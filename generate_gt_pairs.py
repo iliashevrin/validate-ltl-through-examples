@@ -96,8 +96,9 @@ def ask_claude(
 
     response = client.messages.create(
         model="claude-sonnet-4-6",
-        max_tokens=128,
-        temperature=0,
+        max_tokens=1024,
+        # anthropic>=1.0 dropped the temperature argument, but Sonnet 4.6 still honours it
+        extra_body={"temperature": 0},
         messages=[
             {
                 "role": "user",
@@ -105,6 +106,10 @@ def ask_claude(
             }
         ],
     )
+
+    # A truncated answer would be miscounted as a syntax error
+    if response.stop_reason == "max_tokens":
+        print(f"Warning: response truncated at max_tokens for: {requirement}", file=sys.stderr)
 
     text = response.content[0].text
 
@@ -196,8 +201,9 @@ def extract_ap_mapping(ltl_formula: str) -> str:
 
 def load_dataset(input_path: str):
     """
-    Parse an input dataset file (.txt / .xlsx / .csv / spacewire.json / .json)
-    into a list of (requirement, ground_truth, atomic_proposition) tuples.
+    Parse an input dataset file (Dwyer .txt / ARTEMIS .xlsx / Textbook .csv /
+    SpaceWire .json / a generic nlTask+ltlequ .json) into a list of
+    (requirement, ground_truth, atomic_proposition) tuples.
 
     Returns (dataset, parse_errors).
     """
@@ -207,7 +213,7 @@ def load_dataset(input_path: str):
 
 
 
-    if "Dwyer" in input_path:
+    if "dwyer" in input_path.lower():
 
 
 
@@ -353,16 +359,58 @@ def load_dataset(input_path: str):
                     line = lines[i].strip()
 
                     # --------------------------------------------------------
-                    # REQUIREMENT
+                    # REQUIREMENT (possibly multiline)
                     # --------------------------------------------------------
                     if line.startswith("REQUIREMENT:"):
-                        requirement = line[len("REQUIREMENT:"):].strip()
+
+                        requirement_lines = [
+                            line[len("REQUIREMENT:"):].strip()
+                        ]
+
+                        i += 1
+
+                        while i < len(lines):
+
+                            next_line = lines[i].strip()
+
+                            # Stop if another field begins
+                            if starts_with_field(next_line):
+                                i -= 1
+                                break
+
+                            if next_line:
+                                requirement_lines.append(next_line)
+
+                            i += 1
+
+                        requirement = " ".join(requirement_lines)
 
                     # --------------------------------------------------------
-                    # REFINEMENT
+                    # REFINEMENT (possibly multiline)
                     # --------------------------------------------------------
                     elif line.startswith("REFINEMENT:"):
-                        refinement = line[len("REFINEMENT:"):].strip()
+
+                        refinement_lines = [
+                            line[len("REFINEMENT:"):].strip()
+                        ]
+
+                        i += 1
+
+                        while i < len(lines):
+
+                            next_line = lines[i].strip()
+
+                            # Stop if another field begins
+                            if starts_with_field(next_line):
+                                i -= 1
+                                break
+
+                            if next_line:
+                                refinement_lines.append(next_line)
+
+                            i += 1
+
+                        refinement = " ".join(refinement_lines)
 
                     # --------------------------------------------------------
                     # LTL (possibly multiline)
@@ -434,7 +482,7 @@ def load_dataset(input_path: str):
                 print(f"Malformed item {idx}: {e}")
 
 
-    elif "ARTEMIS" in input_path:
+    elif "artemis" in input_path.lower():
 
 
         wb = load_workbook(input_path, data_only=True)
@@ -635,7 +683,7 @@ def load_dataset(input_path: str):
 
 
 
-    elif "Textbook" in input_path:
+    elif "textbook" in input_path.lower():
 
         df = pd.read_csv(input_path, sep=',')
 
@@ -652,7 +700,7 @@ def load_dataset(input_path: str):
             dataset.append((requirement, ground_truth, atomic_proposition))
 
 
-    elif "SpaceWire" in input_path:
+    elif "spacewire" in input_path.lower():
 
         with open(input_path, "r", encoding="utf-8") as f:
             data = json.load(f)
@@ -687,7 +735,7 @@ def load_dataset(input_path: str):
                 ground_truth = ground_truth.replace("-->", "->")
                 ground_truth = re.sub(r"\bnot\b", "!", ground_truth)
                 ground_truth = re.sub(r"\band\b", "&", ground_truth)
-                ground_truth = re.sub(r"\bor\b", "&", ground_truth)
+                ground_truth = re.sub(r"\bor\b", "|", ground_truth)
 
                 try:
                     ap_set = extract_ap_mapping(ground_truth)
@@ -708,7 +756,7 @@ def load_dataset(input_path: str):
 
             if not found_ltl:
                 continue
-                                  
+
 
     elif input_path.endswith("json"):
 
@@ -743,104 +791,234 @@ def load_dataset(input_path: str):
 
             dataset.append((requirement, ground_truth, atomic_proposition))
 
+    else:
+        # No prior branch had no final `else`, so a path matching none of
+        # the dataset-name checks above (e.g. a typo, or a case mismatch
+        # before the .lower() fix -- exactly how this was found: the real
+        # "textbook/all_data.csv" path silently returned an EMPTY dataset
+        # with zero parse errors here, no exception, nothing) used to
+        # fall through invisibly. Fail loudly instead.
+        raise ValueError(
+            f"Could not determine dataset format for {input_path!r} -- "
+            "expected 'dwyer', 'artemis', 'textbook', or 'spacewire' in "
+            "the path (case-insensitive), or a .json file."
+        )
+
     return dataset, parse_errors
+
+
+
+
+# Spot does not finish checking equivalence for this ARTEMIS ground truth
+SPOT_TIMEOUT_GROUND_TRUTHS = {
+    "!(newPatient) U ((newPatient) & F(((patientAttributesEntered & SelfTestMode) & "
+    "((((((testPowerSwitchPass & testLeaksPass) & testFl2Pass) & testPSExpPass) & "
+    "testOxygenSensorPass) & testAlarmsPass) -> selfTestPass))))",
+}
+
+
+def provided_aps(atomic_proposition: str) -> set[str]:
+    """
+    AP names in the mapping given to the model. Most datasets pass the
+    "{ap1, ap2}" format of extract_ap_mapping; Textbook passes a description
+    mapping such as '"Process enters critical section" : x1 ; B : x2' or
+    '"Green" x1', where the AP name is the last identifier of each entry.
+    """
+    text = atomic_proposition.strip()
+
+    if text.startswith("{") and text.endswith("}"):
+        return {ap.strip() for ap in text.strip("{}").split(",") if ap.strip()}
+
+    names = set()
+    for entry in re.split(r"[;,]", text):
+        tokens = re.findall(r"[A-Za-z_][A-Za-z0-9_]*", entry)
+        if tokens:
+            names.add(tokens[-1])
+
+    return names
+
+
+def classify_response(ground_truth: str, response: str, atomic_proposition: str) -> str:
+    """
+    Returns:
+        "syntax_error"   -> the response does not parse as LTL
+        "ap_outside_set" -> the response uses an AP that appears neither in
+                            the provided mapping nor in the ground truth
+        "equivalent"     -> semantically equivalent to the ground truth
+        "mismatch"       -> semantically different from the ground truth
+        "compare_error"  -> Spot could not compare the two formulas
+    """
+    try:
+        formula = spot.formula(response)
+    except Exception:
+        return "syntax_error"
+
+    used = {str(ap) for ap in spot.atomic_prop_collect(formula)}
+    gt_aps = {str(ap) for ap in spot.atomic_prop_collect(spot.formula(ground_truth))}
+
+    if not used <= provided_aps(atomic_proposition) | gt_aps:
+        return "ap_outside_set"
+
+    equivalent = semantically_equivalent(ground_truth, response)
+
+    if equivalent is None:
+        return "compare_error"
+
+    return "equivalent" if equivalent else "mismatch"
+
+
+RESPONSE_FIELDS = [
+    "Requirement",
+    "Ground Truth",
+    "Atomic Proposition",
+    "Response",
+    "Status",
+    "Duplicate",
+]
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Translate natural language requirements to LTL and compare with ground truth."
     )
-    parser.add_argument("input", help="Input file")
-    parser.add_argument("output_csv", help="Output CSV file")
-    # parser.add_argument(
-    #     "--model",
-    #     default="gpt-5.4-mini",
-    #     help="OpenAI model to use, default: gpt-5.4-mini",
-    # )
+    parser.add_argument(
+        "inputs",
+        nargs="+",
+        help="Input file(s) of a single dataset, e.g. all ARTEMIS/PlausibleSpecs*.xlsx",
+    )
+    parser.add_argument(
+        "--pairs",
+        required=True,
+        help="Output CSV of mismatched Cand-GT pairs (input of evaluate.py)",
+    )
+    parser.add_argument(
+        "--responses",
+        required=True,
+        help="Output CSV with every response and its status; reused on reruns to skip LLM calls",
+    )
+    parser.add_argument(
+        "--seed",
+        type=int,
+        default=0,
+        help="Seed for the random ground-truth selection of ARTEMIS",
+    )
 
     args = parser.parse_args()
 
-    # if not os.getenv("OPENAI_API_KEY"):
-    #     raise RuntimeError("OPENAI_API_KEY environment variable is not set.")
     if not os.getenv("ANTHROPIC_API_KEY"):
         raise RuntimeError("ANTHROPIC_API_KEY environment variable is not set.")
 
-    dataset, parse_errors = load_dataset(args.input)
+    dataset = []
+    parse_errors = 0
 
-    # client = OpenAI()
+    for input_path in args.inputs:
+        random.seed(args.seed)
+        loaded, errors = load_dataset(input_path)
+        dataset += loaded
+        parse_errors += errors
 
-    # client = genai.Client(
-    #     api_key=os.environ["GEMINI_API_KEY"]
-    # )
+    # Ground truths that Spot cannot handle are dataset issues, not model
+    # failures, so they are dropped before prompting
+    usable = []
+    gt_errors = 0
+
+    for requirement, ground_truth, atomic_proposition in dataset:
+        if ground_truth in SPOT_TIMEOUT_GROUND_TRUTHS:
+            gt_errors += 1
+            continue
+
+        try:
+            spot.formula(ground_truth)
+        except Exception:
+            print(f"Unparseable ground truth; excluding: {ground_truth}", file=sys.stderr)
+            gt_errors += 1
+            continue
+
+        usable.append((requirement, ground_truth, atomic_proposition))
+
+    # Responses of a previous run, keyed by the prompt inputs
+    cached = {}
+
+    if os.path.exists(args.responses):
+        with open(args.responses, newline="", encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                key = (row["Requirement"], row["Ground Truth"], row["Atomic Proposition"])
+                cached[key] = row["Response"]
 
     client = anthropic.Anthropic(
         api_key=os.environ["ANTHROPIC_API_KEY"]
     )
 
     rows = []
-    correct = 0
-    total = 0
-    syntax_errors = 0
-
     seen = set()
 
+    for requirement, ground_truth, atomic_proposition in usable:
 
-    for requirement, ground_truth, atomic_proposition in dataset:
+        key = (requirement, ground_truth, atomic_proposition)
 
-        # model_response = ask_chatgpt(client, requirement, atomic_proposition)
-        # model_response = ask_gemini(client, requirement, atomic_proposition)
-        model_response = ask_claude(client, requirement, atomic_proposition)
-        
+        if key in cached:
+            model_response = cached[key]
+        else:
+            model_response = ask_claude(client, requirement, atomic_proposition)
 
-        # Spot validation timeout
-        if ground_truth == (
-            "!(newPatient) U ((newPatient) & F(((patientAttributesEntered & SelfTestMode) & "
-            "((((((testPowerSwitchPass & testLeaksPass) & testFl2Pass) & testPSExpPass) & "
-            "testOxygenSensorPass) & testAlarmsPass) -> selfTestPass))))"
-        ):
-            continue
-
-        equivalent = semantically_equivalent(ground_truth, model_response)
+        status = classify_response(ground_truth, model_response, atomic_proposition)
 
         print(
             f"  Requirement: {requirement}\n"
             f"  Ground Truth: {ground_truth}\n"
             f"  Response:     {model_response}\n"
-            f"  Equivalent:     {equivalent}\n",
+            f"  Status:       {status}\n",
             file=sys.stderr,
         )
 
-        if equivalent is None:
-            syntax_errors += 1
-        else:
-            pair = (ground_truth, model_response)
-            if pair not in seen:
+        # The same GT may appear under several requirements; identical
+        # Cand-GT pairs are counted once
+        pair = (ground_truth, model_response)
 
-                total += 1
-                seen.add(pair)
-
-                if equivalent == False:
-                    rows.append(
-                        {
-                            "Ground Truth": ground_truth,
-                            "Response": model_response,
-                        }
-                    )
-
-                else:
-                    correct += 1
-
-    with open(args.output_csv, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(
-            f,
-            fieldnames=["Ground Truth", "Response"],
+        rows.append(
+            {
+                "Requirement": requirement,
+                "Ground Truth": ground_truth,
+                "Atomic Proposition": atomic_proposition,
+                "Response": model_response,
+                "Status": status,
+                "Duplicate": pair in seen,
+            }
         )
+
+        seen.add(pair)
+
+    with open(args.responses, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=RESPONSE_FIELDS)
         writer.writeheader()
         writer.writerows(rows)
 
+    unique = [row for row in rows if not row["Duplicate"]]
+
+    with open(args.pairs, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=["Ground Truth", "Response"])
+        writer.writeheader()
+        writer.writerows(
+            {"Ground Truth": row["Ground Truth"], "Response": row["Response"]}
+            for row in unique
+            if row["Status"] == "mismatch"
+        )
+
+    statuses = ["equivalent", "mismatch", "syntax_error", "ap_outside_set", "compare_error"]
+    counts = {status: sum(row["Status"] == status for row in unique) for status in statuses}
+
+    correct = counts["equivalent"]
+    total = correct + counts["mismatch"]
     accuracy = correct / total if total else 0.0
+
+    print(f"Dataset entries: {len(dataset)} (unparseable entries skipped while loading: {parse_errors})")
+    print(f"Ground truths excluded before prompting: {gt_errors}")
+    print(f"Responses: {len(rows)} ({len(rows) - len(unique)} duplicate Cand-GT pairs)")
+
+    for status in statuses:
+        print(f"  {status}: {counts[status]}")
+
     print(f"Total accuracy: {accuracy:.4f} ({correct}/{total})")
-    print(f"Syntax errors excluded: {syntax_errors}")
 
 
 if __name__ == "__main__":
