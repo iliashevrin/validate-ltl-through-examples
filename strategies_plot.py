@@ -1,64 +1,56 @@
+import re
+
 import numpy as np
+import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from matplotlib.lines import Line2D
 
 # =========================
-# Data
+# Data, read from the evaluate.py results on the combined real-world dataset
 # =========================
 
-strategies = [
-    "Top 50 Ctx.",
-    "Top 100 Ctx.",
-    "Top 200 Ctx.",
-    "Top 400 Ctx.",
-    "All Ctx.",
-]
+STRATEGIES = {
+    "Top 50 Ctx.": "top50_context",
+    "Top 100 Ctx.": "top100_context",
+    "Top 200 Ctx.": "top200_context",
+    "Top 400 Ctx.": "top400_context",
+    "All Ctx.": "all_contexts",
+}
 
-ndt_inf = np.array([
 
-    0.111,
-    0.063,
-    0.045,
-    0.028,
-    0.023,
-])
+def read_results(ordering, strategy):
+    with open(f"results_ALL_RL_{ordering}_{strategy}.txt", encoding="utf-8") as f:
+        txt = f.read()
 
-dt_random = np.array([
+    undetected = float(re.search(r"Undetected Ratio: ([\d.]+)", txt).group(1))
+    detected_after_5 = float(re.search(r"Detected >5 Ratio: ([\d.]+)", txt).group(1))
+    avg_traces = float(re.search(r"Traces to Detection: Avg: ([\d.]+)", txt).group(1))
 
-    0.224,
-    0.188,
-    0.204,
-    0.206,
-    0.204,
-])
+    return undetected, detected_after_5, avg_traces
 
-dt_regr = np.array([
 
-    0.040,
-    0.050,
-    0.048,
-    0.055,
-    0.053,
-])
+strategies = list(STRATEGIES)
 
-avg_random = np.array([
+random_results = [read_results("RANDOM", s) for s in STRATEGIES.values()]
+regr_results = [read_results("LTLTRUST", s) for s in STRATEGIES.values()]
 
-    3.88,
-    3.75,
-    4.05,
-    4.17,
-    4.16,
-])
+# The undetected ratio does not depend on the ordering
+ndt_inf = np.array([r[0] for r in regr_results])
 
-avg_regr = np.array([
+dt_random = np.array([r[1] for r in random_results])
+dt_regr = np.array([r[1] for r in regr_results])
 
-    1.99,
-    1.86,
-    1.97,
-    2.10,
-    2.15,
-])
+avg_random = np.array([r[2] for r in random_results])
+avg_regr = np.array([r[2] for r in regr_results])
+
+for name, ndt, dt_rand, dt_reg, avg_rand, avg_reg in zip(strategies, ndt_inf, dt_random, dt_regr, avg_random, avg_regr):
+    print(
+        f"{name:14s} NDT_inf={ndt:.3f} | DT>5 random={dt_rand:.3f} LTLTrust={dt_reg:.3f} "
+        f"| NDT_5 random={ndt + dt_rand:.3f} LTLTrust={ndt + dt_reg:.3f} "
+        f"| avg traces random={avg_rand:.2f} LTLTrust={avg_reg:.2f}"
+    )
 
 # =========================
 # Plot setup
@@ -171,5 +163,3 @@ plt.tight_layout()
 # =========================
 
 plt.savefig("stacked_bar_plot.svg", format="svg", bbox_inches="tight")
-
-plt.show()
