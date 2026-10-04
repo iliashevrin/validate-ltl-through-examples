@@ -4,6 +4,7 @@ spot.setup()
 import itertools
 import re
 import csv
+from functools import lru_cache
 
 from enum import Enum
 
@@ -217,9 +218,16 @@ def count_literals(trace: str) -> int:
 
 
 
+# Large ground truths take seconds to translate, and the same one is checked
+# against every trace generated for its candidate
+@lru_cache(maxsize=None)
+def translate(formula):
+    return spot.translate(formula)
+
+
 def simulate_user(ground_truth, trace, candidate_acceptance):
 
-    gt_acceptance = check_acceptance(spot.translate(ground_truth), trace)
+    gt_acceptance = check_acceptance(translate(ground_truth), trace)
 
     # User rejects candidate based on trace
     return gt_acceptance != candidate_acceptance

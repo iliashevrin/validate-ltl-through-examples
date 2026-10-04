@@ -1,4 +1,5 @@
 from mutation_based import generate_traces
+from utils import simulate_user
 import sys
 import csv
 import json
@@ -9,6 +10,12 @@ def collect_frequencies(
     formulas,
     strategy,
 ):
+    """
+    Count, per mutation context, the generated traces that distinguish the
+    candidate from the ground truth, over all traces of all pairs, i.e.,
+    regardless of the order in which the traces would be examined. Contexts
+    that never distinguish a pair are kept with a count of zero.
+    """
     by_mutation = {}
 
     for formula_id, formula in enumerate(formulas):
@@ -22,7 +29,9 @@ def collect_frequencies(
         for trace in traces:
             if trace[2] not in by_mutation:
                 by_mutation[trace[2]] = 0
-            by_mutation[trace[2]] += 1
+
+            if simulate_user(formula[0], trace[0], trace[1]):
+                by_mutation[trace[2]] += 1
 
     return by_mutation
 
@@ -48,7 +57,7 @@ freq = dict(sorted(freq.items(), key=lambda item: -item[1]))
 
 with open(f"freq_{dataset}_{sys.argv[2]}.csv", "w", newline="", encoding="utf-8") as f:
     writer = csv.writer(f)
-    writer.writerow(["Mutation Context", "Frequency"])  # Optional: write a header
-    
+    writer.writerow(["Mutation Context", "Detections"])  # Optional: write a header
+
     for key, value in freq.items():
         writer.writerow([key, value])

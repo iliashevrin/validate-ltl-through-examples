@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
+import json
+import os
 import re
+import sys
 import spot
 spot.setup()
 from utils import get_words_from_conditions, check_acceptance, collect_aps, trace_len
@@ -275,7 +278,48 @@ def rejecting_traces(mutant):
 
 
 
+# Spot orders the operands of a formula by when they were first created in the
+# process, so the mutants and accepting runs of a candidate depend on what the
+# process generated before. To give training, every ordering and the context
+# ranking the same traces, they are generated once per candidate by
+# precompute_traces.py and read from this file.
+TRACE_CACHE = os.environ.get("TRACE_CACHE", "trace_cache.json")
+
+_trace_cache = None
+
+
+def cached_raw_traces(formula):
+    global _trace_cache
+
+    if _trace_cache is None:
+        _trace_cache = {}
+
+        if os.path.exists(TRACE_CACHE):
+            with open(TRACE_CACHE, encoding="utf-8") as f:
+                _trace_cache = json.load(f)
+
+    return _trace_cache.get(formula)
+
+
 def generate_traces(formula, strategy):
+    raw_traces = cached_raw_traces(formula)
+
+    if raw_traces is None:
+        print(f"[WARNING] {formula} is not in {TRACE_CACHE}, generating its traces now", file=sys.stderr)
+        raw_traces = generate_raw_traces(formula)
+
+    return [
+        (t, ac, f'{mut}_{depth}_{ac}_{trace_len(t)}')
+        for (t, ac, mut, depth) in raw_traces
+        if globals()[strategy]((mut, depth), ac, trace_len(t))
+    ]
+
+
+def generate_raw_traces(formula):
+    """
+    All traces of all mutation contexts of a formula, as
+    (trace, acceptance by the formula, mutation name, depth).
+    """
     mutants = mutate_ltl_formula(formula)
 
     traces = []
@@ -302,5 +346,4 @@ def generate_traces(formula, strategy):
             candidate_acceptance = check_acceptance(original_aut, trace)
             traces.append((trace, candidate_acceptance, mutation_type))
 
-    traces = [(t, ac, f'{str(mut[0])}_{mut[1]}_{ac}_{trace_len(t)}') for (t, ac, mut) in traces if globals()[strategy](mut, ac, trace_len(t))]
-    return traces
+    return [(t, ac, str(mut[0]), mut[1]) for (t, ac, mut) in traces]
