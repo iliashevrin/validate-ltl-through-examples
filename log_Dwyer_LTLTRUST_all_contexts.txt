@@ -1,24 +1,29 @@
-Candidate = G((call_Enqueue_d1 & F(call_Enqueue_d2)) -> F(call_Enqueue_d1 & F(call_Enqueue_d2 & F(call_Bottom_Up))))
-GT = G ((call_Enqueue_d1 & (!return_Dequeue_d1 U (call_Enqueue_d2 & (!return_Dequeue_d1 & !return_Dequeue_d2 U call_Bottom_Up)))) -> F (call_Bottom_Up & F (call_P_d2 & F call_P_d1)))
-trace#0, cand_acc=True, gt_acc=True, !call_Enqueue_d2; cycle{!call_Enqueue_d2}
-trace#1, cand_acc=True, gt_acc=None, cycle{(call_Bottom_Up & call_Enqueue_d2) | (!call_Enqueue_d1 & call_Enqueue_d2)}
+Candidate = G((call_Enqueue_d1 & !return_Dequeue_d1 U call_Enqueue_d2) & !return_Dequeue_d2 U call_Top_Down -> (call_Enqueue_d1 & !return_Dequeue_d1 U call_Enqueue_d2) & !return_Dequeue_d2 U (call_Top_Down & F(call_P_d1 & !call_P_d2 U (call_P_d1 & F(call_P_d2)))))
+GT = G ((call_Enqueue_d1 & (!return_Dequeue_d1 U (call_Enqueue_d2 & (!return_Dequeue_d1 & !return_Dequeue_d2 U call_Top_Down)))) -> F (call_Top_Down & F (call_P_d1 & F call_P_d2)))
+trace#0, cand_acc=True, gt_acc=True, cycle{!call_Enqueue_d1 | (!call_Enqueue_d2 & return_Dequeue_d1) | (call_Enqueue_d2 & call_P_d1 & call_P_d2 & call_Top_Down)}
+trace#1, cand_acc=True, gt_acc=None, cycle{!call_Enqueue_d1 | (call_Enqueue_d2 & call_P_d1 & call_P_d2 & call_Top_Down) | (!call_Top_Down & return_Dequeue_d2)}
 
-Candidate = G((call_Enqueue & !return_Dequeue U call_Empty) -> X(call_Enqueue & !return_Dequeue U call_Empty))
+Candidate = G((call_Enqueue & X((!return_Dequeue) U call_Empty)) -> X((!return_Dequeue) U return_Empty_false))
 GT = G (call_Enqueue & (!return_Dequeue U call_Empty) -> F (call_Empty & F return_Empty_false))
-trace#0, cand_acc=False, gt_acc=None, call_Empty & call_Enqueue; 1; !call_Enqueue | (!call_Empty & return_Dequeue); cycle{1}
+trace#0, cand_acc=False, gt_acc=None, call_Enqueue; call_Empty & call_Enqueue & return_Dequeue & !return_Empty_false; cycle{call_Enqueue}
 
 Candidate = G((call_Enqueue_d1 & F(return_Empty_true)) -> (call_Enqueue_d1 U (return_Dequeue_d1 U return_Empty_true)))
 GT = G ((call_Enqueue_d1 & F return_Empty_true) -> (!return_Empty_true U return_Dequeue_d1))
 trace#0, cand_acc=True, gt_acc=True, !return_Empty_true; cycle{!return_Empty_true}
 trace#1, cand_acc=True, gt_acc=None, cycle{!call_Enqueue_d1 | return_Empty_true}
 
-Candidate = G(call -> (call U (atfloor & open)))
+Candidate = G(call -> ((!open) U (atfloor & (!open) U (open | (atfloor & (!open) U open)))))
 GT = G ((call & F open) -> ((!atfloor & !open) U (open | ((atfloor & !open) U (open | ((!atfloor & !open) U (open | ((atfloor & !open) U (open | (!atfloor U open))))))))))
-trace#0, cand_acc=False, gt_acc=None, 1; (!atfloor & call) | (call & !open); cycle{(!atfloor & call) | (call & !open)}
+trace#0, cand_acc=False, gt_acc=None, 1; !atfloor & call & open; cycle{1}
 
-Candidate = G(OpenNetworkConnection -> F(ErrorMessage | NetworkError))
+Candidate = G((OpenNetworkConnection & X(NetworkError)) -> X(F(ErrorMessage)))
 GT = G (OpenNetworkConnection -> G (NetworkError -> F ErrorMessage))
-trace#0, cand_acc=False, gt_acc=None, 1; !ErrorMessage & !NetworkError & OpenNetworkConnection; cycle{!ErrorMessage & !NetworkError}
+trace#0, cand_acc=False, gt_acc=False, 1; OpenNetworkConnection; !ErrorMessage & NetworkError; cycle{!ErrorMessage}
+trace#1, cand_acc=False, gt_acc=False, 1; !ErrorMessage & OpenNetworkConnection; !ErrorMessage & NetworkError; cycle{!ErrorMessage}
+trace#2, cand_acc=False, gt_acc=False, OpenNetworkConnection; !ErrorMessage & NetworkError & OpenNetworkConnection; cycle{!ErrorMessage & OpenNetworkConnection}
+trace#3, cand_acc=False, gt_acc=False, OpenNetworkConnection; !ErrorMessage & NetworkError; cycle{!ErrorMessage}
+trace#4, cand_acc=True, gt_acc=True, !OpenNetworkConnection; cycle{!OpenNetworkConnection}
+trace#5, cand_acc=True, gt_acc=None, 1; cycle{ErrorMessage | !NetworkError}
 
 Candidate = G(PopServerConnected -> (MessagesTransfered U PlacedinMailboxes))
 GT = G ((PopServerConnected & F PlacedinMailboxes) -> (!PlacedinMailboxes U MessagesTransfered))
@@ -48,33 +53,30 @@ Candidate = G(PlacedinMailboxes -> F(MarkasUnread))
 GT = G (MessageTransferred -> G (PlacedinMailboxes -> F MarkasUnread))
 trace#0, cand_acc=False, gt_acc=None, 1; !MarkasUnread & PlacedinMailboxes; cycle{!MarkasUnread}
 
-Candidate = G(!POPServerMessageDelete U PlacedinMailboxes)
+Candidate = G(POPServerMessageDelete -> PlacedinMailboxes U POPServerMessageDelete)
 GT = G (!POPServerMessageDelete) | F (POPServerMessageDelete & F PlacedinMailboxes)
-trace#0, cand_acc=False, gt_acc=None, 1; cycle{!POPServerMessageDelete & !PlacedinMailboxes}
+trace#0, cand_acc=True, gt_acc=None, !POPServerMessageDelete; cycle{1}
 
 Candidate = G(!call_Execute -> !call_doWork)
 GT = (F call_Execute) -> ((!call_doWork) U call_Execute)
 trace#0, cand_acc=False, gt_acc=None, 1; !call_Execute & call_doWork; cycle{1}
 
-Candidate = G(return_Execute -> G(!call_doWork))
+Candidate = G(return_Execute -> (!call_doWork U call_Execute))
 GT = G ((return_Execute & (F call_Execute)) -> ((!call_doWork) U call_Execute))
-trace#0, cand_acc=False, gt_acc=None, 1; call_doWork & return_Execute; cycle{1}
+trace#0, cand_acc=False, gt_acc=True, 1; !call_Execute & !call_doWork & return_Execute; cycle{!call_Execute & !call_doWork}
 
 Candidate = G(call_doResults_i -> (!call_doResults_j U return_doResults_i))
 GT = G (call_doResults_i -> ((!call_doResults_j) U (return_doResults_i | G (!call_doResults_j))))
 trace#0, cand_acc=False, gt_acc=None, 1; call_doResults_i & !call_doResults_j & !return_doResults_i; cycle{!call_doResults_j & !return_doResults_i}
 
-Candidate = G(call_doResults_i -> (!call_doResults_j U return_doResults_i))
+Candidate = G((call_doResults_i -> (!call_doResults_j U return_doResults_i)) & (call_doResults_j -> (!call_doResults_i U return_doResults_i)))
 GT = G ((call_doResults_i & F return_doResults_i) -> ((!call_doResults_j) U return_doResults_i))
-trace#0, cand_acc=False, gt_acc=True, 1; call_doResults_i & !call_doResults_j & !return_doResults_i; cycle{!call_doResults_j & !return_doResults_i}
+trace#0, cand_acc=True, gt_acc=True, cycle{return_doResults_i}
+trace#1, cand_acc=False, gt_acc=None, 1; call_doResults_i & call_doResults_j & !return_doResults_i; cycle{1}
 
-Candidate = G(call_resultlock_signal_i -> F(return_resultlock_wait_i))
-GT = G (return_resultlock_wait_i -> F call_resultlock_signal_i)
-trace#0, cand_acc=False, gt_acc=True, 1; call_resultlock_signal_i & !return_resultlock_wait_i; cycle{!return_resultlock_wait_i}
-
-Candidate = G((call_resultlock_signal_i & !return_resultlock_wait_i) -> F(return_resultlock_wait_i))
+Candidate = G((call_resultlock_signal_i & !return_resultlock_wait_i U call_resultlock_signal_i) -> (return_doResult_i -> F(return_resultlock_wait_i)))
 GT = G (call_doResult_i -> F return_doResult_i) -> G (return_resultlock_wait_i -> F call_resultlock_signal_i)
-trace#0, cand_acc=True, gt_acc=None, !call_resultlock_signal_i | return_resultlock_wait_i; cycle{!call_resultlock_signal_i | return_resultlock_wait_i}
+trace#0, cand_acc=True, gt_acc=None, cycle{!call_resultlock_signal_i | return_resultlock_wait_i}
 
 Candidate = G(call_Execute -> F(return_Execute & (workCountEQzero | return_doWork_done_true_i)))
 GT = G (call_Execute -> ((!return_Execute) U (return_doWork_done_true_i |_| return_doResult_done_true_i |_| workCountEQzero | G (!return_Execute))))
@@ -82,99 +84,107 @@ trace#0, cand_acc=True, gt_acc=True, !call_Execute | (return_Execute & return_do
 trace#1, cand_acc=True, gt_acc=True, cycle{!call_Execute | (return_Execute & return_doWork_done_true_i) | (return_Execute & workCountEQzero)}
 trace#2, cand_acc=False, gt_acc=None, 1; (call_Execute & !return_Execute) | (call_Execute & !return_doWork_done_true_i & !workCountEQzero); cycle{!return_Execute | (!return_doWork_done_true_i & !workCountEQzero)}
 
-Candidate = G(return_Execute -> !return_pool_Complete U return_Execute)
+Candidate = G(return_Execute -> return_pool_Complete)
 GT = ((! return_Execute ) U ( return_pool_Complete | G  (!return_Execute)))
-trace#0, cand_acc=True, gt_acc=None, !return_Execute; cycle{1}
+trace#0, cand_acc=False, gt_acc=None, 1; return_Execute & !return_pool_Complete; cycle{1}
 
 Candidate = G(return_pool_Finished -> (return_doResult_done_true_i | return_doWork_done_true_i))
 GT = (!return_pool_Finished) U (return_doWork_done_true_i |_| return_doResult_done_true_i |_| G  (!return_pool_Finished))
 trace#0, cand_acc=False, gt_acc=None, 1; !return_doResult_done_true_i & !return_doWork_done_true_i & return_pool_Finished; cycle{1}
 
-Candidate = G(call_Execute_i -> !(call_Create_i | call_Destroy_i | call_GetResults_i | call_Input_i))
+Candidate = G(!(call_Create_i | call_Destroy_i | call_Execute_i | call_GetResults_i | call_Input_i) | !(call_Execute_i | call_GetResults_i))
 GT = G !(call_Create_i | call_Destroy_i | call_Input_i | call_Execute_i | call_GetResults_i)
-trace#0, cand_acc=True, gt_acc=None, !call_Execute_i | (!call_Create_i & !call_Destroy_i & !call_GetResults_i & !call_Input_i); cycle{!call_Execute_i | (!call_Create_i & !call_Destroy_i & !call_GetResults_i & !call_Input_i)}
+trace#0, cand_acc=False, gt_acc=False, call_Create_i | call_Destroy_i | call_Execute_i | call_GetResults_i | call_Input_i; call_Execute_i | call_GetResults_i; cycle{1}
+trace#1, cand_acc=False, gt_acc=False, call_Execute_i | call_GetResults_i; call_Create_i | call_Destroy_i | call_Execute_i | call_GetResults_i | call_Input_i; cycle{1}
+trace#2, cand_acc=False, gt_acc=False, 1; call_Execute_i | call_GetResults_i; cycle{1}
+trace#3, cand_acc=None, gt_acc=False, call_GetResults_i | call_Input_i; cycle{1}
 
 Candidate = G(return_doWork_done_true_i -> return_doResult_done_true_i)
 GT = (G !(call_Create_i | call_Destroy_i | call_Input_i | call_Execute_i | call_GetResults_i)) -> ((!return_pool_Finished) U (return_doWork_done_true_i |_| return_doResult_done_true_i |_| G  (!return_pool_Finished)))
 trace#0, cand_acc=False, gt_acc=None, 1; !return_doResult_done_true_i & return_doWork_done_true_i; cycle{1}
 
-Candidate = G(state1 -> (X(state0) | X(state2)))
+Candidate = G((state0 -> (!state1 & !state2 & !state3)) & (state1 -> (!state0 & !state2 & !state3)) & (state2 -> (!state0 & !state1 & !state3)) & (state3 -> (!state0 & !state1 & !state2)))
+GT = G ((state0 & !state1 & !state2 & !state3) | (!state0 & state1 & !state2 & !state3) | (!state0 & !state1 & state2 & !state3) | (!state0 & !state1 & !state2 & state3) )
+trace#0, cand_acc=True, gt_acc=True, !state0 & !state1 & !state2 & state3; cycle{!state0 & !state1 & !state2 & state3}
+trace#1, cand_acc=True, gt_acc=True, !state0 & !state1 & state2 & !state3; cycle{!state0 & !state1 & state2 & !state3}
+trace#2, cand_acc=True, gt_acc=True, !state0 & state1 & !state2 & !state3; cycle{!state0 & state1 & !state2 & !state3}
+trace#3, cand_acc=True, gt_acc=True, state0 & !state1 & !state2 & !state3; cycle{state0 & !state1 & !state2 & !state3}
+trace#4, cand_acc=False, gt_acc=False, 1; (state0 & state1) | (state0 & state2) | (state0 & state3) | (state1 & state2) | (state1 & state3) | (state2 & state3); cycle{1}
+trace#5, cand_acc=True, gt_acc=None, (!state1 & !state2 & !state3) | (!state0 & !state2 & !state3) | (!state0 & !state1 & !state3) | (!state0 & !state1 & !state2); cycle{(!state1 & !state2 & !state3) | (!state0 & !state2 & !state3) | (!state0 & !state1 & !state3) | (!state0 & !state1 & !state2)}
+
+Candidate = G((state1 -> X(state0 | state2)) & (state1 -> !(X(state3))))
 GT = G ((state1 & F (state0 | state2)) -> !state3 U (state0 | state2))
-trace#0, cand_acc=False, gt_acc=None, 1; state1; !state0 & !state2; cycle{1}
+trace#0, cand_acc=False, gt_acc=None, 1; state1; state3 | (!state0 & !state2); cycle{1}
 
-Candidate = !( (blockingReceive | blockingSend | disconnect | poke | receive | send) U connect) & F connect | G !(blockingReceive | blockingSend | disconnect | poke | receive | send)
+Candidate = !( !connect U (blockingReceive | blockingSend | disconnect | poke | receive | send) )
 GT = F connect -> (!(disconnect | poke | send | blockingSend | receive | blockingReceive) U connect)
-trace#0, cand_acc=False, gt_acc=True, 1; !blockingReceive & !blockingSend & !connect & !disconnect & !poke & !receive & !send; (blockingReceive & !connect) | (blockingSend & !connect) | (!connect & disconnect) | (!connect & poke) | (!connect & receive) | (!connect & send); cycle{!connect}
+trace#0, cand_acc=False, gt_acc=None, blockingReceive | blockingSend | disconnect | poke | receive | send; cycle{blockingReceive | blockingSend | disconnect | poke | receive | send}
 
-Candidate = G(connect -> G(connect | disconnect))
+Candidate = G(connect -> X(!connect U disconnect))
 GT = G ((connect & F disconnect) -> !connect U disconnect)
-trace#0, cand_acc=False, gt_acc=None, 1; connect; !connect & !disconnect; cycle{1}
+trace#0, cand_acc=False, gt_acc=None, 1; connect; cycle{!connect & !disconnect}
 
-Candidate = G(disconnect -> ((!blockingReceive & !blockingSend & !poke & !receive & !send) U connect))
+Candidate = G(disconnect -> ((!disconnect & !poke & !send & !blockingSend & !receive & !blockingReceive) U connect))
 GT = G ((disconnect & F connect) -> !(disconnect | poke | send | blockingSend | receive | blockingReceive) U connect)
-trace#0, cand_acc=False, gt_acc=True, 1; !blockingReceive & !blockingSend & !connect & disconnect & !poke & !receive & !send; cycle{!blockingReceive & !blockingSend & !connect & !poke & !receive & !send}
+trace#0, cand_acc=False, gt_acc=None, 1; !connect & disconnect; cycle{1}
 
-Candidate = G((register_a1_e1 & !unregister_a1_e1) -> ((!unregister_a1_e1) U (notify_artists_e1 | notify_artists_e2)))
+Candidate = G((register_a1_e1 & notify_artists_e1) -> (notify_artists_e1 U notify_client_event_a1_e1))
 GT = G ((register_a1_e1 & F  unregister_a1_e1) -> (after_notify_artists_e1 -> ((!(notify_artists_e1 | notify_artists_e2) & !unregister_a1_e1) U notify_client_event_a1_e1)) U unregister_a1_e1)
-trace#0, cand_acc=True, gt_acc=None, cycle{notify_artists_e1 | notify_artists_e2 | (!register_a1_e1 & !unregister_a1_e1) | (register_a1_e1 & unregister_a1_e1)}
+trace#0, cand_acc=True, gt_acc=None, cycle{!notify_artists_e1 | notify_client_event_a1_e1}
 
 Candidate = G((!notify_artists_e1) U notify_client_event_a1_e1 | (!notify_artists_e1) U notify_client_event_a2_e1)
 GT = !(notify_client_event_a1_e1 | notify_client_event_a2_e1)  U (notify_artists_e1 | G !(notify_client_event_a1_e1 | notify_client_event_a2_e1))
 trace#0, cand_acc=False, gt_acc=None, 1; cycle{!notify_artists_e1 & !notify_client_event_a1_e1 & !notify_client_event_a2_e1}
 
-Candidate = G(notify_artists_e1 -> G(!notify_artists_e2 & !notify_client_event_a1_e2 & !notify_client_event_a2_e2))
+Candidate = G(notify_artists_e1 -> G(!notify_artists_e2))
 GT = G (notify_artists_e1 -> (!(notify_client_event_a1_e2 | notify_client_event_a2_e2) U (notify_artists_e2 | G !(notify_client_event_a1_e2 | notify_client_event_a2_e2))))
-trace#0, cand_acc=False, gt_acc=None, 1; (notify_artists_e1 & notify_artists_e2) | (notify_artists_e1 & notify_client_event_a1_e2) | (notify_artists_e1 & notify_client_event_a2_e2); cycle{1}
+trace#0, cand_acc=False, gt_acc=None, 1; notify_artists_e1 & notify_artists_e2; cycle{1}
 
-Candidate = G((e1_szEQ0) -> !(notify_client_event_a1_e1 | notify_client_event_a2_e1))
+Candidate = G((e1_szEQ0) -> (!notify_client_event_a1_e1 & !notify_client_event_a2_e1))
 GT = G (e1_szEQ0 -> (!(notify_client_event_a1_e1 | notify_client_event_a2_e1) U (e1_szGT0 | G !(notify_client_event_a1_e1 | notify_client_event_a2_e1))))
-trace#0, cand_acc=True, gt_acc=None, !e1_szEQ0 | (!notify_client_event_a1_e1 & !notify_client_event_a2_e1); cycle{!e1_szEQ0 | (!notify_client_event_a1_e1 & !notify_client_event_a2_e1)}
+trace#0, cand_acc=None, gt_acc=None, (e1_szEQ0 & !notify_client_event_a1_e1) | (e1_szEQ0 & notify_client_event_a2_e1); cycle{1}
+trace#1, cand_acc=None, gt_acc=None, (e1_szEQ0 & notify_client_event_a1_e1) | (e1_szEQ0 & !notify_client_event_a2_e1); cycle{1}
+trace#2, cand_acc=True, gt_acc=True, cycle{!e1_szEQ0}
+trace#3, cand_acc=False, gt_acc=None, 1; (e1_szEQ0 & notify_client_event_a1_e1) | (e1_szEQ0 & notify_client_event_a2_e1); cycle{1}
 
 Candidate = G(notify_event_a1_e1 -> register_a1_e1)
 GT = F register_a1_e1 -> (!notify_event_a1_e1 U register_a1_e1)
 trace#0, cand_acc=False, gt_acc=None, 1; notify_event_a1_e1 & !register_a1_e1; cycle{1}
 
-Candidate = G(notify_client_event_a1_e1 -> register_a1_e1)
+Candidate = G(notify_client_event_a1_e1 -> (register_a1_e1 & !unregister_a1_e1) U notify_client_event_a1_e1)
 GT = G (unregister_a1_e1 -> (!notify_client_event_a1_e1 U (register_a1_e1 | G !notify_client_event_a1_e1)))
-trace#0, cand_acc=False, gt_acc=None, 1; notify_client_event_a1_e1 & !register_a1_e1; cycle{1}
+trace#0, cand_acc=True, gt_acc=None, !notify_client_event_a1_e1; cycle{1}
 
-Candidate = G((register_a1_e1 & !register_a2_e1) -> (!register_a2_e1 U (term | unregister_a1_e1 | register_a2_e1))) & G((register_a2_e1 & !register_a1_e1) -> !register_a1_e1 U (term | unregister_a2_e1))
+Candidate = G((register_a1_e1 & !register_a2_e1 & F(register_a2_e1)) -> (notify_client_event_a1_e1 U (notify_client_event_a1_e1 & F(notify_client_event_a2_e1))))
 GT = F term -> G ((register_a1_e1 & (!unregister_a1_e1 U (register_a2_e1 & (!unregister_a1_e1 & !unregister_a2_e1) U notify_artists_e1))) -> F (notify_artist_e1 & (!notify_client_event_a2_e1 U notify_client_event_a1_e1)))
-trace#0, cand_acc=True, gt_acc=None, cycle{term | (!register_a1_e1 & !register_a2_e1) | (register_a2_e1 & unregister_a2_e1) | (unregister_a1_e1 & unregister_a2_e1)}
+trace#0, cand_acc=True, gt_acc=None, 1; cycle{!register_a2_e1}
 
-Candidate = G(register_a1_e1 -> X(e1_szEQ2 | e1_szLT2)) & G(register_a2_e1 -> X(e1_szEQ2 | e1_szLT2)) & G(after_register_a1_e1 -> e1_szEQ2) & G(after_register_a2_e1 -> e1_szEQ2)
+Candidate = G(e1_szLT2 | e1_szEQ2)
 GT = G (e1_szEQ2 & (after_register_a1_e1 | after_register_a2_e1) -> (!(register_a2_e1 | register_a1_e1)) U (e1_szLT2 | G !(register_a2_e1 | register_a1_e1)))
-trace#0, cand_acc=True, gt_acc=None, (!after_register_a1_e1 & !after_register_a2_e1 & register_a1_e1 & register_a2_e1) | (e1_szEQ2 & register_a1_e1 & register_a2_e1); cycle{(!after_register_a1_e1 & !after_register_a2_e1 & e1_szLT2 & register_a1_e1) | (e1_szEQ2 & register_a1_e1)}
+trace#0, cand_acc=False, gt_acc=None, 1; !e1_szEQ2 & !e1_szLT2; cycle{1}
 
 Candidate = G(!unregister_a1_e1 | register_a1_e1)
 GT = F register_a1_e1 -> (!unregister_a1_e1 U register_a1_e1)
 trace#0, cand_acc=False, gt_acc=None, 1; !register_a1_e1 & unregister_a1_e1; cycle{1}
 
-Candidate = G(unregister_a1_e1 -> after_unregister_a1_e1 | register_a1_e1)
+Candidate = G(unregister_a1_e1 -> register_a1_e1)
 GT = G (after_unregister_a1_e1 -> (!unregister_a1_e1 U (register_a1_e1 | G !unregister_a1_e1)))
-trace#0, cand_acc=False, gt_acc=None, 1; !after_unregister_a1_e1 & !register_a1_e1 & unregister_a1_e1; cycle{1}
+trace#0, cand_acc=False, gt_acc=None, 1; !register_a1_e1 & unregister_a1_e1; cycle{1}
 
-Candidate = G(register_a1_e1 -> (unregister_a1_e1 U term))
+Candidate = G(register_a1_e1 -> ((!term) U unregister_a1_e1))
 GT = (register_a1_e1 -> (!term U unregister_a1_e1)) U (term | G (!term))
-trace#0, cand_acc=False, gt_acc=None, 1; register_a1_e1 & !term & !unregister_a1_e1; cycle{1}
+trace#0, cand_acc=False, gt_acc=True, 1; register_a1_e1 & !term & !unregister_a1_e1; cycle{!term & !unregister_a1_e1}
 
-Candidate = G(landingButi_pressed -> F(lift_floor_i & lift_door_open))
-GT = G (landingButi_pressed -> F (lift_floor_i & lift_door_open & lift_direction_down))
-trace#0, cand_acc=True, gt_acc=None, !landingButi_pressed | (lift_door_open & lift_floor_i); cycle{!landingButi_pressed | (lift_door_open & lift_floor_i)}
-
-Candidate = G(liftButi_pressed -> F(floor_i))
-GT = G (liftButi_pressed -> F (floor_i & door_open))
-trace#0, cand_acc=False, gt_acc=False, 1; !floor_i & liftButi_pressed; cycle{!floor_i}
-trace#1, cand_acc=None, gt_acc=None, floor_i & liftButi_pressed; cycle{1}
-trace#2, cand_acc=True, gt_acc=None, cycle{floor_i | !liftButi_pressed}
-
-Candidate = G((idle & floor_3) -> door_closed)
+Candidate = G(idle & floor_3 & door_closed -> X(idle & floor_3 & door_closed))
 GT = G (floor_3 & idle & door_closed -> G (floor_3 & door_closed))
-trace#0, cand_acc=True, gt_acc=None, cycle{door_closed | !floor_3}
+trace#0, cand_acc=True, gt_acc=True, cycle{!door_closed | !floor_3}
+trace#1, cand_acc=True, gt_acc=True, cycle{!door_closed | !idle}
+trace#2, cand_acc=True, gt_acc=True, cycle{!floor_3 | !idle}
+trace#3, cand_acc=False, gt_acc=None, 1; door_closed & floor_3 & idle; !door_closed | !floor_3 | !idle; cycle{1}
 
-Candidate = G((direction_up & floor_2) -> X(direction_up & floor_2))
+Candidate = G((direction_up & floor_2 & liftBut5_pressed) -> (!floor_5 U liftBut5_pressed))
 GT = G (floor_2 & direction_up & liftBut5_pressed -> direction_up U floor_5)
-trace#0, cand_acc=False, gt_acc=None, direction_up & floor_2; !direction_up & floor_2; cycle{floor_2}
+trace#0, cand_acc=True, gt_acc=None, !direction_up | !floor_2 | !liftBut5_pressed; cycle{1}
 
 Candidate = G((liftBut3_pressed & !lift_empty) -> F(floor_3 & dor_open))
 GT = G (liftBut3_pressed & !lift_empty -> F ((floor_3 & dor_open) | lift_empty))
@@ -197,22 +207,25 @@ Candidate = G(overloaded -> !X(floor_3 <-> !floor_3))
 GT = G (floor_3 & overloaded -> floor_3 U !overloaded)
 trace#0, cand_acc=True, gt_acc=None, cycle{1}
 
-Candidate = G((!overloaded) -> F(door_closed))
+Candidate = G((door_closed) -> (!overloaded))
 GT = G (door_open & !overloaded -> !overloaded U door_closed)
-trace#0, cand_acc=False, gt_acc=None, 1; !door_closed & !overloaded; cycle{!door_closed}
+trace#0, cand_acc=False, gt_acc=None, 1; door_closed & overloaded; cycle{1}
 
 Candidate = G(b -> F(r & !np_))
 GT = G  (b -> (G  !np_& F r))
 trace#0, cand_acc=True, gt_acc=None, !b | (!np_ & r); cycle{!b | (!np_ & r)}
 
-Candidate = G(a -> F(d & (!d U c)))
+Candidate = G(a -> F(d & (!d U (c & (!d U d)))))
 GT = G F  (a -> (c U d))
 trace#0, cand_acc=True, gt_acc=True, 1; cycle{c & d}
 trace#1, cand_acc=True, gt_acc=True, !a | (c & d); cycle{!a | (c & d)}
 trace#2, cand_acc=True, gt_acc=True, cycle{!a | (c & d)}
-trace#3, cand_acc=False, gt_acc=None, 1; (a & !c) | (a & !d); cycle{!c | !d}
+trace#3, cand_acc=True, gt_acc=True, c & d; cycle{c & d}
+trace#4, cand_acc=True, gt_acc=True, cycle{!a}
+trace#5, cand_acc=True, gt_acc=True, a & c & d; cycle{c & d}
+trace#6, cand_acc=False, gt_acc=None, 1; (a & !c) | (a & !d); cycle{!c | !d}
 
-Candidate = G(a -> G(a -> F(d)))
+Candidate = G(a -> G F d)
 GT = G F  (a -> F  d)
 trace#0, cand_acc=False, gt_acc=None, 1; a & !d; cycle{!d}
 
@@ -233,9 +246,9 @@ Candidate = p U !p
 GT = G  (p U !p)
 trace#0, cand_acc=True, gt_acc=None, 1; !p; cycle{1}
 
-Candidate = G(f -> G(f))
-GT = G F f
-trace#0, cand_acc=False, gt_acc=None, 1; f; !f; cycle{1}
+Candidate = G(F(f))
+GT = G (f -> G f)
+trace#0, cand_acc=False, gt_acc=True, !f; cycle{!f}
 
 Candidate = G(aftsCC -> F(aftsCR | aftsDR))
 GT = aftsCR -> F (aftsCC | aftsDR)
@@ -255,25 +268,22 @@ Candidate = G(_ -> F(P_m))
 GT = G (P_0 -> F Q_0) &_& G (P_m -> F Q_m)
 trace#0, cand_acc=False, gt_acc=None, 1; !P_m & _; cycle{!P_m}
 
-Candidate = G((P_0 | P_m) -> F(Q_0 | Q_m))
+Candidate = G((P_0 | P_m) -> (Q_0 & Q_m))
 GT = G ((P_0 -> Q_0) &_& (P_m -> Q_m))
-trace#0, cand_acc=True, gt_acc=None, cycle{Q_m | (!P_0 & !P_m)}
+trace#0, cand_acc=True, gt_acc=None, cycle{(!P_0 & !P_m & !Q_0) | (!P_0 & !P_m & !Q_m) | (P_0 & Q_0 & Q_m) | (P_m & Q_0 & Q_m)}
 
 Candidate = G(request -> F(State_WORK))
 GT = G ((State_INIT & request) -> F (State_WORK))
 trace#0, cand_acc=False, gt_acc=None, 1; !State_WORK & request; cycle{!State_WORK}
 
-Candidate = G(request -> (F(State_INIT)))
+Candidate = G(request -> F(State_INIT))
 GT = G ((State_INIT & request) -> F (!State_INIT & (!State_INIT -> F (State_INIT))))
 trace#0, cand_acc=False, gt_acc=None, 1; !State_INIT & request; cycle{!State_INIT}
 
-Candidate = G(Synch_to_medium -> X(G(!Synch_to_medium)))
+Candidate = G((Synch_to_medium & X(Synch_to_medium U Broadcast)) -> X(!Synch_to_medium U Broadcast))
 GT = G (Synch_to_medium -> !Synch_to_medium U (Broadcast | G !Synch_to_medium))
-trace#0, cand_acc=False, gt_acc=None, 1; Synch_to_medium; Synch_to_medium; cycle{1}
-
-Candidate = G(received -> msg_id_matches_receiver_id)
-GT = G !data_id
-trace#0, cand_acc=False, gt_acc=None, 1; !msg_id_matches_receiver_id & received; cycle{1}
+trace#0, cand_acc=False, gt_acc=False, Synch_to_medium; !Broadcast & Synch_to_medium; cycle{Broadcast}
+trace#1, cand_acc=True, gt_acc=None, cycle{!Broadcast}
 
 Candidate = G(safe -> G(bounded_height))
 GT = G (safe -> bounded_height)
@@ -284,7 +294,7 @@ Candidate = G(merging -> !new_id)
 GT = G (merging -> !(new_id U safe))
 trace#0, cand_acc=False, gt_acc=None, 1; merging & new_id; cycle{1}
 
-Candidate = G(SignalFreeWay -> LevelCrossingClosed)
+Candidate = G(!LevelCrossingClosed -> !SignalFreeWay)
 GT = G (SignalFreeWay & !LevelCrossingClosed)
 trace#0, cand_acc=False, gt_acc=None, 1; !LevelCrossingClosed & SignalFreeWay; cycle{1}
 
@@ -295,7 +305,8 @@ trace#1, cand_acc=True, gt_acc=True, cycle{EndCycle | (PDcontrolContraX & !PDcon
 trace#2, cand_acc=True, gt_acc=True, cycle{EndCycle | (!PDcontrolContraX & !PDcontrolX)}
 trace#3, cand_acc=True, gt_acc=None, cycle{EndCycle | (PDcontrolContraX & !PDcontrolX) | (!PDcontrolContraX & PDcontrolX)}
 
-Candidate = G((RequestGetIOR_i_j & ServerRegistered_j) -> F(etIOR_i))
+Candidate = G((RequestGetIOR_i_j & !ServerRegistered_j) | (RequestGetIOR_i_j -> F(etIOR_i)))
 GT = G (RequestGetIOR_i_j -> (ServerRegistered_j U GetIOR_i))
-trace#0, cand_acc=True, gt_acc=None, cycle{etIOR_i | (RequestGetIOR_i_j & !ServerRegistered_j) | (!RequestGetIOR_i_j & ServerRegistered_j)}
+trace#0, cand_acc=False, gt_acc=False, 1; RequestGetIOR_i_j & ServerRegistered_j & !etIOR_i; cycle{!etIOR_i}
+trace#1, cand_acc=True, gt_acc=None, !RequestGetIOR_i_j | !ServerRegistered_j | etIOR_i; cycle{!RequestGetIOR_i_j | !ServerRegistered_j | etIOR_i}
 

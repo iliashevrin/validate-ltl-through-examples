@@ -2,17 +2,16 @@ Candidate = G(F(x1))
 GT = x1 & X(x1) & X(X(x1))->G(F(x1))
 trace#0, cand_acc=False, gt_acc=True, !x1; cycle{!x1}
 
-Candidate = G(F(x1)) & G(F(x2))
-GT = G(F(x1))
-trace#0, cand_acc=False, gt_acc=None, 1; !x2; cycle{!x2}
-
-Candidate = G(((x1 & X(x2)) -> (x3 & X(x4))) & ((x3 & X(x4)) -> (x1 & X(x2))))
+Candidate = G(((x1 & X(x2)) -> (x3 & X(x4))) & ((x4 & X(x3)) -> (x2 & X(x1))))
 GT = G ((x1 & X x2) -> (x3 & X x4))
-trace#0, cand_acc=False, gt_acc=None, 1; !x1 & x3; x4; cycle{1}
+trace#0, cand_acc=False, gt_acc=False, 1; x1 & !x3; x2; cycle{1}
+trace#1, cand_acc=False, gt_acc=False, x1 & !x3; x2; cycle{1}
+trace#2, cand_acc=False, gt_acc=True, (!x1 & !x2 & x4) | (!x2 & x3 & x4); cycle{!x2 & x3 & x4}
 
-Candidate = G(F(x1) -> F(x2))
+Candidate = G(x1 -> F(x1)) -> G(x2 -> F(x2))
 GT = G(F(x1)) -> G(F(x2))
-trace#0, cand_acc=False, gt_acc=None, 1; x1 & !x2; cycle{!x2}
+trace#0, cand_acc=True, gt_acc=True, cycle{x2}
+trace#1, cand_acc=True, gt_acc=None, cycle{1}
 
 Candidate = G(x1 -> F(x2))
 GT = G(x1 -> x2)
@@ -24,22 +23,6 @@ trace#4, cand_acc=None, gt_acc=None, !x1 & !x2; cycle{!x2}
 trace#5, cand_acc=True, gt_acc=True, cycle{!x1}
 trace#6, cand_acc=False, gt_acc=False, !x2; x1 & !x2; cycle{!x2}
 trace#7, cand_acc=True, gt_acc=None, 1; cycle{x2}
-
-Candidate = G(!A)
-GT = G(!x1)
-trace#0, cand_acc=False, gt_acc=None, 1; A; cycle{1}
-
-Candidate = G(A -> X(G(!A))) & F(A)
-GT = F(x1 & G(X(!x1)))
-trace#0, cand_acc=False, gt_acc=None, 1; A; A; cycle{1}
-
-Candidate = G(A -> F(B))
-GT = G(x1 -> F(x2))
-trace#0, cand_acc=False, gt_acc=None, 1; A & !B; cycle{!B}
-
-Candidate = G((G(x)) -> G(F(y)))
-GT = G(G(x1)->G(F(x2)))
-trace#0, cand_acc=False, gt_acc=None, 1; x & !y; cycle{x & !y}
 
 Candidate = G(x1 -> G(!X(x2)))
 GT = G(x1-> X(!(x2)))
@@ -58,9 +41,9 @@ Candidate = F(x1)
 GT = G(F(x1))
 trace#0, cand_acc=True, gt_acc=None, 1; x1; cycle{1}
 
-Candidate = G((x1 & !x2 & F(x2)) -> (x3 U x2))
+Candidate = G((x1 & !x3 & F(x2)) -> (x1 U (x3 & !x4)))
 GT = G((x1 & F(x2)) -> (x3 U x4))
-trace#0, cand_acc=False, gt_acc=None, 1; x1 & !x2 & !x3; x2; cycle{1}
+trace#0, cand_acc=False, gt_acc=None, 1; x1 & x2 & !x3; (!x1 & !x3) | (!x1 & x4); cycle{1}
 
 Candidate = G(x1 -> F(x2))
 GT = G(x1->x2)
@@ -115,45 +98,11 @@ trace#31, cand_acc=None, gt_acc=None, x2; x2; cycle{1}
 trace#32, cand_acc=None, gt_acc=None, 1; cycle{!x1 & !x2}
 trace#33, cand_acc=None, gt_acc=False, x1; !x2; cycle{1}
 
-Candidate = G(x1 -> (X(x2) & X(!x3)))
+Candidate = G(x1 -> (X(x2) & !x3))
 GT = G(x1->X(x2 & G(!x3)))
-trace#0, cand_acc=False, gt_acc=False, 1; x1; !x2 | x3; cycle{1}
-trace#1, cand_acc=False, gt_acc=False, x1; !x2 | x3; cycle{1}
-trace#2, cand_acc=True, gt_acc=True, 1; cycle{x2 & !x3}
-trace#3, cand_acc=False, gt_acc=False, x1; (x1 & !x2) | (x1 & x3); cycle{x1}
-trace#4, cand_acc=False, gt_acc=False, x1; x3; cycle{1}
-trace#5, cand_acc=True, gt_acc=True, !x1; cycle{!x1}
-trace#6, cand_acc=False, gt_acc=False, x1; cycle{!x2 | x3}
-trace#7, cand_acc=False, gt_acc=False, x1; !x2; cycle{1}
-trace#8, cand_acc=True, gt_acc=True, x1; cycle{x1 & x2 & !x3}
-trace#9, cand_acc=True, gt_acc=True, cycle{!x1}
-trace#10, cand_acc=False, gt_acc=False, x1; (x2 & x3) | (!x2 & !x3); cycle{1}
-trace#11, cand_acc=False, gt_acc=False, cycle{(!x1 & !x2) | (!x1 & x3); x1}
-trace#12, cand_acc=None, gt_acc=None, x1 & !x2; cycle{1}
-trace#13, cand_acc=None, gt_acc=None, x1 & x3; cycle{1}
-trace#14, cand_acc=False, gt_acc=False, (x1 & !x2) | (x1 & x3); cycle{(x1 & !x2) | (x1 & x3)}
-trace#15, cand_acc=True, gt_acc=True, x1 & !x3; cycle{x1 & x2 & !x3}
-trace#16, cand_acc=False, gt_acc=False, x1; x2 & x3; cycle{1}
-trace#17, cand_acc=False, gt_acc=False, x1; !x2 & x3; cycle{1}
-trace#18, cand_acc=False, gt_acc=False, x1; cycle{(x1 & !x2) | (x1 & x3)}
-trace#19, cand_acc=None, gt_acc=None, !x1; !x2 | x3; cycle{1}
-trace#20, cand_acc=True, gt_acc=True, x1 & !x3; !x1 & x2 & !x3; cycle{!x1 & !x3}
-trace#21, cand_acc=None, gt_acc=None, cycle{!x2}
-trace#22, cand_acc=None, gt_acc=None, 1; (x1 & !x2) | (x1 & x3); cycle{1}
-trace#23, cand_acc=None, gt_acc=None, x1; x1; cycle{x1 & x2 & !x3}
-trace#24, cand_acc=None, gt_acc=None, !x1; x2 & !x3; cycle{1}
-trace#25, cand_acc=None, gt_acc=None, 1; cycle{!x1 | (x2 & !x3)}
-trace#26, cand_acc=None, gt_acc=None, x1; x2 & !x3; cycle{1}
-trace#27, cand_acc=None, gt_acc=None, x1; 1; !x2 | x3; cycle{1}
-trace#28, cand_acc=None, gt_acc=None, 1; x1; cycle{x1 & x2 & !x3}
-trace#29, cand_acc=None, gt_acc=None, x2; x1 | !x3; cycle{1}
-trace#30, cand_acc=None, gt_acc=None, cycle{!x1 | (x2 & !x3)}
-trace#31, cand_acc=None, gt_acc=None, !x1; cycle{1}
-trace#32, cand_acc=None, gt_acc=None, cycle{x1}
-trace#33, cand_acc=None, gt_acc=None, x1; !x2 | !x3; cycle{1}
-trace#34, cand_acc=None, gt_acc=None, x1; x2 | x3; cycle{1}
-trace#35, cand_acc=None, gt_acc=None, 1; !x2 | x3; cycle{1}
-trace#36, cand_acc=None, gt_acc=None, 1; !x1; cycle{1}
+trace#0, cand_acc=True, gt_acc=True, !x3; cycle{x2 & !x3}
+trace#1, cand_acc=True, gt_acc=True, !x1; cycle{!x1}
+trace#2, cand_acc=False, gt_acc=None, 1; x1 & x3; cycle{1}
 
 Candidate = (!x1 U (x1 & x2))
 GT = G(x1->X(x2))
@@ -163,9 +112,9 @@ Candidate = G(x1 -> x2)
 GT = G (x1 -> (x1 U (!x1 | x2)))
 trace#0, cand_acc=False, gt_acc=None, 1; x1 & !x2; cycle{1}
 
-Candidate = x1 -> x2
+Candidate = x1 -> F(x2)
 GT = G (x1 -> F(x2))
-trace#0, cand_acc=True, gt_acc=None, (x1 & x2) | (!x1 & !x2); cycle{1}
+trace#0, cand_acc=True, gt_acc=None, !x1; cycle{1}
 
 Candidate = G(!x1)
 GT = F(G(!x1))
@@ -181,10 +130,9 @@ trace#0, cand_acc=False, gt_acc=False, 1; x1 & x2; !x1 & x2; cycle{1}
 trace#1, cand_acc=False, gt_acc=False, x1 & x2; !x1 & x2; cycle{x2}
 trace#2, cand_acc=True, gt_acc=None, cycle{!x1 | !x2}
 
-Candidate = G((x1 & X(!x1)) -> ((!x2) U (x2 U ((!x2) U (x2 -> G(!x1))))))
+Candidate = G(x1 -> X(!x1 U x2))
 GT = G(x2 -> (x1 & X(G(!x1))))
-trace#0, cand_acc=False, gt_acc=False, x2; x1 & x2; !x1 & x2; cycle{x1 & x2}
-trace#1, cand_acc=True, gt_acc=None, cycle{x1 | !x2}
+trace#0, cand_acc=False, gt_acc=None, 1; x1; cycle{!x1 & !x2}
 
 Candidate = G((x1 & !x2 & !x3))
 GT = x1 & G (!x2 & !x3)
@@ -204,6 +152,11 @@ Candidate = G(x1) -> !F(x2)
 GT = G(x1 -> !F(x2))
 trace#0, cand_acc=True, gt_acc=None, 1; !x1; cycle{1}
 
+Candidate = G((x1 U x2) & (x2 U x3) -> (x1 U x3))
+GT = ((x1 U x2) & (x1 U x3)) -> (x1 U x3)
+trace#0, cand_acc=True, gt_acc=True, cycle{x3 | (!x1 & !x2)}
+trace#1, cand_acc=False, gt_acc=True, 1; !x1 & x2 & !x3; x3; cycle{1}
+
 Candidate = G(x1) -> G(F(x2))
 GT = G(F(x1)) -> G(F(x2))
 trace#0, cand_acc=False, gt_acc=False, x1; cycle{x1 & !x2}
@@ -216,12 +169,11 @@ Candidate = G(x1) -> F(x2)
 GT = G(F(x1 -> F(x2)))
 trace#0, cand_acc=True, gt_acc=None, 1; !x1 | x2; cycle{1}
 
-Candidate = G(x1) -> G(F(x2))
+Candidate = G(G(x1) -> G(F(x2)))
 GT = G(x1-> G(F(x2)))
-trace#0, cand_acc=False, gt_acc=False, x1; cycle{x1 & !x2}
-trace#1, cand_acc=False, gt_acc=False, x1 & !x2; cycle{x1 & !x2}
-trace#2, cand_acc=None, gt_acc=None, !x1 | x2; cycle{1}
-trace#3, cand_acc=None, gt_acc=False, x1 & !x2; cycle{!x2}
+trace#0, cand_acc=False, gt_acc=False, 1; x1 & !x2; cycle{x1 & !x2}
+trace#1, cand_acc=True, gt_acc=True, cycle{!x1}
+trace#2, cand_acc=True, gt_acc=None, cycle{!x1 | x2}
 
 Candidate = G(x1) -> F(x2)
 GT = G(x1 -> F(x2))
@@ -230,6 +182,10 @@ trace#0, cand_acc=True, gt_acc=None, 1; !x1 | x2; cycle{1}
 Candidate = G(x1 | x2)
 GT = x1 -> (!x1 -> x2)
 trace#0, cand_acc=False, gt_acc=True, 1; !x1 & !x2; cycle{1}
+
+Candidate = G(!((!x1) -> x2))
+GT = !x2 & !(!x1 -> x2)
+trace#0, cand_acc=False, gt_acc=None, 1; x1 | x2; cycle{1}
 
 Candidate = G(!x1 -> x2)
 GT = !x1 -> x2
@@ -253,9 +209,15 @@ trace#0, cand_acc=True, gt_acc=True, !x1 & !x2 & !x3; cycle{!x1 & !x2 & !x3}
 trace#1, cand_acc=True, gt_acc=True, x1 & x2 & x3; cycle{x1 & x2 & x3}
 trace#2, cand_acc=False, gt_acc=None, 1; (x1 & !x3) | (!x2 & x3); cycle{1}
 
-Candidate = G(x2 -> x1)
-GT = x2 -> x1
-trace#0, cand_acc=False, gt_acc=None, 1; !x1 & x2; cycle{1}
+Candidate = G((x1 & !x2) | (!x1 & x2) -> (x1 & x2))
+GT = ((x1 & !x2) | (!x1 & x2)) -> (x1 & x2)
+trace#0, cand_acc=True, gt_acc=True, (x1 & x2) | (!x1 & !x2); cycle{(x1 & x2) | (!x1 & !x2)}
+trace#1, cand_acc=True, gt_acc=True, cycle{(x1 & x2) | (!x1 & !x2)}
+trace#2, cand_acc=False, gt_acc=None, 1; (x1 & !x2) | (!x1 & x2); cycle{1}
+
+Candidate = G((x1 | x2) -> (x1 <-> !x2))
+GT = (x1 | x2) -> ((x1 & !x2) | (!x1 & x2))
+trace#0, cand_acc=False, gt_acc=None, 1; x1 & x2; cycle{1}
 
 Candidate = x1 | !(x1 & x2)
 GT = X1 | !(x1 & x2)
@@ -279,15 +241,21 @@ Candidate = (x1) & (x2 -> X(x3))
 GT = x1 ∧ (x2 -> !x3)
 trace#0, cand_acc=False, gt_acc=None, x1 & x2; !x3; cycle{1}
 
+Candidate = G(x1 -> (x2 | x3))
+GT = x1 -> (x2 | x3)
+trace#0, cand_acc=False, gt_acc=None, 1; x1 & !x2 & !x3; cycle{1}
+
+Candidate = G(x1 <-> !x2)
+GT = x1 <-> !x2
+trace#0, cand_acc=False, gt_acc=None, 1; (x1 & x2) | (!x1 & !x2); cycle{1}
+
 Candidate = G(x1 -> F(x2))
 GT = x1 -> x2
 trace#0, cand_acc=False, gt_acc=None, 1; x1 & !x2; cycle{!x2}
 
-Candidate = x1 -> x2
+Candidate = G(x1 -> x2)
 GT = x2 -> x1
-trace#0, cand_acc=True, gt_acc=True, (x1 & x2) | (!x1 & !x2); cycle{1}
-trace#1, cand_acc=True, gt_acc=True, !x1 & !x2; cycle{1}
-trace#2, cand_acc=True, gt_acc=None, !x1; cycle{1}
+trace#0, cand_acc=False, gt_acc=None, 1; x1 & !x2; cycle{1}
 
 Candidate = G((!x1 -> x2) & (x1 -> x3))
 GT = (!x1 -> x2) & (x1 -> x3)
@@ -305,15 +273,21 @@ Candidate = G(x1 <-> (x2 | x3))
 GT = x1 <-> (x2 | x3)
 trace#0, cand_acc=False, gt_acc=None, 1; (x1 & !x2 & !x3) | (!x1 & x2) | (!x1 & x3); cycle{1}
 
-Candidate = G((!x3) -> (!x1 | x1)) & G(x4 -> x2) & G(x4)
+Candidate = G((!x3 -> !x1) & (x4 -> x2) & G(x4)) & G(x2)
 GT = (!G x1) & (G x2) & (!G x3) ∧ (G x4)
-trace#0, cand_acc=False, gt_acc=False, 1; !x2 | !x4; cycle{1}
-trace#1, cand_acc=True, gt_acc=False, cycle{x2 & x3 & x4}
+trace#0, cand_acc=True, gt_acc=True, !x1 & x2 & !x3 & x4; cycle{!x1 & x2 & x4}
+trace#1, cand_acc=False, gt_acc=None, 1; !x2 | !x4 | (x1 & !x3); cycle{1}
 
 Candidate = F(x1 & G(!x2))
 GT = F(x1 & G(X(!x2)))
 trace#0, cand_acc=True, gt_acc=True, 1; x1 & !x2; cycle{!x2}
 trace#1, cand_acc=False, gt_acc=None, cycle{!x1 | x2}
+
+Candidate = G(x1 -> F((!x1) U x2))
+GT = G(x1 -> X(!x1 U x2))
+trace#0, cand_acc=True, gt_acc=True, 1; cycle{x2}
+trace#1, cand_acc=False, gt_acc=False, 1; x1 & !x2; cycle{!x2}
+trace#2, cand_acc=True, gt_acc=None, cycle{!x1 | x2}
 
 Candidate = G(x1 -> G(x2))
 GT = F(x1) -> G(x2)
@@ -338,7 +312,7 @@ Candidate = G(x1 -> (x2 U !x3))
 GT = x1 -> G(x2 U !x3)
 trace#0, cand_acc=False, gt_acc=None, 1; x1 & x2 & x3; cycle{x2 & x3}
 
-Candidate = G(x2 <-> (!x1 & F(!x1) & !(x1 U (x1 & G(!x1)))))
+Candidate = G(x2 <-> (!x1 & F(!x1) & !(x1 U x1)))
 GT = G (x1-> X(!x1 U X2))
 trace#0, cand_acc=False, gt_acc=None, 1; (x1 & x2) | (!x1 & !x2); cycle{1}
 
@@ -348,9 +322,9 @@ trace#0, cand_acc=False, gt_acc=False, 1; x1 & !x2; cycle{!x2}
 trace#1, cand_acc=None, gt_acc=None, x1 & x2; cycle{1}
 trace#2, cand_acc=True, gt_acc=None, cycle{!x1 | x2}
 
-Candidate = G(x1 -> (x4 U (x2 & x3)))
+Candidate = G(F(x1 -> (x4 U (x2 & x3))))
 GT = G (F(x4 -> (!(F !x1->(x2 & x3)))))
-trace#0, cand_acc=False, gt_acc=None, 1; (x1 & !x2 & x4) | (x1 & !x3 & x4); cycle{(!x2 & x4) | (!x3 & x4)}
+trace#0, cand_acc=False, gt_acc=None, 1; cycle{(x1 & !x2) | (x1 & !x3)}
 
 Candidate = G(!(x1 & x2) & !(x1 & x3) & !(x1 & x4) & !(x2 & x3) & !(x2 & x4))
 GT = G(!(x1 & x3) & !(x2 & x4) & !(x2 & x3) &!(x1 & x4) & ((x2 | x3)  ->!(x1 | x4)))
@@ -375,29 +349,13 @@ Candidate = G((x1 & X(x1)) -> G(!x1))
 GT = G((x1 & X(x1)) -> X(X(G(!x1))))
 trace#0, cand_acc=False, gt_acc=None, 1; x1; x1; cycle{1}
 
-Candidate = G((x1 & !x2 & !x3) | (!x1 & x2 & !x3) | (!x1 & !x2 & x3)) & x1 & !x2 & !x3 & F((!x1 & x2 & !x3) & F(!x1 & !x2 & x3)) & (x1 U (x2 U x3))
+Candidate = G((x1 & !x2 & !x3) | (!x1 & x2 & !x3) | (!x1 & !x2 & x3)) & x1 & !x2 & !x3 & (x1 U (x2 U x3)) & G(x3 -> G(x3))
 GT = x1 & (!x2 | !x3) -> F(x2 & (!x1 | !x3)) -> F(x3 & (!x2 | !x1)) & G(x3)
-trace#0, cand_acc=True, gt_acc=False, x1 & !x2 & !x3; !x1 & x2 & !x3; cycle{!x1 & !x2 & x3}
+trace#0, cand_acc=False, gt_acc=None, x1 & !x2 & !x3; (x1 & x3) | (x2 & x3); cycle{x3}
 
-Candidate = G(!x1 | x2) U G(F(x2))
+Candidate = F(G(x2)) & (!G(!(x1 & !x2)) U G(x2))
 GT = !(x1 & !x2) U (F(G(x2)))
-trace#0, cand_acc=False, gt_acc=False, 1; cycle{!x2}
-trace#1, cand_acc=False, gt_acc=False, x1 & !x2; cycle{!x2}
-trace#2, cand_acc=False, gt_acc=False, !x2; cycle{!x2}
-trace#3, cand_acc=True, gt_acc=True, x2; cycle{x2}
-trace#4, cand_acc=None, gt_acc=None, x2; cycle{1}
-trace#5, cand_acc=None, gt_acc=None, !x1; cycle{!x1}
-trace#6, cand_acc=True, gt_acc=True, cycle{x2}
-trace#7, cand_acc=False, gt_acc=False, cycle{!x1 & !x2}
-trace#8, cand_acc=False, gt_acc=False, cycle{x1 & !x2}
-trace#9, cand_acc=None, gt_acc=None, !x1 | x2; cycle{!x1 | x2}
-trace#10, cand_acc=True, gt_acc=True, 1; cycle{x2}
-trace#11, cand_acc=False, gt_acc=False, cycle{!x2}
-trace#12, cand_acc=None, gt_acc=None, cycle{!x1 | x2}
-trace#13, cand_acc=None, gt_acc=None, x1 & !x2; !x2; cycle{1}
-trace#14, cand_acc=None, gt_acc=None, cycle{x1}
-trace#15, cand_acc=None, gt_acc=None, 1; x2; cycle{1}
-trace#16, cand_acc=None, gt_acc=None, x1 & !x2; cycle{1}
+trace#0, cand_acc=False, gt_acc=None, !x1 & !x2; cycle{!x1 | x2}
 
 Candidate = G(x1 -> F(x2 & G(!x1)))
 GT = G(x1->F(x2))
@@ -426,17 +384,18 @@ Candidate = G((x1 -> (X(!x1) & X(x2))) & (x2 -> (X(!x1) & X(x1))))
 GT = G((x1->(!x & X(x2)) ) & (x2->(!x1 & X(x1))))
 trace#0, cand_acc=False, gt_acc=None, !x1 & x2; cycle{1}
 
-Candidate = (F x1 | G (x1 -> X !x1 & X X x1)) -> F x2
+Candidate = F(x1) -> F(x2)
 GT = x1 & X(!x1) | !x1 & X(x1) -> x2
-trace#0, cand_acc=True, gt_acc=True, x2; cycle{1}
-trace#1, cand_acc=True, gt_acc=None, 1; x2; cycle{1}
+trace#0, cand_acc=True, gt_acc=None, 1; x2; cycle{1}
 
-Candidate = G(x1 -> (X(x1 -> (X(!x1) & (!x1 U G(!x1)))) & (!x1 U G(!x1)) | X(!x1 & (!x1 U (x1 & X(!x1) & X(!x1 U G(!x1)))))))
+Candidate = G(x1 -> X((!x1 U x1) & X(x1 -> X(G(!x1)))))
 GT = F(x1 & X(F(x1 & G(!x1))))
-trace#0, cand_acc=False, gt_acc=False, 1; x1; x1; cycle{1}
-trace#1, cand_acc=False, gt_acc=False, x1; x1; x1; cycle{1}
-trace#2, cand_acc=False, gt_acc=False, 1; x1; cycle{1}
-trace#3, cand_acc=True, gt_acc=False, cycle{!x1}
+trace#0, cand_acc=False, gt_acc=False, 1; x1; !x1; cycle{!x1}
+trace#1, cand_acc=False, gt_acc=False, 1; x1; x1; cycle{!x1}
+trace#2, cand_acc=False, gt_acc=False, x1; 1; !x1; cycle{!x1}
+trace#3, cand_acc=False, gt_acc=False, x1; !x1; cycle{!x1}
+trace#4, cand_acc=False, gt_acc=False, cycle{x1}
+trace#5, cand_acc=True, gt_acc=False, !x1; !x1; cycle{!x1}
 
 Candidate = F(G((!x2 & !x3) -> x1))
 GT = F(!x2 & !x3 -> G(x1))
@@ -489,9 +448,15 @@ Candidate = G((x1 & X(!x1)) -> X(X(!x1)))
 GT = G(x1 -> (X(!x1) & X(X(x1))))
 trace#0, cand_acc=True, gt_acc=None, 1; 1; cycle{!x1}
 
-Candidate = G((X(x3) <-> (x1 & x2)) & (x3 -> F(x1 & x2)))
-GT = G (x3 <-> (X(x1 & x2) & F(x1 & x2)))
-trace#0, cand_acc=False, gt_acc=None, 1; !x1 | !x2; x3; cycle{1}
+Candidate = G(((x1 <-> x2) & !(x2 <-> x3)) | ((x1 <-> x3) & !(x1 <-> x2)) | ((x2 <-> x3) & !(x1 <-> x2))) & G(((x1 <-> x2) & !(x2 <-> x3)) -> X(((x1 <-> x3) & !(x1 <-> x2)) | ((x2 <-> x3) & !(x1 <-> x3)))) & G(((x1 <-> x3) & !(x1 <-> x2)) -> X(((x1 <-> x2) & !(x2 <-> x3)) | ((x2 <-> x3) & !(x1 <-> x3)))) & G(((x2 <-> x3) & !(x1 <-> x2)) -> X(((x1 <-> x2) & !(x2 <-> x3)) | ((x1 <-> x3) & !(x1 <-> x2))))
+GT = G!(x1 & x2 & x3 ) & 
+G!(!x1 & !x2 & !x3 ) &
+G((x1 & x2 & !x3 )| (x1 & !x2 & x3 )| (!x1 & x2 & x3 )| (!x1 & !x2 & x3 )| (!x1 & x2 & !x3 )| (x1 & !x2 & !x3 )) & 
+G((x1 & x2 & !x3 )->X((!x1 & x2 & x3 )| (x1 & !x2 & x3 ))) &G((x1 & !x2 & x3 )->X((!x1 & x2 & x3 )| (x1 & x2 & !x3 ))) &
+G((!x1 & x2 & x3 )->X((x1 & !x2 & x3 )| (!x1 & !x2 & x3 ))) &
+G((!x1 & x2 & !x3 )->X((x1 & !x2 & x3 )| (x1 & x2 & !x3 ))) & 
+G((x1 & !x2 & !x3 )->X((x1 & x2 & !x3 )| (!x1 & x2 & x3 )))
+trace#0, cand_acc=True, gt_acc=None, (!x1 & !x2 & x3) | (x1 & x2 & !x3); cycle{(!x1 & x2 & !x3) | (x1 & !x2 & x3); (!x1 & !x2 & x3) | (x1 & x2 & !x3)}
 
 Candidate = G(x1 -> (x1 U x2)) & G(x2 -> G(!x1))
 GT = (x1 U x2) & G(x2 -> F (!x1))
@@ -505,9 +470,9 @@ trace#2, cand_acc=True, gt_acc=None, x1 & x2; cycle{x2}
 
 Candidate = (F(x1 & x2) -> (!x1 U x1)) & (!F(x1 & x2) -> (F(x2) -> F(x1)))
 GT = F(x1 & x2) -> (!x1 U x1) & F(x2)->F(x1)
-trace#0, cand_acc=True, gt_acc=True, x1 & x2; cycle{x1}
-trace#1, cand_acc=True, gt_acc=True, x1 & !x2; cycle{1}
-trace#2, cand_acc=True, gt_acc=True, cycle{!x2}
+trace#0, cand_acc=True, gt_acc=True, x1 & !x2; cycle{1}
+trace#1, cand_acc=True, gt_acc=True, cycle{!x2}
+trace#2, cand_acc=True, gt_acc=True, x1 & x2; cycle{x1}
 trace#3, cand_acc=True, gt_acc=True, x1; cycle{1}
 trace#4, cand_acc=True, gt_acc=True, x1 & x2; cycle{1}
 trace#5, cand_acc=True, gt_acc=True, x1 & !x2; cycle{!x1 | !x2}
@@ -572,7 +537,7 @@ trace#45, cand_acc=None, gt_acc=None, x1; !x2; cycle{1}
 trace#46, cand_acc=None, gt_acc=None, 1; cycle{!x1 | (x2 & x3)}
 trace#47, cand_acc=None, gt_acc=None, 1; !x1 | (x2 & x3); cycle{1}
 
-Candidate = G((x1 -> !X(x2)) & (!x1 -> X(x2)))
+Candidate = G((x1 -> X(!x2)) & (!x1 -> X(x2)))
 GT = G((x1->!x2) & X(!x1->X(x2)))
 trace#0, cand_acc=False, gt_acc=None, x1; x2; cycle{1}
 
@@ -580,19 +545,30 @@ Candidate = G((x1 | x2 | x3) -> F(G(x4)))
 GT = x1 & x2 & x3 -> X(G(x4))
 trace#0, cand_acc=False, gt_acc=None, 1; x1 | x2 | x3; cycle{!x4}
 
-Candidate = G(x1 -> (!x2 & !(X x2) & !(X X x2) & !x3 & !(X x3) & !(X X x3)))
+Candidate = G(x1 -> (!x2 & !(X x2) & !(X x3) & !(X X x3)))
 GT = G(x1->(X(!x2) & X(x3) & X(X(!x3))))
-trace#0, cand_acc=False, gt_acc=None, x1 & x2; cycle{1}
+trace#0, cand_acc=True, gt_acc=None, !x2; cycle{!x2 & !x3}
 
-Candidate = G(x1 -> X(!x1 & X(x1))) & G(!x1 -> X(x1 & X(!x1)))
+Candidate = G(x1 -> X(!x1)) & G(!x1 -> X(x1))
 GT = G((x1 U !x1) & (!x1 U x1))
 trace#0, cand_acc=False, gt_acc=None, !x1; !x1; cycle{1}
 
-Candidate = G(!x1) -> G((x2 & !x3) | (!x2 & x3)) & G((x2 -> X(!x2 & x3)) & (x3 -> X(!x3 & x2)))
+Candidate = G(!x1) -> G((x2 & !x3) -> X(!x2 & x3)) & G((!x2 & x3) -> X(x2 & !x3))
 GT = G(!x1) -> ((x2 -> X(!x2 & x3)) & (x3 ->X(!x3 & x2)))
-trace#0, cand_acc=False, gt_acc=False, !x1 & !x2 & x3; !x1 & !x2 & x3; cycle{(!x1 & !x2 & x3) | (!x1 & x2 & !x3)}
-trace#1, cand_acc=False, gt_acc=False, !x1 & x2 & x3; cycle{!x1}
-trace#2, cand_acc=False, gt_acc=None, !x1; (!x1 & !x2 & !x3) | (!x1 & x2 & x3); cycle{!x1}
+trace#0, cand_acc=False, gt_acc=False, !x1 & !x2 & x3; (!x1 & !x2) | (!x1 & x3); cycle{!x1}
+trace#1, cand_acc=True, gt_acc=True, !x1 & !x2 & x3; cycle{!x1 & x2 & !x3; !x1 & !x2 & x3}
+trace#2, cand_acc=False, gt_acc=False, !x1 & !x2 & x3; cycle{(!x1 & !x2) | (!x1 & x3)}
+trace#3, cand_acc=None, gt_acc=None, x2 & !x3; x2 | !x3; cycle{!x1}
+trace#4, cand_acc=False, gt_acc=False, cycle{!x1 & x2 & !x3}
+trace#5, cand_acc=True, gt_acc=True, x1 & x2 & !x3; x2 | !x3; cycle{1}
+trace#6, cand_acc=True, gt_acc=True, !x2 & x3; x1; cycle{1}
+trace#7, cand_acc=True, gt_acc=True, x1; cycle{1}
+trace#8, cand_acc=True, gt_acc=True, cycle{x1}
+trace#9, cand_acc=None, gt_acc=None, 1; !x1 & !x2 & x3; (!x1 & !x2) | (!x1 & x3); cycle{!x1}
+trace#10, cand_acc=True, gt_acc=True, 1; x1; cycle{1}
+trace#11, cand_acc=False, gt_acc=False, !x1 & !x2 & x3; cycle{!x1 & !x2 & x3}
+trace#12, cand_acc=True, gt_acc=True, (x1 & !x2 & !x3) | (x1 & x2 & x3); cycle{(!x2 & !x3) | (x2 & x3)}
+trace#13, cand_acc=True, gt_acc=None, (!x2 & !x3) | (x2 & x3); cycle{(!x2 & !x3) | (x2 & x3)}
 
 Candidate = G((x2 & x1 & x3) -> F(G(x1 & x2 & x3)))
 GT = x1 & x2 & x3 -> F(x1) & F(x2) & F(x3)
@@ -641,15 +617,15 @@ trace#26, cand_acc=None, gt_acc=None, !x2 & x3; cycle{1}
 trace#27, cand_acc=None, gt_acc=None, x1 & !x2; x1 & x3; cycle{x1}
 trace#28, cand_acc=None, gt_acc=False, x1 & x3; x1 & !x2; cycle{x1}
 
-Candidate = G(((!x2) & X(x2)) -> (X(x1) & X(x3))) & G(((!x2) & X(x2)) -> (x4 U x1)) & F(x2)
+Candidate = G(((!x2) & X(x2)) -> (X(x1) & X(x3))) & G((!x2 & X(x2)) -> X(x1)) & (x4 U x1) & F(x2)
 GT = G (F(x2 & x3) & (X (x2 -> X(x1))) & G(x4 U x1) & F(x2))
-trace#0, cand_acc=False, gt_acc=False, 1; !x1 & !x2 & !x4; x2; cycle{1}
-trace#1, cand_acc=False, gt_acc=False, !x2; cycle{!x2}
-trace#2, cand_acc=False, gt_acc=None, !x2; (!x1 & x2) | (x2 & !x3); cycle{1}
+trace#0, cand_acc=False, gt_acc=False, !x1 & x2 & !x4; cycle{x2}
+trace#1, cand_acc=False, gt_acc=False, x1 & !x2; cycle{!x2}
+trace#2, cand_acc=True, gt_acc=None, x1 & x2; cycle{!x2 | (x1 & x3)}
 
-Candidate = G(x1 -> x2)
+Candidate = G(x1 -> F(x2))
 GT = G(x1 -> G(x2))
-trace#0, cand_acc=False, gt_acc=False, 1; x1 & !x2; cycle{1}
+trace#0, cand_acc=False, gt_acc=False, 1; x1 & !x2; cycle{!x2}
 trace#1, cand_acc=None, gt_acc=None, x1 & x2; cycle{1}
 trace#2, cand_acc=True, gt_acc=None, cycle{!x1 | x2}
 
@@ -687,12 +663,12 @@ trace#5, cand_acc=True, gt_acc=True, cycle{!x1 | !x2 | x3}
 trace#6, cand_acc=True, gt_acc=True, !x1 | !x2 | x3; cycle{!x1 | !x2 | x3}
 trace#7, cand_acc=False, gt_acc=None, 1; x1 & x2 & !x3; cycle{!x3}
 
-Candidate = G(x1) -> (G(F(x2)) & G(F(x3)))
+Candidate = G(x1) -> (G(F(x2)) & F(x3))
 GT = G(x1 -> (F(x2) & F(x3)))
 trace#0, cand_acc=True, gt_acc=True, !x1 & !x3; cycle{!x1 & !x3}
-trace#1, cand_acc=True, gt_acc=None, !x1 & !x3; cycle{!x3}
+trace#1, cand_acc=True, gt_acc=None, !x1 & x3; cycle{x2}
 
-Candidate = G(x1 -> !x3) U F(!x1 & x3)
+Candidate = G(x1 -> !x3) U (F(x3 & !x1))
 GT = G((x1->!x3) U (!x1->x3))
 trace#0, cand_acc=True, gt_acc=None, 1; !x1 & x3; cycle{1}
 
@@ -714,7 +690,7 @@ trace#3, cand_acc=False, gt_acc=False, !x1 & x2; cycle{!x1}
 trace#4, cand_acc=True, gt_acc=True, x1 & !x2; cycle{!x2}
 trace#5, cand_acc=True, gt_acc=None, x1 & x2; cycle{1}
 
-Candidate = G((x1 & !x2) -> F(x3))
+Candidate = G((x1 & !x2) -> F x3)
 GT = x1 & x2 & X(x3)
 trace#0, cand_acc=True, gt_acc=None, cycle{x3 | (x1 & x2) | (!x1 & !x2)}
 
@@ -761,14 +737,13 @@ trace#10, cand_acc=None, gt_acc=None, x1; x1; cycle{1}
 trace#11, cand_acc=None, gt_acc=None, cycle{1}
 trace#12, cand_acc=None, gt_acc=None, 1; !x1; cycle{1}
 
-Candidate = x1 & F(x1 & F(x2 & F(x3)))
+Candidate = G(x1 -> F(x2 & F(x3))) & (!x3 U x2)
 GT = F (x1 & F (x2)) & F (x3 & (!x3 U x2))
-trace#0, cand_acc=True, gt_acc=None, x1 & x3; cycle{x1 & !x2 & x3; x1 & x2 & !x3}
+trace#0, cand_acc=True, gt_acc=None, (!x1 & x2) | (x2 & x3); cycle{(!x1 & x2) | (x2 & x3)}
 
-Candidate = G(x1 -> (F(x2) & F(x2 & G(x2 -> X(X(x3))))))
+Candidate = G(x1 -> (F(x2 & G(x2 -> X(X(x3))))))
 GT = G(x1 -> (X(x2) & G(X(X(x3)))))
-trace#0, cand_acc=True, gt_acc=True, x2 & x3; cycle{x2 & x3}
-trace#1, cand_acc=True, gt_acc=None, x2; cycle{!x2; x2 & x3}
+trace#0, cand_acc=True, gt_acc=None, x2; cycle{!x2; x2 & x3}
 
 Candidate = G(x1 -> F(x2))
 GT = F(x1) & F(x2)
@@ -827,13 +802,13 @@ Candidate = G(a -> (X(b) & X(X(b))))
 GT = G (a -> (b | X(b)))
 trace#0, cand_acc=False, gt_acc=None, 1; a; !b; cycle{1}
 
-Candidate = G(!a | (X(!a) | X(X(!a))))
+Candidate = G(!a | F(a & F(!a & G(!a))))
 GT = G(!a -> (X(!a) | X(X(a))))
-trace#0, cand_acc=False, gt_acc=None, 1; a; a; a; cycle{1}
+trace#0, cand_acc=False, gt_acc=True, cycle{a}
 
-Candidate = G(a -> (X(!a) & X(X(!a))))
+Candidate = G(a -> X(X(X(!a | a))))
 GT = G(a -> (X(!a) | X(X(!a)) | X(X(X(a)))))
-trace#0, cand_acc=False, gt_acc=None, a; 1; a; cycle{1}
+trace#0, cand_acc=True, gt_acc=None, cycle{1}
 
 Candidate = G(a -> F(b))
 GT = G ( a -> X(b))
@@ -846,6 +821,10 @@ GT = G(x1 <-> x2)
 trace#0, cand_acc=False, gt_acc=False, 1; x1 & !x2; cycle{1}
 trace#1, cand_acc=None, gt_acc=None, x1 & x2; cycle{1}
 trace#2, cand_acc=True, gt_acc=None, cycle{!x1 | x2}
+
+Candidate = G(a -> (!a U b))
+GT = (!a) U b
+trace#0, cand_acc=False, gt_acc=None, 1; a & !b; cycle{1}
 
 Candidate = !(F(p & X(F(p & X(F(p))))))
 GT = !p U (p U (!p U (p U G(!p))))
@@ -868,17 +847,6 @@ trace#0, cand_acc=False, gt_acc=None, 1; r; !r; cycle{1}
 Candidate = G(r -> X(G(!r)))
 GT = (r U !r) & (G(!r -> G(!r)))
 trace#0, cand_acc=False, gt_acc=None, 1; r; r; cycle{1}
-
-Candidate = G(x1 -> X(X(X(x1))))
-GT = x1 -> X(X(X(x1)))
-trace#0, cand_acc=True, gt_acc=True, 1; x1; x1; cycle{x1}
-trace#1, cand_acc=True, gt_acc=True, cycle{x1}
-trace#2, cand_acc=True, gt_acc=True, !x1; cycle{!x1}
-trace#3, cand_acc=True, gt_acc=True, cycle{!x1}
-trace#4, cand_acc=False, gt_acc=False, cycle{x1; 1; 1; !x1}
-trace#5, cand_acc=False, gt_acc=False, x1; 1; 1; cycle{!x1}
-trace#6, cand_acc=False, gt_acc=False, x1; 1; 1; !x1; cycle{1}
-trace#7, cand_acc=None, gt_acc=True, x1; 1; 1; x1; cycle{1}
 
 Candidate = F(X(X(r)))
 GT = X(X(F(X(r))))
@@ -908,19 +876,22 @@ trace#14, cand_acc=True, gt_acc=True, !b & !r; cycle{!r}
 trace#15, cand_acc=None, gt_acc=None, b & r; cycle{1}
 trace#16, cand_acc=None, gt_acc=False, !b; r; cycle{1}
 
-Candidate = G(r -> (!r & X(r)))
-GT = G(r -> X(!r) & X(X(r)))
-trace#0, cand_acc=True, gt_acc=True, !r; cycle{!r}
-trace#1, cand_acc=False, gt_acc=None, 1; r; cycle{1}
-
-Candidate = G(x1 -> F(x1))
+Candidate = F(x1 & F(x1))
 GT = F(b & X(F(b)))
-trace#0, cand_acc=True, gt_acc=None, !x1; cycle{1}
+trace#0, cand_acc=False, gt_acc=None, cycle{!x1}
 
 Candidate = G(x1 & X(!x1 & X(x1)))
 GT = x1 & G(x1 -> X(!x1 & X(x1)))
 trace#0, cand_acc=False, gt_acc=False, x1; x1; cycle{1}
 trace#1, cand_acc=False, gt_acc=None, cycle{1}
+
+Candidate = G(x1 -> (X(G(!x1)) & (!x1 U x1 | G(!x1))))
+GT = !x1 U (x1 & G(!X(x1)))
+trace#0, cand_acc=False, gt_acc=False, 1; x1; x1; cycle{1}
+trace#1, cand_acc=False, gt_acc=False, x1; 1; x1; cycle{1}
+trace#2, cand_acc=None, gt_acc=None, !x1; cycle{1}
+trace#3, cand_acc=False, gt_acc=False, x1; x1; cycle{1}
+trace#4, cand_acc=True, gt_acc=False, !x1; cycle{!x1}
 
 Candidate = G((!x1 | !x2) -> !X(x3))
 GT = G((!x1 | x2) -> X(!x3))
@@ -985,17 +956,13 @@ trace#5, cand_acc=True, gt_acc=True, cycle{!x1 | !x2 | !x3 | x4}
 trace#6, cand_acc=True, gt_acc=True, !x1 | !x2 | !x3 | x4; cycle{!x1 | !x2 | !x3 | x4}
 trace#7, cand_acc=False, gt_acc=None, x1 & x2 & x3 & !x4; !x2 & !x4; cycle{1}
 
-Candidate = G(F(x1)) -> G(x1)
+Candidate = G(F(x1) -> G(x1))
 GT = F(G(x1))
-trace#0, cand_acc=False, gt_acc=True, 1; !x1; cycle{x1}
+trace#0, cand_acc=True, gt_acc=False, !x1; cycle{!x1}
 
-Candidate = G(x1 -> F(x2)) -> G(F(x1) -> F(x2))
+Candidate = G(x1 -> F(x2)) -> G(F(x1) -> G(F(x2)))
 GT = G(F(x1)) -> G(F(x2))
-trace#0, cand_acc=True, gt_acc=None, cycle{1}
-
-Candidate = G((!B) | (B -> ((!B) U A)))
-GT = G(x2->X(!x2 U x1))
-trace#0, cand_acc=False, gt_acc=None, 1; !A & B; cycle{1}
+trace#0, cand_acc=False, gt_acc=True, 1; x1 & x2; !x1 & !x2; cycle{!x1 & !x2}
 
 Candidate = G(x1 -> F(x2))
 GT = G (x1 -> X(x2))
@@ -1003,7 +970,7 @@ trace#0, cand_acc=False, gt_acc=False, 1; x1 & !x2; cycle{!x2}
 trace#1, cand_acc=None, gt_acc=None, x1 & x2; cycle{1}
 trace#2, cand_acc=True, gt_acc=None, cycle{!x1 | x2}
 
-Candidate = G(x1 -> (x1 & X(x1 & X(x1 & X(!x1)))))
+Candidate = G(x1 -> (x1 & X(x1 & X(!x1))))
 GT = x1 -> (X(x1) & X(X(x1)) & X(X(X(!x1))))
 trace#0, cand_acc=False, gt_acc=None, 1; x1; !x1; cycle{1}
 
@@ -1018,9 +985,9 @@ trace#1, cand_acc=True, gt_acc=True, cycle{!x1 & x2; x1 & x2}
 trace#2, cand_acc=True, gt_acc=True, cycle{x1 & !x2; x1 & x2}
 trace#3, cand_acc=False, gt_acc=None, 1; x1 & !x2; cycle{x1 & !x2}
 
-Candidate = G((x1 -> X(x2 | x3)) & (x1 -> !(x2 | x3)))
+Candidate = G((x1 -> X(x2 | x3)) & (x1 -> G(!(x2 | x3))))
 GT = G(x1 -> X(x2 | X3)) & G(x1-> (!x2 & !x3))
-trace#0, cand_acc=False, gt_acc=None, x1 & !x2 & !x3; cycle{x1 & !x2 & !x3}
+trace#0, cand_acc=False, gt_acc=None, x1; x2 | x3; cycle{1}
 
 Candidate = F(x2 -> (!x2 U (x1 & x3)))
 GT = F(x2) -> !x2 U (x1 & x3)
@@ -1071,22 +1038,17 @@ trace#2, cand_acc=True, gt_acc=True, cycle{!x1 | x2}
 trace#3, cand_acc=True, gt_acc=True, 1; x2; cycle{x2}
 trace#4, cand_acc=False, gt_acc=None, 1; x1 & !x2; cycle{!x2}
 
-Candidate = G((F(x1 & x2)) -> G((x1 -> x2) & (x2 -> x1)))
+Candidate = (F(x1 & x2)) -> (G((x1 -> x2) & (x2 -> x1)))
 GT = (F(x1) & F(x2)) -> G(x1 -> x2 & x2 -> x1)
-trace#0, cand_acc=False, gt_acc=True, 1; (!x1 & x2) | (x1 & !x2); x1 & x2; cycle{1}
+trace#0, cand_acc=False, gt_acc=True, (!x1 & x2) | (x1 & !x2); x1 & x2; cycle{x1}
 
 Candidate = !(G(x1) U G(!x1))
 GT = !(G(x1)) U G(!x1)
 trace#0, cand_acc=False, gt_acc=True, cycle{!x1}
 
-Candidate = F(x1 -> (x1 U !x1))
+Candidate = F(x1 -> G(x1 U !x1))
 GT = F(x1) -> G(x1 U !x1)
 trace#0, cand_acc=True, gt_acc=None, 1; !x1; cycle{1}
-
-Candidate = X(x1) -> X(X(x1))
-GT = X(X(x1))->X(x1)
-trace#0, cand_acc=True, gt_acc=True, 1; x1; x1; cycle{1}
-trace#1, cand_acc=True, gt_acc=False, 1; !x1; x1; cycle{1}
 
 Candidate = G(F(x2 U X(x1)))
 GT = G(F(x2) U X(x1))
@@ -1104,7 +1066,7 @@ trace#10, cand_acc=None, gt_acc=None, 1; 1; x1; cycle{1}
 trace#11, cand_acc=False, gt_acc=False, !x1 & !x2; cycle{!x1 & !x2}
 trace#12, cand_acc=True, gt_acc=None, cycle{1; x1}
 
-Candidate = (x3 U x1) | (G x3 & F x2)
+Candidate = G(x3) & F(x2) | (x3 U x1)
 GT = x3 U ((x1 | G(x3)) & F(x2))
 trace#0, cand_acc=False, gt_acc=False, !x1 & !x3; !x3; cycle{1}
 trace#1, cand_acc=False, gt_acc=False, !x1 & !x2 & !x3; !x3; cycle{1}
@@ -1133,22 +1095,9 @@ trace#8, cand_acc=None, gt_acc=None, !x1 & x2; x1 & !x2; cycle{1}
 trace#9, cand_acc=None, gt_acc=None, x1 & !x2; cycle{1}
 trace#10, cand_acc=None, gt_acc=True, !x1; cycle{!x1 & x2}
 
-Candidate = G(F(x1 U x2))
+Candidate = G(x1 U x2)
 GT = F(G(x1 U x2))
-trace#0, cand_acc=False, gt_acc=False, 1; cycle{!x2}
-trace#1, cand_acc=None, gt_acc=None, x2; cycle{1}
-trace#2, cand_acc=True, gt_acc=True, x2; cycle{x2}
-trace#3, cand_acc=True, gt_acc=True, 1; cycle{x2}
-trace#4, cand_acc=False, gt_acc=False, !x2; cycle{!x2}
-trace#5, cand_acc=None, gt_acc=None, 1; x2; cycle{1}
-trace#6, cand_acc=True, gt_acc=True, cycle{x2}
-trace#7, cand_acc=False, gt_acc=False, !x1 & !x2; cycle{!x1 & !x2}
-trace#8, cand_acc=None, gt_acc=None, !x1; cycle{!x1}
-trace#9, cand_acc=False, gt_acc=False, cycle{!x1 & !x2}
-trace#10, cand_acc=None, gt_acc=None, !x1 & !x2; cycle{1}
-trace#11, cand_acc=False, gt_acc=False, cycle{!x2}
-trace#12, cand_acc=None, gt_acc=None, 1; !x1 & !x2; cycle{1}
-trace#13, cand_acc=None, gt_acc=None, cycle{x1}
+trace#0, cand_acc=False, gt_acc=None, 1; !x1 & !x2; cycle{1}
 
 Candidate = G((x1 & x2) -> (X(x3) & X(X(!x3))))
 GT = (x1 & x2) -> (X(x3) & X(X(!x3)))
@@ -1192,31 +1141,6 @@ Candidate = G(!x1 -> G(x1 | F(x2)))
 GT = G(!x1) -> (G(x1) | F(x2))
 trace#0, cand_acc=False, gt_acc=None, 1; !x1 & !x2; cycle{!x2}
 
-Candidate = (F(x2 & x1)) -> (x1 U (x2 | X(x2)))
-GT = F(x2 & x1) -> (x1 U x2) | (X(x2))
-trace#0, cand_acc=True, gt_acc=True, !x1 & !x2; cycle{!x1 | !x2}
-trace#1, cand_acc=True, gt_acc=True, 1; x2; cycle{1}
-trace#2, cand_acc=True, gt_acc=True, !x1 & !x2; x1 & !x2; cycle{x1 & !x2}
-trace#3, cand_acc=True, gt_acc=True, !x1; cycle{!x1 | !x2}
-trace#4, cand_acc=True, gt_acc=True, !x2; !x1 & !x2; cycle{!x1 | !x2}
-trace#5, cand_acc=True, gt_acc=True, x1 & x2; cycle{x1 & !x2}
-trace#6, cand_acc=True, gt_acc=True, 1; !x1 & !x2; !x2; cycle{!x1 | !x2}
-trace#7, cand_acc=True, gt_acc=True, !x2; !x2; cycle{!x1 | !x2}
-trace#8, cand_acc=False, gt_acc=False, !x1 & !x2; !x2; x1 & x2; cycle{1}
-trace#9, cand_acc=None, gt_acc=None, !x2; !x2; cycle{1}
-trace#10, cand_acc=True, gt_acc=True, !x1 & !x2; !x2; cycle{!x2}
-trace#11, cand_acc=None, gt_acc=None, 1; !x1 & !x2; !x2; x1 & x2; cycle{1}
-trace#12, cand_acc=True, gt_acc=True, !x1 | !x2; cycle{!x1 | !x2}
-trace#13, cand_acc=True, gt_acc=True, !x1 & x2; cycle{!x1 | !x2}
-trace#14, cand_acc=True, gt_acc=True, x1 & x2; cycle{1}
-trace#15, cand_acc=True, gt_acc=True, x2; cycle{1}
-trace#16, cand_acc=False, gt_acc=False, !x1 & !x2; !x2; cycle{x1 & x2}
-trace#17, cand_acc=True, gt_acc=True, !x1 & !x2; !x1; cycle{!x1 | !x2}
-trace#18, cand_acc=True, gt_acc=True, !x1 & !x2; x1 & x2; cycle{x2}
-trace#19, cand_acc=None, gt_acc=None, cycle{1}
-trace#20, cand_acc=True, gt_acc=True, x1 & x2; !x1 & !x2; !x2; cycle{1}
-trace#21, cand_acc=True, gt_acc=None, x1 & !x2; !x2; x1 & x2; cycle{1}
-
 Candidate = (F(x1 & x2 & x3) -> x4) & (!F(x1 & x2 & x3) -> !x4)
 GT = ((F(x1) & F(x2) & F(x3)) -> x4) & (!F(x1) | !F(x2) | !F(x3) -> !x4)
 trace#0, cand_acc=True, gt_acc=None, (!x1 & !x4) | (!x2 & !x4) | (!x3 & !x4); (!x1 & !x4) | (!x2 & !x4) | (!x3 & !x4); cycle{!x1 | !x2 | !x3}
@@ -1238,21 +1162,28 @@ Candidate = G(x1 <-> (x2 U (x1 U x3)))
 GT = (x1 <-> x2) U (x1 U x3)
 trace#0, cand_acc=False, gt_acc=None, 1; !x1 & x3; cycle{1}
 
-Candidate = G(!x1 & !x2) & G(x1 | x2)
+Candidate = G((!x1 & !x2) & (x1 | x2))
 GT = G(!(x1 & x2)) & G(x1 | x2)
-trace#0, cand_acc=False, gt_acc=None, !x1 | x2; cycle{1}
+trace#0, cand_acc=False, gt_acc=None, cycle{1}
 
 Candidate = G(x1 -> (X(!x1) & F(x2)))
 GT = x1 -> X(!x1) & F(x2)
 trace#0, cand_acc=False, gt_acc=None, 1; x1; x1; cycle{1}
-
-Candidate = G(x1)
-GT = F(x1) -> G(x1)
-trace#0, cand_acc=False, gt_acc=None, 1; !x1; cycle{1}
 
 Candidate = G(x1 -> X(X(X(x1))))
 GT = X(X(F(X(x1))))
 trace#0, cand_acc=True, gt_acc=True, 1; x1; x1; cycle{x1}
 trace#1, cand_acc=True, gt_acc=True, cycle{x1}
 trace#2, cand_acc=True, gt_acc=False, !x1; cycle{!x1}
+
+Candidate = G(x1 -> X(X(X(x1))))
+GT = x1 -> X(X(X(x1)))
+trace#0, cand_acc=True, gt_acc=True, 1; x1; x1; cycle{x1}
+trace#1, cand_acc=True, gt_acc=True, cycle{x1}
+trace#2, cand_acc=True, gt_acc=True, !x1; cycle{!x1}
+trace#3, cand_acc=True, gt_acc=True, cycle{!x1}
+trace#4, cand_acc=False, gt_acc=False, cycle{x1; 1; 1; !x1}
+trace#5, cand_acc=False, gt_acc=False, x1; 1; 1; cycle{!x1}
+trace#6, cand_acc=False, gt_acc=False, x1; 1; 1; !x1; cycle{1}
+trace#7, cand_acc=None, gt_acc=True, x1; 1; 1; x1; cycle{1}
 
