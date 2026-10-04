@@ -28,7 +28,7 @@ DATASIZE = {
     "ConformalLTL":678,
     "Synthetic":1000,
 
-    "heldout": 2548 # Approximation based on the full dataset
+    "heldout": 2542 # Approximation: 20% of the 12711 synthetic candidates using only provided APs
 }
 
 
