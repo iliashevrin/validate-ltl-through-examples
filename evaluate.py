@@ -18,12 +18,13 @@ import numpy as np
 
 DATASIZE = {
     
-    "textbook":370,
-    "ARTEMIS":125,
-    "spacewire":35,
-    "Dwyer":100,
+    # Total candidates per dataset, as reported by count_excluded.py
+    "textbook":367,
+    "ARTEMIS":122,
+    "spacewire":36,
+    "Dwyer":99,
 
-    "ALL_RL":630,
+    "ALL_RL":624,
 
     "ConformalLTL":678,
     "Synthetic":1000,

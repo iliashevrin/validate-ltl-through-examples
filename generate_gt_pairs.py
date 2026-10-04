@@ -165,8 +165,9 @@ def semantically_equivalent(formula_a: str, formula_b: str):
         f_a = spot.formula(formula_a)
         f_b = spot.formula(formula_b)
 
-        xor_formula = spot.formula.Not(spot.formula.Equiv(f_a, f_b))
-        return spot.translate(xor_formula).is_empty()
+        # Checking language containment both ways stays fast on large
+        # formulas whose XOR automaton blows up (SpaceWire compound clauses)
+        return spot.are_equivalent(f_a, f_b)
 
     except Exception as exc:
         msg = str(exc)
@@ -952,6 +953,11 @@ def main() -> None:
     rows = []
     seen = set()
 
+    # Written row by row so an interrupted run keeps its responses for the cache
+    responses_file = open(args.responses, "w", newline="", encoding="utf-8")
+    responses_writer = csv.DictWriter(responses_file, fieldnames=RESPONSE_FIELDS)
+    responses_writer.writeheader()
+
     for requirement, ground_truth, atomic_proposition in usable:
 
         key = (requirement, ground_truth, atomic_proposition)
@@ -988,10 +994,10 @@ def main() -> None:
 
         seen.add(pair)
 
-    with open(args.responses, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=RESPONSE_FIELDS)
-        writer.writeheader()
-        writer.writerows(rows)
+        responses_writer.writerow(rows[-1])
+        responses_file.flush()
+
+    responses_file.close()
 
     unique = [row for row in rows if not row["Duplicate"]]
 
