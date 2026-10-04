@@ -154,7 +154,8 @@ ax.legend(handles=[base_patch, random_patch, regr_patch], fontsize=18)
 # Limits
 # =========================
 
-ax.set_ylim(0, np.max(ndt_inf + np.maximum(dt_random, dt_regr)) * 1.35)
+# Leave room above the bar labels for the legend
+ax.set_ylim(0, np.max(ndt_inf + np.maximum(dt_random, dt_regr)) * 1.75)
 
 plt.tight_layout()
 

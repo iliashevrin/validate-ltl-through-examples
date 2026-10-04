@@ -4,75 +4,77 @@ trace#0, cand_acc=False, gt_acc=True, !x1; cycle{!x1}
 
 Candidate = G(((x1 & X(x2)) -> (x3 & X(x4))) & ((x4 & X(x3)) -> (x2 & X(x1))))
 GT = G ((x1 & X x2) -> (x3 & X x4))
-trace#0, cand_acc=False, gt_acc=None, cycle{!x2 & x4; x3}
+trace#0, cand_acc=False, gt_acc=False, x1 & !x3; x2; cycle{1}
+trace#1, cand_acc=False, gt_acc=False, 1; x1 & !x3; x2; cycle{1}
+trace#2, cand_acc=True, gt_acc=True, !x1 & !x4; cycle{!x1 & !x4}
+trace#3, cand_acc=False, gt_acc=None, cycle{!x2 & x4; x3}
 
 Candidate = G(x1 -> F(x1)) -> G(x2 -> F(x2))
 GT = G(F(x1)) -> G(F(x2))
-trace#0, cand_acc=True, gt_acc=True, 1; cycle{x2}
-trace#1, cand_acc=True, gt_acc=None, x2; cycle{1}
+trace#0, cand_acc=True, gt_acc=None, cycle{1}
 
 Candidate = G(x1 -> F(x2))
 GT = G(x1 -> x2)
 trace#0, cand_acc=False, gt_acc=False, 1; x1 & !x2; cycle{!x2}
 trace#1, cand_acc=None, gt_acc=None, x1 & x2; cycle{1}
-trace#2, cand_acc=True, gt_acc=True, !x1 | x2; cycle{!x1 | x2}
-trace#3, cand_acc=True, gt_acc=True, cycle{!x1 | x2}
-trace#4, cand_acc=None, gt_acc=None, !x1 & x2; cycle{1}
-trace#5, cand_acc=None, gt_acc=None, !x1 & !x2; cycle{!x2}
-trace#6, cand_acc=True, gt_acc=None, 1; cycle{x2}
+trace#2, cand_acc=True, gt_acc=True, cycle{!x1 | x2}
+trace#3, cand_acc=True, gt_acc=True, !x1 | x2; cycle{!x1 | x2}
+trace#4, cand_acc=None, gt_acc=None, !x1 & !x2; cycle{!x2}
+trace#5, cand_acc=True, gt_acc=None, 1; cycle{x2}
 
 Candidate = G(x1 -> G(!X(x2)))
 GT = G(x1-> X(!(x2)))
-trace#0, cand_acc=False, gt_acc=False, cycle{!x1 & x2; x1 & !x2}
-trace#1, cand_acc=None, gt_acc=None, 1; x1; cycle{!x2}
-trace#2, cand_acc=None, gt_acc=None, 1; x1 & x2; cycle{1}
-trace#3, cand_acc=None, gt_acc=None, x1; 1; cycle{!x2}
-trace#4, cand_acc=False, gt_acc=False, cycle{x1 & x2}
+trace#0, cand_acc=True, gt_acc=True, cycle{!x2}
+trace#1, cand_acc=False, gt_acc=False, 1; x1; x2; cycle{1}
+trace#2, cand_acc=False, gt_acc=False, x1; x2; cycle{1}
+trace#3, cand_acc=True, gt_acc=True, 1; cycle{!x2}
+trace#4, cand_acc=False, gt_acc=False, cycle{!x1 & x2; x1 & !x2}
 trace#5, cand_acc=True, gt_acc=True, cycle{!x1}
-trace#6, cand_acc=None, gt_acc=None, !x1; cycle{1}
-trace#7, cand_acc=True, gt_acc=True, !x2; cycle{!x2}
-trace#8, cand_acc=False, gt_acc=False, x1 & x2; cycle{x1 & x2}
-trace#9, cand_acc=False, gt_acc=False, x1; cycle{x2}
-trace#10, cand_acc=None, gt_acc=None, cycle{x1}
+trace#6, cand_acc=False, gt_acc=False, x1; cycle{x2}
+trace#7, cand_acc=False, gt_acc=False, cycle{x1 & x2}
+trace#8, cand_acc=True, gt_acc=True, !x2; cycle{!x2}
+trace#9, cand_acc=False, gt_acc=False, x1 & x2; cycle{x1 & x2}
+trace#10, cand_acc=None, gt_acc=None, 1; x1 & x2; cycle{1}
+trace#11, cand_acc=None, gt_acc=None, x1; 1; cycle{!x2}
+trace#12, cand_acc=None, gt_acc=None, !x1; cycle{1}
+trace#13, cand_acc=None, gt_acc=None, 1; cycle{!x1}
+trace#14, cand_acc=None, gt_acc=None, cycle{x1}
 
 Candidate = G(x1 -> F(x2 & F(x3)))
 GT = G(x1 -> (x1 U (x2 & (x2 U x3))))
-trace#0, cand_acc=True, gt_acc=True, cycle{!x1 | (x2 & x3)}
-trace#1, cand_acc=True, gt_acc=True, !x1 | (x2 & x3); cycle{!x1 | (x2 & x3)}
+trace#0, cand_acc=True, gt_acc=True, !x1 | (x2 & x3); cycle{!x1 | (x2 & x3)}
+trace#1, cand_acc=True, gt_acc=True, cycle{!x1 | (x2 & x3)}
 trace#2, cand_acc=None, gt_acc=None, !x1 & !x2; cycle{!x2}
 trace#3, cand_acc=False, gt_acc=False, 1; x1 & !x2; cycle{!x2}
-trace#4, cand_acc=False, gt_acc=False, x1 & !x2; cycle{x1 & !x2}
-trace#5, cand_acc=True, gt_acc=True, cycle{!x1}
-trace#6, cand_acc=True, gt_acc=True, cycle{x2 & x3}
-trace#7, cand_acc=False, gt_acc=False, !x2; x1 & !x2; cycle{!x2}
-trace#8, cand_acc=True, gt_acc=True, cycle{x1 & x2 & x3}
-trace#9, cand_acc=None, gt_acc=None, x1; cycle{!x2}
-trace#10, cand_acc=False, gt_acc=False, x1 & !x3; cycle{!x3}
-trace#11, cand_acc=True, gt_acc=True, x1 & x2; cycle{x2 & x3}
-trace#12, cand_acc=False, gt_acc=False, x1 & !x3; cycle{x1 & !x3}
+trace#4, cand_acc=True, gt_acc=True, cycle{!x2 & x3; x2 & !x3}
+trace#5, cand_acc=False, gt_acc=False, !x2; x1 & !x2; cycle{!x2}
+trace#6, cand_acc=False, gt_acc=False, x1 & !x3; cycle{!x3}
+trace#7, cand_acc=True, gt_acc=True, cycle{!x1}
+trace#8, cand_acc=True, gt_acc=True, cycle{x2 & x3}
+trace#9, cand_acc=True, gt_acc=True, x1 & x2; cycle{x2 & x3}
+trace#10, cand_acc=False, gt_acc=False, x1 & !x3; cycle{x1 & !x3}
+trace#11, cand_acc=False, gt_acc=False, x1 & !x2; cycle{x1 & !x2}
+trace#12, cand_acc=False, gt_acc=False, 1; x1 & x2 & !x3; cycle{!x3}
 trace#13, cand_acc=True, gt_acc=True, x2 & x3; cycle{x2 & x3}
-trace#14, cand_acc=None, gt_acc=None, !x3; cycle{!x3}
-trace#15, cand_acc=False, gt_acc=False, x1 & !x2; cycle{!x2}
-trace#16, cand_acc=None, gt_acc=None, !x1 & x2 & x3; cycle{1}
-trace#17, cand_acc=None, gt_acc=None, x2 & !x3; cycle{!x3}
-trace#18, cand_acc=None, gt_acc=None, x1 & x2 & x3; cycle{1}
-trace#19, cand_acc=None, gt_acc=None, x1 & !x2; cycle{1}
-trace#20, cand_acc=None, gt_acc=None, cycle{!x2 | (x1 & x3)}
-trace#21, cand_acc=None, gt_acc=None, cycle{!x1 | (!x2 & x3)}
-trace#22, cand_acc=None, gt_acc=None, cycle{!x1 | !x2}
-trace#23, cand_acc=None, gt_acc=None, !x1 | (x2 & x3); cycle{1}
-trace#24, cand_acc=None, gt_acc=None, !x1; cycle{1}
+trace#14, cand_acc=False, gt_acc=False, x1 & !x2; cycle{!x2}
+trace#15, cand_acc=True, gt_acc=True, cycle{x1 & x2 & x3}
+trace#16, cand_acc=None, gt_acc=None, x1 & x2 & x3; cycle{1}
+trace#17, cand_acc=None, gt_acc=None, !x3; cycle{!x3}
+trace#18, cand_acc=False, gt_acc=False, cycle{x1 & !x2}
+trace#19, cand_acc=None, gt_acc=None, x1; cycle{!x2}
+trace#20, cand_acc=None, gt_acc=None, x2 & !x3; cycle{!x3}
+trace#21, cand_acc=None, gt_acc=None, !x1; cycle{1}
+trace#22, cand_acc=None, gt_acc=None, cycle{!x2 | (x1 & x3)}
+trace#23, cand_acc=None, gt_acc=None, (x1 & !x2) | (x1 & x3); cycle{!x2 | x3}
+trace#24, cand_acc=None, gt_acc=None, x1 & x2; cycle{x2}
 trace#25, cand_acc=None, gt_acc=None, x1; !x2; cycle{1}
 trace#26, cand_acc=None, gt_acc=None, 1; cycle{!x1 | (x2 & x3)}
 trace#27, cand_acc=None, gt_acc=None, cycle{x1}
-trace#28, cand_acc=None, gt_acc=None, 1; !x1 | (x2 & x3); cycle{1}
-trace#29, cand_acc=None, gt_acc=None, cycle{x1 | (x2 & x3)}
-trace#30, cand_acc=None, gt_acc=None, (x1 & !x2) | (x1 & x3); cycle{!x2 | x3}
-trace#31, cand_acc=None, gt_acc=None, x1 & x2; cycle{x2}
+trace#28, cand_acc=None, gt_acc=None, !x1 | (x2 & x3); cycle{1}
 
 Candidate = F(x1)
 GT = G(F(x1))
-trace#0, cand_acc=None, gt_acc=False, 1; cycle{!x1}
+trace#0, cand_acc=True, gt_acc=None, x1; cycle{1}
 
 Candidate = G((x1 & !x3 & F(x2)) -> (x1 U (x3 & !x4)))
 GT = G((x1 & F(x2)) -> (x3 U x4))
@@ -82,50 +84,45 @@ Candidate = G(x1 -> F(x2))
 GT = G(x1->x2)
 trace#0, cand_acc=False, gt_acc=False, 1; x1 & !x2; cycle{!x2}
 trace#1, cand_acc=None, gt_acc=None, x1 & x2; cycle{1}
-trace#2, cand_acc=True, gt_acc=True, !x1 | x2; cycle{!x1 | x2}
-trace#3, cand_acc=True, gt_acc=True, cycle{!x1 | x2}
-trace#4, cand_acc=None, gt_acc=None, !x1 & x2; cycle{1}
-trace#5, cand_acc=None, gt_acc=None, !x1 & !x2; cycle{!x2}
-trace#6, cand_acc=True, gt_acc=None, 1; cycle{x2}
+trace#2, cand_acc=True, gt_acc=True, cycle{!x1 | x2}
+trace#3, cand_acc=True, gt_acc=True, !x1 | x2; cycle{!x1 | x2}
+trace#4, cand_acc=None, gt_acc=None, !x1 & !x2; cycle{!x2}
+trace#5, cand_acc=True, gt_acc=None, 1; cycle{x2}
 
 Candidate = G(x1 -> F(!x1))
 GT = G(x1 -> F(!x2))
 trace#0, cand_acc=True, gt_acc=True, cycle{!x1}
 trace#1, cand_acc=True, gt_acc=True, !x1; cycle{!x1}
-trace#2, cand_acc=None, gt_acc=None, x1; cycle{1}
+trace#2, cand_acc=None, gt_acc=None, !x1; cycle{1}
 trace#3, cand_acc=False, gt_acc=None, x1; cycle{x1}
 
 Candidate = G((x1 -> X(!x1 U x2)) & (x2 -> X(!x2 U x1)))
 GT = G(x1 -> X(x2)) & G(x2 -> X(x1))
 trace#0, cand_acc=False, gt_acc=False, 1; x1; cycle{!x1 & !x2}
-trace#1, cand_acc=False, gt_acc=False, x1; cycle{!x1 & !x2}
+trace#1, cand_acc=False, gt_acc=False, cycle{x2; !x1 & x2}
 trace#2, cand_acc=False, gt_acc=False, !x1 & x2; cycle{!x1 & x2}
-trace#3, cand_acc=False, gt_acc=False, cycle{x2; !x1 & x2}
-trace#4, cand_acc=True, gt_acc=True, !x1 & !x2; cycle{!x1 & !x2}
-trace#5, cand_acc=False, gt_acc=False, cycle{!x1 & x2; !x1 & !x2}
-trace#6, cand_acc=False, gt_acc=False, cycle{x1 & !x2; !x1 & !x2}
-trace#7, cand_acc=True, gt_acc=True, cycle{!x1 & !x2}
+trace#3, cand_acc=False, gt_acc=False, x1; cycle{!x1 & !x2}
+trace#4, cand_acc=True, gt_acc=True, cycle{!x1 & !x2}
+trace#5, cand_acc=True, gt_acc=True, !x1 & !x2; cycle{!x1 & !x2}
+trace#6, cand_acc=False, gt_acc=False, cycle{!x1 & x2; !x1 & !x2}
+trace#7, cand_acc=False, gt_acc=False, cycle{x1 & !x2; !x1 & !x2}
 trace#8, cand_acc=None, gt_acc=None, cycle{!x1}
-trace#9, cand_acc=None, gt_acc=None, !x2; cycle{!x1 & !x2}
-trace#10, cand_acc=None, gt_acc=None, !x1 & !x2; cycle{1}
+trace#9, cand_acc=None, gt_acc=None, !x1 & !x2; cycle{1}
+trace#10, cand_acc=None, gt_acc=None, !x2; cycle{!x1 & !x2}
 trace#11, cand_acc=None, gt_acc=None, 1; cycle{!x1 & !x2}
-trace#12, cand_acc=None, gt_acc=None, 1; !x1 & !x2; cycle{1}
-trace#13, cand_acc=None, gt_acc=None, cycle{x1}
-trace#14, cand_acc=None, gt_acc=None, cycle{x2}
-trace#15, cand_acc=None, gt_acc=None, x1; x2; cycle{1}
-trace#16, cand_acc=None, gt_acc=None, x2; x1; cycle{1}
-trace#17, cand_acc=None, gt_acc=None, !x1; cycle{1}
-trace#18, cand_acc=None, gt_acc=None, !x2; cycle{1}
+trace#12, cand_acc=None, gt_acc=None, !x1; cycle{1}
+trace#13, cand_acc=None, gt_acc=None, !x2; cycle{1}
 
 Candidate = G(x1 -> (X(x2) & !x3))
 GT = G(x1->X(x2 & G(!x3)))
-trace#0, cand_acc=True, gt_acc=True, !x1; cycle{!x1}
-trace#1, cand_acc=True, gt_acc=True, x1 & !x3; cycle{x2 & !x3}
-trace#2, cand_acc=False, gt_acc=None, 1; x1 & x3; cycle{1}
+trace#0, cand_acc=True, gt_acc=True, !x3; cycle{x2 & !x3}
+trace#1, cand_acc=True, gt_acc=True, x1 & !x3; cycle{x1 & x2 & !x3}
+trace#2, cand_acc=True, gt_acc=True, !x1; cycle{!x1}
+trace#3, cand_acc=False, gt_acc=None, 1; x1 & x3; cycle{1}
 
 Candidate = (!x1 U (x1 & x2))
 GT = G(x1->X(x2))
-trace#0, cand_acc=True, gt_acc=None, x1 & x2; cycle{x1}
+trace#0, cand_acc=False, gt_acc=None, x1 & !x2; cycle{1}
 
 Candidate = G(x1 -> x2)
 GT = G (x1 -> (x1 U (!x1 | x2)))
@@ -133,13 +130,7 @@ trace#0, cand_acc=False, gt_acc=None, 1; x1 & !x2; cycle{1}
 
 Candidate = x1 -> F(x2)
 GT = G (x1 -> F(x2))
-trace#0, cand_acc=True, gt_acc=True, !x1 & x2; cycle{!x1}
-trace#1, cand_acc=False, gt_acc=False, x1 & !x2; cycle{!x2}
-trace#2, cand_acc=False, gt_acc=False, cycle{x1 & !x2}
-trace#3, cand_acc=None, gt_acc=None, x1 | !x2; cycle{1}
-trace#4, cand_acc=None, gt_acc=None, !x1 | !x2; cycle{1}
-trace#5, cand_acc=None, gt_acc=None, 1; !x1 | x2; cycle{1}
-trace#6, cand_acc=None, gt_acc=False, 1; x1 & !x2; cycle{!x2}
+trace#0, cand_acc=True, gt_acc=None, !x1 | x2; cycle{1}
 
 Candidate = G(!x1)
 GT = F(G(!x1))
@@ -151,8 +142,8 @@ trace#0, cand_acc=False, gt_acc=None, 1; (x1 & !x2) | (!x2 & x3); cycle{1}
 
 Candidate = G(x1 -> (x2 -> X(G(!x2) | (!x2 U x1))))
 GT = G(x1 -> (x2 & X(G!(x2))))
-trace#0, cand_acc=False, gt_acc=False, cycle{!x1 & x2; x1 & x2}
-trace#1, cand_acc=True, gt_acc=None, x1 & x2; cycle{(x1 & x2) | (!x1 & !x2)}
+trace#0, cand_acc=False, gt_acc=False, 1; x1 & x2; !x1 & x2; cycle{1}
+trace#1, cand_acc=True, gt_acc=None, cycle{!x1 | !x2}
 
 Candidate = G(x1 -> X(!x1 U x2))
 GT = G(x2 -> (x1 & X(G(!x1))))
@@ -164,53 +155,51 @@ trace#0, cand_acc=False, gt_acc=None, 1; !x1 | x2 | x3; cycle{1}
 
 Candidate = G(x1 -> (!x2 U x3))
 GT = G(x1 -> G(x2 -> F(x3)))
-trace#0, cand_acc=False, gt_acc=None, 1; x1 & x2 & !x3; cycle{1}
+trace#0, cand_acc=False, gt_acc=None, 1; x1 & !x2 & !x3; cycle{!x2 & !x3}
 
 Candidate = G(x1 -> F(x2)) -> (G(F(x1)) -> G(F(x2)))
 GT = G(F(x1))-> G(F(x2))
-trace#0, cand_acc=True, gt_acc=None, x1 & x2; cycle{1}
+trace#0, cand_acc=True, gt_acc=True, !x1 & !x2; cycle{!x1 & !x2}
+trace#1, cand_acc=True, gt_acc=None, cycle{1}
 
 Candidate = G(x1) -> !F(x2)
 GT = G(x1 -> !F(x2))
-trace#0, cand_acc=None, gt_acc=None, !x1 | !x2; cycle{1}
-trace#1, cand_acc=False, gt_acc=False, cycle{x1 & x2}
-trace#2, cand_acc=False, gt_acc=False, x1 & x2; cycle{x1}
-trace#3, cand_acc=None, gt_acc=None, x1 & !x2; cycle{x1}
-trace#4, cand_acc=None, gt_acc=False, 1; x1 & x2; cycle{x1}
+trace#0, cand_acc=True, gt_acc=None, !x1; cycle{1}
 
 Candidate = G((x1 U x2) & (x2 U x3) -> (x1 U x3))
 GT = ((x1 U x2) & (x1 U x3)) -> (x1 U x3)
-trace#0, cand_acc=True, gt_acc=True, cycle{(!x1 & !x2) | (!x2 & !x3)}
-trace#1, cand_acc=True, gt_acc=True, !x2 | x3; cycle{!x2 | x3}
-trace#2, cand_acc=None, gt_acc=True, x2 & x3; cycle{1}
+trace#0, cand_acc=True, gt_acc=True, !x2 | x3; cycle{!x2 | x3}
+trace#1, cand_acc=False, gt_acc=True, 1; !x1 & x2 & !x3; x3; cycle{1}
 
 Candidate = G(x1) -> G(F(x2))
 GT = G(F(x1)) -> G(F(x2))
-trace#0, cand_acc=None, gt_acc=False, 1; x1 & !x2; cycle{x1 & !x2}
+trace#0, cand_acc=None, gt_acc=None, x1 & x2; cycle{x1}
+trace#1, cand_acc=None, gt_acc=None, x1; cycle{1}
+trace#2, cand_acc=None, gt_acc=None, !x2; cycle{1}
+trace#3, cand_acc=True, gt_acc=None, !x1; cycle{1}
 
 Candidate = G(x1) -> F(x2)
 GT = G(F(x1 -> F(x2)))
-trace#0, cand_acc=None, gt_acc=False, 1; cycle{x1 & !x2}
+trace#0, cand_acc=True, gt_acc=None, !x1 | x2; cycle{1}
 
 Candidate = G(G(x1) -> G(F(x2)))
 GT = G(x1-> G(F(x2)))
-trace#0, cand_acc=True, gt_acc=True, cycle{!x1}
-trace#1, cand_acc=False, gt_acc=False, x1 & !x2; cycle{x1 & !x2}
-trace#2, cand_acc=None, gt_acc=None, !x1 & !x2; cycle{!x2}
-trace#3, cand_acc=None, gt_acc=None, x1; cycle{x1}
-trace#4, cand_acc=None, gt_acc=None, x1 & x2; cycle{x1}
-trace#5, cand_acc=True, gt_acc=True, cycle{x2}
+trace#0, cand_acc=False, gt_acc=False, 1; x1 & !x2; cycle{x1 & !x2}
+trace#1, cand_acc=True, gt_acc=True, cycle{!x1}
+trace#2, cand_acc=False, gt_acc=False, x1 & !x2; cycle{x1 & !x2}
+trace#3, cand_acc=None, gt_acc=None, !x1 & !x2; cycle{!x2}
+trace#4, cand_acc=None, gt_acc=None, x1; cycle{x1}
+trace#5, cand_acc=None, gt_acc=None, x1 & x2; cycle{x1}
 trace#6, cand_acc=True, gt_acc=True, !x1 & x2; cycle{!x1 & x2}
-trace#7, cand_acc=None, gt_acc=None, !x2; cycle{!x2}
-trace#8, cand_acc=None, gt_acc=None, !x1; cycle{1}
-trace#9, cand_acc=None, gt_acc=None, cycle{!x2}
-trace#10, cand_acc=None, gt_acc=None, 1; !x1; cycle{1}
-trace#11, cand_acc=True, gt_acc=True, cycle{x1 & x2}
-trace#12, cand_acc=None, gt_acc=None, cycle{x1}
+trace#7, cand_acc=True, gt_acc=True, cycle{x2}
+trace#8, cand_acc=None, gt_acc=None, !x2; cycle{!x2}
+trace#9, cand_acc=None, gt_acc=None, !x1; cycle{1}
+trace#10, cand_acc=None, gt_acc=None, cycle{!x2}
+trace#11, cand_acc=None, gt_acc=None, cycle{x1}
 
 Candidate = G(x1) -> F(x2)
 GT = G(x1 -> F(x2))
-trace#0, cand_acc=None, gt_acc=False, 1; cycle{x1 & !x2}
+trace#0, cand_acc=True, gt_acc=None, !x1 | x2; cycle{1}
 
 Candidate = G(x1 | x2)
 GT = x1 -> (!x1 -> x2)
@@ -218,7 +207,8 @@ trace#0, cand_acc=False, gt_acc=True, 1; !x1 & !x2; cycle{1}
 
 Candidate = G(!((!x1) -> x2))
 GT = !x2 & !(!x1 -> x2)
-trace#0, cand_acc=False, gt_acc=None, 1; x1 | x2; cycle{1}
+trace#0, cand_acc=True, gt_acc=True, cycle{!x1 & !x2}
+trace#1, cand_acc=False, gt_acc=None, 1; x1 | x2; cycle{1}
 
 Candidate = G(!x1 -> x2)
 GT = !x1 -> x2
@@ -242,15 +232,21 @@ trace#0, cand_acc=False, gt_acc=None, 1; (x1 & !x3) | (!x2 & x3); cycle{1}
 
 Candidate = G((x1 & !x2) | (!x1 & x2) -> (x1 & x2))
 GT = ((x1 & !x2) | (!x1 & x2)) -> (x1 & x2)
-trace#0, cand_acc=False, gt_acc=None, !x1 | !x2; (x1 & !x2) | (!x1 & x2); cycle{1}
+trace#0, cand_acc=True, gt_acc=True, (x1 & x2) | (!x1 & !x2); cycle{(x1 & x2) | (!x1 & !x2)}
+trace#1, cand_acc=True, gt_acc=True, cycle{!x1 & !x2}
+trace#2, cand_acc=False, gt_acc=None, !x1 | !x2; (x1 & !x2) | (!x1 & x2); cycle{1}
 
 Candidate = G((x1 | x2) -> (x1 <-> !x2))
 GT = (x1 | x2) -> ((x1 & !x2) | (!x1 & x2))
 trace#0, cand_acc=False, gt_acc=None, 1; x1 & x2; cycle{1}
 
+Candidate = x1 | !(x1 & x2)
+GT = X1 | !(x1 & x2)
+trace#0, cand_acc=True, gt_acc=None, cycle{1}
+
 Candidate = x1 | (!x1 & !x2)
 GT = X1 | (!x1 & !x2)
-trace#0, cand_acc=False, gt_acc=None, !x1 & x2; cycle{!x1}
+trace#0, cand_acc=False, gt_acc=None, !x1 & x2; cycle{x2}
 
 Candidate = G(x1 <-> x2)
 GT = x1 <-> x2
@@ -262,14 +258,9 @@ trace#0, cand_acc=False, gt_acc=None, 1; !x1 & !x2; cycle{1}
 
 Candidate = (x1) & (x2 -> X(x3))
 GT = x1 ∧ (x2 -> !x3)
-trace#0, cand_acc=False, gt_acc=False, !x1; cycle{1}
-trace#1, cand_acc=False, gt_acc=False, cycle{!x1}
-trace#2, cand_acc=None, gt_acc=None, x1 & x2; cycle{1}
-trace#3, cand_acc=None, gt_acc=None, x1; !x2 | x3; cycle{1}
-trace#4, cand_acc=None, gt_acc=None, !x2; cycle{1}
-trace#5, cand_acc=None, gt_acc=None, x2 & !x3; cycle{1}
-trace#6, cand_acc=None, gt_acc=None, 1; !x1; cycle{1}
-trace#7, cand_acc=None, gt_acc=None, 1; x1 & !x2; cycle{1}
+trace#0, cand_acc=True, gt_acc=True, x1 & !x2; cycle{1}
+trace#1, cand_acc=False, gt_acc=False, !x1; cycle{1}
+trace#2, cand_acc=False, gt_acc=None, x1 & x2; cycle{x1 & x2 & !x3}
 
 Candidate = G(x1 -> (x2 | x3))
 GT = x1 -> (x2 | x3)
@@ -312,12 +303,14 @@ GT = F(x1 & G(X(!x2)))
 trace#0, cand_acc=False, gt_acc=False, 1; cycle{x2}
 trace#1, cand_acc=None, gt_acc=None, !x1 & !x2; cycle{!x2}
 trace#2, cand_acc=None, gt_acc=None, x1 & x2; cycle{1}
-trace#3, cand_acc=None, gt_acc=True, x1; cycle{!x2}
+trace#3, cand_acc=True, gt_acc=True, x1 & !x2; cycle{!x2}
+trace#4, cand_acc=None, gt_acc=None, !x2; cycle{!x2}
+trace#5, cand_acc=None, gt_acc=True, x1; cycle{!x2}
 
 Candidate = G(x1 -> F((!x1) U x2))
 GT = G(x1 -> X(!x1 U x2))
-trace#0, cand_acc=False, gt_acc=False, 1; x1 & !x2; cycle{!x2}
-trace#1, cand_acc=True, gt_acc=True, 1; cycle{x2}
+trace#0, cand_acc=True, gt_acc=True, 1; cycle{x2}
+trace#1, cand_acc=False, gt_acc=False, 1; x1 & !x2; cycle{!x2}
 trace#2, cand_acc=True, gt_acc=None, cycle{!x1 | x2}
 
 Candidate = G(x1 -> G(x2))
@@ -326,20 +319,18 @@ trace#0, cand_acc=False, gt_acc=False, 1; x1 & !x2; cycle{1}
 trace#1, cand_acc=False, gt_acc=False, cycle{!x1 & !x2; x1 & x2}
 trace#2, cand_acc=False, gt_acc=False, x1; !x2; cycle{1}
 trace#3, cand_acc=False, gt_acc=False, x1 & !x2; cycle{x1}
-trace#4, cand_acc=None, gt_acc=None, 1; x1 & x2; cycle{x2}
+trace#4, cand_acc=False, gt_acc=False, x1 & !x2; cycle{1}
 trace#5, cand_acc=None, gt_acc=None, !x1 & x2; cycle{1}
 trace#6, cand_acc=None, gt_acc=None, x1 & x2; cycle{x1}
-trace#7, cand_acc=False, gt_acc=False, x1 & !x2; cycle{1}
-trace#8, cand_acc=None, gt_acc=None, !x1 & !x2; cycle{1}
-trace#9, cand_acc=None, gt_acc=None, x1 & x2; cycle{1}
-trace#10, cand_acc=False, gt_acc=False, x1; cycle{!x2}
-trace#11, cand_acc=None, gt_acc=None, !x1; cycle{1}
-trace#12, cand_acc=True, gt_acc=True, cycle{x2}
-trace#13, cand_acc=None, gt_acc=False, !x2; x1; cycle{1}
+trace#7, cand_acc=False, gt_acc=False, x1; cycle{!x2}
+trace#8, cand_acc=None, gt_acc=None, x1 & x2; cycle{1}
+trace#9, cand_acc=None, gt_acc=None, !x1 & !x2; cycle{1}
+trace#10, cand_acc=None, gt_acc=None, !x1; cycle{1}
+trace#11, cand_acc=None, gt_acc=False, !x2; x1; cycle{1}
 
 Candidate = G(x1 -> (x2 U !x3))
 GT = x1 -> G(x2 U !x3)
-trace#0, cand_acc=False, gt_acc=None, 1; x1 & !x2 & x3; cycle{1}
+trace#0, cand_acc=False, gt_acc=None, 1; x1 & x2 & x3; cycle{x2 & x3}
 
 Candidate = G(x2 <-> (!x1 & F(!x1) & !(x1 U x1)))
 GT = G (x1-> X(!x1 U X2))
@@ -349,15 +340,15 @@ Candidate = G(x1 -> F(x2))
 GT = G(x1 -> F(X(x2)))
 trace#0, cand_acc=False, gt_acc=False, 1; x1 & !x2; cycle{!x2}
 trace#1, cand_acc=None, gt_acc=None, x1 & x2; cycle{1}
-trace#2, cand_acc=True, gt_acc=None, !x1 | x2; cycle{!x1 | x2}
+trace#2, cand_acc=True, gt_acc=None, cycle{!x1 | x2}
 
 Candidate = G(F(x1 -> (x4 U (x2 & x3))))
 GT = G (F(x4 -> (!(F !x1->(x2 & x3)))))
-trace#0, cand_acc=True, gt_acc=None, cycle{!x1 | (x2 & x3)}
+trace#0, cand_acc=True, gt_acc=None, cycle{x2 & x3}
 
 Candidate = G(!(x1 & x2) & !(x1 & x3) & !(x1 & x4) & !(x2 & x3) & !(x2 & x4))
 GT = G(!(x1 & x3) & !(x2 & x4) & !(x2 & x3) &!(x1 & x4) & ((x2 | x3)  ->!(x1 | x4)))
-trace#0, cand_acc=True, gt_acc=None, cycle{(!x1 & !x2) | (!x1 & !x3 & !x4) | (!x2 & !x3 & !x4)}
+trace#0, cand_acc=True, gt_acc=None, (!x1 & !x2) | (!x1 & !x3 & !x4) | (!x2 & !x3 & !x4); cycle{(!x1 & !x2) | (!x1 & !x3 & !x4) | (!x2 & !x3 & !x4)}
 
 Candidate = G(x1 <-> X(X(X(x1))))
 GT = G((x1 & X(!x1) & X(X(x1))) | (!x1 & X(x1) & X(X(!x1))))
@@ -365,7 +356,9 @@ trace#0, cand_acc=None, gt_acc=None, !x1; cycle{1}
 
 Candidate = G(x1 -> X(G(!x1)))
 GT = x1 & X(G(!x1))
-trace#0, cand_acc=None, gt_acc=False, 1; x1; cycle{!x1}
+trace#0, cand_acc=False, gt_acc=False, 1; x1; x1; cycle{1}
+trace#1, cand_acc=False, gt_acc=False, x1; x1; cycle{1}
+trace#2, cand_acc=True, gt_acc=None, 1; cycle{!x1}
 
 Candidate = G(x1 <-> (X(X(X(x1)))))
 GT = x1 & G(x1 -> X(!x1) & X(X(!x1)) & X(X(X(x1))))
@@ -373,22 +366,16 @@ trace#0, cand_acc=None, gt_acc=False, !x1; cycle{1}
 
 Candidate = G((x1 & X(x1)) -> G(!x1))
 GT = G((x1 & X(x1)) -> X(X(G(!x1))))
-trace#0, cand_acc=True, gt_acc=True, cycle{!x1}
-trace#1, cand_acc=True, gt_acc=True, !x1; cycle{!x1}
-trace#2, cand_acc=None, gt_acc=None, !x1; cycle{1}
-trace#3, cand_acc=False, gt_acc=False, x1; cycle{x1}
-trace#4, cand_acc=False, gt_acc=False, cycle{x1}
-trace#5, cand_acc=None, gt_acc=None, x1; cycle{1}
-trace#6, cand_acc=None, gt_acc=None, x1; !x1; cycle{1}
-trace#7, cand_acc=None, gt_acc=None, 1; !x1; cycle{1}
+trace#0, cand_acc=False, gt_acc=None, 1; x1; x1; cycle{1}
 
 Candidate = G((x1 & !x2 & !x3) | (!x1 & x2 & !x3) | (!x1 & !x2 & x3)) & x1 & !x2 & !x3 & (x1 U (x2 U x3)) & G(x3 -> G(x3))
 GT = x1 & (!x2 | !x3) -> F(x2 & (!x1 | !x3)) -> F(x3 & (!x2 | !x1)) & G(x3)
-trace#0, cand_acc=False, gt_acc=None, !x1 | x2 | x3; cycle{1}
+trace#0, cand_acc=False, gt_acc=None, cycle{!x1 | x2 | x3}
 
 Candidate = F(G(x2)) & (!G(!(x1 & !x2)) U G(x2))
 GT = !(x1 & !x2) U (F(G(x2)))
-trace#0, cand_acc=False, gt_acc=None, !x1 | x2; !x1 & !x2; cycle{!x1 | x2}
+trace#0, cand_acc=True, gt_acc=True, x2; cycle{x2}
+trace#1, cand_acc=False, gt_acc=None, !x1 | x2; !x1 & !x2; cycle{!x1 | x2}
 
 Candidate = G(x1 -> F(x2 & G(!x1)))
 GT = G(x1->F(x2))
@@ -405,8 +392,8 @@ Candidate = G(x2) & F(x1)
 GT = G(x2) & F(x1) & F(!x1)
 trace#0, cand_acc=False, gt_acc=False, 1; !x2; cycle{1}
 trace#1, cand_acc=False, gt_acc=False, !x2; cycle{1}
-trace#2, cand_acc=None, gt_acc=None, 1; x1 & x2; cycle{x2}
-trace#3, cand_acc=True, gt_acc=False, x1 & x2; cycle{x1 & x2}
+trace#2, cand_acc=None, gt_acc=None, !x1; cycle{1}
+trace#3, cand_acc=None, gt_acc=False, x1 & x2; cycle{x1}
 
 Candidate = G(x1 -> (X(!x2) & x2))
 GT = G(X(x1) -> (x2 & !X(x2)))
@@ -414,31 +401,33 @@ trace#0, cand_acc=False, gt_acc=None, 1; x1 & !x2; cycle{1}
 
 Candidate = G((x1 -> (X(!x1) & X(x2))) & (x2 -> (X(!x1) & X(x1))))
 GT = G((x1->(!x & X(x2)) ) & (x2->(!x1 & X(x1))))
-trace#0, cand_acc=False, gt_acc=None, 1; x1 | x2; cycle{1}
+trace#0, cand_acc=False, gt_acc=None, 1; x2; cycle{1}
 
 Candidate = F(x1) -> F(x2)
 GT = x1 & X(!x1) | !x1 & X(x1) -> x2
-trace#0, cand_acc=True, gt_acc=True, !x1 & x2; cycle{!x1}
+trace#0, cand_acc=True, gt_acc=True, x2; cycle{1}
 trace#1, cand_acc=False, gt_acc=None, x1 & !x2; cycle{!x2}
 
 Candidate = G(x1 -> X((!x1 U x1) & X(x1 -> X(G(!x1)))))
 GT = F(x1 & X(F(x1 & G(!x1))))
-trace#0, cand_acc=False, gt_acc=False, cycle{x1}
-trace#1, cand_acc=True, gt_acc=False, !x1; cycle{!x1}
+trace#0, cand_acc=False, gt_acc=False, 1; x1; !x1; cycle{!x1}
+trace#1, cand_acc=False, gt_acc=False, x1; !x1; cycle{!x1}
+trace#2, cand_acc=False, gt_acc=False, x1; cycle{x1}
+trace#3, cand_acc=True, gt_acc=False, cycle{!x1}
 
 Candidate = F(G((!x2 & !x3) -> x1))
 GT = F(!x2 & !x3 -> G(x1))
-trace#0, cand_acc=None, gt_acc=None, !x2 & !x3; cycle{!x2 & !x3}
-trace#1, cand_acc=True, gt_acc=True, x1 | x2 | x3; cycle{x1 | x2 | x3}
-trace#2, cand_acc=None, gt_acc=None, !x1 | x2 | x3; cycle{!x1 | x2 | x3}
-trace#3, cand_acc=True, gt_acc=True, cycle{(!x1 & x2) | (!x1 & x3); x1 & !x2 & !x3}
+trace#0, cand_acc=True, gt_acc=True, cycle{x2 | x3}
+trace#1, cand_acc=None, gt_acc=None, !x2 & !x3; cycle{!x2 & !x3}
+trace#2, cand_acc=True, gt_acc=True, x1 | x2 | x3; cycle{x1 | x2 | x3}
+trace#3, cand_acc=None, gt_acc=None, !x1 | x2 | x3; cycle{!x1 | x2 | x3}
+trace#4, cand_acc=True, gt_acc=True, cycle{(!x1 & x2) | (!x1 & x3); x1 & !x2 & !x3}
 
 Candidate = G((!x2 & X(x3)) | F(x1))
 GT = G(F(x1) U (!x2) & X(x3))
-trace#0, cand_acc=False, gt_acc=False, !x1; !x1 & x2; cycle{!x1}
-trace#1, cand_acc=False, gt_acc=False, 1; !x1 & x2; cycle{!x1}
-trace#2, cand_acc=False, gt_acc=False, !x1 & x2; cycle{!x1}
-trace#3, cand_acc=True, gt_acc=None, cycle{x1}
+trace#0, cand_acc=False, gt_acc=False, 1; !x1 & x2; cycle{!x1}
+trace#1, cand_acc=False, gt_acc=False, !x1; !x1 & x2; cycle{!x1}
+trace#2, cand_acc=True, gt_acc=None, cycle{x1}
 
 Candidate = G(x2 -> X(!x2 U x1) | (x1 & x2))
 GT = G(x1 -> X(x2))
@@ -446,13 +435,12 @@ trace#0, cand_acc=False, gt_acc=True, 1; !x1 & x2; cycle{!x1 & !x2}
 
 Candidate = G(X(x1) -> G(F(x1)))
 GT = G(X(x1) & G(F(x1)))
-trace#0, cand_acc=None, gt_acc=None, 1; x1; cycle{1}
-trace#1, cand_acc=True, gt_acc=True, cycle{x1}
-trace#2, cand_acc=True, gt_acc=False, 1; cycle{!x1}
+trace#0, cand_acc=True, gt_acc=False, !x1; cycle{!x1}
 
 Candidate = G(x1 & x2 | X(X(X(X(X(x1 & x2)))))) | G(x3 | X(X(X(x3))))
 GT = X(X(X(X(X(x1 & x2))))) | X(X(X(x3)))
-trace#0, cand_acc=True, gt_acc=True, x2 & x3; cycle{x2 & x3}
+trace#0, cand_acc=True, gt_acc=True, x1 & x2; cycle{x1 & x2}
+trace#1, cand_acc=True, gt_acc=True, x2 & x3; cycle{x2 & x3}
 
 Candidate = G(x1 U (!x2 & x3))
 GT = x1 U (!x2 & x3)
@@ -476,12 +464,12 @@ G((!x1 & x2 & !x3 )->X((x1 & !x2 & x3 )| (x1 & x2 & !x3 ))) &
 G((x1 & !x2 & !x3 )->X((x1 & x2 & !x3 )| (!x1 & x2 & x3 )))
 trace#0, cand_acc=False, gt_acc=False, 1; (!x1 & !x2 & !x3) | (x1 & x2 & x3); cycle{1}
 trace#1, cand_acc=False, gt_acc=False, cycle{(!x1 & !x2 & !x3) | (x1 & x2 & x3)}
-trace#2, cand_acc=None, gt_acc=None, (!x1 & !x2 & x3) | (x1 & x2 & !x3); cycle{1}
-trace#3, cand_acc=None, gt_acc=None, (!x1 & x2 & !x3) | (x1 & !x2 & x3); cycle{1}
-trace#4, cand_acc=None, gt_acc=None, (!x1 & x2 & x3) | (x1 & !x2 & !x3); cycle{1}
-trace#5, cand_acc=None, gt_acc=None, (x1 & x3) | (!x1 & !x3) | (x2 & x3) | (!x2 & !x3); cycle{1}
-trace#6, cand_acc=None, gt_acc=None, (x2 & !x3) | (!x2 & x3) | (x1 & x3) | (!x1 & !x3); cycle{1}
-trace#7, cand_acc=None, gt_acc=None, (x2 & x3) | (!x2 & !x3) | (x1 & !x3) | (!x1 & x3); cycle{1}
+trace#2, cand_acc=None, gt_acc=None, (x1 & x3) | (!x1 & !x3) | (x2 & x3) | (!x2 & !x3); cycle{1}
+trace#3, cand_acc=None, gt_acc=None, (x2 & !x3) | (!x2 & x3) | (x1 & x3) | (!x1 & !x3); cycle{1}
+trace#4, cand_acc=None, gt_acc=None, (x2 & x3) | (!x2 & !x3) | (x1 & !x3) | (!x1 & x3); cycle{1}
+trace#5, cand_acc=None, gt_acc=None, (!x1 & !x2 & x3) | (x1 & x2 & !x3); cycle{1}
+trace#6, cand_acc=None, gt_acc=None, (!x1 & x2 & !x3) | (x1 & !x2 & x3); cycle{1}
+trace#7, cand_acc=None, gt_acc=None, (!x1 & x2 & x3) | (x1 & !x2 & !x3); cycle{1}
 
 Candidate = G(x1 -> (x1 U x2)) & G(x2 -> G(!x1))
 GT = (x1 U x2) & G(x2 -> F (!x1))
@@ -489,67 +477,54 @@ trace#0, cand_acc=False, gt_acc=None, 1; x1 & x2; cycle{1}
 
 Candidate = G(x1 -> F(x2)) & (!x3 U (x1 & x2))
 GT = G(x1 ->F(x2)) & G(!x3 U (x1 & x2))
-trace#0, cand_acc=False, gt_acc=False, (!x1 & x3) | (!x2 & x3); cycle{1}
-trace#1, cand_acc=False, gt_acc=False, cycle{(!x1 & x3) | (!x2 & x3)}
-trace#2, cand_acc=None, gt_acc=None, !x1 | !x2; cycle{1}
-trace#3, cand_acc=None, gt_acc=None, x2; cycle{!x1 | x2}
-trace#4, cand_acc=None, gt_acc=None, x1 & !x2; cycle{x2; x1 & !x2}
-trace#5, cand_acc=None, gt_acc=None, cycle{1}
-trace#6, cand_acc=None, gt_acc=None, !x1 | (!x2 & x3); cycle{1}
-trace#7, cand_acc=None, gt_acc=None, x1 & x2; cycle{x1}
-trace#8, cand_acc=None, gt_acc=None, (x1 & !x2) | (x1 & !x3); cycle{1}
-trace#9, cand_acc=None, gt_acc=None, x2 & x3; cycle{!x2 | x3}
-trace#10, cand_acc=None, gt_acc=False, 1; (!x1 & x3) | (!x2 & x3); cycle{1}
+trace#0, cand_acc=True, gt_acc=None, x1 & x2; cycle{!x1 | x2}
 
 Candidate = (F(x1 & x2) -> (!x1 U x1)) & (!F(x1 & x2) -> (F(x2) -> F(x1)))
 GT = F(x1 & x2) -> (!x1 U x1) & F(x2)->F(x1)
-trace#0, cand_acc=False, gt_acc=True, !x1 & x2; cycle{!x1}
+trace#0, cand_acc=True, gt_acc=True, x1 & x2; cycle{x1}
+trace#1, cand_acc=True, gt_acc=True, cycle{!x2}
+trace#2, cand_acc=False, gt_acc=True, cycle{!x1 & x2}
 
 Candidate = (F(x1) -> (x2 U x1)) & (!F(x1) -> G(x3))
 GT = F(x1)->(x2 U x1) & G(x3)
-trace#0, cand_acc=True, gt_acc=None, x1 | x2; cycle{x1}
+trace#0, cand_acc=True, gt_acc=True, !x1 & !x2 & x3; cycle{!x1 & x3}
+trace#1, cand_acc=True, gt_acc=None, x1; cycle{x1}
 
 Candidate = G(x1 -> F(x2 & F(x3)))
 GT = G(x1->F(x3 & F(x2)))
-trace#0, cand_acc=True, gt_acc=True, cycle{!x1 | (x2 & x3)}
-trace#1, cand_acc=True, gt_acc=True, !x1 | (x2 & x3); cycle{!x1 | (x2 & x3)}
+trace#0, cand_acc=True, gt_acc=True, !x1 | (x2 & x3); cycle{!x1 | (x2 & x3)}
+trace#1, cand_acc=True, gt_acc=True, cycle{!x1 | (x2 & x3)}
 trace#2, cand_acc=None, gt_acc=None, !x1 & !x2; cycle{!x2}
 trace#3, cand_acc=False, gt_acc=False, 1; x1 & !x2; cycle{!x2}
-trace#4, cand_acc=False, gt_acc=False, x1 & !x2; cycle{x1 & !x2}
-trace#5, cand_acc=True, gt_acc=True, cycle{!x1}
-trace#6, cand_acc=True, gt_acc=True, cycle{x2 & x3}
-trace#7, cand_acc=False, gt_acc=False, !x2; x1 & !x2; cycle{!x2}
-trace#8, cand_acc=True, gt_acc=True, cycle{x1 & x2 & x3}
-trace#9, cand_acc=None, gt_acc=None, x1; cycle{!x2}
-trace#10, cand_acc=False, gt_acc=False, x1 & !x3; cycle{!x3}
-trace#11, cand_acc=True, gt_acc=True, x1 & x2; cycle{x2 & x3}
-trace#12, cand_acc=False, gt_acc=False, x1 & !x3; cycle{x1 & !x3}
+trace#4, cand_acc=True, gt_acc=True, cycle{!x2 & x3; x2 & !x3}
+trace#5, cand_acc=False, gt_acc=False, !x2; x1 & !x2; cycle{!x2}
+trace#6, cand_acc=False, gt_acc=False, x1 & !x3; cycle{!x3}
+trace#7, cand_acc=True, gt_acc=True, cycle{!x1}
+trace#8, cand_acc=True, gt_acc=True, cycle{x2 & x3}
+trace#9, cand_acc=True, gt_acc=True, x1 & x2; cycle{x2 & x3}
+trace#10, cand_acc=False, gt_acc=False, x1 & !x3; cycle{x1 & !x3}
+trace#11, cand_acc=False, gt_acc=False, x1 & !x2; cycle{x1 & !x2}
+trace#12, cand_acc=False, gt_acc=False, 1; x1 & x2 & !x3; cycle{!x3}
 trace#13, cand_acc=True, gt_acc=True, x2 & x3; cycle{x2 & x3}
-trace#14, cand_acc=None, gt_acc=None, !x3; cycle{!x3}
-trace#15, cand_acc=False, gt_acc=False, x1 & !x2; cycle{!x2}
-trace#16, cand_acc=None, gt_acc=None, !x1 & x2 & x3; cycle{1}
-trace#17, cand_acc=None, gt_acc=None, x2 & !x3; cycle{!x3}
-trace#18, cand_acc=None, gt_acc=None, x1 & x2 & x3; cycle{1}
-trace#19, cand_acc=None, gt_acc=None, x1 & !x2; cycle{1}
-trace#20, cand_acc=None, gt_acc=None, cycle{!x2 | (x1 & x3)}
-trace#21, cand_acc=None, gt_acc=None, cycle{!x1 | (!x2 & x3)}
-trace#22, cand_acc=None, gt_acc=None, cycle{!x1 | !x2}
-trace#23, cand_acc=None, gt_acc=None, !x1 | (x2 & x3); cycle{1}
-trace#24, cand_acc=None, gt_acc=None, !x1; cycle{1}
+trace#14, cand_acc=False, gt_acc=False, x1 & !x2; cycle{!x2}
+trace#15, cand_acc=True, gt_acc=True, cycle{x1 & x2 & x3}
+trace#16, cand_acc=None, gt_acc=None, x1 & x2 & x3; cycle{1}
+trace#17, cand_acc=None, gt_acc=None, !x3; cycle{!x3}
+trace#18, cand_acc=False, gt_acc=False, cycle{x1 & !x2}
+trace#19, cand_acc=None, gt_acc=None, x1; cycle{!x2}
+trace#20, cand_acc=None, gt_acc=None, x2 & !x3; cycle{!x3}
+trace#21, cand_acc=None, gt_acc=None, !x1; cycle{1}
+trace#22, cand_acc=None, gt_acc=None, cycle{!x2 | (x1 & x3)}
+trace#23, cand_acc=None, gt_acc=None, (x1 & !x2) | (x1 & x3); cycle{!x2 | x3}
+trace#24, cand_acc=None, gt_acc=None, x1 & x2; cycle{x2}
 trace#25, cand_acc=None, gt_acc=None, x1; !x2; cycle{1}
 trace#26, cand_acc=None, gt_acc=None, 1; cycle{!x1 | (x2 & x3)}
 trace#27, cand_acc=None, gt_acc=None, cycle{x1}
-trace#28, cand_acc=None, gt_acc=None, 1; !x1 | (x2 & x3); cycle{1}
-trace#29, cand_acc=None, gt_acc=None, cycle{x1 | (x2 & x3)}
-trace#30, cand_acc=None, gt_acc=None, (x1 & !x2) | (x1 & x3); cycle{!x2 | x3}
-trace#31, cand_acc=None, gt_acc=None, x1 & x2; cycle{x2}
+trace#28, cand_acc=None, gt_acc=None, !x1 | (x2 & x3); cycle{1}
 
 Candidate = G((x1 -> X(!x2)) & (!x1 -> X(x2)))
 GT = G((x1->!x2) & X(!x1->X(x2)))
-trace#0, cand_acc=False, gt_acc=False, cycle{x1 & x2}
-trace#1, cand_acc=False, gt_acc=False, !x1; cycle{!x1 & !x2}
-trace#2, cand_acc=None, gt_acc=None, cycle{!x1}
-trace#3, cand_acc=None, gt_acc=True, !x2; cycle{x1 & !x2}
+trace#0, cand_acc=False, gt_acc=None, !x1; !x2; cycle{1}
 
 Candidate = G((x1 | x2 | x3) -> F(G(x4)))
 GT = x1 & x2 & x3 -> X(G(x4))
@@ -557,23 +532,21 @@ trace#0, cand_acc=False, gt_acc=None, 1; x1 | x2 | x3; cycle{!x4}
 
 Candidate = G(x1 -> (!x2 & !(X x2) & !(X x3) & !(X X x3)))
 GT = G(x1->(X(!x2) & X(x3) & X(X(!x3))))
-trace#0, cand_acc=False, gt_acc=None, x1 & x2; cycle{1}
+trace#0, cand_acc=True, gt_acc=False, x1 & !x2; cycle{x1 & !x2 & !x3}
 
 Candidate = G(x1 -> X(!x1)) & G(!x1 -> X(x1))
 GT = G((x1 U !x1) & (!x1 U x1))
-trace#0, cand_acc=False, gt_acc=False, cycle{x1}
-trace#1, cand_acc=None, gt_acc=None, 1; !x1; cycle{1}
-trace#2, cand_acc=None, gt_acc=None, 1; x1; cycle{1}
-trace#3, cand_acc=None, gt_acc=None, !x1; cycle{1}
-trace#4, cand_acc=None, gt_acc=None, x1; cycle{1}
+trace#0, cand_acc=False, gt_acc=None, !x1; !x1; cycle{1}
 
 Candidate = G(!x1) -> G((x2 & !x3) -> X(!x2 & x3)) & G((!x2 & x3) -> X(x2 & !x3))
 GT = G(!x1) -> ((x2 -> X(!x2 & x3)) & (x3 ->X(!x3 & x2)))
-trace#0, cand_acc=False, gt_acc=False, !x1 & !x2 & x3; cycle{!x1 & !x2 & x3}
-trace#1, cand_acc=False, gt_acc=False, cycle{!x1 & x2 & !x3}
-trace#2, cand_acc=None, gt_acc=None, x2; cycle{1}
-trace#3, cand_acc=None, gt_acc=None, (!x1 & !x2) | (!x1 & x3); cycle{!x1}
-trace#4, cand_acc=None, gt_acc=None, (!x1 & x2) | (!x1 & !x3); cycle{!x1}
+trace#0, cand_acc=False, gt_acc=False, !x1 & !x2 & x3; (!x1 & !x2) | (!x1 & x3); cycle{!x1}
+trace#1, cand_acc=True, gt_acc=True, x1; cycle{1}
+trace#2, cand_acc=False, gt_acc=False, !x1 & !x2 & x3; cycle{!x1 & !x2 & x3}
+trace#3, cand_acc=False, gt_acc=False, cycle{!x1 & x2 & !x3}
+trace#4, cand_acc=None, gt_acc=None, x2; cycle{1}
+trace#5, cand_acc=None, gt_acc=None, (!x1 & !x2) | (!x1 & x3); cycle{!x1}
+trace#6, cand_acc=None, gt_acc=None, (!x1 & x2) | (!x1 & !x3); cycle{!x1}
 
 Candidate = G((x2 & x1 & x3) -> F(G(x1 & x2 & x3)))
 GT = x1 & x2 & x3 -> F(x1) & F(x2) & F(x3)
@@ -581,158 +554,136 @@ trace#0, cand_acc=True, gt_acc=True, cycle{!x1 | !x2}
 trace#1, cand_acc=True, gt_acc=True, cycle{!x1 | !x3}
 trace#2, cand_acc=True, gt_acc=True, cycle{!x2 | !x3}
 trace#3, cand_acc=True, gt_acc=True, cycle{!x1 | !x2 | !x3}
-trace#4, cand_acc=False, gt_acc=True, x1 & x2 & x3; cycle{!x1 | !x2 | !x3}
+trace#4, cand_acc=True, gt_acc=True, x1 & x2 & x3; cycle{x1 & x2 & x3}
+trace#5, cand_acc=False, gt_acc=True, 1; x1 & x2 & x3; cycle{!x1 | !x2 | !x3}
 
 Candidate = G((!X(x1)) -> (x2 & !X(x2) & !x3 & X(x3)))
 GT = G(X(!x1->((x2 & X(!x2)) & (!x3 & X(x3)))))
-trace#0, cand_acc=False, gt_acc=False, (!x2 & x3) | (x1 & !x2) | (x1 & x3); cycle{!x1 & !x2 & x3}
-trace#1, cand_acc=False, gt_acc=False, (!x1 & !x2) | (!x1 & x3); cycle{(!x1 & !x2) | (!x1 & x3)}
-trace#2, cand_acc=False, gt_acc=False, !x2 | x3; cycle{!x1}
-trace#3, cand_acc=True, gt_acc=True, x1 & x2 & !x3; cycle{x1 & x2 & !x3}
-trace#4, cand_acc=True, gt_acc=True, 1; cycle{x1}
-trace#5, cand_acc=True, gt_acc=True, x2 | x3; cycle{(x1 & x2) | (x1 & x3)}
-trace#6, cand_acc=None, gt_acc=None, x1 | !x3; cycle{(x2 & !x3) | (x1 & x2)}
-trace#7, cand_acc=None, gt_acc=None, x2 | x3; !x1; cycle{1}
-trace#8, cand_acc=None, gt_acc=None, cycle{!x2 | x3}
-trace#9, cand_acc=None, gt_acc=False, 1; (!x1 & !x2) | (!x1 & x3); cycle{1}
+trace#0, cand_acc=False, gt_acc=None, !x2 | x3; !x1; cycle{1}
 
 Candidate = G((x3 & !x2) -> !x1) & G((x2 & x1) -> x3) & F(x1 & x2 & x3)
 GT = G((x3->!x1 & x2) & ((x1 & x2) -> x3) & F(x1 & x2 & x3))
-trace#0, cand_acc=True, gt_acc=False, x1 & x2 & x3; cycle{(x1 & x2 & x3) | (x1 & !x2 & !x3)}
+trace#0, cand_acc=True, gt_acc=False, x1 & x2 & x3; cycle{!x1 | (x2 & x3) | (!x2 & !x3)}
 
 Candidate = G(x1) -> (x2 U !x3)
 GT = G(x1) -> G(x2) U (!x3)
-trace#0, cand_acc=True, gt_acc=True, x1 & x2 & !x3; cycle{x2}
-trace#1, cand_acc=False, gt_acc=False, x1 & !x2 & x3; cycle{x1}
-trace#2, cand_acc=None, gt_acc=None, 1; !x1 | !x3; cycle{1}
-trace#3, cand_acc=None, gt_acc=None, 1; x1 & !x2 & x3; cycle{x1}
-trace#4, cand_acc=None, gt_acc=None, !x1 | !x2; cycle{1}
-trace#5, cand_acc=None, gt_acc=None, x1 & x3; cycle{x1}
-trace#6, cand_acc=False, gt_acc=False, cycle{x1 & x3}
-trace#7, cand_acc=None, gt_acc=None, x1 & x2 & x3; cycle{x1}
-trace#8, cand_acc=None, gt_acc=None, x1 | !x3; cycle{1}
-trace#9, cand_acc=None, gt_acc=None, x1 & !x2; x1 & x3; cycle{x1}
-trace#10, cand_acc=None, gt_acc=False, x1 & x3; x1 & !x2; cycle{x1}
+trace#0, cand_acc=True, gt_acc=True, !x1 | !x3; cycle{1}
+trace#1, cand_acc=True, gt_acc=True, x1 & x2 & !x3; cycle{x2}
+trace#2, cand_acc=None, gt_acc=None, 1; cycle{x1 & x2 & x3}
+trace#3, cand_acc=True, gt_acc=True, cycle{!x1 & x2 & x3}
+trace#4, cand_acc=None, gt_acc=None, x1 | !x3; cycle{1}
+trace#5, cand_acc=None, gt_acc=None, !x1 | !x2; cycle{1}
+trace#6, cand_acc=None, gt_acc=None, x1 & x3; cycle{x1}
+trace#7, cand_acc=False, gt_acc=False, cycle{x1 & x3}
+trace#8, cand_acc=None, gt_acc=None, x1 & !x2; x1 & x3; cycle{x1}
+trace#9, cand_acc=None, gt_acc=False, x1 & x3; x1 & !x2; cycle{x1}
 
 Candidate = G(((!x2) & X(x2)) -> (X(x1) & X(x3))) & G((!x2 & X(x2)) -> X(x1)) & (x4 U x1) & F(x2)
 GT = G (F(x2 & x3) & (X (x2 -> X(x1))) & G(x4 U x1) & F(x2))
-trace#0, cand_acc=False, gt_acc=False, !x1 & !x4; cycle{1}
-trace#1, cand_acc=False, gt_acc=False, cycle{!x1 & !x4}
-trace#2, cand_acc=False, gt_acc=False, !x2; cycle{!x2}
-trace#3, cand_acc=None, gt_acc=None, !x1 & !x2; cycle{1}
-trace#4, cand_acc=None, gt_acc=None, x2 & x3; cycle{x3}
-trace#5, cand_acc=None, gt_acc=None, !x1; cycle{1}
-trace#6, cand_acc=None, gt_acc=None, !x4; cycle{1}
-trace#7, cand_acc=None, gt_acc=None, x2 & x4; cycle{x2}
-trace#8, cand_acc=None, gt_acc=None, !x4; !x1; cycle{1}
-trace#9, cand_acc=None, gt_acc=None, x2 & !x4; x1 & x2; cycle{x2}
-trace#10, cand_acc=None, gt_acc=False, 1; !x1 & !x4; cycle{1}
+trace#0, cand_acc=True, gt_acc=None, x1 & x2; cycle{x2}
 
 Candidate = G(x1 -> F(x2))
 GT = G(x1 -> G(x2))
 trace#0, cand_acc=False, gt_acc=False, 1; x1 & !x2; cycle{!x2}
 trace#1, cand_acc=None, gt_acc=None, x1 & x2; cycle{1}
-trace#2, cand_acc=True, gt_acc=None, !x1 | x2; cycle{!x1 | x2}
+trace#2, cand_acc=True, gt_acc=None, cycle{!x1 | x2}
 
 Candidate = F(x1 & F(G(!x1)))
 GT = !x1 U F(x1) & X(G(!x1))
-trace#0, cand_acc=None, gt_acc=None, 1; !x1; cycle{!x1}
-trace#1, cand_acc=False, gt_acc=False, !x1; cycle{!x1}
-trace#2, cand_acc=None, gt_acc=None, x1; cycle{1}
+trace#0, cand_acc=False, gt_acc=False, !x1; cycle{!x1}
+trace#1, cand_acc=None, gt_acc=None, x1; cycle{1}
 
 Candidate = G(x1 -> (!x2 & !x3))
 GT = G(x1-> !(x2 & x3))
-trace#0, cand_acc=True, gt_acc=True, cycle{!x1 | (!x2 & !x3)}
-trace#1, cand_acc=True, gt_acc=True, cycle{!x1}
-trace#2, cand_acc=True, gt_acc=True, !x1 | (!x2 & !x3); cycle{!x1 | (!x2 & !x3)}
+trace#0, cand_acc=True, gt_acc=True, cycle{!x1}
+trace#1, cand_acc=True, gt_acc=True, !x1 | (!x2 & !x3); cycle{!x1 | (!x2 & !x3)}
+trace#2, cand_acc=True, gt_acc=True, cycle{!x1 | (!x2 & !x3)}
 trace#3, cand_acc=True, gt_acc=True, cycle{(x1 & !x2 & !x3) | (!x1 & x2) | (!x1 & x3)}
 trace#4, cand_acc=False, gt_acc=None, 1; (x1 & x2) | (x1 & x3); cycle{1}
 
 Candidate = G(X(x1) -> F(x2))
 GT = X(x1)->F(x2)
-trace#0, cand_acc=True, gt_acc=True, x2; cycle{x2}
-trace#1, cand_acc=True, gt_acc=True, cycle{x2}
-trace#2, cand_acc=None, gt_acc=None, 1; x1 & !x2; cycle{!x2}
-trace#3, cand_acc=None, gt_acc=True, x2; cycle{1}
+trace#0, cand_acc=False, gt_acc=None, 1; !x2; x1 & !x2; cycle{!x2}
 
 Candidate = G(x1) & (!x2) & X(!x2)
 GT = G(x1) & X(X(!x2))
-trace#0, cand_acc=False, gt_acc=None, !x1 | x2; cycle{1}
+trace#0, cand_acc=False, gt_acc=None, 1; !x1 | x2; cycle{1}
 
 Candidate = G(x1 U F(!x2))
 GT = G(x1 U F(x2))
 trace#0, cand_acc=None, gt_acc=None, !x2; cycle{1}
-trace#1, cand_acc=True, gt_acc=False, cycle{!x2}
+trace#1, cand_acc=True, gt_acc=False, cycle{x1 & !x2}
 
 Candidate = G((x1 & x2) -> F(x3))
 GT = G(x1 & x2) -> F(x3)
-trace#0, cand_acc=True, gt_acc=True, cycle{!x1 | !x2 | x3}
-trace#1, cand_acc=True, gt_acc=True, !x1 | !x2 | x3; cycle{!x1 | !x2 | x3}
-trace#2, cand_acc=True, gt_acc=True, cycle{!x2 | x3}
-trace#3, cand_acc=None, gt_acc=True, (!x1 & !x3) | (!x2 & !x3); cycle{!x3}
+trace#0, cand_acc=True, gt_acc=True, cycle{x3 | (x1 & !x2) | (!x1 & x2)}
+trace#1, cand_acc=True, gt_acc=True, cycle{!x2 | x3}
+trace#2, cand_acc=True, gt_acc=True, cycle{x3 | (x1 & !x2)}
+trace#3, cand_acc=True, gt_acc=True, cycle{!x1 | x3}
+trace#4, cand_acc=True, gt_acc=True, cycle{!x1 | !x2 | x3}
+trace#5, cand_acc=True, gt_acc=True, !x1 | !x2 | x3; cycle{!x1 | !x2 | x3}
+trace#6, cand_acc=True, gt_acc=True, cycle{x3 | (!x1 & !x2)}
+trace#7, cand_acc=True, gt_acc=True, cycle{!x1 | !x2}
+trace#8, cand_acc=None, gt_acc=True, (!x1 & !x3) | (!x2 & !x3); cycle{!x3}
 
 Candidate = G(x1) -> (G(F(x2)) & F(x3))
 GT = G(x1 -> (F(x2) & F(x3)))
-trace#0, cand_acc=False, gt_acc=False, x1 & !x3; cycle{x1 & !x3}
-trace#1, cand_acc=None, gt_acc=False, 1; x1 & !x3; cycle{x1 & !x3}
+trace#0, cand_acc=True, gt_acc=None, !x1; cycle{1}
 
 Candidate = G(x1 -> !x3) U (F(x3 & !x1))
 GT = G((x1->!x3) U (!x1->x3))
 trace#0, cand_acc=None, gt_acc=None, !x1; x3; cycle{1}
 trace#1, cand_acc=None, gt_acc=None, x3; !x1; cycle{1}
-trace#2, cand_acc=True, gt_acc=None, !x1 & x3; cycle{!x1}
+trace#2, cand_acc=None, gt_acc=None, !x1; cycle{1}
+trace#3, cand_acc=True, gt_acc=None, !x1 & x3; cycle{1}
 
 Candidate = G(x1 <-> !X(x1))
 GT = G(x1->X(!x1) | !x1->X(x1))
-trace#0, cand_acc=False, gt_acc=True, !x1; cycle{!x1}
+trace#0, cand_acc=False, gt_acc=None, !x1; !x1; cycle{1}
 
 Candidate = (x1 U (x2 | x3)) & F(x3)
 GT = G(x1 U (x2 | x3) & F(x3))
-trace#0, cand_acc=True, gt_acc=True, x3; cycle{x3}
-trace#1, cand_acc=False, gt_acc=False, cycle{!x3}
-trace#2, cand_acc=True, gt_acc=None, !x1 & !x2 & x3; cycle{1}
+trace#0, cand_acc=True, gt_acc=None, x3; cycle{1}
 
 Candidate = G(!x2) | (x2 U x1)
 GT = G(!x2) | G(x2 U x1)
 trace#0, cand_acc=None, gt_acc=None, !x1; cycle{1}
 trace#1, cand_acc=None, gt_acc=None, x2; cycle{1}
-trace#2, cand_acc=False, gt_acc=False, !x1 & x2; cycle{!x1}
-trace#3, cand_acc=None, gt_acc=None, 1; x1; cycle{1}
-trace#4, cand_acc=False, gt_acc=False, cycle{!x1 & x2}
-trace#5, cand_acc=None, gt_acc=None, !x1 & x2; !x2; cycle{1}
-trace#6, cand_acc=None, gt_acc=None, !x2; !x1 & x2; cycle{1}
-trace#7, cand_acc=None, gt_acc=None, !x1 & x2; cycle{1}
+trace#2, cand_acc=False, gt_acc=False, !x1 & x2; !x1 & !x2; cycle{1}
+trace#3, cand_acc=False, gt_acc=False, !x1 & x2; cycle{!x1}
+trace#4, cand_acc=True, gt_acc=None, x1; cycle{1}
 
 Candidate = G((x1 & !x2) -> F x3)
 GT = x1 & x2 & X(x3)
-trace#0, cand_acc=True, gt_acc=None, cycle{!x1 | x2}
+trace#0, cand_acc=True, gt_acc=None, cycle{x3 | (x1 & x2) | (!x1 & !x2)}
 
 Candidate = F(x1 & x2)
 GT = G(F(x1 & x2))
 trace#0, cand_acc=None, gt_acc=None, !x1 & x2; cycle{1}
 trace#1, cand_acc=None, gt_acc=None, x1 & !x2; cycle{1}
-trace#2, cand_acc=False, gt_acc=False, x1 & !x2; cycle{!x2}
-trace#3, cand_acc=True, gt_acc=None, x1 & x2; cycle{x1}
+trace#2, cand_acc=True, gt_acc=None, x1 & x2; cycle{1}
 
 Candidate = G((x1 & X(G(!x1))) | (!x1 & X(F(x1 & X(G(!x1))))))
 GT = ( !x1) U (x1 & X(G (!x1)))
-trace#0, cand_acc=False, gt_acc=False, cycle{!x1}
+trace#0, cand_acc=False, gt_acc=None, 1; x1; cycle{!x1}
 
 Candidate = F(G(!x1))
 GT = (x1) U (G(!x1))
-trace#0, cand_acc=False, gt_acc=False, x1; cycle{x1}
+trace#0, cand_acc=True, gt_acc=True, !x1; cycle{!x1}
+trace#1, cand_acc=False, gt_acc=False, x1; cycle{x1}
 
 Candidate = F(x1 & X(G(!x1)))
 GT = F(x1) & G(x1 -> X(G(!x1)))
-trace#0, cand_acc=None, gt_acc=None, 1; cycle{!x1}
-trace#1, cand_acc=None, gt_acc=None, x1; cycle{1}
+trace#0, cand_acc=True, gt_acc=True, x1; cycle{!x1}
+trace#1, cand_acc=None, gt_acc=None, 1; cycle{!x1}
+trace#2, cand_acc=None, gt_acc=None, x1; cycle{1}
 
 Candidate = G(x1 -> F(G(!x1)))
 GT = F(!x1) & G(!x1 -> X(G(!x1)))
-trace#0, cand_acc=None, gt_acc=None, x1; cycle{1}
+trace#0, cand_acc=False, gt_acc=False, 1; x1; cycle{x1}
 trace#1, cand_acc=None, gt_acc=None, x1; x1; cycle{1}
-trace#2, cand_acc=None, gt_acc=None, !x1; cycle{1}
-trace#3, cand_acc=None, gt_acc=None, 1; !x1; cycle{1}
+trace#2, cand_acc=True, gt_acc=True, !x1; cycle{!x1}
+trace#3, cand_acc=None, gt_acc=None, !x1; cycle{1}
 
 Candidate = G(x1 -> F(x2 & F(x3))) & (!x3 U x2)
 GT = F (x1 & F (x2)) & F (x3 & (!x3 U x2))
@@ -741,19 +692,17 @@ trace#0, cand_acc=True, gt_acc=None, (!x1 & x2) | (x2 & x3); cycle{(!x1 & x2) | 
 Candidate = G(x1 -> (F(x2 & G(x2 -> X(X(x3))))))
 GT = G(x1 -> (X(x2) & G(X(X(x3)))))
 trace#0, cand_acc=True, gt_acc=True, !x1; cycle{!x1}
-trace#1, cand_acc=False, gt_acc=False, 1; x1 & !x2; cycle{!x2}
+trace#1, cand_acc=True, gt_acc=True, cycle{!x1}
 trace#2, cand_acc=False, gt_acc=False, !x2; x1 & !x2; cycle{!x2}
-trace#3, cand_acc=True, gt_acc=True, cycle{!x1}
+trace#3, cand_acc=None, gt_acc=None, !x1 & !x2; cycle{!x2}
 trace#4, cand_acc=False, gt_acc=False, x1 & !x2; cycle{!x2}
-trace#5, cand_acc=None, gt_acc=None, !x1 & !x2; cycle{!x2}
-trace#6, cand_acc=False, gt_acc=False, cycle{x1 & !x2}
-trace#7, cand_acc=True, gt_acc=True, x2 & x3; cycle{x2 & x3}
-trace#8, cand_acc=None, gt_acc=None, !x1; cycle{1}
-trace#9, cand_acc=None, gt_acc=None, cycle{!x2}
-trace#10, cand_acc=None, gt_acc=None, x2 & !x3; cycle{!x3}
-trace#11, cand_acc=None, gt_acc=None, !x2; cycle{!x2}
-trace#12, cand_acc=False, gt_acc=False, x1 & !x2; cycle{x1 & !x2}
-trace#13, cand_acc=None, gt_acc=False, x1; cycle{!x2}
+trace#5, cand_acc=True, gt_acc=True, x2 & x3; cycle{x2 & x3}
+trace#6, cand_acc=False, gt_acc=False, 1; x1 & !x2; cycle{!x2}
+trace#7, cand_acc=False, gt_acc=False, cycle{x1 & !x2}
+trace#8, cand_acc=None, gt_acc=None, 1; cycle{!x1}
+trace#9, cand_acc=None, gt_acc=None, !x2; cycle{!x2}
+trace#10, cand_acc=False, gt_acc=False, x1 & !x2; cycle{x1 & !x2}
+trace#11, cand_acc=None, gt_acc=False, x1; cycle{!x2}
 
 Candidate = G(x1 -> F(x2))
 GT = F(x1) & F(x2)
@@ -761,13 +710,7 @@ trace#0, cand_acc=False, gt_acc=None, 1; x1 & !x2; cycle{!x2}
 
 Candidate = (x1 | x2) U x3
 GT = F(x1 | x2) & F(x3)
-trace#0, cand_acc=False, gt_acc=False, cycle{!x3}
-trace#1, cand_acc=None, gt_acc=None, !x2 & !x3; cycle{1}
-trace#2, cand_acc=None, gt_acc=None, !x1 & x2 & !x3; cycle{1}
-trace#3, cand_acc=None, gt_acc=None, 1; cycle{(x1 & !x3) | (x2 & !x3)}
-trace#4, cand_acc=None, gt_acc=None, 1; x3; cycle{1}
-trace#5, cand_acc=None, gt_acc=None, !x1 & !x3; cycle{1}
-trace#6, cand_acc=None, gt_acc=None, x1; cycle{1}
+trace#0, cand_acc=True, gt_acc=None, x3; cycle{1}
 
 Candidate = G(b -> X(c U a | G c))
 GT = b -> X((c U a) | (G(c)))
@@ -776,17 +719,18 @@ trace#0, cand_acc=None, gt_acc=True, !b; cycle{1}
 Candidate = !b U (a | G(!b))
 GT = (F(b) -> (!b U (a & !b)))
 trace#0, cand_acc=False, gt_acc=False, !a & b; b; cycle{1}
-trace#1, cand_acc=None, gt_acc=None, a | b; cycle{1}
-trace#2, cand_acc=None, gt_acc=False, b; cycle{1}
+trace#1, cand_acc=False, gt_acc=False, !a & b; cycle{!a}
+trace#2, cand_acc=False, gt_acc=False, !a & b; cycle{b}
+trace#3, cand_acc=None, gt_acc=None, a | b; cycle{1}
+trace#4, cand_acc=True, gt_acc=False, a & b; cycle{a}
 
 Candidate = G(F(!a))
 GT = F(G(!a))
 trace#0, cand_acc=None, gt_acc=None, !a; cycle{1}
 trace#1, cand_acc=False, gt_acc=False, a; cycle{a}
 trace#2, cand_acc=True, gt_acc=True, !a; cycle{!a}
-trace#3, cand_acc=None, gt_acc=None, 1; !a; cycle{1}
-trace#4, cand_acc=True, gt_acc=True, cycle{!a}
-trace#5, cand_acc=False, gt_acc=False, cycle{a}
+trace#3, cand_acc=True, gt_acc=True, cycle{!a}
+trace#4, cand_acc=False, gt_acc=False, cycle{a}
 
 Candidate = G((!a & !b) -> F(c))
 GT = G (!(a & b) -> F(c))
@@ -807,7 +751,8 @@ trace#1, cand_acc=False, gt_acc=False, !b; cycle{!a | !b}
 trace#2, cand_acc=False, gt_acc=False, !b; cycle{!b}
 trace#3, cand_acc=False, gt_acc=False, !b; cycle{1}
 trace#4, cand_acc=False, gt_acc=False, cycle{!b}
-trace#5, cand_acc=True, gt_acc=None, a & b; cycle{1}
+trace#5, cand_acc=None, gt_acc=None, a; cycle{1}
+trace#6, cand_acc=True, gt_acc=None, a & b; cycle{1}
 
 Candidate = G(a & X(X(X(X(X(a))))))
 GT = a & G(a -> X(!a) & X(X(!a)) & X(X(X(!a))) & X(X(X(X(!a)))) & X(X(X(X(X(a))))))
@@ -815,26 +760,23 @@ trace#0, cand_acc=False, gt_acc=None, 1; !a; cycle{1}
 
 Candidate = G(a -> (X(b) & X(X(b))))
 GT = G (a -> (b | X(b)))
-trace#0, cand_acc=True, gt_acc=True, cycle{!a}
-trace#1, cand_acc=True, gt_acc=True, !a; cycle{!a}
-trace#2, cand_acc=False, gt_acc=None, a; cycle{!b}
+trace#0, cand_acc=False, gt_acc=None, a; !b; cycle{1}
 
 Candidate = G(!a | F(a & F(!a & G(!a))))
 GT = G(!a -> (X(!a) | X(X(a))))
 trace#0, cand_acc=True, gt_acc=True, cycle{!a}
-trace#1, cand_acc=None, gt_acc=None, !a; cycle{1}
-trace#2, cand_acc=None, gt_acc=None, 1; !a; cycle{1}
-trace#3, cand_acc=None, gt_acc=None, a; cycle{1}
+trace#1, cand_acc=False, gt_acc=True, 1; a; cycle{a}
 
 Candidate = G(a -> X(X(X(!a | a))))
 GT = G(a -> (X(!a) | X(X(!a)) | X(X(X(a)))))
-trace#0, cand_acc=True, gt_acc=None, cycle{1}
+trace#0, cand_acc=True, gt_acc=True, cycle{!a}
+trace#1, cand_acc=True, gt_acc=None, cycle{1}
 
 Candidate = G(a -> F(b))
 GT = G ( a -> X(b))
 trace#0, cand_acc=False, gt_acc=False, 1; a & !b; cycle{!b}
 trace#1, cand_acc=None, gt_acc=None, a & b; cycle{1}
-trace#2, cand_acc=True, gt_acc=None, !a | b; cycle{!a | b}
+trace#2, cand_acc=True, gt_acc=None, cycle{!a | b}
 
 Candidate = G(x1 -> x2)
 GT = G(x1 <-> x2)
@@ -856,27 +798,25 @@ trace#4, cand_acc=None, gt_acc=None, p; cycle{1}
 
 Candidate = G(x1 -> (x2 U (x3 & x4)))
 GT = x1 -> X(x2 U (x3 & x4))
-trace#0, cand_acc=False, gt_acc=None, 1; (x1 & !x2 & !x3) | (x1 & !x2 & !x4); cycle{1}
+trace#0, cand_acc=False, gt_acc=None, 1; (x1 & x2 & !x3) | (x1 & x2 & !x4); cycle{(x2 & !x3) | (x2 & !x4)}
 
 Candidate = G(x1 -> F(!x1))
 GT = F(x1 -> F(!x1))
 trace#0, cand_acc=True, gt_acc=True, cycle{!x1}
 trace#1, cand_acc=True, gt_acc=True, !x1; cycle{!x1}
-trace#2, cand_acc=None, gt_acc=None, x1; cycle{1}
-trace#3, cand_acc=False, gt_acc=False, x1; cycle{x1}
-trace#4, cand_acc=None, gt_acc=True, !x1; cycle{1}
+trace#2, cand_acc=None, gt_acc=True, !x1; cycle{1}
 
 Candidate = G(r -> G(r))
 GT = G(r -> X(!r & X(r)))
-trace#0, cand_acc=False, gt_acc=True, cycle{!r; r}
+trace#0, cand_acc=False, gt_acc=None, 1; r; !r; cycle{1}
 
 Candidate = G(r -> X(G(!r)))
 GT = (r U !r) & (G(!r -> G(!r)))
-trace#0, cand_acc=None, gt_acc=None, 1; r; cycle{!r}
-trace#1, cand_acc=True, gt_acc=True, cycle{!r}
-trace#2, cand_acc=None, gt_acc=None, !r; cycle{1}
-trace#3, cand_acc=False, gt_acc=False, r; cycle{r}
-trace#4, cand_acc=None, gt_acc=True, r; 1; cycle{!r}
+trace#0, cand_acc=False, gt_acc=None, 1; r; r; cycle{1}
+
+Candidate = F(X(X(r)))
+GT = X(X(F(X(r))))
+trace#0, cand_acc=False, gt_acc=False, 1; 1; cycle{!r}
 
 Candidate = G(r -> G(b))
 GT = F(r) -> G(b)
@@ -884,34 +824,36 @@ trace#0, cand_acc=False, gt_acc=False, 1; !b & r; cycle{1}
 trace#1, cand_acc=False, gt_acc=False, cycle{!b & !r; b & r}
 trace#2, cand_acc=False, gt_acc=False, r; !b; cycle{1}
 trace#3, cand_acc=False, gt_acc=False, !b & r; cycle{r}
-trace#4, cand_acc=None, gt_acc=None, 1; b & r; cycle{b}
-trace#5, cand_acc=None, gt_acc=None, b & !r; cycle{1}
-trace#6, cand_acc=None, gt_acc=None, b & r; cycle{r}
-trace#7, cand_acc=False, gt_acc=False, !b & r; cycle{1}
-trace#8, cand_acc=None, gt_acc=None, !b & !r; cycle{1}
+trace#4, cand_acc=False, gt_acc=False, !b & r; cycle{1}
+trace#5, cand_acc=True, gt_acc=True, cycle{!r}
+trace#6, cand_acc=None, gt_acc=None, b & !r; cycle{1}
+trace#7, cand_acc=None, gt_acc=None, b & r; cycle{r}
+trace#8, cand_acc=False, gt_acc=False, r; cycle{!b}
 trace#9, cand_acc=None, gt_acc=None, b & r; cycle{1}
-trace#10, cand_acc=False, gt_acc=False, r; cycle{!b}
+trace#10, cand_acc=None, gt_acc=None, !b & !r; cycle{1}
 trace#11, cand_acc=None, gt_acc=None, !r; cycle{1}
-trace#12, cand_acc=True, gt_acc=True, cycle{b}
-trace#13, cand_acc=None, gt_acc=False, !b; r; cycle{1}
+trace#12, cand_acc=None, gt_acc=False, !b; r; cycle{1}
 
 Candidate = F(x1 & F(x1))
 GT = F(b & X(F(b)))
-trace#0, cand_acc=None, gt_acc=None, 1; cycle{!x1}
+trace#0, cand_acc=True, gt_acc=None, x1; cycle{1}
 
 Candidate = G(x1 & X(!x1 & X(x1)))
 GT = x1 & G(x1 -> X(!x1 & X(x1)))
-trace#0, cand_acc=False, gt_acc=False, !x1; cycle{!x1}
-trace#1, cand_acc=False, gt_acc=True, cycle{x1; !x1}
+trace#0, cand_acc=False, gt_acc=None, 1; !x1; cycle{1}
 
 Candidate = G(x1 -> (X(G(!x1)) & (!x1 U x1 | G(!x1))))
 GT = !x1 U (x1 & G(!X(x1)))
-trace#0, cand_acc=None, gt_acc=None, !x1; cycle{1}
-trace#1, cand_acc=True, gt_acc=False, !x1; cycle{!x1}
+trace#0, cand_acc=False, gt_acc=False, 1; x1; x1; cycle{1}
+trace#1, cand_acc=None, gt_acc=None, !x1; cycle{1}
+trace#2, cand_acc=False, gt_acc=False, x1; x1; cycle{1}
+trace#3, cand_acc=False, gt_acc=False, x1; cycle{x1}
+trace#4, cand_acc=False, gt_acc=False, cycle{x1}
+trace#5, cand_acc=True, gt_acc=False, !x1; cycle{!x1}
 
 Candidate = G((!x1 | !x2) -> !X(x3))
 GT = G((!x1 | x2) -> X(!x3))
-trace#0, cand_acc=False, gt_acc=None, !x1 | !x2; cycle{x3}
+trace#0, cand_acc=False, gt_acc=None, 1; !x1 | !x2; x3; cycle{1}
 
 Candidate = G(x1 -> F(x2))
 GT = G(x1 & !x2)
@@ -919,12 +861,15 @@ trace#0, cand_acc=False, gt_acc=None, 1; x1 & !x2; cycle{!x2}
 
 Candidate = G((x1 & !x2) -> x1)
 GT = (x1 & !x2) -> X(x1)
-trace#0, cand_acc=True, gt_acc=None, cycle{!x1 | !x2}
+trace#0, cand_acc=True, gt_acc=None, cycle{1}
 
 Candidate = G((!x1 & x2) -> F(x3))
 GT = (!x1 & x2) -> F(x3 )
-trace#0, cand_acc=True, gt_acc=True, cycle{x1 | !x2}
-trace#1, cand_acc=False, gt_acc=None, 1; !x1 & x2 & !x3; cycle{!x3}
+trace#0, cand_acc=True, gt_acc=True, cycle{x3 | (!x1 & !x2) | (x1 & x2)}
+trace#1, cand_acc=True, gt_acc=True, cycle{x3 | (!x1 & !x2)}
+trace#2, cand_acc=True, gt_acc=True, x1 | !x2 | x3; cycle{x1 | !x2 | x3}
+trace#3, cand_acc=True, gt_acc=True, cycle{x1 | !x2 | x3}
+trace#4, cand_acc=False, gt_acc=None, 1; !x1 & x2 & !x3; cycle{!x3}
 
 Candidate = G(x1 -> F(x2))
 GT = x1 -> F(x2)
@@ -932,119 +877,96 @@ trace#0, cand_acc=False, gt_acc=None, 1; x1 & !x2; cycle{!x2}
 
 Candidate = G(x1 -> (x2 U x3))
 GT = x1 -> (x2 U x3)
-trace#0, cand_acc=False, gt_acc=None, 1; x1 & !x2 & !x3; cycle{1}
+trace#0, cand_acc=False, gt_acc=None, 1; x1 & x2 & !x3; cycle{x2 & !x3}
 
 Candidate = G(x1 -> F(x2))
 GT = G (x1 -> G(F(x2)))
 trace#0, cand_acc=False, gt_acc=False, 1; x1 & !x2; cycle{!x2}
 trace#1, cand_acc=None, gt_acc=None, x1 & x2; cycle{1}
-trace#2, cand_acc=True, gt_acc=None, !x1 | x2; cycle{!x1 | x2}
+trace#2, cand_acc=True, gt_acc=None, cycle{!x1 | x2}
 
 Candidate = G(x1 -> (!x2 U x3))
 GT = G(x1 -> G(!x2 U x3))
-trace#0, cand_acc=False, gt_acc=False, 1; x1 & x2 & !x3; cycle{1}
-trace#1, cand_acc=True, gt_acc=None, cycle{!x1 | x3}
+trace#0, cand_acc=False, gt_acc=False, 1; x1 & !x2 & !x3; cycle{!x2 & !x3}
+trace#1, cand_acc=False, gt_acc=False, 1; x1 & x2 & !x3; cycle{1}
+trace#2, cand_acc=True, gt_acc=None, cycle{!x1 | x3}
 
 Candidate = G(x1 -> F(x2))
 GT = G(x1 -> G(F(x2)))
 trace#0, cand_acc=False, gt_acc=False, 1; x1 & !x2; cycle{!x2}
 trace#1, cand_acc=None, gt_acc=None, x1 & x2; cycle{1}
-trace#2, cand_acc=True, gt_acc=None, !x1 | x2; cycle{!x1 | x2}
+trace#2, cand_acc=True, gt_acc=None, cycle{!x1 | x2}
 
 Candidate = !x1 U x2
 GT = G ( !x2 -> !x1 )
-trace#0, cand_acc=True, gt_acc=None, !x1 & x2; cycle{1}
+trace#0, cand_acc=True, gt_acc=None, x2; cycle{1}
 
 Candidate = G((x1 & x2 & x3) -> (x2 U x4))
 GT = G(x1 & x2 & x3 -> (x1 U x4))
 trace#0, cand_acc=True, gt_acc=True, cycle{!x1 | !x2 | x4}
 trace#1, cand_acc=True, gt_acc=True, cycle{!x1 | !x3 | x4}
 trace#2, cand_acc=True, gt_acc=True, cycle{!x2 | !x3 | x4}
-trace#3, cand_acc=True, gt_acc=True, cycle{(x1 & x2 & x3 & x4) | (!x2 & !x4)}
-trace#4, cand_acc=False, gt_acc=False, 1; x1 & x2 & x3 & !x4; cycle{x2 & !x4}
-trace#5, cand_acc=True, gt_acc=True, !x1 | !x2 | !x3 | x4; cycle{!x1 | !x2 | !x3 | x4}
-trace#6, cand_acc=True, gt_acc=True, cycle{!x1 | !x2 | !x3 | x4}
-trace#7, cand_acc=True, gt_acc=True, cycle{!x1 | !x2 | !x3}
-trace#8, cand_acc=None, gt_acc=None, x1 & x2 & x3 & x4; cycle{1}
+trace#3, cand_acc=True, gt_acc=True, !x1 | !x2 | !x3 | x4; cycle{!x1 | !x2 | !x3 | x4}
+trace#4, cand_acc=True, gt_acc=True, cycle{!x1 | !x2 | !x3 | x4}
+trace#5, cand_acc=True, gt_acc=True, cycle{x4 | (!x1 & !x2 & !x3)}
+trace#6, cand_acc=False, gt_acc=False, 1; x1 & x2 & x3 & !x4; cycle{x2 & !x4}
+trace#7, cand_acc=True, gt_acc=True, cycle{(x1 & x2 & x3 & x4) | (!x2 & !x4)}
+trace#8, cand_acc=True, gt_acc=True, cycle{!x1 | !x2 | !x3}
 trace#9, cand_acc=None, gt_acc=None, !x1 & x2 & x3 & !x4; cycle{x2 & !x4}
 trace#10, cand_acc=None, gt_acc=None, x1 & !x2 & x3 & !x4; cycle{1}
 trace#11, cand_acc=None, gt_acc=None, x1 & x2 & !x3 & !x4; cycle{x2 & !x4}
-trace#12, cand_acc=False, gt_acc=False, cycle{x1 & x2 & x3 & !x4; !x2 & !x4}
-trace#13, cand_acc=True, gt_acc=True, cycle{x4}
-trace#14, cand_acc=True, gt_acc=True, x1 & x2 & x3 & x4; cycle{x2 & x4}
-trace#15, cand_acc=False, gt_acc=False, x1 & x2 & x3 & !x4; cycle{x2 & !x4}
-trace#16, cand_acc=None, gt_acc=None, !x1 | !x2 | !x3 | x4; cycle{1}
-trace#17, cand_acc=None, gt_acc=None, (!x1 & x4) | (!x2 & x4) | (!x3 & x4); cycle{1}
-trace#18, cand_acc=False, gt_acc=False, x1 & x2 & x3 & !x4; cycle{!x4}
-trace#19, cand_acc=None, gt_acc=None, !x1 | !x2 | !x3; cycle{1}
-trace#20, cand_acc=True, gt_acc=True, cycle{x1 & x2 & x3 & x4}
-trace#21, cand_acc=None, gt_acc=None, x1 & !x2 & x3 & !x4; x2; cycle{1}
-trace#22, cand_acc=None, gt_acc=None, x1 & x2 & !x4; !x2 & x3 & !x4; cycle{1}
-trace#23, cand_acc=None, gt_acc=None, x2 & x3 & !x4; x1 & !x2 & !x4; cycle{1}
+trace#12, cand_acc=None, gt_acc=None, x1 & x2 & x3 & x4; cycle{1}
+trace#13, cand_acc=None, gt_acc=None, x1 & !x2 & x3 & !x4; x2; cycle{1}
+trace#14, cand_acc=None, gt_acc=None, x1 & x2 & !x4; !x2 & x3 & !x4; cycle{1}
+trace#15, cand_acc=None, gt_acc=None, x2 & x3 & !x4; x1 & !x2 & !x4; cycle{1}
+trace#16, cand_acc=False, gt_acc=False, cycle{x1 & x2 & x3 & !x4; !x2 & !x4}
+trace#17, cand_acc=True, gt_acc=True, cycle{x4}
+trace#18, cand_acc=None, gt_acc=None, !x1 | !x2 | !x3; cycle{1}
+trace#19, cand_acc=None, gt_acc=None, !x1 | !x2 | !x3 | x4; cycle{1}
+trace#20, cand_acc=False, gt_acc=False, x1 & x2 & x3 & !x4; cycle{!x4}
+trace#21, cand_acc=True, gt_acc=True, x1 & x2 & x3 & x4; cycle{x2 & x4}
+trace#22, cand_acc=False, gt_acc=False, x1 & x2 & x3 & !x4; cycle{x2 & !x4}
+trace#23, cand_acc=True, gt_acc=True, !x1 & x2 & x3 & x4; cycle{!x1 & x3}
 trace#24, cand_acc=None, gt_acc=None, !x2 & !x4; x1 & x2 & x3; cycle{1}
-trace#25, cand_acc=False, gt_acc=False, x1 & x2 & x3 & !x4; cycle{x1 & x2 & x3 & !x4}
-trace#26, cand_acc=True, gt_acc=True, !x1 & x2 & x3 & x4; cycle{!x1 & x3}
-trace#27, cand_acc=False, gt_acc=False, cycle{x1 & x2 & x3 & !x4}
-trace#28, cand_acc=None, gt_acc=None, x1 & x2 & x3 & !x4; cycle{1}
-trace#29, cand_acc=None, gt_acc=None, !x2 & !x4; cycle{1}
-trace#30, cand_acc=None, gt_acc=None, x1 & x2 & x3; cycle{x2 & !x4}
-trace#31, cand_acc=None, gt_acc=None, cycle{x1 & x2 & x3}
-trace#32, cand_acc=None, gt_acc=None, 1; cycle{!x1 | !x2 | !x3 | x4}
-trace#33, cand_acc=None, gt_acc=None, cycle{1}
-trace#34, cand_acc=None, gt_acc=None, 1; !x1 | !x2 | !x3 | x4; cycle{1}
-trace#35, cand_acc=None, gt_acc=None, cycle{x4 | (x1 & x2 & x3)}
-trace#36, cand_acc=None, gt_acc=None, cycle{x1 | !x2 | !x3 | !x4}
-trace#37, cand_acc=False, gt_acc=False, x1 & x2 & x3 & !x4; cycle{x1 & x2 & !x4}
-trace#38, cand_acc=False, gt_acc=False, x1 & x2 & x3 & !x4; cycle{x2 & x3 & !x4}
-trace#39, cand_acc=None, gt_acc=None, cycle{!x1 | !x2 | !x3 | !x4}
-trace#40, cand_acc=None, gt_acc=None, cycle{!x1 | !x2 | x3 | x4}
-trace#41, cand_acc=None, gt_acc=None, cycle{!x1 | x2 | !x3 | x4}
-trace#42, cand_acc=None, gt_acc=None, cycle{x1 | !x2 | !x3 | x4}
+trace#25, cand_acc=None, gt_acc=None, !x2 & !x4; cycle{1}
+trace#26, cand_acc=False, gt_acc=False, x1 & x2 & x3 & !x4; cycle{x1 & x2 & x3 & !x4}
+trace#27, cand_acc=None, gt_acc=None, x1 & x2 & x3; cycle{x2 & !x4}
+trace#28, cand_acc=False, gt_acc=False, cycle{x1 & x2 & x3 & !x4}
+trace#29, cand_acc=None, gt_acc=None, cycle{x1 & x2 & x3}
+trace#30, cand_acc=None, gt_acc=None, cycle{x1 | !x2 | !x3 | !x4}
+trace#31, cand_acc=None, gt_acc=None, 1; cycle{!x1 | !x2 | !x3 | x4}
+trace#32, cand_acc=False, gt_acc=False, x1 & x2 & x3 & !x4; cycle{x1 & x2 & !x4}
+trace#33, cand_acc=False, gt_acc=False, x1 & x2 & x3 & !x4; cycle{x2 & x3 & !x4}
 
 Candidate = G(F(x1) -> G(x1))
 GT = F(G(x1))
-trace#0, cand_acc=False, gt_acc=True, !x1; cycle{x1}
+trace#0, cand_acc=False, gt_acc=None, 1; x1; !x1; cycle{1}
 
 Candidate = G(x1 -> F(x2)) -> G(F(x1) -> G(F(x2)))
 GT = G(F(x1)) -> G(F(x2))
-trace#0, cand_acc=None, gt_acc=None, !x1 | x2; cycle{1}
-trace#1, cand_acc=True, gt_acc=True, !x1 & x2; cycle{!x1}
-trace#2, cand_acc=None, gt_acc=True, x1 & x2; cycle{!x1 | x2}
+trace#0, cand_acc=False, gt_acc=True, 1; x1 & x2; !x1 & !x2; cycle{!x1 & !x2}
 
 Candidate = G(x1 -> F(x2))
 GT = G (x1 -> X(x2))
 trace#0, cand_acc=False, gt_acc=False, 1; x1 & !x2; cycle{!x2}
 trace#1, cand_acc=None, gt_acc=None, x1 & x2; cycle{1}
-trace#2, cand_acc=True, gt_acc=None, !x1 | x2; cycle{!x1 | x2}
+trace#2, cand_acc=True, gt_acc=None, cycle{!x1 | x2}
 
 Candidate = G(x1 -> (x1 & X(x1 & X(!x1))))
 GT = x1 -> (X(x1) & X(X(x1)) & X(X(X(!x1))))
-trace#0, cand_acc=False, gt_acc=None, 1; x1; cycle{1}
+trace#0, cand_acc=True, gt_acc=True, cycle{!x1}
+trace#1, cand_acc=True, gt_acc=True, !x1; cycle{!x1}
+trace#2, cand_acc=False, gt_acc=None, 1; x1; cycle{1}
 
 Candidate = G(x1 U !x1) & F(!x1 U x1)
 GT = G((x1 U !x1) & (F(!x1 U x1)) )
-trace#0, cand_acc=False, gt_acc=False, !x1; cycle{!x1}
-trace#1, cand_acc=None, gt_acc=None, !x1; cycle{1}
-trace#2, cand_acc=None, gt_acc=False, 1; !x1; cycle{!x1}
+trace#0, cand_acc=True, gt_acc=False, x1; cycle{!x1}
 
 Candidate = G((x1 | x2) & (x1 U x2) & (x2 U x1))
 GT = G(x1 | x2) & x1 U x2 & x2 U x1
 trace#0, cand_acc=False, gt_acc=False, 1; !x1 & !x2; cycle{1}
 trace#1, cand_acc=None, gt_acc=None, x1 & x2; cycle{1}
-trace#2, cand_acc=False, gt_acc=False, !x1 & !x2; cycle{1}
-trace#3, cand_acc=False, gt_acc=False, cycle{!x1 & !x2}
-trace#4, cand_acc=False, gt_acc=False, !x1 & !x2; cycle{!x1 & !x2}
-trace#5, cand_acc=None, gt_acc=None, !x1; cycle{1}
-trace#6, cand_acc=None, gt_acc=None, 1; cycle{!x1 & x2; x1 & !x2}
-trace#7, cand_acc=None, gt_acc=None, !x2; cycle{1}
-trace#8, cand_acc=None, gt_acc=None, 1; x1 & x2; cycle{1}
-trace#9, cand_acc=None, gt_acc=None, cycle{1}
-trace#10, cand_acc=None, gt_acc=None, !x1 | x2; cycle{1}
-trace#11, cand_acc=None, gt_acc=None, x1 | !x2; cycle{1}
-trace#12, cand_acc=True, gt_acc=True, x1; cycle{x1 & x2}
-trace#13, cand_acc=True, gt_acc=True, x2; cycle{x1 & x2}
-trace#14, cand_acc=None, gt_acc=None, cycle{x1}
-trace#15, cand_acc=None, gt_acc=None, cycle{x2}
+trace#2, cand_acc=False, gt_acc=None, 1; x1 & !x2; cycle{x1 & !x2}
 
 Candidate = G((x1 -> X(x2 | x3)) & (x1 -> G(!(x2 | x3))))
 GT = G(x1 -> X(x2 | X3)) & G(x1-> (!x2 & !x3))
@@ -1052,40 +974,21 @@ trace#0, cand_acc=False, gt_acc=None, x1; cycle{1}
 
 Candidate = F(x2 -> (!x2 U (x1 & x3)))
 GT = F(x2) -> !x2 U (x1 & x3)
-trace#0, cand_acc=None, gt_acc=False, !x1 | !x3; cycle{(!x1 & x2) | (x2 & !x3)}
+trace#0, cand_acc=True, gt_acc=None, !x2 | (x1 & x3); cycle{1}
 
 Candidate = G(x1) & (x2 U x1) & F(G(x2))
 GT = G(x1 & (G(x2) U x1) & F(x2))
 trace#0, cand_acc=False, gt_acc=False, 1; !x1; cycle{1}
 trace#1, cand_acc=False, gt_acc=False, !x1; cycle{1}
-trace#2, cand_acc=False, gt_acc=False, cycle{!x1}
-trace#3, cand_acc=None, gt_acc=None, x1 & !x2; cycle{x1}
-trace#4, cand_acc=None, gt_acc=None, 1; x1 & x2; cycle{x1 & x2}
-trace#5, cand_acc=True, gt_acc=True, x1 & x2; cycle{x1 & x2}
-trace#6, cand_acc=None, gt_acc=None, !x2; cycle{1}
-trace#7, cand_acc=None, gt_acc=None, !x1 | !x2; cycle{1}
-trace#8, cand_acc=None, gt_acc=None, cycle{1}
+trace#2, cand_acc=None, gt_acc=None, x1 & !x2; cycle{x1}
+trace#3, cand_acc=True, gt_acc=True, x1 & x2; cycle{x1 & x2}
+trace#4, cand_acc=False, gt_acc=False, cycle{!x1}
+trace#5, cand_acc=None, gt_acc=None, !x2; cycle{1}
+trace#6, cand_acc=None, gt_acc=None, !x1 | !x2; cycle{1}
 
 Candidate = G(x1 & !x2 & F(x3))
 GT = G(x1& !x2) & F(x3)
-trace#0, cand_acc=False, gt_acc=False, 1; !x1 | x2; cycle{1}
-trace#1, cand_acc=False, gt_acc=False, !x1 | x2; cycle{1}
-trace#2, cand_acc=None, gt_acc=None, !x2; cycle{x1 & !x2 & x3}
-trace#3, cand_acc=None, gt_acc=None, x1; cycle{x1 & !x2 & x3}
-trace#4, cand_acc=False, gt_acc=False, cycle{!x1 & !x2 & x3; x1 & !x2 & !x3}
-trace#5, cand_acc=False, gt_acc=False, cycle{x1 & x2 & x3; x1 & !x2 & !x3}
-trace#6, cand_acc=None, gt_acc=None, x1 & !x2 & x3; cycle{1}
-trace#7, cand_acc=True, gt_acc=True, x1 & !x2 & x3; cycle{x1 & !x2 & x3}
-trace#8, cand_acc=False, gt_acc=False, cycle{!x1 | x2}
-trace#9, cand_acc=True, gt_acc=True, cycle{x1 & !x2 & x3}
-trace#10, cand_acc=False, gt_acc=False, !x3; cycle{!x3}
-trace#11, cand_acc=False, gt_acc=False, cycle{(!x1 & x3) | (x2 & x3); x1 & !x2 & !x3}
-trace#12, cand_acc=None, gt_acc=None, !x2 | x3; cycle{1}
-trace#13, cand_acc=None, gt_acc=None, !x1 | x2 | !x3; cycle{1}
-trace#14, cand_acc=None, gt_acc=None, 1; cycle{x1 & !x2 & x3}
-trace#15, cand_acc=None, gt_acc=None, 1; x1 & !x2 & x3; cycle{1}
-trace#16, cand_acc=None, gt_acc=None, !x1 | x2 | x3; cycle{1}
-trace#17, cand_acc=None, gt_acc=None, x1 | x2; cycle{1}
+trace#0, cand_acc=False, gt_acc=None, 1; x1 & !x2 & !x3; cycle{!x3}
 
 Candidate = G(F(x1 -> F(G(x1))))
 GT = G(F(x1)) -> F(G(x1))
@@ -1097,12 +1000,12 @@ GT = x1 & !x2 -> F(!x1 U x2 )
 trace#0, cand_acc=True, gt_acc=True, !x1 | x2; cycle{!x1 | x2}
 trace#1, cand_acc=True, gt_acc=True, cycle{!x1 | x2}
 trace#2, cand_acc=True, gt_acc=True, 1; cycle{x2}
-trace#3, cand_acc=False, gt_acc=None, 1; x1 & !x2; cycle{!x2}
+trace#3, cand_acc=True, gt_acc=True, !x1 & x2; cycle{!x1}
+trace#4, cand_acc=False, gt_acc=None, 1; x1 & !x2; cycle{!x2}
 
 Candidate = (F(x1 & x2)) -> (G((x1 -> x2) & (x2 -> x1)))
 GT = (F(x1) & F(x2)) -> G(x1 -> x2 & x2 -> x1)
-trace#0, cand_acc=True, gt_acc=True, (x1 & x2) | (!x1 & !x2); cycle{(x1 & x2) | (!x1 & !x2)}
-trace#1, cand_acc=False, gt_acc=True, x1 & x2; cycle{(!x1 & x2) | (x1 & !x2)}
+trace#0, cand_acc=False, gt_acc=True, (!x1 & x2) | (x1 & !x2); x1 & x2; cycle{x1}
 
 Candidate = !(G(x1) U G(!x1))
 GT = !(G(x1)) U G(!x1)
@@ -1110,16 +1013,17 @@ trace#0, cand_acc=False, gt_acc=True, cycle{!x1}
 
 Candidate = F(x1 -> G(x1 U !x1))
 GT = F(x1) -> G(x1 U !x1)
-trace#0, cand_acc=None, gt_acc=False, 1; cycle{x1}
+trace#0, cand_acc=True, gt_acc=None, !x1; cycle{1}
 
 Candidate = G(F(x2 U X(x1)))
 GT = G(F(x2) U X(x1))
 trace#0, cand_acc=None, gt_acc=None, cycle{!x2; !x1}
 trace#1, cand_acc=False, gt_acc=False, !x1; cycle{!x1}
-trace#2, cand_acc=True, gt_acc=True, cycle{x1}
-trace#3, cand_acc=None, gt_acc=None, cycle{x2}
+trace#2, cand_acc=False, gt_acc=False, 1; 1; cycle{!x1}
+trace#3, cand_acc=True, gt_acc=True, cycle{x1}
 trace#4, cand_acc=None, gt_acc=None, !x2; cycle{!x2}
-trace#5, cand_acc=True, gt_acc=True, x1; cycle{x1}
+trace#5, cand_acc=None, gt_acc=None, cycle{x2}
+trace#6, cand_acc=True, gt_acc=True, x1; cycle{x1}
 
 Candidate = G(x3) & F(x2) | (x3 U x1)
 GT = x3 U ((x1 | G(x3)) & F(x2))
@@ -1127,41 +1031,31 @@ trace#0, cand_acc=False, gt_acc=False, !x1 & !x2 & !x3; !x3; cycle{1}
 trace#1, cand_acc=False, gt_acc=False, !x1 & !x3; cycle{1}
 trace#2, cand_acc=False, gt_acc=False, !x1 & !x3; cycle{!x1}
 trace#3, cand_acc=False, gt_acc=False, !x1 & !x3; cycle{!x3}
-trace#4, cand_acc=None, gt_acc=None, x1 | x2; cycle{1}
-trace#5, cand_acc=False, gt_acc=False, cycle{!x1 & !x3}
-trace#6, cand_acc=None, gt_acc=None, !x3; !x1; cycle{1}
-trace#7, cand_acc=None, gt_acc=None, !x3; x1; cycle{1}
-trace#8, cand_acc=None, gt_acc=None, !x1 & !x2; cycle{1}
-trace#9, cand_acc=None, gt_acc=None, x2; cycle{1}
-trace#10, cand_acc=None, gt_acc=None, !x1; cycle{1}
-trace#11, cand_acc=None, gt_acc=None, x1 | (x2 & !x3); cycle{1}
-trace#12, cand_acc=None, gt_acc=None, x3; cycle{1}
-trace#13, cand_acc=None, gt_acc=None, 1; !x1 & !x3; cycle{1}
-trace#14, cand_acc=None, gt_acc=None, 1; x1; cycle{1}
+trace#4, cand_acc=False, gt_acc=False, cycle{!x1 & !x3}
+trace#5, cand_acc=None, gt_acc=None, x1 | x2; cycle{1}
+trace#6, cand_acc=True, gt_acc=None, x1; cycle{1}
 
 Candidate = G(x1 -> X(x1))
 GT = x1 -> X(x1)
-trace#0, cand_acc=False, gt_acc=False, x1; cycle{!x1}
-trace#1, cand_acc=True, gt_acc=True, !x1; cycle{!x1}
-trace#2, cand_acc=False, gt_acc=True, cycle{!x1; x1}
+trace#0, cand_acc=True, gt_acc=True, 1; cycle{x1}
+trace#1, cand_acc=False, gt_acc=True, 1; x1; !x1; cycle{1}
 
 Candidate = G(x1 -> (G(!x2) & (!x1 U x1)))
 GT = (x1 -> G(!x2 & F(!x1 U x1)))
-trace#0, cand_acc=False, gt_acc=None, 1; x1 & x2; cycle{1}
+trace#0, cand_acc=True, gt_acc=True, cycle{!x1}
+trace#1, cand_acc=True, gt_acc=None, cycle{!x2}
 
 Candidate = F(x1 <-> (X(!x2) | G(x2)))
 GT = F((x1 <-> X(!x2)) | G(x2))
 trace#0, cand_acc=False, gt_acc=False, !x1; cycle{!x1 & !x2}
 trace#1, cand_acc=None, gt_acc=None, !x1; !x1; cycle{!x1 & !x2}
 trace#2, cand_acc=None, gt_acc=None, !x2; !x1 & x2; cycle{1}
-trace#3, cand_acc=True, gt_acc=True, cycle{x1 & !x2}
-trace#4, cand_acc=True, gt_acc=True, x1 & x2; cycle{x2}
-trace#5, cand_acc=None, gt_acc=None, x1; cycle{1}
-trace#6, cand_acc=None, gt_acc=None, 1; cycle{!x1 & !x2}
+trace#3, cand_acc=None, gt_acc=None, !x2; cycle{!x1 & !x2}
+trace#4, cand_acc=None, gt_acc=None, 1; cycle{!x1 & !x2}
+trace#5, cand_acc=True, gt_acc=True, x1 & x2; cycle{x2}
+trace#6, cand_acc=None, gt_acc=None, x1; cycle{1}
 trace#7, cand_acc=None, gt_acc=None, cycle{!x1}
-trace#8, cand_acc=None, gt_acc=None, !x2; cycle{!x1 & !x2}
-trace#9, cand_acc=None, gt_acc=None, 1; !x1; cycle{!x1 & !x2}
-trace#10, cand_acc=None, gt_acc=None, !x1 & !x2; cycle{1}
+trace#8, cand_acc=True, gt_acc=True, cycle{x1 & !x2}
 
 Candidate = G(x1 U x2)
 GT = F(G(x1 U x2))
@@ -1169,46 +1063,35 @@ trace#0, cand_acc=False, gt_acc=None, 1; !x1 & !x2; cycle{1}
 
 Candidate = G((x1 & x2) -> (X(x3) & X(X(!x3))))
 GT = (x1 & x2) -> (X(x3) & X(X(!x3)))
-trace#0, cand_acc=True, gt_acc=True, !x1 | !x2; cycle{!x1 | !x2}
-trace#1, cand_acc=True, gt_acc=True, cycle{!x1 | !x2}
-trace#2, cand_acc=True, gt_acc=True, cycle{!x2}
-trace#3, cand_acc=False, gt_acc=False, x1 & x2; cycle{!x3}
-trace#4, cand_acc=False, gt_acc=False, x1 & x2 & !x3; cycle{x1 & x2 & !x3}
-trace#5, cand_acc=None, gt_acc=None, cycle{!x2 | !x3}
-trace#6, cand_acc=None, gt_acc=None, 1; x1 & x2 & !x3; cycle{1}
-trace#7, cand_acc=None, gt_acc=None, 1; cycle{!x1 | !x2}
-trace#8, cand_acc=None, gt_acc=None, 1; !x1 | !x2; cycle{1}
-trace#9, cand_acc=None, gt_acc=True, !x1 | !x2; cycle{1}
+trace#0, cand_acc=False, gt_acc=None, x1 & x2; !x3 | (x1 & x2); cycle{1}
 
 Candidate = G(x1 -> (X(x1) & (X(x1) -> X(X(x1)))))
 GT = (x1 -> X(x1)) & (X(x1) -> X(X(x1)))
-trace#0, cand_acc=False, gt_acc=False, cycle{!x1; x1}
-trace#1, cand_acc=True, gt_acc=True, !x1; cycle{!x1}
-trace#2, cand_acc=True, gt_acc=True, cycle{!x1}
-trace#3, cand_acc=False, gt_acc=False, x1; cycle{!x1}
-trace#4, cand_acc=None, gt_acc=None, x1; 1; cycle{x1}
-trace#5, cand_acc=None, gt_acc=None, x1; x1; cycle{1}
-trace#6, cand_acc=None, gt_acc=None, x1; cycle{1}
-trace#7, cand_acc=None, gt_acc=None, 1; !x1; cycle{1}
+trace#0, cand_acc=False, gt_acc=False, x1; !x1; cycle{1}
+trace#1, cand_acc=False, gt_acc=False, 1; x1; !x1; cycle{1}
+trace#2, cand_acc=False, gt_acc=False, cycle{!x1; x1}
+trace#3, cand_acc=True, gt_acc=True, 1; cycle{x1}
+trace#4, cand_acc=True, gt_acc=True, !x1; cycle{!x1}
+trace#5, cand_acc=False, gt_acc=False, x1; cycle{!x1}
+trace#6, cand_acc=True, gt_acc=True, cycle{!x1}
+trace#7, cand_acc=None, gt_acc=None, x1; cycle{1}
+trace#8, cand_acc=None, gt_acc=None, x1; 1; cycle{x1}
 
 Candidate = G(x1 -> F(x2 U !x1))
 GT = x1 -> F(x2 U !x1)
 trace#0, cand_acc=True, gt_acc=True, cycle{!x1}
 trace#1, cand_acc=True, gt_acc=True, !x1; cycle{!x1}
-trace#2, cand_acc=None, gt_acc=None, x1 & !x2; cycle{1}
-trace#3, cand_acc=None, gt_acc=None, x2; cycle{x2}
-trace#4, cand_acc=False, gt_acc=False, cycle{x1}
-trace#5, cand_acc=False, gt_acc=False, x1; cycle{x1}
-trace#6, cand_acc=True, gt_acc=True, x1 & x2; cycle{!x1}
-trace#7, cand_acc=None, gt_acc=None, cycle{!x2}
-trace#8, cand_acc=None, gt_acc=True, !x1; cycle{1}
+trace#2, cand_acc=None, gt_acc=None, x2; cycle{x2}
+trace#3, cand_acc=True, gt_acc=True, x1 & x2; cycle{!x1}
+trace#4, cand_acc=False, gt_acc=False, x1; cycle{x1}
+trace#5, cand_acc=False, gt_acc=False, cycle{x1}
+trace#6, cand_acc=None, gt_acc=True, !x1; cycle{1}
 
 Candidate = G(X(X(X(x1))) -> F((!x2) & x3))
 GT = X(X(X(x1))) -> (F(!x2) & x3)
-trace#0, cand_acc=True, gt_acc=True, cycle{!x2 & x3}
-trace#1, cand_acc=True, gt_acc=True, !x2 & x3; cycle{!x2 & x3}
-trace#2, cand_acc=None, gt_acc=None, x2 | !x3; cycle{x2 | !x3}
-trace#3, cand_acc=False, gt_acc=None, (x1 & x2) | (x1 & !x3); cycle{(x1 & x2) | (x1 & !x3)}
+trace#0, cand_acc=True, gt_acc=True, !x2 & x3; cycle{!x2 & x3}
+trace#1, cand_acc=True, gt_acc=True, cycle{!x2 & x3}
+trace#2, cand_acc=False, gt_acc=None, (x1 & x2) | (x1 & !x3); cycle{(x1 & x2) | (x1 & !x3)}
 
 Candidate = G(x1 U !x2) & G(!x1 & !x2)
 GT = G(x1 U x2) & G(!(x1 & x2))
@@ -1216,8 +1099,8 @@ trace#0, cand_acc=False, gt_acc=None, 1; x1 | x2; cycle{1}
 
 Candidate = G((F(x1) -> X(!x1)) & (x2 -> !x2))
 GT = G(F(x1 -> X(!x1)) & x2 -> !x2)
-trace#0, cand_acc=True, gt_acc=True, !x1 & !x2; cycle{!x1 & !x2}
-trace#1, cand_acc=False, gt_acc=None, 1; x1 | x2; cycle{1}
+trace#0, cand_acc=True, gt_acc=True, !x2; cycle{!x1 & !x2}
+trace#1, cand_acc=False, gt_acc=None, 1; x2; cycle{1}
 
 Candidate = G(!x1 -> G(x1 | F(x2)))
 GT = G(!x1) -> (G(x1) | F(x2))
@@ -1225,33 +1108,31 @@ trace#0, cand_acc=False, gt_acc=None, 1; !x1 & !x2; cycle{!x2}
 
 Candidate = (F(x1 & x2 & x3) -> x4) & (!F(x1 & x2 & x3) -> !x4)
 GT = ((F(x1) & F(x2) & F(x3)) -> x4) & (!F(x1) | !F(x2) | !F(x3) -> !x4)
-trace#0, cand_acc=True, gt_acc=True, x1 & x2 & x3 & x4; cycle{x4}
-trace#1, cand_acc=False, gt_acc=False, cycle{x1 & x2 & x3 & !x4}
-trace#2, cand_acc=False, gt_acc=False, x1 & x2 & x3 & !x4; cycle{1}
-trace#3, cand_acc=None, gt_acc=None, (!x1 & !x4) | (x1 & x2 & x3 & x4) | (!x2 & !x4) | (!x3 & !x4); cycle{1}
-trace#4, cand_acc=True, gt_acc=True, x1 & x2 & x3 & x4; cycle{1}
-trace#5, cand_acc=None, gt_acc=None, cycle{!x1 | !x2 | !x3}
-trace#6, cand_acc=None, gt_acc=None, (!x1 & !x4) | (!x2 & !x4) | (!x3 & !x4); cycle{1}
-trace#7, cand_acc=None, gt_acc=None, !x1 & x2 & x3 & x4; cycle{1}
-trace#8, cand_acc=None, gt_acc=None, x1 & x2 & x3; cycle{1}
-trace#9, cand_acc=None, gt_acc=None, !x4; cycle{1}
-trace#10, cand_acc=None, gt_acc=None, x4 | (x1 & x2 & x3); cycle{1}
-trace#11, cand_acc=None, gt_acc=None, 1; x1 & x2 & x3 & !x4; cycle{1}
-trace#12, cand_acc=None, gt_acc=None, 1; x1 & x2 & x3 & x4; cycle{1}
-trace#13, cand_acc=None, gt_acc=None, !x1 & x2 & x3 & !x4; cycle{1}
-trace#14, cand_acc=None, gt_acc=None, (!x1 & x4) | (!x2 & x4) | (!x3 & x4); cycle{1}
-trace#15, cand_acc=None, gt_acc=None, x1 & !x2 & x3 & !x4; cycle{1}
-trace#16, cand_acc=None, gt_acc=None, x1 & x2 & !x3 & !x4; cycle{1}
+trace#0, cand_acc=False, gt_acc=False, cycle{x1 & x2 & x3 & !x4}
+trace#1, cand_acc=False, gt_acc=False, x1 & x2 & x3 & !x4; cycle{1}
+trace#2, cand_acc=True, gt_acc=True, x1 & x2 & x3 & x4; cycle{x4}
+trace#3, cand_acc=True, gt_acc=True, x1 & x2 & x3 & x4; cycle{1}
+trace#4, cand_acc=None, gt_acc=None, !x1 & x2 & x3 & x4; cycle{1}
+trace#5, cand_acc=None, gt_acc=None, x1 & x2 & x3; cycle{1}
+trace#6, cand_acc=None, gt_acc=None, cycle{!x1 | !x2 | !x3}
+trace#7, cand_acc=None, gt_acc=None, !x4; cycle{1}
+trace#8, cand_acc=None, gt_acc=None, x4 | (x1 & x2 & x3); cycle{1}
+trace#9, cand_acc=None, gt_acc=None, !x1 & x2 & x3 & !x4; cycle{1}
+trace#10, cand_acc=None, gt_acc=None, x1 & !x2 & x3 & !x4; cycle{1}
+trace#11, cand_acc=None, gt_acc=None, x1 & x2 & !x3 & !x4; cycle{1}
 
 Candidate = G((x1 & !x2 & (x1 -> !x2)) -> G(!x2))
 GT = G(x1 & !x2)
-trace#0, cand_acc=False, gt_acc=False, cycle{x2; x1 & !x2}
-trace#1, cand_acc=False, gt_acc=False, x1 & !x2; cycle{x2}
-trace#2, cand_acc=True, gt_acc=False, cycle{!x1 | x2}
+trace#0, cand_acc=False, gt_acc=False, 1; x1 & !x2; x2; cycle{1}
+trace#1, cand_acc=False, gt_acc=False, x1 & !x2; x2; cycle{1}
+trace#2, cand_acc=False, gt_acc=False, x1 & !x2; !x1 & x2; cycle{!x1 | !x2}
+trace#3, cand_acc=False, gt_acc=False, x1 & !x2; x1 & x2; cycle{x1}
+trace#4, cand_acc=False, gt_acc=False, cycle{x2; x1 & !x2}
+trace#5, cand_acc=True, gt_acc=False, cycle{!x1 | x2}
 
 Candidate = G((x1 -> F(!x1)) & (!x1 -> F(x1)))
 GT = x1 -> F(!x1) & !x1 -> F(x1)
-trace#0, cand_acc=False, gt_acc=True, x1; cycle{x1}
+trace#0, cand_acc=False, gt_acc=True, 1; x1; cycle{x1}
 
 Candidate = G(x1 <-> (x2 U (x1 U x3)))
 GT = (x1 <-> x2) U (x1 U x3)
@@ -1259,17 +1140,8 @@ trace#0, cand_acc=False, gt_acc=None, 1; !x1 & x3; cycle{1}
 
 Candidate = G(x1 -> (X(!x1) & F(x2)))
 GT = x1 -> X(!x1) & F(x2)
-trace#0, cand_acc=True, gt_acc=True, !x1; cycle{!x1}
-trace#1, cand_acc=False, gt_acc=False, x1 & !x2; cycle{!x2}
-trace#2, cand_acc=True, gt_acc=True, cycle{!x1}
-trace#3, cand_acc=False, gt_acc=False, x1; cycle{x1}
-trace#4, cand_acc=False, gt_acc=False, x1 & !x2; cycle{x1 & !x2}
-trace#5, cand_acc=False, gt_acc=False, cycle{x1}
-trace#6, cand_acc=True, gt_acc=True, x1 & x2; cycle{!x1}
-trace#7, cand_acc=None, gt_acc=None, cycle{!x2}
-trace#8, cand_acc=None, gt_acc=None, x1; !x1; cycle{1}
-trace#9, cand_acc=None, gt_acc=None, x1 & x2; cycle{1}
-trace#10, cand_acc=None, gt_acc=True, !x1; cycle{1}
+trace#0, cand_acc=False, gt_acc=False, x1; x1; cycle{1}
+trace#1, cand_acc=False, gt_acc=None, 1; x1; x1; cycle{1}
 
 Candidate = G(x1 -> X(X(X(x1))))
 GT = X(X(F(X(x1))))
@@ -1279,7 +1151,6 @@ Candidate = G(x1 -> X(X(X(x1))))
 GT = x1 -> X(X(X(x1)))
 trace#0, cand_acc=True, gt_acc=True, !x1; cycle{!x1}
 trace#1, cand_acc=True, gt_acc=True, cycle{!x1}
-trace#2, cand_acc=None, gt_acc=None, 1; !x1; cycle{1}
 
 Candidate = G((call_Enqueue_d1 & !return_Dequeue_d1 U call_Enqueue_d2) & !return_Dequeue_d2 U call_Top_Down -> (call_Enqueue_d1 & !return_Dequeue_d1 U call_Enqueue_d2) & !return_Dequeue_d2 U (call_Top_Down & F(call_P_d1 & !call_P_d2 U (call_P_d1 & F(call_P_d2)))))
 GT = G ((call_Enqueue_d1 & (!return_Dequeue_d1 U (call_Enqueue_d2 & (!return_Dequeue_d1 & !return_Dequeue_d2 U call_Top_Down)))) -> F (call_Top_Down & F (call_P_d1 & F call_P_d2)))
@@ -1288,31 +1159,29 @@ trace#1, cand_acc=True, gt_acc=None, cycle{!call_Enqueue_d1 | (call_Enqueue_d2 &
 
 Candidate = G((call_Enqueue & X((!return_Dequeue) U call_Empty)) -> X((!return_Dequeue) U return_Empty_false))
 GT = G (call_Enqueue & (!return_Dequeue U call_Empty) -> F (call_Empty & F return_Empty_false))
-trace#0, cand_acc=False, gt_acc=False, call_Empty & call_Enqueue & !return_Empty_false; cycle{call_Empty & call_Enqueue & !return_Empty_false}
-trace#1, cand_acc=False, gt_acc=False, call_Enqueue; cycle{call_Empty & call_Enqueue & !return_Dequeue & !return_Empty_false}
-trace#2, cand_acc=False, gt_acc=None, call_Enqueue; cycle{call_Empty & !return_Dequeue & !return_Empty_false}
+trace#0, cand_acc=False, gt_acc=None, 1; call_Enqueue; call_Empty & return_Dequeue & !return_Empty_false; cycle{1}
 
 Candidate = G((call_Enqueue_d1 & F(return_Empty_true)) -> (call_Enqueue_d1 U (return_Dequeue_d1 U return_Empty_true)))
 GT = G ((call_Enqueue_d1 & F return_Empty_true) -> (!return_Empty_true U return_Dequeue_d1))
-trace#0, cand_acc=True, gt_acc=True, cycle{!call_Enqueue_d1}
-trace#1, cand_acc=True, gt_acc=None, cycle{!call_Enqueue_d1 | return_Empty_true}
+trace#0, cand_acc=False, gt_acc=None, call_Enqueue_d1 & !return_Empty_true; !call_Enqueue_d1 & !return_Dequeue_d1 & !return_Empty_true; cycle{return_Empty_true}
 
 Candidate = G(call -> ((!open) U (atfloor & (!open) U (open | (atfloor & (!open) U open)))))
 GT = G ((call & F open) -> ((!atfloor & !open) U (open | ((atfloor & !open) U (open | ((!atfloor & !open) U (open | ((atfloor & !open) U (open | (!atfloor U open))))))))))
-trace#0, cand_acc=True, gt_acc=True, !call | (atfloor & open); cycle{!call | (atfloor & open)}
-trace#1, cand_acc=True, gt_acc=True, cycle{!call | (atfloor & open)}
-trace#2, cand_acc=True, gt_acc=True, cycle{(!atfloor & !call & open) | (atfloor & call & open)}
-trace#3, cand_acc=False, gt_acc=None, 1; !atfloor & call & open; cycle{1}
+trace#0, cand_acc=False, gt_acc=None, 1; !atfloor & call & open; cycle{1}
 
 Candidate = G((OpenNetworkConnection & X(NetworkError)) -> X(F(ErrorMessage)))
 GT = G (OpenNetworkConnection -> G (NetworkError -> F ErrorMessage))
-trace#0, cand_acc=True, gt_acc=True, !OpenNetworkConnection; cycle{!OpenNetworkConnection}
-trace#1, cand_acc=True, gt_acc=True, cycle{!OpenNetworkConnection}
-trace#2, cand_acc=None, gt_acc=False, 1; !ErrorMessage & NetworkError & OpenNetworkConnection; cycle{!ErrorMessage}
+trace#0, cand_acc=False, gt_acc=False, 1; OpenNetworkConnection; !ErrorMessage & NetworkError; cycle{!ErrorMessage}
+trace#1, cand_acc=False, gt_acc=False, OpenNetworkConnection; !ErrorMessage & NetworkError & OpenNetworkConnection; cycle{!ErrorMessage & OpenNetworkConnection}
+trace#2, cand_acc=False, gt_acc=False, OpenNetworkConnection; !ErrorMessage & NetworkError; cycle{!ErrorMessage}
+trace#3, cand_acc=True, gt_acc=True, !OpenNetworkConnection; cycle{!OpenNetworkConnection}
+trace#4, cand_acc=True, gt_acc=True, cycle{!OpenNetworkConnection}
+trace#5, cand_acc=None, gt_acc=None, !OpenNetworkConnection; cycle{!ErrorMessage}
+trace#6, cand_acc=None, gt_acc=False, 1; !ErrorMessage & NetworkError & OpenNetworkConnection; cycle{!ErrorMessage}
 
 Candidate = G(PopServerConnected -> (MessagesTransfered U PlacedinMailboxes))
 GT = G ((PopServerConnected & F PlacedinMailboxes) -> (!PlacedinMailboxes U MessagesTransfered))
-trace#0, cand_acc=False, gt_acc=None, 1; !MessagesTransfered & !PlacedinMailboxes & PopServerConnected; cycle{1}
+trace#0, cand_acc=False, gt_acc=None, 1; MessagesTransfered & !PlacedinMailboxes & PopServerConnected; cycle{MessagesTransfered & !PlacedinMailboxes}
 
 Candidate = G(SMTPServerConnected -> F(QueuedMailSent))
 GT = F QueuedMailSent -> (!QueuedMailSent U SMTPServerConnected)
@@ -1340,7 +1209,7 @@ trace#0, cand_acc=False, gt_acc=None, 1; !MarkasUnread & PlacedinMailboxes; cycl
 
 Candidate = G(POPServerMessageDelete -> PlacedinMailboxes U POPServerMessageDelete)
 GT = G (!POPServerMessageDelete) | F (POPServerMessageDelete & F PlacedinMailboxes)
-trace#0, cand_acc=True, gt_acc=None, cycle{POPServerMessageDelete | !PlacedinMailboxes}
+trace#0, cand_acc=True, gt_acc=None, !POPServerMessageDelete & !PlacedinMailboxes; cycle{1}
 
 Candidate = G(!call_Execute -> !call_doWork)
 GT = (F call_Execute) -> ((!call_doWork) U call_Execute)
@@ -1348,30 +1217,11 @@ trace#0, cand_acc=False, gt_acc=None, 1; !call_Execute & call_doWork; cycle{1}
 
 Candidate = G(return_Execute -> (!call_doWork U call_Execute))
 GT = G ((return_Execute & (F call_Execute)) -> ((!call_doWork) U call_Execute))
-trace#0, cand_acc=False, gt_acc=None, 1; !call_Execute & call_doWork & return_Execute; cycle{1}
+trace#0, cand_acc=False, gt_acc=True, 1; !call_Execute & !call_doWork & return_Execute; cycle{!call_Execute & !call_doWork}
 
 Candidate = G(call_doResults_i -> (!call_doResults_j U return_doResults_i))
 GT = G (call_doResults_i -> ((!call_doResults_j) U (return_doResults_i | G (!call_doResults_j))))
-trace#0, cand_acc=False, gt_acc=False, 1; call_doResults_i & call_doResults_j & !return_doResults_i; cycle{1}
-trace#1, cand_acc=True, gt_acc=True, cycle{!call_doResults_i | return_doResults_i}
-trace#2, cand_acc=True, gt_acc=True, cycle{(!call_doResults_i & call_doResults_j & !return_doResults_i) | (call_doResults_i & return_doResults_i)}
-trace#3, cand_acc=None, gt_acc=None, call_doResults_i & return_doResults_i; cycle{1}
-trace#4, cand_acc=True, gt_acc=True, !call_doResults_i | return_doResults_i; cycle{!call_doResults_i | return_doResults_i}
-trace#5, cand_acc=None, gt_acc=None, !call_doResults_i & call_doResults_j & return_doResults_i; cycle{1}
-trace#6, cand_acc=None, gt_acc=None, call_doResults_i & call_doResults_j; !return_doResults_i; cycle{1}
-trace#7, cand_acc=True, gt_acc=True, cycle{call_doResults_i & return_doResults_i}
-trace#8, cand_acc=None, gt_acc=None, call_doResults_i; cycle{!call_doResults_j & !return_doResults_i}
-trace#9, cand_acc=True, gt_acc=True, cycle{!call_doResults_i}
-trace#10, cand_acc=True, gt_acc=True, cycle{return_doResults_i}
-trace#11, cand_acc=None, gt_acc=None, !call_doResults_i & call_doResults_j & !return_doResults_i; cycle{1}
-trace#12, cand_acc=None, gt_acc=None, call_doResults_j & !return_doResults_i; call_doResults_i; cycle{1}
-trace#13, cand_acc=None, gt_acc=None, cycle{call_doResults_i}
-trace#14, cand_acc=None, gt_acc=None, call_doResults_i & call_doResults_j & return_doResults_i; cycle{1}
-trace#15, cand_acc=None, gt_acc=None, call_doResults_i & call_doResults_j; cycle{1}
-trace#16, cand_acc=False, gt_acc=False, call_doResults_i & call_doResults_j & !return_doResults_i; cycle{1}
-trace#17, cand_acc=None, gt_acc=None, call_doResults_j & !return_doResults_i; cycle{1}
-trace#18, cand_acc=None, gt_acc=None, (!call_doResults_i & return_doResults_i) | (call_doResults_i & call_doResults_j & !return_doResults_i); cycle{1}
-trace#19, cand_acc=False, gt_acc=None, call_doResults_i & !return_doResults_i; cycle{!return_doResults_i}
+trace#0, cand_acc=False, gt_acc=None, 1; call_doResults_i & !call_doResults_j & !return_doResults_i; cycle{!call_doResults_j & !return_doResults_i}
 
 Candidate = G((call_doResults_i -> (!call_doResults_j U return_doResults_i)) & (call_doResults_j -> (!call_doResults_i U return_doResults_i)))
 GT = G ((call_doResults_i & F return_doResults_i) -> ((!call_doResults_j) U return_doResults_i))
@@ -1379,7 +1229,7 @@ trace#0, cand_acc=False, gt_acc=None, 1; call_doResults_i & call_doResults_j & !
 
 Candidate = G((call_resultlock_signal_i & !return_resultlock_wait_i U call_resultlock_signal_i) -> (return_doResult_i -> F(return_resultlock_wait_i)))
 GT = G (call_doResult_i -> F return_doResult_i) -> G (return_resultlock_wait_i -> F call_resultlock_signal_i)
-trace#0, cand_acc=False, gt_acc=True, 1; call_resultlock_signal_i & return_doResult_i & !return_resultlock_wait_i; cycle{!return_resultlock_wait_i}
+trace#0, cand_acc=True, gt_acc=None, cycle{!call_resultlock_signal_i | return_resultlock_wait_i}
 
 Candidate = G(call_Execute -> F(return_Execute & (workCountEQzero | return_doWork_done_true_i)))
 GT = G (call_Execute -> ((!return_Execute) U (return_doWork_done_true_i |_| return_doResult_done_true_i |_| workCountEQzero | G (!return_Execute))))
@@ -1397,8 +1247,7 @@ Candidate = G(!(call_Create_i | call_Destroy_i | call_Execute_i | call_GetResult
 GT = G !(call_Create_i | call_Destroy_i | call_Input_i | call_Execute_i | call_GetResults_i)
 trace#0, cand_acc=False, gt_acc=False, call_Create_i | call_Destroy_i | call_Execute_i | call_GetResults_i | call_Input_i; call_Execute_i | call_GetResults_i; cycle{1}
 trace#1, cand_acc=False, gt_acc=False, call_Execute_i | call_GetResults_i; call_Create_i | call_Destroy_i | call_Execute_i | call_GetResults_i | call_Input_i; cycle{1}
-trace#2, cand_acc=False, gt_acc=False, 1; call_Execute_i | call_GetResults_i; cycle{1}
-trace#3, cand_acc=True, gt_acc=None, !call_Execute_i & !call_GetResults_i; cycle{!call_Execute_i & !call_GetResults_i}
+trace#2, cand_acc=True, gt_acc=None, !call_Execute_i & !call_GetResults_i; cycle{!call_Execute_i & !call_GetResults_i}
 
 Candidate = G(return_doWork_done_true_i -> return_doResult_done_true_i)
 GT = (G !(call_Create_i | call_Destroy_i | call_Input_i | call_Execute_i | call_GetResults_i)) -> ((!return_pool_Finished) U (return_doWork_done_true_i |_| return_doResult_done_true_i |_| G  (!return_pool_Finished)))
@@ -1407,16 +1256,16 @@ trace#0, cand_acc=False, gt_acc=None, 1; !return_doResult_done_true_i & return_d
 Candidate = G((state0 -> (!state1 & !state2 & !state3)) & (state1 -> (!state0 & !state2 & !state3)) & (state2 -> (!state0 & !state1 & !state3)) & (state3 -> (!state0 & !state1 & !state2)))
 GT = G ((state0 & !state1 & !state2 & !state3) | (!state0 & state1 & !state2 & !state3) | (!state0 & !state1 & state2 & !state3) | (!state0 & !state1 & !state2 & state3) )
 trace#0, cand_acc=False, gt_acc=False, 1; (state0 & state1) | (state0 & state2) | (state0 & state3) | (state1 & state2) | (state1 & state3) | (state2 & state3); cycle{1}
-trace#1, cand_acc=False, gt_acc=False, (state0 & state1) | (state0 & state2) | (state0 & state3) | (state1 & state2) | (state1 & state3) | (state2 & state3); cycle{1}
+trace#1, cand_acc=False, gt_acc=False, cycle{(state0 & state1) | (state0 & state2) | (state0 & state3) | (state1 & state2) | (state1 & state3) | (state2 & state3)}
 trace#2, cand_acc=True, gt_acc=None, (!state1 & !state2 & !state3) | (!state0 & !state2 & !state3) | (!state0 & !state1 & !state3) | (!state0 & !state1 & !state2); cycle{(!state1 & !state2 & !state3) | (!state0 & !state2 & !state3) | (!state0 & !state1 & !state3) | (!state0 & !state1 & !state2)}
 
 Candidate = G((state1 -> X(state0 | state2)) & (state1 -> !(X(state3))))
 GT = G ((state1 & F (state0 | state2)) -> !state3 U (state0 | state2))
-trace#0, cand_acc=False, gt_acc=None, cycle{(!state0 & !state1 & !state2) | (!state1 & state3); state1}
+trace#0, cand_acc=False, gt_acc=None, 1; state1; state3 | (!state0 & !state2); cycle{1}
 
 Candidate = !( !connect U (blockingReceive | blockingSend | disconnect | poke | receive | send) )
 GT = F connect -> (!(disconnect | poke | send | blockingSend | receive | blockingReceive) U connect)
-trace#0, cand_acc=False, gt_acc=None, blockingReceive | blockingSend | disconnect | poke | receive | send; cycle{blockingReceive | blockingSend | disconnect | poke | receive | send}
+trace#0, cand_acc=False, gt_acc=None, cycle{blockingReceive | blockingSend | disconnect | poke | receive | send}
 
 Candidate = G(connect -> X(!connect U disconnect))
 GT = G ((connect & F disconnect) -> !connect U disconnect)
@@ -1424,14 +1273,14 @@ trace#0, cand_acc=False, gt_acc=None, 1; connect; cycle{!connect & !disconnect}
 
 Candidate = G(disconnect -> ((!disconnect & !poke & !send & !blockingSend & !receive & !blockingReceive) U connect))
 GT = G ((disconnect & F connect) -> !(disconnect | poke | send | blockingSend | receive | blockingReceive) U connect)
-trace#0, cand_acc=True, gt_acc=True, cycle{!disconnect}
-trace#1, cand_acc=True, gt_acc=True, connect | !disconnect; cycle{connect | !disconnect}
+trace#0, cand_acc=True, gt_acc=True, connect | !disconnect; cycle{connect | !disconnect}
+trace#1, cand_acc=True, gt_acc=True, cycle{!disconnect}
 trace#2, cand_acc=True, gt_acc=True, cycle{connect | !disconnect}
 trace#3, cand_acc=False, gt_acc=None, 1; !connect & disconnect; cycle{1}
 
 Candidate = G((register_a1_e1 & notify_artists_e1) -> (notify_artists_e1 U notify_client_event_a1_e1))
 GT = G ((register_a1_e1 & F  unregister_a1_e1) -> (after_notify_artists_e1 -> ((!(notify_artists_e1 | notify_artists_e2) & !unregister_a1_e1) U notify_client_event_a1_e1)) U unregister_a1_e1)
-trace#0, cand_acc=True, gt_acc=None, cycle{(!notify_artists_e1 & !notify_client_event_a1_e1) | (notify_artists_e1 & notify_client_event_a1_e1 & register_a1_e1)}
+trace#0, cand_acc=True, gt_acc=None, cycle{!notify_artists_e1 | notify_client_event_a1_e1}
 
 Candidate = G((!notify_artists_e1) U notify_client_event_a1_e1 | (!notify_artists_e1) U notify_client_event_a2_e1)
 GT = !(notify_client_event_a1_e1 | notify_client_event_a2_e1)  U (notify_artists_e1 | G !(notify_client_event_a1_e1 | notify_client_event_a2_e1))
@@ -1443,7 +1292,8 @@ trace#0, cand_acc=False, gt_acc=None, 1; notify_artists_e1 & notify_artists_e2; 
 
 Candidate = G((e1_szEQ0) -> (!notify_client_event_a1_e1 & !notify_client_event_a2_e1))
 GT = G (e1_szEQ0 -> (!(notify_client_event_a1_e1 | notify_client_event_a2_e1) U (e1_szGT0 | G !(notify_client_event_a1_e1 | notify_client_event_a2_e1))))
-trace#0, cand_acc=True, gt_acc=None, cycle{!e1_szEQ0 | (!notify_client_event_a1_e1 & !notify_client_event_a2_e1)}
+trace#0, cand_acc=True, gt_acc=True, cycle{!e1_szEQ0}
+trace#1, cand_acc=True, gt_acc=None, !e1_szEQ0 | (!notify_client_event_a1_e1 & !notify_client_event_a2_e1); cycle{!e1_szEQ0 | (!notify_client_event_a1_e1 & !notify_client_event_a2_e1)}
 
 Candidate = G(notify_event_a1_e1 -> register_a1_e1)
 GT = F register_a1_e1 -> (!notify_event_a1_e1 U register_a1_e1)
@@ -1451,7 +1301,8 @@ trace#0, cand_acc=False, gt_acc=None, 1; notify_event_a1_e1 & !register_a1_e1; c
 
 Candidate = G(notify_client_event_a1_e1 -> (register_a1_e1 & !unregister_a1_e1) U notify_client_event_a1_e1)
 GT = G (unregister_a1_e1 -> (!notify_client_event_a1_e1 U (register_a1_e1 | G !notify_client_event_a1_e1)))
-trace#0, cand_acc=True, gt_acc=None, cycle{notify_client_event_a1_e1 | !register_a1_e1 | unregister_a1_e1}
+trace#0, cand_acc=True, gt_acc=True, cycle{!notify_client_event_a1_e1 | (register_a1_e1 & !unregister_a1_e1)}
+trace#1, cand_acc=True, gt_acc=None, cycle{1}
 
 Candidate = G((register_a1_e1 & !register_a2_e1 & F(register_a2_e1)) -> (notify_client_event_a1_e1 U (notify_client_event_a1_e1 & F(notify_client_event_a2_e1))))
 GT = F term -> G ((register_a1_e1 & (!unregister_a1_e1 U (register_a2_e1 & (!unregister_a1_e1 & !unregister_a2_e1) U notify_artists_e1))) -> F (notify_artist_e1 & (!notify_client_event_a2_e1 U notify_client_event_a1_e1)))
@@ -1471,24 +1322,33 @@ trace#0, cand_acc=False, gt_acc=None, 1; !register_a1_e1 & unregister_a1_e1; cyc
 
 Candidate = G(register_a1_e1 -> ((!term) U unregister_a1_e1))
 GT = (register_a1_e1 -> (!term U unregister_a1_e1)) U (term | G (!term))
-trace#0, cand_acc=False, gt_acc=None, 1; register_a1_e1 & term & !unregister_a1_e1; cycle{1}
+trace#0, cand_acc=False, gt_acc=True, 1; register_a1_e1 & !term & !unregister_a1_e1; cycle{!term & !unregister_a1_e1}
 
 Candidate = G(idle & floor_3 & door_closed -> X(idle & floor_3 & door_closed))
 GT = G (floor_3 & idle & door_closed -> G (floor_3 & door_closed))
 trace#0, cand_acc=True, gt_acc=True, cycle{!door_closed | !floor_3}
 trace#1, cand_acc=True, gt_acc=True, cycle{!door_closed | !idle}
 trace#2, cand_acc=True, gt_acc=True, cycle{!floor_3 | !idle}
-trace#3, cand_acc=True, gt_acc=True, !door_closed | !floor_3 | !idle; cycle{!door_closed | !floor_3 | !idle}
-trace#4, cand_acc=True, gt_acc=True, cycle{!door_closed | !floor_3 | !idle}
-trace#5, cand_acc=False, gt_acc=None, cycle{!door_closed | !floor_3 | !idle; door_closed & floor_3 & idle}
+trace#3, cand_acc=True, gt_acc=True, 1; cycle{door_closed & floor_3 & idle}
+trace#4, cand_acc=False, gt_acc=None, 1; door_closed & floor_3 & idle; !door_closed | !floor_3 | !idle; cycle{1}
 
 Candidate = G((direction_up & floor_2 & liftBut5_pressed) -> (!floor_5 U liftBut5_pressed))
 GT = G (floor_2 & direction_up & liftBut5_pressed -> direction_up U floor_5)
-trace#0, cand_acc=True, gt_acc=None, cycle{liftBut5_pressed}
+trace#0, cand_acc=True, gt_acc=None, cycle{!direction_up | !floor_2 | !floor_5 | !liftBut5_pressed}
 
 Candidate = G((liftBut3_pressed & !lift_empty) -> F(floor_3 & dor_open))
 GT = G (liftBut3_pressed & !lift_empty -> F ((floor_3 & dor_open) | lift_empty))
-trace#0, cand_acc=False, gt_acc=None, 1; (!dor_open & liftBut3_pressed & !lift_empty) | (!floor_3 & liftBut3_pressed & !lift_empty); cycle{!dor_open | !floor_3}
+trace#0, cand_acc=True, gt_acc=True, cycle{!liftBut3_pressed | (dor_open & floor_3)}
+trace#1, cand_acc=True, gt_acc=True, cycle{(dor_open & floor_3) | (!liftBut3_pressed & !lift_empty) | (liftBut3_pressed & lift_empty)}
+trace#2, cand_acc=True, gt_acc=True, cycle{lift_empty | (dor_open & floor_3)}
+trace#3, cand_acc=True, gt_acc=True, cycle{(dor_open & floor_3) | (liftBut3_pressed & lift_empty)}
+trace#4, cand_acc=True, gt_acc=True, cycle{!liftBut3_pressed | lift_empty}
+trace#5, cand_acc=True, gt_acc=True, 1; cycle{dor_open & floor_3}
+trace#6, cand_acc=True, gt_acc=True, cycle{!liftBut3_pressed | lift_empty | (dor_open & floor_3)}
+trace#7, cand_acc=True, gt_acc=True, cycle{(dor_open & floor_3) | (!liftBut3_pressed & lift_empty)}
+trace#8, cand_acc=True, gt_acc=True, !liftBut3_pressed | lift_empty | (dor_open & floor_3); cycle{!liftBut3_pressed | lift_empty | (dor_open & floor_3)}
+trace#9, cand_acc=True, gt_acc=True, dor_open & floor_3; cycle{dor_open & floor_3}
+trace#10, cand_acc=False, gt_acc=None, 1; (!dor_open & liftBut3_pressed & !lift_empty) | (!floor_3 & liftBut3_pressed & !lift_empty); cycle{!dor_open | !floor_3}
 
 Candidate = G(idle -> floor_1)
 GT = G (floor_4 & idle -> idle U floor_1)
@@ -1498,24 +1358,27 @@ Candidate = G((liftBut2_pressed -> F floor_2) & (liftBut3_pressed -> F floor_3))
 GT = G (up & liftBut2_pressed & !liftBut3_pressed -> !(floor_3 & doors_open) U ((floor_2 & door_open) | !up))
 trace#0, cand_acc=False, gt_acc=None, 1; !floor_2 & liftBut2_pressed; cycle{!floor_2}
 
+Candidate = G(overloaded -> !X(floor_3 <-> !floor_3))
+GT = G (floor_3 & overloaded -> floor_3 U !overloaded)
+trace#0, cand_acc=True, gt_acc=None, cycle{1}
+
 Candidate = G((door_closed) -> (!overloaded))
 GT = G (door_open & !overloaded -> !overloaded U door_closed)
 trace#0, cand_acc=False, gt_acc=None, 1; door_closed & overloaded; cycle{1}
 
 Candidate = G(b -> F(r & !np_))
 GT = G  (b -> (G  !np_& F r))
-trace#0, cand_acc=False, gt_acc=False, 1; (b & np_) | (b & !r); cycle{np_ | !r}
-trace#1, cand_acc=True, gt_acc=None, cycle{!b | (!np_ & r)}
+trace#0, cand_acc=True, gt_acc=None, !b | (!np_ & r); cycle{!b | (!np_ & r)}
 
 Candidate = G(a -> F(d & (!d U (c & (!d U d)))))
 GT = G F  (a -> (c U d))
 trace#0, cand_acc=True, gt_acc=True, 1; cycle{c & d}
-trace#1, cand_acc=True, gt_acc=True, !a | (c & d); cycle{!a | (c & d)}
-trace#2, cand_acc=True, gt_acc=True, cycle{!a | (c & d)}
+trace#1, cand_acc=True, gt_acc=True, cycle{!a | (c & d)}
+trace#2, cand_acc=True, gt_acc=True, !a | (c & d); cycle{!a | (c & d)}
 trace#3, cand_acc=True, gt_acc=True, c & d; cycle{c & d}
-trace#4, cand_acc=True, gt_acc=True, cycle{!a}
-trace#5, cand_acc=True, gt_acc=True, cycle{c & d}
-trace#6, cand_acc=False, gt_acc=None, 1; (a & !c) | (a & !d); cycle{!c | !d}
+trace#4, cand_acc=True, gt_acc=True, cycle{c & d}
+trace#5, cand_acc=True, gt_acc=True, cycle{!a}
+trace#6, cand_acc=False, gt_acc=None, (a & !c) | (a & !d); cycle{(a & !c) | (a & !d)}
 
 Candidate = G(a -> G F d)
 GT = G F  (a -> F  d)
@@ -1524,14 +1387,13 @@ trace#0, cand_acc=False, gt_acc=None, 1; a & !d; cycle{!d}
 Candidate = G(F(p))
 GT = F G  p
 trace#0, cand_acc=False, gt_acc=False, !p; cycle{!p}
-trace#1, cand_acc=None, gt_acc=None, 1; p; cycle{1}
-trace#2, cand_acc=None, gt_acc=None, p; cycle{1}
-trace#3, cand_acc=True, gt_acc=True, cycle{p}
-trace#4, cand_acc=False, gt_acc=False, cycle{!p}
+trace#1, cand_acc=None, gt_acc=None, p; cycle{1}
+trace#2, cand_acc=True, gt_acc=True, cycle{p}
+trace#3, cand_acc=False, gt_acc=False, cycle{!p}
 
 Candidate = p U !p
 GT = G  (p U !p)
-trace#0, cand_acc=None, gt_acc=False, 1; cycle{p}
+trace#0, cand_acc=True, gt_acc=None, !p; cycle{1}
 
 Candidate = G(F(f))
 GT = G (f -> G f)
@@ -1549,7 +1411,7 @@ Candidate = G(p -> F(q))
 GT = G (p -> F G q)
 trace#0, cand_acc=False, gt_acc=False, 1; p & !q; cycle{!q}
 trace#1, cand_acc=None, gt_acc=None, p & q; cycle{1}
-trace#2, cand_acc=True, gt_acc=None, !p | q; cycle{!p | q}
+trace#2, cand_acc=True, gt_acc=None, cycle{!p | q}
 
 Candidate = G(_ -> F(P_m))
 GT = G (P_0 -> F Q_0) &_& G (P_m -> F Q_m)
@@ -1557,7 +1419,7 @@ trace#0, cand_acc=False, gt_acc=None, 1; !P_m & _; cycle{!P_m}
 
 Candidate = G((P_0 | P_m) -> (Q_0 & Q_m))
 GT = G ((P_0 -> Q_0) &_& (P_m -> Q_m))
-trace#0, cand_acc=True, gt_acc=None, cycle{(Q_0 & Q_m) | (!P_0 & !P_m)}
+trace#0, cand_acc=True, gt_acc=None, (Q_0 & Q_m) | (!P_0 & !P_m); cycle{(Q_0 & Q_m) | (!P_0 & !P_m)}
 
 Candidate = G(request -> F(State_WORK))
 GT = G ((State_INIT & request) -> F (State_WORK))
@@ -1569,10 +1431,7 @@ trace#0, cand_acc=False, gt_acc=None, 1; !State_INIT & request; cycle{!State_INI
 
 Candidate = G((Synch_to_medium & X(Synch_to_medium U Broadcast)) -> X(!Synch_to_medium U Broadcast))
 GT = G (Synch_to_medium -> !Synch_to_medium U (Broadcast | G !Synch_to_medium))
-trace#0, cand_acc=True, gt_acc=True, cycle{!Synch_to_medium}
-trace#1, cand_acc=True, gt_acc=True, !Synch_to_medium; cycle{!Synch_to_medium}
-trace#2, cand_acc=None, gt_acc=None, cycle{Synch_to_medium}
-trace#3, cand_acc=None, gt_acc=None, !Synch_to_medium; cycle{1}
+trace#0, cand_acc=True, gt_acc=None, cycle{!Broadcast}
 
 Candidate = G(safe -> G(bounded_height))
 GT = G (safe -> bounded_height)
@@ -1593,36 +1452,30 @@ trace#0, cand_acc=False, gt_acc=None, 1; !EndCycle & PDcontrolContraX & PDcontro
 
 Candidate = G((RequestGetIOR_i_j & !ServerRegistered_j) | (RequestGetIOR_i_j -> F(etIOR_i)))
 GT = G (RequestGetIOR_i_j -> (ServerRegistered_j U GetIOR_i))
-trace#0, cand_acc=True, gt_acc=None, cycle{!RequestGetIOR_i_j | !ServerRegistered_j | etIOR_i}
+trace#0, cand_acc=True, gt_acc=None, !RequestGetIOR_i_j | !ServerRegistered_j | etIOR_i; cycle{!RequestGetIOR_i_j | !ServerRegistered_j | etIOR_i}
 
 Candidate = G(NChar_received -> (NChar_received U NChar_read))
 GT = G((NChar_received) -> ((NChar_TXFIFO) U (NChar_read)))
 trace#0, cand_acc=False, gt_acc=False, 1; !NChar_read & NChar_received; cycle{!NChar_read & NChar_received}
-trace#1, cand_acc=True, gt_acc=True, cycle{NChar_read | !NChar_received}
-trace#2, cand_acc=None, gt_acc=None, NChar_read & NChar_received; cycle{1}
-trace#3, cand_acc=True, gt_acc=True, cycle{(!NChar_read & !NChar_received) | (NChar_read & NChar_received)}
-trace#4, cand_acc=True, gt_acc=True, NChar_read | !NChar_received; cycle{NChar_read | !NChar_received}
-trace#5, cand_acc=None, gt_acc=None, NChar_read & !NChar_received; cycle{1}
-trace#6, cand_acc=True, gt_acc=True, cycle{NChar_read}
+trace#1, cand_acc=None, gt_acc=None, NChar_read & NChar_received; cycle{1}
+trace#2, cand_acc=True, gt_acc=True, NChar_read | !NChar_received; cycle{NChar_read | !NChar_received}
+trace#3, cand_acc=True, gt_acc=True, cycle{NChar_read | !NChar_received}
+trace#4, cand_acc=True, gt_acc=True, cycle{(!NChar_read & !NChar_received) | (NChar_read & NChar_received)}
+trace#5, cand_acc=True, gt_acc=True, cycle{!NChar_received}
+trace#6, cand_acc=None, gt_acc=None, !NChar_received; cycle{1}
 trace#7, cand_acc=None, gt_acc=None, NChar_read | !NChar_received; cycle{1}
-trace#8, cand_acc=False, gt_acc=False, !NChar_read & NChar_received; cycle{!NChar_read}
+trace#8, cand_acc=True, gt_acc=True, cycle{NChar_read}
 trace#9, cand_acc=False, gt_acc=False, !NChar_read & NChar_received; cycle{!NChar_read & NChar_received}
-trace#10, cand_acc=None, gt_acc=None, !NChar_received; cycle{1}
-trace#11, cand_acc=True, gt_acc=True, cycle{NChar_read & NChar_received}
-trace#12, cand_acc=True, gt_acc=True, NChar_read & !NChar_received; cycle{NChar_read & !NChar_received}
-trace#13, cand_acc=None, gt_acc=None, !NChar_read & !NChar_received; NChar_received; cycle{1}
-trace#14, cand_acc=False, gt_acc=False, cycle{!NChar_read & NChar_received; !NChar_read & !NChar_received}
+trace#10, cand_acc=False, gt_acc=False, !NChar_read & NChar_received; cycle{!NChar_read}
+trace#11, cand_acc=True, gt_acc=True, NChar_read & !NChar_received; cycle{NChar_read & !NChar_received}
+trace#12, cand_acc=None, gt_acc=None, !NChar_read & !NChar_received; NChar_received; cycle{1}
+trace#13, cand_acc=False, gt_acc=False, cycle{!NChar_read & NChar_received; !NChar_read & !NChar_received}
+trace#14, cand_acc=None, gt_acc=None, !NChar_read & !NChar_received; cycle{1}
 trace#15, cand_acc=True, gt_acc=True, NChar_read & NChar_received; cycle{NChar_read & NChar_received}
-trace#16, cand_acc=None, gt_acc=None, !NChar_read & !NChar_received; cycle{1}
-trace#17, cand_acc=None, gt_acc=None, !NChar_read & NChar_received; cycle{1}
-trace#18, cand_acc=False, gt_acc=False, cycle{!NChar_read & NChar_received}
-trace#19, cand_acc=None, gt_acc=None, cycle{NChar_received}
-trace#20, cand_acc=None, gt_acc=None, cycle{!NChar_read | !NChar_received}
-trace#21, cand_acc=None, gt_acc=None, 1; cycle{NChar_read | !NChar_received}
-trace#22, cand_acc=None, gt_acc=None, cycle{1}
-trace#23, cand_acc=None, gt_acc=None, 1; NChar_read | !NChar_received; cycle{1}
-trace#24, cand_acc=None, gt_acc=None, cycle{!NChar_read | NChar_received}
-trace#25, cand_acc=None, gt_acc=None, cycle{NChar_read | NChar_received}
+trace#16, cand_acc=False, gt_acc=False, cycle{!NChar_read & NChar_received}
+trace#17, cand_acc=None, gt_acc=None, cycle{NChar_received}
+trace#18, cand_acc=None, gt_acc=None, 1; cycle{NChar_read | !NChar_received}
+trace#19, cand_acc=None, gt_acc=None, cycle{!NChar_read | NChar_received}
 
 Candidate = G((!sent_data & !sent_control_symbol) -> null_passed)
 GT = G((! (sent_data | sent_control_symbol)) -> X(null_passed))
@@ -1631,7 +1484,8 @@ trace#1, cand_acc=True, gt_acc=None, null_passed | sent_control_symbol | sent_da
 
 Candidate = G((output_port_reset & transmition_stopped) -> ((!data_transition U reset_strobe_signal) & (reset_strobe_signal -> X(!Strobe_signal_transition U reset_data_signal))))
 GT = ((output_port_reset) -> G (!(data_transition) & !(Strobe_signal_transition))) & G( (transmition_stopped) -> (X (reset_strobe_signal) & X X(reset_data_signal)))
-trace#0, cand_acc=False, gt_acc=None, 1; data_transition & output_port_reset & !reset_strobe_signal & transmition_stopped; cycle{1}
+trace#0, cand_acc=False, gt_acc=False, 1; output_port_reset & reset_strobe_signal & transmition_stopped; cycle{!Strobe_signal_transition & !reset_data_signal}
+trace#1, cand_acc=False, gt_acc=None, 1; data_transition & output_port_reset & !reset_strobe_signal & transmition_stopped; cycle{1}
 
 Candidate = G((receiver_enabled & Null_detected & !gotNull_assert) -> X(gotNull_assert))
 GT = G((receiver_enabled) -> (! (gotNull_assert) U (Null_detected)))
@@ -1639,7 +1493,7 @@ trace#0, cand_acc=True, gt_acc=None, cycle{!Null_detected | !receiver_enabled}
 
 Candidate = G((state_machine_leaves_ErrorReset & F(data_edge_detected | Strobe_ine_edge_detected)) -> F(disconnect_detection_enable))
 GT = G( (state_machine_leaves_ErrorReset) -> (!(disconnect_detection_enable) U ((data_edge_detected) | (Strobe_ine_edge_detected))) )
-trace#0, cand_acc=True, gt_acc=None, !Strobe_ine_edge_detected & !data_edge_detected; cycle{!Strobe_ine_edge_detected & !data_edge_detected}
+trace#0, cand_acc=False, gt_acc=None, 1; (Strobe_ine_edge_detected & !disconnect_detection_enable & state_machine_leaves_ErrorReset) | (data_edge_detected & !disconnect_detection_enable & state_machine_leaves_ErrorReset); cycle{!disconnect_detection_enable}
 
 Candidate = G((ESC_received & X(ESC_received | EOP_received | EEP_received)) -> X(ESC_error)) & G((ESC_received & X(Null)) -> X(Null)) & G((ESC_received & X(data_received)) -> X(broadcast_code))
 GT = G( (((ESC_received & X ESC_received) | (ESC_received & X EOP_received)) | (ESC_received & X EEP_received )) -> (ESC_error) ) & G( (ESC_received & X FCT_received) -> Null) & G((ESC_received & X data_received) -> (broadcast_code) )
@@ -1647,11 +1501,11 @@ trace#0, cand_acc=False, gt_acc=None, cycle{(EEP_received & !ESC_error & !ESC_re
 
 Candidate = (!CT_received U (CT_received & G(CT_received -> send_NChar | !send_NChar))) & (!send_NChar U CT_received)
 GT = G(!(send_NChar) U (FCT_received))
-trace#0, cand_acc=False, gt_acc=None, !CT_received & send_NChar; cycle{1}
+trace#0, cand_acc=True, gt_acc=None, CT_received; cycle{1}
 
 Candidate = G((!first_Null_received) -> (!Parity_Error_enable & !ESC_Error_enable & !gotFCT_enable & !gotNChar_enable & !gotBC_enable))
 GT = G((first_Null_received) -> X((Parity_Error_enable) & (ESC_Error_enable) & (gotFCT_enable) & (gotNChar_enable) & (gotBC_enable)))
-trace#0, cand_acc=True, gt_acc=None, cycle{first_Null_received | (!ESC_Error_enable & !Parity_Error_enable & !gotBC_enable & !gotFCT_enable & !gotNChar_enable)}
+trace#0, cand_acc=True, gt_acc=None, first_Null_received | (!ESC_Error_enable & !Parity_Error_enable & !gotBC_enable & !gotFCT_enable & !gotNChar_enable); cycle{first_Null_received | (!ESC_Error_enable & !Parity_Error_enable & !gotBC_enable & !gotFCT_enable & !gotNChar_enable)}
 
 Candidate = G(Disconnect_Error_enable -> (first_data_transition | first_strobe_line_transition))
 GT = G(((first_data_transition) | (first_strobe_line_transition )) -> X (Disconnect_Error_enable) )
@@ -1659,36 +1513,43 @@ trace#0, cand_acc=False, gt_acc=None, 1; Disconnect_Error_enable & !first_data_t
 
 Candidate = G(Port_Reset_asserted -> (TX_FIFO_cleared & RX_FIFO_cleared & ErrorReset_state))
 GT = G((Port_Reset_asserted) -> ((TX_FIFO_cleared) & (RX_FIFO_cleared) & X (ErrorReset_state)))
-trace#0, cand_acc=True, gt_acc=None, cycle{!Port_Reset_asserted | (ErrorReset_state & RX_FIFO_cleared & TX_FIFO_cleared)}
+trace#0, cand_acc=True, gt_acc=None, !Port_Reset_asserted | (ErrorReset_state & RX_FIFO_cleared & TX_FIFO_cleared); cycle{!Port_Reset_asserted | (ErrorReset_state & RX_FIFO_cleared & TX_FIFO_cleared)}
 
 Candidate = G((link_machine_Run_state & broadcast_code_requested) -> (broadcast_code_requested U (current_character_finished & X broadcast_code_sent)))
 GT = G(((link_machine_Run_state) & (broadcast_code_requested)) -> ((current_character_finished) -> X (broadcast_code_sent)))
-trace#0, cand_acc=True, gt_acc=True, !broadcast_code_requested | !link_machine_Run_state; cycle{!broadcast_code_requested | !link_machine_Run_state}
-trace#1, cand_acc=True, gt_acc=True, cycle{!broadcast_code_requested & !current_character_finished}
-trace#2, cand_acc=True, gt_acc=True, cycle{!broadcast_code_requested | !link_machine_Run_state}
-trace#3, cand_acc=True, gt_acc=True, cycle{!link_machine_Run_state}
-trace#4, cand_acc=False, gt_acc=True, broadcast_code_requested & !current_character_finished & link_machine_Run_state; cycle{broadcast_code_requested & !current_character_finished}
+trace#0, cand_acc=True, gt_acc=True, cycle{!broadcast_code_requested}
+trace#1, cand_acc=True, gt_acc=True, cycle{!broadcast_code_requested | !link_machine_Run_state}
+trace#2, cand_acc=True, gt_acc=True, !broadcast_code_requested | !link_machine_Run_state; cycle{!broadcast_code_requested | !link_machine_Run_state}
+trace#3, cand_acc=True, gt_acc=True, cycle{!broadcast_code_requested & !current_character_finished}
+trace#4, cand_acc=True, gt_acc=True, cycle{!broadcast_code_requested & !link_machine_Run_state}
+trace#5, cand_acc=True, gt_acc=True, cycle{(broadcast_code_requested & !link_machine_Run_state) | (!broadcast_code_requested & link_machine_Run_state)}
+trace#6, cand_acc=True, gt_acc=True, cycle{broadcast_code_requested & !link_machine_Run_state}
+trace#7, cand_acc=None, gt_acc=True, broadcast_code_requested & !current_character_finished; cycle{broadcast_code_requested & !current_character_finished}
 
 Candidate = G(CT_requested -> (current_character_sent -> F(CT_sent)))
 GT = G((FCT_requested) -> (! (FCT_sent) U (current_character_sent)))
-trace#0, cand_acc=True, gt_acc=None, cycle{!CT_requested | !current_character_sent}
+trace#0, cand_acc=True, gt_acc=None, cycle{!CT_requested | CT_sent}
 
 Candidate = G((LinkDisabled_asserted & Ready_state) -> X(Ready_state))
 GT = G (((LinkDisabled_asserted) & (Ready_state)) -> X (G(Ready_state)))
-trace#0, cand_acc=True, gt_acc=True, !LinkDisabled_asserted | !Ready_state; cycle{!LinkDisabled_asserted | !Ready_state}
-trace#1, cand_acc=False, gt_acc=False, cycle{!Ready_state; LinkDisabled_asserted & Ready_state}
-trace#2, cand_acc=True, gt_acc=True, cycle{!Ready_state}
-trace#3, cand_acc=False, gt_acc=False, LinkDisabled_asserted & Ready_state; cycle{!Ready_state}
-trace#4, cand_acc=None, gt_acc=None, Ready_state; LinkDisabled_asserted & !Ready_state; cycle{1}
-trace#5, cand_acc=None, gt_acc=None, 1; !LinkDisabled_asserted | !Ready_state; cycle{1}
-trace#6, cand_acc=None, gt_acc=None, !LinkDisabled_asserted & Ready_state; !Ready_state; cycle{1}
-trace#7, cand_acc=None, gt_acc=None, LinkDisabled_asserted & !Ready_state; !Ready_state; cycle{1}
-trace#8, cand_acc=None, gt_acc=None, cycle{!LinkDisabled_asserted | Ready_state}
-trace#9, cand_acc=None, gt_acc=None, cycle{LinkDisabled_asserted | !Ready_state}
+trace#0, cand_acc=True, gt_acc=True, 1; cycle{Ready_state}
+trace#1, cand_acc=False, gt_acc=False, LinkDisabled_asserted & Ready_state; LinkDisabled_asserted & !Ready_state; cycle{LinkDisabled_asserted}
+trace#2, cand_acc=False, gt_acc=False, 1; LinkDisabled_asserted & Ready_state; !Ready_state; cycle{1}
+trace#3, cand_acc=False, gt_acc=False, LinkDisabled_asserted & Ready_state; !Ready_state; cycle{1}
+trace#4, cand_acc=True, gt_acc=True, cycle{!Ready_state}
+trace#5, cand_acc=True, gt_acc=True, cycle{!LinkDisabled_asserted & !Ready_state}
+trace#6, cand_acc=True, gt_acc=True, cycle{!LinkDisabled_asserted | !Ready_state}
+trace#7, cand_acc=False, gt_acc=False, cycle{!Ready_state; LinkDisabled_asserted & Ready_state}
+trace#8, cand_acc=True, gt_acc=True, cycle{(LinkDisabled_asserted & !Ready_state) | (!LinkDisabled_asserted & Ready_state)}
+trace#9, cand_acc=True, gt_acc=True, cycle{LinkDisabled_asserted & !Ready_state}
+trace#10, cand_acc=False, gt_acc=False, LinkDisabled_asserted & Ready_state; cycle{!Ready_state}
+trace#11, cand_acc=True, gt_acc=True, cycle{!LinkDisabled_asserted}
+trace#12, cand_acc=True, gt_acc=True, !LinkDisabled_asserted | !Ready_state; cycle{!LinkDisabled_asserted | !Ready_state}
+trace#13, cand_acc=None, gt_acc=None, Ready_state; LinkDisabled_asserted & !Ready_state; cycle{1}
 
 Candidate = G(((LinkDisabled | disconnect | parity | ESC_Error | NChar_received | broadcast_received) -> X(ErrorReset)) & ((LinkStart_asserted | (AutoStart_asserted & gotNull_asserted)) -> X(Started_state)))
 GT = G((LinkDisabled) -> X (ErrorReset)) & G((disconnect) -> X (ErrorReset)) & G((parity) -> X (ErrorReset)) & G((ESC_Error) -> (ErrorReset)) & G(((FCT_received) | (NChar_received) | (broadcast_received)) -> X(ErrorReset)) & G((LinkStart_asserted) -> X(Started_state)) & G(((AutoStart_asserted) | (gotNull_asserted)) -> X(Started_state))
-trace#0, cand_acc=False, gt_acc=None, cycle{ESC_Error | LinkDisabled | NChar_received | broadcast_received | disconnect | parity; !ErrorReset}
+trace#0, cand_acc=False, gt_acc=None, 1; ESC_Error | LinkDisabled | NChar_received | broadcast_received | disconnect | parity; !ErrorReset; cycle{1}
 
 Candidate = G(ErrorReset_State -> receiver_Disable_asserted)
 GT = G ((receiver_Disable_asserted ) -> X (G(ErrorReset_State)))
@@ -1698,11 +1559,11 @@ Candidate = G(PortReset_asserted -> F(Link_Error_Recovery_state_machine_Normal))
 GT = G ((PortReset_asserted) -> X (Link_Error_Recovery_state_machine_Normal))
 trace#0, cand_acc=False, gt_acc=False, 1; !Link_Error_Recovery_state_machine_Normal & PortReset_asserted; cycle{!Link_Error_Recovery_state_machine_Normal}
 trace#1, cand_acc=None, gt_acc=None, Link_Error_Recovery_state_machine_Normal & PortReset_asserted; cycle{1}
-trace#2, cand_acc=True, gt_acc=None, Link_Error_Recovery_state_machine_Normal | !PortReset_asserted; cycle{Link_Error_Recovery_state_machine_Normal | !PortReset_asserted}
+trace#2, cand_acc=True, gt_acc=None, cycle{Link_Error_Recovery_state_machine_Normal | !PortReset_asserted}
 
 Candidate = G(((Run_state & LinkDisabled_asserted) | (Run_state & (Disconnect | Parity_Error | ESC_Error | Credit_Error))) -> X(Recovery_state))
 GT = G (((Run_State) & (LinkDisabled_asserted)) -> X(Recovery_state)) & G( ( (Run_state ) & ((Disconnect) | ((Parity_Error) | ((ESC_Error) | (Credit_Error))) ) ) -> X(Recovery_state))
-trace#0, cand_acc=False, gt_acc=None, cycle{(!Credit_Error & !Disconnect & !ESC_Error & !LinkDisabled_asserted & !Parity_Error & !Recovery_state) | (!Recovery_state & !Run_state); (LinkDisabled_asserted & Run_state) | (Credit_Error & Run_state) | (Disconnect & Run_state) | (ESC_Error & Run_state) | (Parity_Error & Run_state)}
+trace#0, cand_acc=False, gt_acc=None, 1; (LinkDisabled_asserted & Run_state) | (Credit_Error & Run_state) | (Disconnect & Run_state) | (ESC_Error & Run_state) | (Parity_Error & Run_state); !Recovery_state; cycle{1}
 
 Candidate = G((Recovery_state & sending_current_packet) -> discard_remainder) & G((Recovery_state & last_character_is_data) -> write_EEP) & G((Recovery_state & (last_character_EOP | last_character_EEP)) -> EEP_sent_to_receive_FIFO) & G((Recovery_state & EEP_pending & IFO_full) -> (EEP_wait U (!IFO_full & write_EEP))) & G(Recovery_state -> Record_error)
 GT = G((Recovery_state) -> (((sending_current_packet) & (a_packet_not_sent)) -> X(discard_remainder))) & (G((Recovery_state) -> ((last_character_is_data) -> X(EEP_sent_to_receive_FIFO))) & (G((Recovery_state) -> ((last_character_EOP | last_character_EEP) -> X(EEP_sent_to_receive_FIFO))) & (G((Recovery_state) -> ( (((EEP_pending) & (FIFO_full)) -> ((EEP_wait) U (EEP_in_receive_FIFO))) -> X(write_EEP))) & G((Recovery_state) -> ((error) -> X (Record_error))))))
@@ -1714,43 +1575,48 @@ trace#0, cand_acc=True, gt_acc=None, cycle{!NChar_sent | !Run_state_started | la
 
 Candidate = G((receive_FIFO_full -> !send_FCT) & (!receive_FIFO_full & eight_NChar_room -> F(send_FCT)))
 GT = G((receive_FIFO_full) -> ! F(send_FCT)) & G((eight_NChar_room ) -> X(send_FCT))
-trace#0, cand_acc=True, gt_acc=None, (!eight_NChar_room & !send_FCT) | (!receive_FIFO_full & send_FCT) | (receive_FIFO_full & !send_FCT); cycle{(!eight_NChar_room & !send_FCT) | (!receive_FIFO_full & send_FCT) | (receive_FIFO_full & !send_FCT)}
+trace#0, cand_acc=True, gt_acc=None, cycle{(!eight_NChar_room & !receive_FIFO_full) | (!receive_FIFO_full & send_FCT)}
 
 Candidate = G(all_error_recovery_actions_completed -> F(normal_state))
 GT = G((all_error_recovery_actions_completed) -> X(normal_state))
 trace#0, cand_acc=False, gt_acc=False, 1; all_error_recovery_actions_completed & !normal_state; cycle{!normal_state}
 trace#1, cand_acc=None, gt_acc=None, all_error_recovery_actions_completed & normal_state; cycle{1}
-trace#2, cand_acc=True, gt_acc=None, !all_error_recovery_actions_completed | normal_state; cycle{!all_error_recovery_actions_completed | normal_state}
+trace#2, cand_acc=True, gt_acc=None, cycle{!all_error_recovery_actions_completed | normal_state}
 
 Candidate = G((transmit_packet & !current_packet_sent & !error_transmit) -> (!transmit_packet U (current_packet_sent | error_transmit)))
 GT = G(!(transmit_packet) U ((current_packet_sent) | (error_transmit)))
-trace#0, cand_acc=True, gt_acc=False, cycle{!current_packet_sent & !error_transmit & !transmit_packet}
+trace#0, cand_acc=True, gt_acc=None, current_packet_sent | error_transmit | !transmit_packet; cycle{current_packet_sent | error_transmit | !transmit_packet}
 
 Candidate = G((free_output_port) -> (packet_transfer U output_port_free))
 GT = G((output_port_free) -> ((packet_transfer) & X (free_output_port)))
-trace#0, cand_acc=False, gt_acc=None, 1; free_output_port & !output_port_free & !packet_transfer; cycle{1}
+trace#0, cand_acc=False, gt_acc=None, 1; free_output_port & !output_port_free & packet_transfer; cycle{!output_port_free & packet_transfer}
 
 Candidate = G((!multicast_output_ports_ready) -> (input_port_wait & (!NChar_sent U multicast_output_ports_ready)))
 GT = G(! (NChar_accepted) -> ((input_port_wait) & (! (NChar_sent) U (multicast_output_ports_ready))))
-trace#0, cand_acc=False, gt_acc=None, 1; (NChar_sent & !multicast_output_ports_ready) | (!input_port_wait & !multicast_output_ports_ready); cycle{1}
+trace#0, cand_acc=True, gt_acc=None, cycle{!input_port_wait & multicast_output_ports_ready}
 
 Candidate = G(BROADCAST_CODE_received -> (Character_sent U broadcast_code_sent))
 GT = G((BROADCAST_CODE_received) -> ((Character_sent) -> X (broadcast_code_sent)))
-trace#0, cand_acc=False, gt_acc=None, 1; BROADCAST_CODE_received & !Character_sent & !broadcast_code_sent; cycle{1}
+trace#0, cand_acc=False, gt_acc=False, 1; BROADCAST_CODE_received & Character_sent & !broadcast_code_sent; cycle{Character_sent & !broadcast_code_sent}
+trace#1, cand_acc=False, gt_acc=None, 1; BROADCAST_CODE_received & !Character_sent & !broadcast_code_sent; cycle{1}
 
 Candidate = G(RECEIVE_ERROR_received -> F(ErrorReset_state))
 GT = G((RECEIVE_ERROR_received) -> X (ErrorReset_state))
 trace#0, cand_acc=False, gt_acc=False, 1; !ErrorReset_state & RECEIVE_ERROR_received; cycle{!ErrorReset_state}
 trace#1, cand_acc=None, gt_acc=None, ErrorReset_state & RECEIVE_ERROR_received; cycle{1}
-trace#2, cand_acc=True, gt_acc=None, ErrorReset_state | !RECEIVE_ERROR_received; cycle{ErrorReset_state | !RECEIVE_ERROR_received}
+trace#2, cand_acc=True, gt_acc=None, cycle{ErrorReset_state | !RECEIVE_ERROR_received}
 
 Candidate = G((Null_received & receiver_enabled) -> F(gotNull_indicated))
 GT = G(((receiver_enabled) -> F(Null_received)) -> (gotNull_indicated))
-trace#0, cand_acc=True, gt_acc=None, cycle{!Null_received | gotNull_indicated | !receiver_enabled}
+trace#0, cand_acc=True, gt_acc=None, cycle{gotNull_indicated | (Null_received & !receiver_enabled) | (!Null_received & receiver_enabled)}
 
 Candidate = G((receiver_enabled & F(first_null_received_without_error)) -> F(got_null_passed))
 GT = G( receiver_enabled -> X(G(first_null_received_without_error) -> got_null_passed))
-trace#0, cand_acc=False, gt_acc=None, 1; first_null_received_without_error & !got_null_passed & receiver_enabled; cycle{!got_null_passed}
+trace#0, cand_acc=True, gt_acc=None, cycle{got_null_passed | (first_null_received_without_error & !receiver_enabled)}
+
+Candidate = G((receive_i & !receive_j U send_i) -> (send_i -> !send_j U send_i))
+GT = G( (receive_i -> X(F(receive_j))) -> (send_i & X(send_j)) )
+trace#0, cand_acc=True, gt_acc=None, cycle{1}
 
 Candidate = G((corr_interr_code_received & send_interr_ack & !interr_code_prop) -> (F(new_interr_code_disc) | G(new_interr_code_prop)))
 GT = G(((corr_interr_code_received) -> X( !( !(send_interr_ack) U(interr_code_prop)))) -> (G(new_interr_code_disc) & G(F(new_interr_code_prop))))
@@ -1758,64 +1624,60 @@ trace#0, cand_acc=True, gt_acc=None, cycle{!corr_interr_code_received | interr_c
 
 Candidate = G((limits & !standby & supported & !apfail) -> G(pullup))
 GT = !limits U (limits & G(!standby & supported & !apfail -> F(pullup)))
-trace#0, cand_acc=False, gt_acc=None, 1; !apfail & limits & !pullup & !standby & supported; cycle{1}
+trace#0, cand_acc=True, gt_acc=None, cycle{apfail | !limits | standby | !supported}
 
 Candidate = G(!good -> F(state_is_MANEUVER))
 GT = G(!good -> X(state_is_MANEUVER))
 trace#0, cand_acc=False, gt_acc=False, 1; !good & !state_is_MANEUVER; cycle{!state_is_MANEUVER}
 trace#1, cand_acc=None, gt_acc=None, !good & state_is_MANEUVER; cycle{1}
-trace#2, cand_acc=None, gt_acc=None, good & !state_is_MANEUVER; cycle{!state_is_MANEUVER}
-trace#3, cand_acc=True, gt_acc=None, good | state_is_MANEUVER; cycle{good | state_is_MANEUVER}
+trace#2, cand_acc=True, gt_acc=None, cycle{good | state_is_MANEUVER}
 
 Candidate = G((supported & good) -> F(state_is_TRANSITION))
 GT = G(supported & good -> X(state_is_TRANSITION))
-trace#0, cand_acc=True, gt_acc=None, cycle{!good | state_is_TRANSITION | !supported}
+trace#0, cand_acc=True, gt_acc=None, cycle{state_is_TRANSITION | (good & !supported) | (!good & supported)}
 
 Candidate = G((!standby) -> F(state_is_TRANSITION))
 GT = G(!standby -> X(state_is_TRANSITION))
 trace#0, cand_acc=False, gt_acc=False, 1; !standby & !state_is_TRANSITION; cycle{!state_is_TRANSITION}
 trace#1, cand_acc=None, gt_acc=None, !standby & state_is_TRANSITION; cycle{1}
-trace#2, cand_acc=None, gt_acc=None, standby & !state_is_TRANSITION; cycle{!state_is_TRANSITION}
-trace#3, cand_acc=True, gt_acc=None, standby | state_is_TRANSITION; cycle{standby | state_is_TRANSITION}
+trace#2, cand_acc=True, gt_acc=None, cycle{standby | state_is_TRANSITION}
 
 Candidate = G(apfail -> F(state_is_MANEUVER))
 GT = !apfail U (apfail & X(state_is_MANEUVER))
 trace#0, cand_acc=False, gt_acc=False, 1; apfail & !state_is_MANEUVER; cycle{!state_is_MANEUVER}
 trace#1, cand_acc=None, gt_acc=None, apfail & state_is_MANEUVER; cycle{1}
-trace#2, cand_acc=True, gt_acc=None, !apfail | state_is_MANEUVER; cycle{!apfail | state_is_MANEUVER}
+trace#2, cand_acc=True, gt_acc=None, cycle{!apfail | state_is_MANEUVER}
 
 Candidate = G(limits -> F(state_is_FAULT))
 GT = !limits U (limits & X(state_is_FAULT))
 trace#0, cand_acc=False, gt_acc=False, 1; limits & !state_is_FAULT; cycle{!state_is_FAULT}
 trace#1, cand_acc=None, gt_acc=None, limits & state_is_FAULT; cycle{1}
-trace#2, cand_acc=True, gt_acc=None, !limits | state_is_FAULT; cycle{!limits | state_is_FAULT}
+trace#2, cand_acc=True, gt_acc=None, cycle{!limits | state_is_FAULT}
 
 Candidate = G((!request) -> F(state_is_TRANSITION))
 GT = G(!request -> X(state_is_TRANSITION))
 trace#0, cand_acc=False, gt_acc=False, 1; !request & !state_is_TRANSITION; cycle{!state_is_TRANSITION}
 trace#1, cand_acc=None, gt_acc=None, !request & state_is_TRANSITION; cycle{1}
-trace#2, cand_acc=None, gt_acc=None, request & !state_is_TRANSITION; cycle{!state_is_TRANSITION}
-trace#3, cand_acc=True, gt_acc=None, request | state_is_TRANSITION; cycle{request | state_is_TRANSITION}
+trace#2, cand_acc=True, gt_acc=None, cycle{request | state_is_TRANSITION}
 
 Candidate = G(((!request) & (!limits)) -> X(state_is_TRANSITION))
 GT = G(!request & !limits -> F(state_is_TRANSITION))
-trace#0, cand_acc=False, gt_acc=None, !limits & !request; cycle{!state_is_TRANSITION}
+trace#0, cand_acc=False, gt_acc=None, !limits & !request; !limits & !state_is_TRANSITION; cycle{!limits}
 
 Candidate = G((StartUpMode & initDone) -> X(SelfTestMode))
 GT = !initDone U (initDone & G(StartUpMode -> X(SelfTestMode)))
-trace#0, cand_acc=True, gt_acc=None, !StartUpMode | !initDone; cycle{!StartUpMode | !initDone}
+trace#0, cand_acc=False, gt_acc=False, StartUpMode & initDone; !SelfTestMode & StartUpMode; cycle{StartUpMode}
+trace#1, cand_acc=False, gt_acc=False, StartUpMode & initDone; !SelfTestMode & initDone; cycle{initDone}
+trace#2, cand_acc=True, gt_acc=None, 1; cycle{SelfTestMode}
 
 Candidate = G(StartUpMode -> (checkCommsSensors & checkCommsValves))
 GT = G(StartUpMode -> X(checkCommsSensors & checkCommsValves))
-trace#0, cand_acc=True, gt_acc=None, cycle{!StartUpMode | (checkCommsSensors & checkCommsValves)}
+trace#0, cand_acc=True, gt_acc=None, !StartUpMode | (checkCommsSensors & checkCommsValves); cycle{!StartUpMode | (checkCommsSensors & checkCommsValves)}
 
 Candidate = G((SelfTestMode & selfTestFail) -> G(!ventilating))
 GT = !selfTestFail U (selfTestFail & G(SelfTestMode -> G(!ventilating)))
 trace#0, cand_acc=False, gt_acc=False, 1; SelfTestMode & selfTestFail & ventilating; cycle{1}
-trace#1, cand_acc=None, gt_acc=None, !SelfTestMode & selfTestFail & ventilating; cycle{1}
-trace#2, cand_acc=None, gt_acc=None, SelfTestMode & !selfTestFail & ventilating; cycle{1}
-trace#3, cand_acc=False, gt_acc=False, cycle{(!SelfTestMode & ventilating) | (!selfTestFail & ventilating); SelfTestMode & selfTestFail & !ventilating}
-trace#4, cand_acc=True, gt_acc=None, !ventilating; cycle{!ventilating}
+trace#1, cand_acc=True, gt_acc=None, cycle{!SelfTestMode | !selfTestFail}
 
 Candidate = G(((PCVMode | PSVMode) & expiratoryPauseButton) -> F(expiratoryPhaseEnd & (expiratoryPauseButton -> (inValveClose & outValveClose) U !expiratoryPauseButton)))
 GT = !expiratoryPauseButton & expiratoryPhaseEnd U (expiratoryPauseButton & expiratoryPhaseEnd & G((PCVMode | PSVMode) & expiratoryPauseButton -> X(expiratoryPause & inValveClose & outValveClose)))
@@ -1825,15 +1687,14 @@ Candidate = G(StartUpMode -> F(checkCommsGUI))
 GT = G(StartUpMode -> (checkCommsGUI))
 trace#0, cand_acc=False, gt_acc=False, 1; StartUpMode & !checkCommsGUI; cycle{!checkCommsGUI}
 trace#1, cand_acc=None, gt_acc=None, StartUpMode & checkCommsGUI; cycle{1}
-trace#2, cand_acc=True, gt_acc=True, !StartUpMode | checkCommsGUI; cycle{!StartUpMode | checkCommsGUI}
-trace#3, cand_acc=True, gt_acc=True, cycle{!StartUpMode | checkCommsGUI}
-trace#4, cand_acc=None, gt_acc=None, !StartUpMode & checkCommsGUI; cycle{1}
-trace#5, cand_acc=None, gt_acc=None, !StartUpMode & !checkCommsGUI; cycle{!checkCommsGUI}
-trace#6, cand_acc=True, gt_acc=None, 1; cycle{checkCommsGUI}
+trace#2, cand_acc=True, gt_acc=True, cycle{!StartUpMode | checkCommsGUI}
+trace#3, cand_acc=True, gt_acc=True, !StartUpMode | checkCommsGUI; cycle{!StartUpMode | checkCommsGUI}
+trace#4, cand_acc=None, gt_acc=None, !StartUpMode & !checkCommsGUI; cycle{!checkCommsGUI}
+trace#5, cand_acc=True, gt_acc=None, 1; cycle{checkCommsGUI}
 
 Candidate = G(PCVMode & breathingCycleStart -> inspiratoryPhaseStart)
 GT = !(breathingCycleStart) U ((breathingCycleStart) & G(PCVMode -> (inspiratoryPhaseStart)))
-trace#0, cand_acc=True, gt_acc=None, cycle{!PCVMode | !breathingCycleStart | inspiratoryPhaseStart}
+trace#0, cand_acc=True, gt_acc=None, cycle{!breathingCycleStart | inspiratoryPhaseStart}
 
 Candidate = G((PSVMode & inspiratoryPhaseEnd & inspiratoryPauseButton) -> X(inValveClose & outValveClose))
 GT = !(inspiratoryPhaseEnd) U ((inspiratoryPhaseEnd) & G((PSVMode & inspiratoryPauseButton) -> ((inValveClose & outValveClose))))
@@ -1841,25 +1702,24 @@ trace#0, cand_acc=True, gt_acc=None, cycle{!PSVMode | !inspiratoryPauseButton}
 
 Candidate = G((StartUpMode | StandbyMode) -> (inValveClose & outValveOpen))
 GT = G((StartUpMode | StandbyMode) -> G((inValveClose & outValveOpen)))
-trace#0, cand_acc=True, gt_acc=None, cycle{(inValveClose & outValveOpen) | (!StandbyMode & !StartUpMode)}
+trace#0, cand_acc=True, gt_acc=None, (inValveClose & outValveOpen) | (!StandbyMode & !StartUpMode); cycle{(inValveClose & outValveOpen) | (!StandbyMode & !StartUpMode)}
 
 Candidate = G((PCVMode | PSVMode) & inspiratoryPauseButton -> F inspiratoryPause)
 GT = !(inspiratoryPauseButton) U ((inspiratoryPauseButton) & G((( PCVMode | PSVMode )) -> X((inspiratoryPause | (! inspiratoryPauseButton)))))
-trace#0, cand_acc=True, gt_acc=None, cycle{inspiratoryPause | !inspiratoryPauseButton | (!PCVMode & !PSVMode)}
+trace#0, cand_acc=True, gt_acc=None, inspiratoryPause | !inspiratoryPauseButton | (!PCVMode & !PSVMode); cycle{inspiratoryPause | !inspiratoryPauseButton | (!PCVMode & !PSVMode)}
 
 Candidate = G(StartUpMode -> F(defaultParamsLoaded))
 GT = G(StartUpMode -> (defaultParamsLoaded))
 trace#0, cand_acc=False, gt_acc=False, 1; StartUpMode & !defaultParamsLoaded; cycle{!defaultParamsLoaded}
 trace#1, cand_acc=None, gt_acc=None, StartUpMode & defaultParamsLoaded; cycle{1}
-trace#2, cand_acc=True, gt_acc=True, !StartUpMode | defaultParamsLoaded; cycle{!StartUpMode | defaultParamsLoaded}
-trace#3, cand_acc=True, gt_acc=True, cycle{!StartUpMode | defaultParamsLoaded}
-trace#4, cand_acc=None, gt_acc=None, !StartUpMode & defaultParamsLoaded; cycle{1}
-trace#5, cand_acc=None, gt_acc=None, !StartUpMode & !defaultParamsLoaded; cycle{!defaultParamsLoaded}
-trace#6, cand_acc=True, gt_acc=None, 1; cycle{defaultParamsLoaded}
+trace#2, cand_acc=True, gt_acc=True, cycle{!StartUpMode | defaultParamsLoaded}
+trace#3, cand_acc=True, gt_acc=True, !StartUpMode | defaultParamsLoaded; cycle{!StartUpMode | defaultParamsLoaded}
+trace#4, cand_acc=None, gt_acc=None, !StartUpMode & !defaultParamsLoaded; cycle{!defaultParamsLoaded}
+trace#5, cand_acc=True, gt_acc=None, 1; cycle{defaultParamsLoaded}
 
 Candidate = G((SelfTestMode & (selfTestPass | guiResumeRequest)) -> X(StandbyMode))
 GT = !(selfTestPass | guiResumeRequest) U ((selfTestPass | guiResumeRequest) & G(SelfTestMode -> F(StandbyMode)))
-trace#0, cand_acc=False, gt_acc=None, cycle{(!SelfTestMode & !StandbyMode) | (!StandbyMode & !guiResumeRequest & !selfTestPass); (SelfTestMode & guiResumeRequest) | (SelfTestMode & selfTestPass)}
+trace#0, cand_acc=False, gt_acc=None, (SelfTestMode & guiResumeRequest) | (SelfTestMode & selfTestPass); (!StandbyMode & guiResumeRequest) | (!StandbyMode & selfTestPass); cycle{guiResumeRequest | selfTestPass}
 
 Candidate = G((inspiratoryPhaseEnd & !PSVMode & RM) -> X(RM & RMButton))
 GT = !(inspiratoryPhaseEnd) U ((inspiratoryPhaseEnd) & G((PSVMode & RMButton) -> X(RM)))
@@ -1877,11 +1737,11 @@ Candidate = G(RM -> F(expiratoryPhaseStart))
 GT = !(RM) U ((RM) & F(((! RM) & expiratoryPhaseStart)))
 trace#0, cand_acc=False, gt_acc=False, 1; RM & !expiratoryPhaseStart; cycle{!expiratoryPhaseStart}
 trace#1, cand_acc=None, gt_acc=None, RM & expiratoryPhaseStart; cycle{1}
-trace#2, cand_acc=True, gt_acc=None, !RM | expiratoryPhaseStart; cycle{!RM | expiratoryPhaseStart}
+trace#2, cand_acc=True, gt_acc=None, cycle{!RM | expiratoryPhaseStart}
 
 Candidate = G((PCVMode | PSVMode) & expiratoryPauseButton -> F expiratoryPause)
 GT = !(expiratoryPauseButton) U ((expiratoryPauseButton) & G((( PCVMode | PSVMode )) -> X((expiratoryPause | (! expiratoryPauseButton)))))
-trace#0, cand_acc=True, gt_acc=None, cycle{expiratoryPause | !expiratoryPauseButton | (!PCVMode & !PSVMode)}
+trace#0, cand_acc=True, gt_acc=None, expiratoryPause | !expiratoryPauseButton | (!PCVMode & !PSVMode); cycle{expiratoryPause | !expiratoryPauseButton | (!PCVMode & !PSVMode)}
 
 Candidate = G(PSVModeSelected -> F(PSVMode))
 GT = !(PSVModeSelected) U ((PSVModeSelected) & G(StandbyMode -> F(PSVMode)))
@@ -1889,7 +1749,7 @@ trace#0, cand_acc=False, gt_acc=None, 1; !PSVMode & PSVModeSelected; cycle{!PSVM
 
 Candidate = G(((PCVMode | PSVMode) & inspiratoryPhaseEnd & !inspiratoryPauseButton & RMButton) -> F(RM))
 GT = !(inspiratoryPhaseEnd) U ((inspiratoryPhaseEnd) & G((( PCVMode | PSVMode ) & RMButton & ! inspiratoryPauseButton) -> (RM)))
-trace#0, cand_acc=True, gt_acc=None, cycle{RM | !RMButton | inspiratoryPauseButton | !inspiratoryPhaseEnd | (!PCVMode & !PSVMode)}
+trace#0, cand_acc=True, gt_acc=None, cycle{RM | !RMButton | !inspiratoryPhaseEnd | (!PCVMode & !PSVMode)}
 
 Candidate = G((PSVMode & stopVentilation) -> F(!PSVMode & !StandbyMode))
 GT = !(stopVentilation) U ((stopVentilation) & G(PSVMode -> F(StandbyMode)))
@@ -1905,7 +1765,7 @@ trace#0, cand_acc=False, gt_acc=None, 1; !PCVMode & PCVModeSelected; cycle{!PCVM
 
 Candidate = G(RM -> (outValveClose & inValveOpen))
 GT = G((RM) -> X((outValveClose & inValveOpen)))
-trace#0, cand_acc=True, gt_acc=None, cycle{!RM | (inValveOpen & outValveClose)}
+trace#0, cand_acc=True, gt_acc=None, !RM | (inValveOpen & outValveClose); cycle{!RM | (inValveOpen & outValveClose)}
 
 Candidate = G(((PCVMode | PSVMode) & inspiratoryPauseButton) -> F(inspiratoryPhaseEnd & (inspiratoryPauseButton -> (inValveClose & outValveClose) U !inspiratoryPauseButton)))
 GT = !inspiratoryPauseButton & inspiratoryPhaseEnd U (inspiratoryPauseButton & inspiratoryPhaseEnd & G((PCVMode | PSVMode) & inspiratoryPauseButton -> G(inspiratoryPause & inValveClose & outValveClose)))
@@ -1915,12 +1775,12 @@ Candidate = G(SelfTestMode -> F(selfTestFail | selfTestPass))
 GT = G(SelfTestMode -> X((selfTestPass | selfTestFail)))
 trace#0, cand_acc=True, gt_acc=True, 1; cycle{selfTestFail | selfTestPass}
 trace#1, cand_acc=False, gt_acc=False, 1; SelfTestMode & !selfTestFail & !selfTestPass; cycle{!selfTestFail & !selfTestPass}
-trace#2, cand_acc=None, gt_acc=None, SelfTestMode & !selfTestFail & !selfTestPass; cycle{1}
-trace#3, cand_acc=True, gt_acc=None, !SelfTestMode | selfTestFail | selfTestPass; cycle{!SelfTestMode | selfTestFail | selfTestPass}
+trace#2, cand_acc=None, gt_acc=None, (SelfTestMode & selfTestFail) | (SelfTestMode & selfTestPass); cycle{1}
+trace#3, cand_acc=True, gt_acc=None, cycle{!SelfTestMode | selfTestFail | selfTestPass}
 
 Candidate = G((PCVMode & PSVModeSelected) -> F(confirmPSVParameters))
 GT = !(PSVModeSelected) U ((PSVModeSelected) & G(PCVMode -> X(confirmPSVParameters)))
-trace#0, cand_acc=True, gt_acc=None, cycle{!PCVMode | !PSVModeSelected | confirmPSVParameters}
+trace#0, cand_acc=True, gt_acc=None, cycle{confirmPSVParameters | (PCVMode & !PSVModeSelected) | (!PCVMode & PSVModeSelected)}
 
 Candidate = G(SelfTestMode -> F(testFl2Pass | testFl2Fail | testFl2Skip))
 GT = G(SelfTestMode -> (((testFl2Pass | testFl2Fail) | testFl2Skip)))
@@ -1936,28 +1796,28 @@ trace#0, cand_acc=False, gt_acc=None, 1; (!guiConnected & !highPriorityAlarm) | 
 
 Candidate = G((selfTestPass & startMonitoring) -> F(startReportingHealthParams))
 GT = !(selfTestPass) U ((selfTestPass) & X(((startMonitoring & startReportingHealthParams) & StandbyMode)))
-trace#0, cand_acc=True, gt_acc=None, cycle{!selfTestPass | !startMonitoring | startReportingHealthParams}
+trace#0, cand_acc=True, gt_acc=None, cycle{startReportingHealthParams | (selfTestPass & !startMonitoring) | (!selfTestPass & startMonitoring)}
 
 Candidate = G(resumeVentilation -> G((testAlarmsSkip | testAlarmsPass) & (testFl2Skip | testFl2Pass) & (testLeaksSkip | testLeaksPass) & (testOxygenSensorSkip | testOxygenSensorPass) & (testPSExpSkip | testPSExpPass) & (testPowerSwitchSkip | testPowerSwitchPass)))
 GT = !(resumeVentilation) U ((resumeVentilation) & F((SelfTestMode & (((((((testPowerSwitchPass | testPowerSwitchSkip) & (testLeaksPass | testLeaksSkip)) & (testFl2Pass | testFl2Skip)) & (testPSExpPass | testPSExpSkip)) & (testOxygenSensorPass | testOxygenSensorSkip)) & (testAlarmsPass | testAlarmsSkip)) -> selfTestPass))))
-trace#0, cand_acc=False, gt_acc=None, 1; (resumeVentilation & !testAlarmsPass & !testAlarmsSkip) | (resumeVentilation & !testFl2Pass & !testFl2Skip) | (resumeVentilation & !testLeaksPass & !testLeaksSkip) | (resumeVentilation & !testOxygenSensorPass & !testOxygenSensorSkip) | (resumeVentilation & !testPSExpPass & !testPSExpSkip) | (resumeVentilation & !testPowerSwitchPass & !testPowerSwitchSkip); cycle{1}
+trace#0, cand_acc=False, gt_acc=None, cycle{(!resumeVentilation & !testAlarmsPass & !testAlarmsSkip) | (!resumeVentilation & !testFl2Pass & !testFl2Skip) | (!resumeVentilation & !testLeaksPass & !testLeaksSkip) | (!resumeVentilation & !testOxygenSensorPass & !testOxygenSensorSkip) | (!resumeVentilation & !testPSExpPass & !testPSExpSkip) | (!resumeVentilation & !testPowerSwitchPass & !testPowerSwitchSkip); (resumeVentilation & testAlarmsPass & testFl2Pass & testLeaksPass & testOxygenSensorPass & testPSExpPass & testPowerSwitchPass) | (resumeVentilation & testAlarmsPass & testFl2Pass & testLeaksPass & testOxygenSensorPass & testPSExpPass & testPowerSwitchSkip) | (resumeVentilation & testAlarmsPass & testFl2Pass & testLeaksPass & testOxygenSensorPass & testPSExpSkip & testPowerSwitchPass) | (resumeVentilation & testAlarmsPass & testFl2Pass & testLeaksPass & testOxygenSensorPass & testPSExpSkip & testPowerSwitchSkip) | (resumeVentilation & testAlarmsPass & testFl2Pass & testLeaksPass & testOxygenSensorSkip & testPSExpPass & testPowerSwitchPass) | (resumeVentilation & testAlarmsPass & testFl2Pass & testLeaksPass & testOxygenSensorSkip & testPSExpPass & testPowerSwitchSkip) | (resumeVentilation & testAlarmsPass & testFl2Pass & testLeaksPass & testOxygenSensorSkip & testPSExpSkip & testPowerSwitchPass) | (resumeVentilation & testAlarmsPass & testFl2Pass & testLeaksPass & testOxygenSensorSkip & testPSExpSkip & testPowerSwitchSkip) | (resumeVentilation & testAlarmsPass & testFl2Pass & testLeaksSkip & testOxygenSensorPass & testPSExpPass & testPowerSwitchPass) | (resumeVentilation & testAlarmsPass & testFl2Pass & testLeaksSkip & testOxygenSensorPass & testPSExpPass & testPowerSwitchSkip) | (resumeVentilation & testAlarmsPass & testFl2Pass & testLeaksSkip & testOxygenSensorPass & testPSExpSkip & testPowerSwitchPass) | (resumeVentilation & testAlarmsPass & testFl2Pass & testLeaksSkip & testOxygenSensorPass & testPSExpSkip & testPowerSwitchSkip) | (resumeVentilation & testAlarmsPass & testFl2Pass & testLeaksSkip & testOxygenSensorSkip & testPSExpPass & testPowerSwitchPass) | (resumeVentilation & testAlarmsPass & testFl2Pass & testLeaksSkip & testOxygenSensorSkip & testPSExpPass & testPowerSwitchSkip) | (resumeVentilation & testAlarmsPass & testFl2Pass & testLeaksSkip & testOxygenSensorSkip & testPSExpSkip & testPowerSwitchPass) | (resumeVentilation & testAlarmsPass & testFl2Pass & testLeaksSkip & testOxygenSensorSkip & testPSExpSkip & testPowerSwitchSkip) | (resumeVentilation & testAlarmsPass & testFl2Skip & testLeaksPass & testOxygenSensorPass & testPSExpPass & testPowerSwitchPass) | (resumeVentilation & testAlarmsPass & testFl2Skip & testLeaksPass & testOxygenSensorPass & testPSExpPass & testPowerSwitchSkip) | (resumeVentilation & testAlarmsPass & testFl2Skip & testLeaksPass & testOxygenSensorPass & testPSExpSkip & testPowerSwitchPass) | (resumeVentilation & testAlarmsPass & testFl2Skip & testLeaksPass & testOxygenSensorPass & testPSExpSkip & testPowerSwitchSkip) | (resumeVentilation & testAlarmsPass & testFl2Skip & testLeaksPass & testOxygenSensorSkip & testPSExpPass & testPowerSwitchPass) | (resumeVentilation & testAlarmsPass & testFl2Skip & testLeaksPass & testOxygenSensorSkip & testPSExpPass & testPowerSwitchSkip) | (resumeVentilation & testAlarmsPass & testFl2Skip & testLeaksPass & testOxygenSensorSkip & testPSExpSkip & testPowerSwitchPass) | (resumeVentilation & testAlarmsPass & testFl2Skip & testLeaksPass & testOxygenSensorSkip & testPSExpSkip & testPowerSwitchSkip) | (resumeVentilation & testAlarmsPass & testFl2Skip & testLeaksSkip & testOxygenSensorPass & testPSExpPass & testPowerSwitchPass) | (resumeVentilation & testAlarmsPass & testFl2Skip & testLeaksSkip & testOxygenSensorPass & testPSExpPass & testPowerSwitchSkip) | (resumeVentilation & testAlarmsPass & testFl2Skip & testLeaksSkip & testOxygenSensorPass & testPSExpSkip & testPowerSwitchPass) | (resumeVentilation & testAlarmsPass & testFl2Skip & testLeaksSkip & testOxygenSensorPass & testPSExpSkip & testPowerSwitchSkip) | (resumeVentilation & testAlarmsPass & testFl2Skip & testLeaksSkip & testOxygenSensorSkip & testPSExpPass & testPowerSwitchPass) | (resumeVentilation & testAlarmsPass & testFl2Skip & testLeaksSkip & testOxygenSensorSkip & testPSExpPass & testPowerSwitchSkip) | (resumeVentilation & testAlarmsPass & testFl2Skip & testLeaksSkip & testOxygenSensorSkip & testPSExpSkip & testPowerSwitchPass) | (resumeVentilation & testAlarmsPass & testFl2Skip & testLeaksSkip & testOxygenSensorSkip & testPSExpSkip & testPowerSwitchSkip) | (resumeVentilation & testAlarmsSkip & testFl2Pass & testLeaksPass & testOxygenSensorPass & testPSExpPass & testPowerSwitchPass) | (resumeVentilation & testAlarmsSkip & testFl2Pass & testLeaksPass & testOxygenSensorPass & testPSExpPass & testPowerSwitchSkip) | (resumeVentilation & testAlarmsSkip & testFl2Pass & testLeaksPass & testOxygenSensorPass & testPSExpSkip & testPowerSwitchPass) | (resumeVentilation & testAlarmsSkip & testFl2Pass & testLeaksPass & testOxygenSensorPass & testPSExpSkip & testPowerSwitchSkip) | (resumeVentilation & testAlarmsSkip & testFl2Pass & testLeaksPass & testOxygenSensorSkip & testPSExpPass & testPowerSwitchPass) | (resumeVentilation & testAlarmsSkip & testFl2Pass & testLeaksPass & testOxygenSensorSkip & testPSExpPass & testPowerSwitchSkip) | (resumeVentilation & testAlarmsSkip & testFl2Pass & testLeaksPass & testOxygenSensorSkip & testPSExpSkip & testPowerSwitchPass) | (resumeVentilation & testAlarmsSkip & testFl2Pass & testLeaksPass & testOxygenSensorSkip & testPSExpSkip & testPowerSwitchSkip) | (resumeVentilation & testAlarmsSkip & testFl2Pass & testLeaksSkip & testOxygenSensorPass & testPSExpPass & testPowerSwitchPass) | (resumeVentilation & testAlarmsSkip & testFl2Pass & testLeaksSkip & testOxygenSensorPass & testPSExpPass & testPowerSwitchSkip) | (resumeVentilation & testAlarmsSkip & testFl2Pass & testLeaksSkip & testOxygenSensorPass & testPSExpSkip & testPowerSwitchPass) | (resumeVentilation & testAlarmsSkip & testFl2Pass & testLeaksSkip & testOxygenSensorPass & testPSExpSkip & testPowerSwitchSkip) | (resumeVentilation & testAlarmsSkip & testFl2Pass & testLeaksSkip & testOxygenSensorSkip & testPSExpPass & testPowerSwitchPass) | (resumeVentilation & testAlarmsSkip & testFl2Pass & testLeaksSkip & testOxygenSensorSkip & testPSExpPass & testPowerSwitchSkip) | (resumeVentilation & testAlarmsSkip & testFl2Pass & testLeaksSkip & testOxygenSensorSkip & testPSExpSkip & testPowerSwitchPass) | (resumeVentilation & testAlarmsSkip & testFl2Pass & testLeaksSkip & testOxygenSensorSkip & testPSExpSkip & testPowerSwitchSkip) | (resumeVentilation & testAlarmsSkip & testFl2Skip & testLeaksPass & testOxygenSensorPass & testPSExpPass & testPowerSwitchPass) | (resumeVentilation & testAlarmsSkip & testFl2Skip & testLeaksPass & testOxygenSensorPass & testPSExpPass & testPowerSwitchSkip) | (resumeVentilation & testAlarmsSkip & testFl2Skip & testLeaksPass & testOxygenSensorPass & testPSExpSkip & testPowerSwitchPass) | (resumeVentilation & testAlarmsSkip & testFl2Skip & testLeaksPass & testOxygenSensorPass & testPSExpSkip & testPowerSwitchSkip) | (resumeVentilation & testAlarmsSkip & testFl2Skip & testLeaksPass & testOxygenSensorSkip & testPSExpPass & testPowerSwitchPass) | (resumeVentilation & testAlarmsSkip & testFl2Skip & testLeaksPass & testOxygenSensorSkip & testPSExpPass & testPowerSwitchSkip) | (resumeVentilation & testAlarmsSkip & testFl2Skip & testLeaksPass & testOxygenSensorSkip & testPSExpSkip & testPowerSwitchPass) | (resumeVentilation & testAlarmsSkip & testFl2Skip & testLeaksPass & testOxygenSensorSkip & testPSExpSkip & testPowerSwitchSkip) | (resumeVentilation & testAlarmsSkip & testFl2Skip & testLeaksSkip & testOxygenSensorPass & testPSExpPass & testPowerSwitchPass) | (resumeVentilation & testAlarmsSkip & testFl2Skip & testLeaksSkip & testOxygenSensorPass & testPSExpPass & testPowerSwitchSkip) | (resumeVentilation & testAlarmsSkip & testFl2Skip & testLeaksSkip & testOxygenSensorPass & testPSExpSkip & testPowerSwitchPass) | (resumeVentilation & testAlarmsSkip & testFl2Skip & testLeaksSkip & testOxygenSensorPass & testPSExpSkip & testPowerSwitchSkip) | (resumeVentilation & testAlarmsSkip & testFl2Skip & testLeaksSkip & testOxygenSensorSkip & testPSExpPass & testPowerSwitchPass) | (resumeVentilation & testAlarmsSkip & testFl2Skip & testLeaksSkip & testOxygenSensorSkip & testPSExpPass & testPowerSwitchSkip) | (resumeVentilation & testAlarmsSkip & testFl2Skip & testLeaksSkip & testOxygenSensorSkip & testPSExpSkip & testPowerSwitchPass) | (resumeVentilation & testAlarmsSkip & testFl2Skip & testLeaksSkip & testOxygenSensorSkip & testPSExpSkip & testPowerSwitchSkip)}
 
 Candidate = G(measureTV -> F(displayTV))
 GT = (G((measureTV & displayTV)))
 trace#0, cand_acc=False, gt_acc=False, 1; !displayTV & measureTV; cycle{!displayTV}
 trace#1, cand_acc=None, gt_acc=None, displayTV & measureTV; cycle{1}
-trace#2, cand_acc=True, gt_acc=None, displayTV | !measureTV; cycle{displayTV | !measureTV}
+trace#2, cand_acc=True, gt_acc=None, cycle{displayTV | !measureTV}
 
 Candidate = G(enableLeakCompensation -> F(leakCompensationActive)) & !leakCompensationActive
 GT = G(enableLeakCompensation -> F(leakCompensationActive))
-trace#0, cand_acc=True, gt_acc=True, !enableLeakCompensation & !leakCompensationActive; cycle{!enableLeakCompensation}
-trace#1, cand_acc=False, gt_acc=None, leakCompensationActive; cycle{1}
+trace#0, cand_acc=True, gt_acc=True, !enableLeakCompensation & !leakCompensationActive; cycle{!enableLeakCompensation | leakCompensationActive}
+trace#1, cand_acc=True, gt_acc=True, !enableLeakCompensation & !leakCompensationActive; cycle{!enableLeakCompensation}
+trace#2, cand_acc=False, gt_acc=None, leakCompensationActive; cycle{1}
 
 Candidate = G((StartUpMode | SelfTestMode) -> !patientConnected)
 GT = G(StartUpMode | SelfTestMode -> G(! patientConnected))
 trace#0, cand_acc=False, gt_acc=False, 1; (SelfTestMode & patientConnected) | (StartUpMode & patientConnected); cycle{1}
-trace#1, cand_acc=None, gt_acc=None, !SelfTestMode & !StartUpMode & patientConnected; cycle{1}
-trace#2, cand_acc=True, gt_acc=None, !patientConnected | (!SelfTestMode & !StartUpMode); cycle{!patientConnected | (!SelfTestMode & !StartUpMode)}
+trace#1, cand_acc=True, gt_acc=None, cycle{(!SelfTestMode & !StartUpMode & patientConnected) | (SelfTestMode & !patientConnected) | (StartUpMode & !patientConnected)}
 
 Candidate = G(enterAlarmThresholds)
 GT = ((enterAlarmThresholds))
@@ -1967,9 +1827,7 @@ Candidate = G((PCVMode & breathingCycleDone) -> F(breathingCycleStart)) & G((PCV
 GT = !breathingCycleDone | patientBreathingRequest U (breathingCycleDone | patientBreathingRequest & G(PCVMode -> (breathingCycleStart)))
 trace#0, cand_acc=True, gt_acc=True, 1; cycle{breathingCycleStart}
 trace#1, cand_acc=True, gt_acc=True, cycle{breathingCycleStart}
-trace#2, cand_acc=True, gt_acc=True, cycle{!PCVMode | breathingCycleStart | (!breathingCycleDone & !patientBreathingRequest)}
-trace#3, cand_acc=True, gt_acc=True, !PCVMode | breathingCycleStart | (!breathingCycleDone & !patientBreathingRequest); cycle{!PCVMode | breathingCycleStart | (!breathingCycleDone & !patientBreathingRequest)}
-trace#4, cand_acc=False, gt_acc=True, 1; (PCVMode & breathingCycleDone & !breathingCycleStart) | (PCVMode & !breathingCycleStart & patientBreathingRequest); cycle{!breathingCycleStart}
+trace#2, cand_acc=False, gt_acc=True, 1; (PCVMode & breathingCycleDone & !breathingCycleStart) | (PCVMode & !breathingCycleStart & patientBreathingRequest); cycle{!breathingCycleStart}
 
 Candidate = G(SelfTestMode -> F(testPSExpPass | testPSExpFail | testPSExpSkip))
 GT = G(SelfTestMode -> (((testPSExpPass | testPSExpFail) | testPSExpSkip)))
@@ -1981,13 +1839,13 @@ trace#0, cand_acc=False, gt_acc=None, 1; apnea & !apneaAlarm; cycle{!apneaAlarm}
 
 Candidate = F(selfTestPass -> F(StandbyMode))
 GT = !(selfTestPass) U ((selfTestPass) & X(StandbyMode))
-trace#0, cand_acc=None, gt_acc=False, !StandbyMode; cycle{!StandbyMode & selfTestPass}
+trace#0, cand_acc=True, gt_acc=None, StandbyMode | !selfTestPass; cycle{1}
 
 Candidate = G(ventilatorSettingsChanged -> F(logVentilatorSettings))
 GT = !(ventilatorSettingsChanged) U ((ventilatorSettingsChanged) & X(logVentilatorSettings))
 trace#0, cand_acc=False, gt_acc=False, 1; !logVentilatorSettings & ventilatorSettingsChanged; cycle{!logVentilatorSettings}
 trace#1, cand_acc=None, gt_acc=None, logVentilatorSettings & ventilatorSettingsChanged; cycle{1}
-trace#2, cand_acc=True, gt_acc=None, logVentilatorSettings | !ventilatorSettingsChanged; cycle{logVentilatorSettings | !ventilatorSettingsChanged}
+trace#2, cand_acc=True, gt_acc=None, cycle{logVentilatorSettings | !ventilatorSettingsChanged}
 
 Candidate = G(selfTestPass -> !selfTestFail)
 GT = (F((selfTestPass | selfTestFail)))
@@ -2004,8 +1862,7 @@ trace#0, cand_acc=False, gt_acc=None, 1; alarmSettingsChanged & !logAlarmSetting
 Candidate = G(StandbyMode -> !ventilating)
 GT = G(StandbyMode -> G((!ventilating)))
 trace#0, cand_acc=False, gt_acc=False, 1; StandbyMode & ventilating; cycle{1}
-trace#1, cand_acc=None, gt_acc=None, !StandbyMode & ventilating; cycle{1}
-trace#2, cand_acc=True, gt_acc=None, !StandbyMode | !ventilating; cycle{!StandbyMode | !ventilating}
+trace#1, cand_acc=True, gt_acc=None, cycle{!StandbyMode | !ventilating}
 
 Candidate = G(StandbyMode -> ventilationParamsAdjustable)
 GT = G(StandbyMode -> F((ventilationParamsAdjustable)))
@@ -2017,7 +1874,7 @@ trace#0, cand_acc=True, gt_acc=False, !initFail; cycle{!initFail}
 
 Candidate = G((PCVMode & PSVModeSelected & inspiratoryPhaseEnd) -> X(PSVMode))
 GT = !(PSVModeSelected) U ((PSVModeSelected) & G(PCVMode -> X((! (inspiratoryPhaseEnd & PSVMode)))))
-trace#0, cand_acc=True, gt_acc=None, cycle{!PCVMode | !PSVModeSelected}
+trace#0, cand_acc=True, gt_acc=None, 1; cycle{PSVMode}
 
 Candidate = G(SelfTestMode -> F(testOxygenSensorPass))
 GT = G(SelfTestMode -> X(((testOxygenSensorPass | testOxygenSensorFail) | testOxygenSensorSkip)))
@@ -2031,8 +1888,8 @@ Candidate = G(SelfTestMode -> F(testAlarmsPass | testAlarmsFail | testAlarmsSkip
 GT = G(SelfTestMode -> X(((testAlarmsPass | testAlarmsFail) | testAlarmsSkip)))
 trace#0, cand_acc=True, gt_acc=True, 1; cycle{testAlarmsFail | testAlarmsPass | testAlarmsSkip}
 trace#1, cand_acc=False, gt_acc=False, 1; SelfTestMode & !testAlarmsFail & !testAlarmsPass & !testAlarmsSkip; cycle{!testAlarmsFail & !testAlarmsPass & !testAlarmsSkip}
-trace#2, cand_acc=None, gt_acc=None, SelfTestMode & !testAlarmsFail & !testAlarmsPass & !testAlarmsSkip; cycle{1}
-trace#3, cand_acc=True, gt_acc=None, !SelfTestMode | testAlarmsFail | testAlarmsPass | testAlarmsSkip; cycle{!SelfTestMode | testAlarmsFail | testAlarmsPass | testAlarmsSkip}
+trace#2, cand_acc=None, gt_acc=None, (SelfTestMode & testAlarmsFail) | (SelfTestMode & testAlarmsPass) | (SelfTestMode & testAlarmsSkip); cycle{1}
+trace#3, cand_acc=True, gt_acc=None, cycle{!SelfTestMode | testAlarmsFail | testAlarmsPass | testAlarmsSkip}
 
 Candidate = G(gasSupplyFailure -> patientSafe)
 GT = G((gasSupplyFailure) -> X(patientSafe))
@@ -2040,14 +1897,13 @@ trace#0, cand_acc=False, gt_acc=None, 1; gasSupplyFailure & !patientSafe; cycle{
 
 Candidate = G(enableLeakCompensation -> F(leakCompensationActive)) & G(!enableLeakCompensation -> F(!leakCompensationActive))
 GT = (G(enableLeakCompensation <-> leakCompensationActive))
-trace#0, cand_acc=False, gt_acc=False, 1; enableLeakCompensation & !leakCompensationActive; cycle{!leakCompensationActive}
+trace#0, cand_acc=True, gt_acc=True, cycle{(!enableLeakCompensation & !leakCompensationActive) | (enableLeakCompensation & leakCompensationActive)}
 trace#1, cand_acc=True, gt_acc=True, (!enableLeakCompensation & !leakCompensationActive) | (enableLeakCompensation & leakCompensationActive); cycle{(!enableLeakCompensation & !leakCompensationActive) | (enableLeakCompensation & leakCompensationActive)}
-trace#2, cand_acc=False, gt_acc=False, enableLeakCompensation & !leakCompensationActive; cycle{!leakCompensationActive}
-trace#3, cand_acc=None, gt_acc=None, !leakCompensationActive; cycle{!leakCompensationActive}
+trace#2, cand_acc=False, gt_acc=False, 1; enableLeakCompensation & !leakCompensationActive; cycle{!leakCompensationActive}
+trace#3, cand_acc=False, gt_acc=False, enableLeakCompensation & !leakCompensationActive; cycle{!leakCompensationActive}
 trace#4, cand_acc=False, gt_acc=False, !enableLeakCompensation & leakCompensationActive; cycle{!enableLeakCompensation & leakCompensationActive}
-trace#5, cand_acc=None, gt_acc=None, cycle{!enableLeakCompensation}
-trace#6, cand_acc=None, gt_acc=None, cycle{enableLeakCompensation}
-trace#7, cand_acc=None, gt_acc=False, !enableLeakCompensation & leakCompensationActive; cycle{!enableLeakCompensation}
+trace#5, cand_acc=None, gt_acc=None, leakCompensationActive; cycle{leakCompensationActive}
+trace#6, cand_acc=None, gt_acc=False, !enableLeakCompensation & leakCompensationActive; cycle{!enableLeakCompensation}
 
 Candidate = G(powerSupplyChanged -> F(logPowerSupply))
 GT = !(powerSupplyChanged) U ((powerSupplyChanged) & (logPowerSupply))
@@ -2055,11 +1911,11 @@ trace#0, cand_acc=False, gt_acc=None, 1; !logPowerSupply & powerSupplyChanged; c
 
 Candidate = G(loadLog -> F(loadLog))
 GT = (F(loadLog))
-trace#0, cand_acc=True, gt_acc=None, cycle{1}
+trace#0, cand_acc=True, gt_acc=False, !loadLog; cycle{!loadLog}
 
 Candidate = G(patientBreathTrigger -> X(breathingTimerReset))
 GT = !(patientBreathTrigger) U ((patientBreathTrigger) & (breathingTimerReset))
-trace#0, cand_acc=False, gt_acc=None, patientBreathTrigger; cycle{!breathingTimerReset}
+trace#0, cand_acc=True, gt_acc=None, 1; cycle{breathingTimerReset}
 
 Candidate = G(SelfTestMode -> F(testPowerSwitchPass | testPowerSwitchFail | testPowerSwitchSkip))
 GT = G(SelfTestMode -> (((testPowerSwitchPass | testPowerSwitchFail) | testPowerSwitchSkip)))
@@ -2067,15 +1923,16 @@ trace#0, cand_acc=True, gt_acc=None, 1; cycle{testPowerSwitchFail | testPowerSwi
 
 Candidate = G(PCVMode & RMButton -> F RM)
 GT = !(RMButton) U ((RMButton) & G(PCVMode -> (RM)))
-trace#0, cand_acc=True, gt_acc=None, cycle{!PCVMode | RM | !RMButton}
+trace#0, cand_acc=True, gt_acc=None, cycle{RM | (PCVMode & !RMButton) | (!PCVMode & RMButton)}
 
 Candidate = G(enableLeakCompensation & MinPEEPAlarm -> leakCompensationActive)
 GT = !MinPEEPAlarm U (MinPEEPAlarm & G(enableLeakCompensation -> X(leakCompensationActive)))
-trace#0, cand_acc=True, gt_acc=None, cycle{!MinPEEPAlarm | !enableLeakCompensation | leakCompensationActive}
+trace#0, cand_acc=True, gt_acc=None, cycle{!enableLeakCompensation | leakCompensationActive}
 
 Candidate = G((breathingCircuitConnected & !patientConnected & airSupplyConnected & powerConnected & powerButton) -> X(StartUpMode))
 GT = !(powerButton) U ((powerButton) & G((breathingCircuitConnected & ! ( patientConnected ) & airSupplyConnected & powerConnected ) -> X(StartUpMode)))
-trace#0, cand_acc=True, gt_acc=None, cycle{!airSupplyConnected | !breathingCircuitConnected | !powerButton | !powerConnected}
+trace#0, cand_acc=False, gt_acc=False, 1; airSupplyConnected & breathingCircuitConnected & !patientConnected & powerButton & powerConnected; !StartUpMode; cycle{1}
+trace#1, cand_acc=True, gt_acc=None, 1; cycle{StartUpMode}
 
 Candidate = G(logPreUseCheck -> F(preUseCheckDone))
 GT = !(preUseCheckDone) U ((preUseCheckDone) & F(logPreUseCheck))
@@ -2083,24 +1940,24 @@ trace#0, cand_acc=False, gt_acc=None, 1; logPreUseCheck & !preUseCheckDone; cycl
 
 Candidate = G((selfTestFail) -> (F(OutOfServiceWarning) & G(failSafeMode) & G(!SelfTestMode)))
 GT = !(selfTestFail) U ((selfTestFail) & G(SelfTestMode -> ((OutOfServiceWarning & failSafeMode))))
-trace#0, cand_acc=False, gt_acc=None, 1; (SelfTestMode & selfTestFail) | (!failSafeMode & selfTestFail); cycle{1}
+trace#0, cand_acc=True, gt_acc=False, cycle{!selfTestFail}
 
 Candidate = G(SelfTestMode -> F(testLeaksPass | testLeaksFail | testLeaksSkip))
 GT = G(SelfTestMode -> X(((testLeaksPass | testLeaksFail) | testLeaksSkip)))
 trace#0, cand_acc=True, gt_acc=True, 1; cycle{testLeaksFail | testLeaksPass | testLeaksSkip}
 trace#1, cand_acc=False, gt_acc=False, 1; SelfTestMode & !testLeaksFail & !testLeaksPass & !testLeaksSkip; cycle{!testLeaksFail & !testLeaksPass & !testLeaksSkip}
-trace#2, cand_acc=None, gt_acc=None, SelfTestMode & !testLeaksFail & !testLeaksPass & !testLeaksSkip; cycle{1}
-trace#3, cand_acc=True, gt_acc=None, !SelfTestMode | testLeaksFail | testLeaksPass | testLeaksSkip; cycle{!SelfTestMode | testLeaksFail | testLeaksPass | testLeaksSkip}
+trace#2, cand_acc=None, gt_acc=None, (SelfTestMode & testLeaksFail) | (SelfTestMode & testLeaksPass) | (SelfTestMode & testLeaksSkip); cycle{1}
+trace#3, cand_acc=True, gt_acc=None, cycle{!SelfTestMode | testLeaksFail | testLeaksPass | testLeaksSkip}
 
 Candidate = G(measureRR -> F(displayRR))
 GT = (G((measureRR & displayRR)))
 trace#0, cand_acc=False, gt_acc=False, 1; !displayRR & measureRR; cycle{!displayRR}
 trace#1, cand_acc=None, gt_acc=None, displayRR & measureRR; cycle{1}
-trace#2, cand_acc=True, gt_acc=None, displayRR | !measureRR; cycle{displayRR | !measureRR}
+trace#2, cand_acc=True, gt_acc=None, cycle{displayRR | !measureRR}
 
 Candidate = G((PCVMode & ventilating) -> F(PSVModeSelected))
 GT = !(PSVModeSelected) U ((PSVModeSelected) & G(PCVMode -> X((ventilating & PSVMode))))
-trace#0, cand_acc=True, gt_acc=None, cycle{!PCVMode | PSVModeSelected | !ventilating}
+trace#0, cand_acc=True, gt_acc=None, cycle{PSVModeSelected | (PCVMode & !ventilating) | (!PCVMode & ventilating)}
 
 Candidate = G(resumeVentilation -> F(loadLastParams))
 GT = !(resumeVentilation) U ((resumeVentilation) & F(loadLastParams))
@@ -2108,21 +1965,21 @@ trace#0, cand_acc=False, gt_acc=None, 1; !loadLastParams & resumeVentilation; cy
 
 Candidate = G((PCVMode & !inspiratoryPhaseStart) -> ((!breathingCycleDone & !patientBreathingRequest) U (breathingCycleDone | patientBreathingRequest) -> X(inspiratoryPhaseStart)))
 GT = !breathingCycleDone | patientBreathingRequest U (breathingCycleDone | patientBreathingRequest & G(PCVMode -> F(inspiratoryPhaseStart)))
-trace#0, cand_acc=True, gt_acc=True, !breathingCycleDone & !patientBreathingRequest; cycle{!breathingCycleDone & !patientBreathingRequest}
-trace#1, cand_acc=False, gt_acc=True, PCVMode & !inspiratoryPhaseStart; cycle{(breathingCycleDone & !inspiratoryPhaseStart) | (!inspiratoryPhaseStart & patientBreathingRequest)}
+trace#0, cand_acc=False, gt_acc=True, (PCVMode & breathingCycleDone & !inspiratoryPhaseStart) | (PCVMode & !inspiratoryPhaseStart & patientBreathingRequest); PCVMode & !inspiratoryPhaseStart; cycle{PCVMode}
 
 Candidate = G(StandbyMode -> (!ventilating & inValveClose & outValveOpen))
 GT = G(StandbyMode -> G(((!ventilating & inValveClose) & outValveOpen)))
 trace#0, cand_acc=False, gt_acc=False, 1; (StandbyMode & !inValveClose) | (StandbyMode & !outValveOpen) | (StandbyMode & ventilating); cycle{1}
-trace#1, cand_acc=True, gt_acc=None, cycle{(!StandbyMode & !inValveClose) | (!StandbyMode & !outValveOpen) | (!StandbyMode & ventilating) | (StandbyMode & inValveClose & outValveOpen & !ventilating)}
+trace#1, cand_acc=True, gt_acc=None, !StandbyMode | (inValveClose & outValveOpen & !ventilating); cycle{!StandbyMode | (inValveClose & outValveOpen & !ventilating)}
 
 Candidate = G(StartUpMode -> (F(defaultParamsLoaded) & F(checkCommsSensors) & F(checkCommsValves) & F(checkCommsGUI) & F(initDone)))
 GT = G(StartUpMode -> X((((checkCommsSensors) & checkCommsValves) & checkCommsGUI) & defaultParamsLoaded & (initStart & (initDone | ((initFail & OutOfServiceWarning) & failSafeMode)))))
-trace#0, cand_acc=True, gt_acc=None, cycle{checkCommsGUI & checkCommsSensors & checkCommsValves & defaultParamsLoaded & initDone}
+trace#0, cand_acc=False, gt_acc=False, 1; StartUpMode & !checkCommsSensors; cycle{!checkCommsSensors}
+trace#1, cand_acc=True, gt_acc=None, cycle{!StartUpMode | (checkCommsGUI & checkCommsSensors & checkCommsValves & defaultParamsLoaded & initDone)}
 
 Candidate = G((PCVMode & !expiratoryPhaseEnd & !patientBreathingRequest & expiratoryPauseButton) -> F(inValveClose & outValveClose))
 GT = !(expiratoryPauseButton) U ((expiratoryPauseButton) & G(PCVMode & expiratoryPhaseEnd & !patientBreathingRequest -> F(((expiratoryPhaseEnd & inValveClose) & outValveClose))))
-trace#0, cand_acc=True, gt_acc=None, cycle{!PCVMode | !expiratoryPauseButton | expiratoryPhaseEnd | (inValveClose & outValveClose)}
+trace#0, cand_acc=True, gt_acc=None, cycle{!PCVMode | !expiratoryPauseButton | expiratoryPhaseEnd | patientBreathingRequest}
 
 Candidate = G(RMButton -> F(!RM))
 GT = !(! RMButton) U ((! RMButton) & F(((! RM) & expiratoryPhaseStart)))
@@ -2130,15 +1987,15 @@ trace#0, cand_acc=False, gt_acc=None, 1; RM & RMButton; cycle{RM}
 
 Candidate = G(expiratoryPhase -> (inValveClose & outValveOpen))
 GT = G((expiratoryPhase) -> G((inValveClose & outValveOpen)))
-trace#0, cand_acc=True, gt_acc=None, cycle{!expiratoryPhase | (inValveClose & outValveOpen)}
+trace#0, cand_acc=True, gt_acc=None, !expiratoryPhase | (inValveClose & outValveOpen); cycle{!expiratoryPhase | (inValveClose & outValveOpen)}
 
 Candidate = G(powerButton -> X(StartUpMode))
 GT = !(off & powerButton) U ((off & powerButton) & F((StartUpMode)))
-trace#0, cand_acc=False, gt_acc=None, powerButton; cycle{!StartUpMode}
+trace#0, cand_acc=True, gt_acc=None, 1; cycle{StartUpMode}
 
 Candidate = G((PCVMode & ventilating & PSVModeSelected & inspiratoryPhaseEnd) -> X(PSVMode))
 GT = !(inspiratoryPhaseEnd & PSVModeSelected) U ((inspiratoryPhaseEnd & PSVModeSelected) & G(PCVMode -> X((ventilating & PSVMode))))
-trace#0, cand_acc=True, gt_acc=None, cycle{!PCVMode | !PSVModeSelected | !inspiratoryPhaseEnd}
+trace#0, cand_acc=True, gt_acc=None, 1; cycle{PSVMode}
 
 Candidate = G((PCVMode & stopVentilation) -> F(!PCVMode & !StandbyMode))
 GT = !(stopVentilation) U ((stopVentilation) & G(PCVMode -> F(StandbyMode)))
@@ -2146,19 +2003,21 @@ trace#0, cand_acc=True, gt_acc=None, !PCVMode | !stopVentilation; cycle{!PCVMode
 
 Candidate = G(PSVMode & breathingCycleStart -> inspiratoryPhaseStart)
 GT = !(breathingCycleStart) U ((breathingCycleStart) & G(PSVMode -> (inspiratoryPhaseStart)))
-trace#0, cand_acc=True, gt_acc=None, cycle{!PSVMode | !breathingCycleStart | inspiratoryPhaseStart}
+trace#0, cand_acc=True, gt_acc=None, cycle{!breathingCycleStart | inspiratoryPhaseStart}
 
 Candidate = G((powerButton & off) -> F(finalState))
 GT = !(!off & powerButton) U ((!off & powerButton) & (finalState))
-trace#0, cand_acc=True, gt_acc=None, cycle{finalState | !off | !powerButton}
+trace#0, cand_acc=True, gt_acc=None, cycle{finalState | (off & !powerButton) | (!off & powerButton)}
 
 Candidate = G(finalState -> (parametersStored U (off & parametersStored)))
 GT = G(finalState -> F((parametersStored & off)))
-trace#0, cand_acc=False, gt_acc=None, 1; finalState & !parametersStored; cycle{1}
+trace#0, cand_acc=False, gt_acc=False, 1; finalState & !off & parametersStored; cycle{!off & parametersStored}
+trace#1, cand_acc=False, gt_acc=None, 1; finalState & !parametersStored; cycle{1}
 
 Candidate = G((PSVMode & V_E_lessThan_ExpiratoryTriggerSensitivity_multiplyBy_PeakV_E) -> X(expiratoryPhaseStart))
 GT = !(V_E_lessThan_ExpiratoryTriggerSensitivity_multiplyBy_PeakV_E) U ((V_E_lessThan_ExpiratoryTriggerSensitivity_multiplyBy_PeakV_E) & G(PSVMode -> (expiratoryPhaseStart)))
-trace#0, cand_acc=True, gt_acc=None, !PSVMode | !V_E_lessThan_ExpiratoryTriggerSensitivity_multiplyBy_PeakV_E; cycle{!PSVMode | !V_E_lessThan_ExpiratoryTriggerSensitivity_multiplyBy_PeakV_E}
+trace#0, cand_acc=False, gt_acc=False, PSVMode & V_E_lessThan_ExpiratoryTriggerSensitivity_multiplyBy_PeakV_E; PSVMode & !expiratoryPhaseStart; cycle{PSVMode}
+trace#1, cand_acc=False, gt_acc=None, PSVMode & V_E_lessThan_ExpiratoryTriggerSensitivity_multiplyBy_PeakV_E; V_E_lessThan_ExpiratoryTriggerSensitivity_multiplyBy_PeakV_E & !expiratoryPhaseStart; cycle{V_E_lessThan_ExpiratoryTriggerSensitivity_multiplyBy_PeakV_E}
 
 Candidate = G((PSVMode & expiratoryPhase & !patientBreathingRequest & expClock_within_interval_min_exp_time_psv_to_apnea_lag & expiratoryPauseButton) -> F(inValveClose & outValveClose))
 GT = !(expiratoryPauseButton) U ((expiratoryPauseButton) & G((PSVMode & expClock_within_interval_min_exp_time_psv_to_apnea_lag & !patientBreathingRequest & expiratoryPhase) -> F(((expiratoryPhaseEnd & inValveClose) & outValveClose))))
@@ -2170,7 +2029,8 @@ trace#0, cand_acc=True, gt_acc=None, 1; cycle{!PCVMode | patientBreathingRequest
 
 Candidate = G((PSVMode & inspiratoryPhase) -> (inspiratoryPhase U ((P_insp_greaterThanOrEqual_MaxP_insp | inspClock_greaterThanOrEqual_inspiratoryTime) & X(!inspiratoryPhase))))
 GT = G(PSVMode -> (inspiratoryPhase U (( P_insp_greaterThanOrEqual_MaxP_insp | inspClock_greaterThanOrEqual_inspiratoryTime ))))
-trace#0, cand_acc=True, gt_acc=None, cycle{!P_insp_greaterThanOrEqual_MaxP_insp & !inspClock_greaterThanOrEqual_inspiratoryTime & !inspiratoryPhase}
+trace#0, cand_acc=False, gt_acc=False, 1; PSVMode & !P_insp_greaterThanOrEqual_MaxP_insp & !inspClock_greaterThanOrEqual_inspiratoryTime & inspiratoryPhase; cycle{!P_insp_greaterThanOrEqual_MaxP_insp & !inspClock_greaterThanOrEqual_inspiratoryTime & inspiratoryPhase}
+trace#1, cand_acc=False, gt_acc=True, (PSVMode & P_insp_greaterThanOrEqual_MaxP_insp & inspiratoryPhase) | (PSVMode & inspClock_greaterThanOrEqual_inspiratoryTime & inspiratoryPhase); cycle{(PSVMode & P_insp_greaterThanOrEqual_MaxP_insp & inspiratoryPhase) | (PSVMode & inspClock_greaterThanOrEqual_inspiratoryTime & inspiratoryPhase)}
 
 Candidate = G((inspiratoryPhase & PCVMode & !apnea) -> (outValveClose & P_insp_equalTo_P_inspPCV)) & G((inspiratoryPhase & PSVMode & !apnea) -> (outValveClose & P_insp_equalTo_P_inspPSV)) & G((inspiratoryPhase & PCVMode & apnea) -> (outValveClose & P_insp_equalTo_P_inspAP))
 GT = G((inspiratoryPhase) -> G((((outValveClose & ((PCVMode & (! apnea)) -> (P_insp_equalTo_P_inspPCV))) & (PSVMode -> (P_insp_equalTo_P_inspPSV))) & ((PCVMode & apnea) -> (P_insp_equalTo_P_inspAP)))))
@@ -2178,11 +2038,11 @@ trace#0, cand_acc=True, gt_acc=None, cycle{!inspiratoryPhase | (!PCVMode & !PSVM
 
 Candidate = G((PSVMode & l1_lessThan_ExpiratoryTriggerSensitivity) -> expiratoryPhaseStart)
 GT = !(l1_lessThan_ExpiratoryTriggerSensitivity) U ((l1_lessThan_ExpiratoryTriggerSensitivity) & G(PSVMode -> X(expiratoryPhaseStart)))
-trace#0, cand_acc=True, gt_acc=None, cycle{!PSVMode | expiratoryPhaseStart | !l1_lessThan_ExpiratoryTriggerSensitivity}
+trace#0, cand_acc=True, gt_acc=None, cycle{expiratoryPhaseStart | !l1_lessThan_ExpiratoryTriggerSensitivity}
 
 Candidate = G(P_insp_greaterThan_MaxP_insp -> X(expiratoryPhaseStart & inspiratoryPhaseEnd))
 GT = !(P_insp_greaterThan_MaxP_insp) U ((P_insp_greaterThan_MaxP_insp) & ((inspiratoryPhaseEnd & expiratoryPhaseStart)))
-trace#0, cand_acc=False, gt_acc=None, cycle{(!P_insp_greaterThan_MaxP_insp & !expiratoryPhaseStart) | (!P_insp_greaterThan_MaxP_insp & !inspiratoryPhaseEnd); P_insp_greaterThan_MaxP_insp}
+trace#0, cand_acc=True, gt_acc=None, 1; cycle{expiratoryPhaseStart & inspiratoryPhaseEnd}
 
 Candidate = G((param_V_greaterThan_paramMax_V | param_V_lessThan_paramMin_V) -> paramAlarm_V)
 GT = !(param_V_greaterThan_paramMax_V | param_V_lessThan_paramMin_V) U ((param_V_greaterThan_paramMax_V | param_V_lessThan_paramMin_V) & F(paramAlarm_V))
@@ -2190,7 +2050,7 @@ trace#0, cand_acc=False, gt_acc=None, 1; (!paramAlarm_V & param_V_greaterThan_pa
 
 Candidate = G((PSVMode & breathingTime_greaterThanOrEqual_apneaLagTime) -> apnea)
 GT = !(breathingTime_greaterThanOrEqual_apneaLagTime) U ((breathingTime_greaterThanOrEqual_apneaLagTime) & G(PSVMode -> X(apnea)))
-trace#0, cand_acc=True, gt_acc=None, cycle{!PSVMode | apnea | !breathingTime_greaterThanOrEqual_apneaLagTime}
+trace#0, cand_acc=True, gt_acc=None, cycle{apnea | !breathingTime_greaterThanOrEqual_apneaLagTime}
 
 Candidate = G(apnea -> F(PCVMode & RR_equalTo_RR_AP & P_insp_equalTo_P_inspAP & ItoE_equalTo_ItoE_AP))
 GT = !(apnea) U ((apnea) & X((((PCVMode & (RR_equalTo_RR_AP)) & (P_insp_equalTo_P_inspAP)) & (ItoE_equalTo_ItoE_AP))))
@@ -2202,11 +2062,11 @@ trace#0, cand_acc=False, gt_acc=None, 1; !breathingCycleStart & dropPAW_greaterT
 
 Candidate = G(PCVMode -> (breathingCycleTime_equalTo_1_divideBy_RR_PCV & ExpiratoryTime_equalTo_breathingCycleTime_divideBy_1_plus_ItoE_PCV))
 GT = G(PCVMode -> G(((breathingCycleTime_equalTo_1_divideBy_RR_PCV) & (ExpiratoryTime_equalTo_breathingCycleTime_divideBy_1_plus_ItoE_PCV))))
-trace#0, cand_acc=True, gt_acc=None, cycle{!PCVMode | (ExpiratoryTime_equalTo_breathingCycleTime_divideBy_1_plus_ItoE_PCV & breathingCycleTime_equalTo_1_divideBy_RR_PCV)}
+trace#0, cand_acc=True, gt_acc=None, !PCVMode | (ExpiratoryTime_equalTo_breathingCycleTime_divideBy_1_plus_ItoE_PCV & breathingCycleTime_equalTo_1_divideBy_RR_PCV); cycle{!PCVMode | (ExpiratoryTime_equalTo_breathingCycleTime_divideBy_1_plus_ItoE_PCV & breathingCycleTime_equalTo_1_divideBy_RR_PCV)}
 
 Candidate = G((PSVMode & breathingCycleStart) -> dropPAW_greaterThan_ITS_PSV)
 GT = !(dropPAW_greaterThan_ITS_PSV) U ((dropPAW_greaterThan_ITS_PSV) & G(PSVMode -> F(breathingCycleStart)))
-trace#0, cand_acc=True, gt_acc=None, cycle{!PSVMode | !breathingCycleStart | dropPAW_greaterThan_ITS_PSV}
+trace#0, cand_acc=True, gt_acc=None, cycle{!breathingCycleStart | dropPAW_greaterThan_ITS_PSV}
 
 Candidate = G((StartUpMode & (pressureSensorConnFailure | pressureSensorError) & pressureSensorRetries_greaterThanOrEqual_5) -> F(failSafeMode))
 GT = !(pressureSensorRetries_greaterThanOrEqual_5 & ( pressureSensorConnFailure | pressureSensorError )) U ((pressureSensorRetries_greaterThanOrEqual_5 & ( pressureSensorConnFailure | pressureSensorError )) & G(StartUpMode -> X(failSafeMode)))
@@ -2214,7 +2074,7 @@ trace#0, cand_acc=True, gt_acc=None, cycle{!StartUpMode | failSafeMode | !pressu
 
 Candidate = G((PSVMode & F(breathingTime_greaterThanOrEqual_apneaLagTime)) -> F(PCVMode & RR_equalTo_RR_AP & P_insp_equalTo_P_inspAP & ItoE_equalTo_ItoE_AP))
 GT = !(breathingTime_greaterThanOrEqual_apneaLagTime) U ((breathingTime_greaterThanOrEqual_apneaLagTime) & G(PSVMode -> F((((PCVMode & (RR_equalTo_RR_AP)) & (P_insp_equalTo_P_inspAP)) & (ItoE_equalTo_ItoE_AP)))))
-trace#0, cand_acc=True, gt_acc=False, !breathingTime_greaterThanOrEqual_apneaLagTime; cycle{!breathingTime_greaterThanOrEqual_apneaLagTime}
+trace#0, cand_acc=True, gt_acc=None, cycle{(ItoE_equalTo_ItoE_AP & PCVMode & P_insp_equalTo_P_inspAP & RR_equalTo_RR_AP) | (!PSVMode & breathingTime_greaterThanOrEqual_apneaLagTime)}
 
 Candidate = G(PCVMode -> inspiratoryTime_equalTo_60_multiplyBy_ItoE_PCV_divideBy_RR_PCV_multiplyBy_1_plus_ItoE_PCV)
 GT = G(PCVMode -> G((inspiratoryTime_equalTo_60_multiplyBy_ItoE_PCV_divideBy_RR_PCV_multiplyBy_1_plus_ItoE_PCV)))
@@ -2224,7 +2084,8 @@ trace#2, cand_acc=True, gt_acc=None, cycle{!PCVMode | inspiratoryTime_equalTo_60
 
 Candidate = G((PSVMode & expiratoryPhase) -> (minExpiratoryTime_equalTo_inspClock_divideBy_2 & minExpiratoryTime_greaterThanOrEqual_0_4 & minExpiratoryTime_lessThanOrEqual_2))
 GT = G(PSVMode -> ((((minExpiratoryTime_greaterThanOrEqual_0_4) & (minExpiratoryTime_lessThanOrEqual_2)) & (expiratoryPhase -> (minExpiratoryTime_equalTo_inspClock_divideBy_2)))))
-trace#0, cand_acc=True, gt_acc=None, cycle{!PSVMode | !expiratoryPhase | (minExpiratoryTime_equalTo_inspClock_divideBy_2 & minExpiratoryTime_greaterThanOrEqual_0_4 & minExpiratoryTime_lessThanOrEqual_2)}
+trace#0, cand_acc=True, gt_acc=True, cycle{!PSVMode | (minExpiratoryTime_equalTo_inspClock_divideBy_2 & minExpiratoryTime_greaterThanOrEqual_0_4 & minExpiratoryTime_lessThanOrEqual_2)}
+trace#1, cand_acc=True, gt_acc=None, !PSVMode | !expiratoryPhase | (minExpiratoryTime_equalTo_inspClock_divideBy_2 & minExpiratoryTime_greaterThanOrEqual_0_4 & minExpiratoryTime_lessThanOrEqual_2); cycle{!PSVMode | !expiratoryPhase | (minExpiratoryTime_equalTo_inspClock_divideBy_2 & minExpiratoryTime_greaterThanOrEqual_0_4 & minExpiratoryTime_lessThanOrEqual_2)}
 
 Candidate = G((StartUpMode & (ADCConnFailure | ADCError) & ADCRetries_greaterThanOrEqual_5) -> F(failSafeMode))
 GT = !(ADCRetries_greaterThanOrEqual_5 & ( ADCConnFailure | ADCError )) U ((ADCRetries_greaterThanOrEqual_5 & ( ADCConnFailure | ADCError )) & G(StartUpMode -> F(failSafeMode)))
@@ -2236,10 +2097,11 @@ trace#0, cand_acc=True, gt_acc=None, cycle{!PSVMode | !apnea}
 
 Candidate = G((PSVMode & expiratoryPhase & dropPAW_greaterThan_ITS_PSV) -> X(inspiratoryPhaseStart))
 GT = !(dropPAW_greaterThan_ITS_PSV) U ((dropPAW_greaterThan_ITS_PSV) & G((PSVMode & expiratoryPhase) -> X(patientBreathingRequest & inspiratoryPhaseStart)))
-trace#0, cand_acc=True, gt_acc=None, cycle{!PSVMode | !dropPAW_greaterThan_ITS_PSV}
+trace#0, cand_acc=True, gt_acc=None, 1; cycle{inspiratoryPhaseStart}
 
 Candidate = G((P_insp_greaterThan_MaxP_insp & !expiratoryPhaseStart) -> X(expiratoryPhaseStart))
 GT = !(P_insp_greaterThan_MaxP_insp) U ((P_insp_greaterThan_MaxP_insp) & X((inspiratoryPhaseEnd & expiratoryPhaseStart)))
-trace#0, cand_acc=False, gt_acc=False, cycle{!P_insp_greaterThan_MaxP_insp & !expiratoryPhaseStart; P_insp_greaterThan_MaxP_insp & !expiratoryPhaseStart}
-trace#1, cand_acc=True, gt_acc=None, !P_insp_greaterThan_MaxP_insp | expiratoryPhaseStart; cycle{!P_insp_greaterThan_MaxP_insp | expiratoryPhaseStart}
+trace#0, cand_acc=False, gt_acc=False, P_insp_greaterThan_MaxP_insp & !expiratoryPhaseStart; P_insp_greaterThan_MaxP_insp & !expiratoryPhaseStart; cycle{P_insp_greaterThan_MaxP_insp}
+trace#1, cand_acc=False, gt_acc=False, 1; P_insp_greaterThan_MaxP_insp & !expiratoryPhaseStart; !expiratoryPhaseStart; cycle{1}
+trace#2, cand_acc=True, gt_acc=None, 1; cycle{expiratoryPhaseStart}
 
