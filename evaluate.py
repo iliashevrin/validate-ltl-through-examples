@@ -20,7 +20,7 @@ DATASIZE = {
     # Total candidates per dataset, as reported by count_excluded.py
     "textbook":367,
     "ARTEMIS":122,
-    "spacewire":36,
+    "SpaceWire":36,
     "Dwyer":99,
 
     "ALL_RL":624,

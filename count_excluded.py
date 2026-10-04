@@ -13,7 +13,7 @@ import csv
 
 DEFAULT_RESPONSES = {
     "Dwyer": "Dwyer/responses_claude.csv",
-    "SpaceWire": "spacewire/responses_claude.csv",
+    "SpaceWire": "SpaceWire/responses_claude.csv",
     "Textbook": "textbook/responses_claude.csv",
     "ARTEMIS": "ARTEMIS/responses_claude.csv",
 }
