@@ -11,7 +11,6 @@ import pandas as pd
 
 from openai import OpenAI
 
-sys.path.insert(0,'/usr/local/lib/python3.10/site-packages/')
 import spot
 spot.setup()
 

@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import sys
-sys.path.insert(0,'/usr/local/lib/python3.10/site-packages/')
 import spot
 spot.setup()
 import itertools
@@ -49,6 +48,9 @@ def evaluate(cand, gt, traces):
 
     good_mc = None
 
+    # Translated once per pair, large ground truths take seconds to translate
+    gt_aut = spot.translate(gt)
+
     for index, t in enumerate(traces):
 
         (trace, cand_acc, mc) = t
@@ -60,7 +62,7 @@ def evaluate(cand, gt, traces):
         length += trace_len(trace)
         lit += count_literals(trace)
 
-        acc = check_acceptance(spot.translate(gt), trace)
+        acc = check_acceptance(gt_aut, trace)
 
         acc_values[str(acc)] += 1
 

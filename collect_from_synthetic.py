@@ -6,7 +6,6 @@ import sys
 
 from datasets import load_dataset, Dataset
 
-sys.path.insert(0,'/usr/local/lib/python3.10/site-packages/')
 import spot
 spot.setup()
 

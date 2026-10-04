@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-import sys
-sys.path.insert(0,'/usr/local/lib/python3.10/site-packages/')
 import spot
 spot.setup()
 import itertools

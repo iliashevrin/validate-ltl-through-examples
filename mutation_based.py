@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 import re
-import sys
-sys.path.insert(0,'/usr/local/lib/python3.10/site-packages/')
 import spot
 spot.setup()
 from utils import get_words_from_conditions, check_acceptance, collect_aps, trace_len
