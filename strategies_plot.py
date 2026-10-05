@@ -59,7 +59,7 @@ for name, ndt, dt_rand, dt_reg, avg_rand, avg_reg in zip(strategies, ndt_inf, dt
 x = np.arange(len(strategies))
 width = 0.38
 
-fig, ax = plt.subplots(figsize=(10, 5))  # keep compact height
+fig, ax = plt.subplots(figsize=(10, 4.2))  # keep compact height
 
 base_color = "0.80"
 top_color = "0.55"
@@ -118,7 +118,8 @@ for i in range(len(strategies)):
 # =========================
 
 ax.set_xticks(x)
-ax.set_xticklabels(strategies, rotation=60, ha="right", fontsize=20)
+# Horizontal labels over two lines, e.g. "Top 25" above "Ctx."
+ax.set_xticklabels([s.replace(" Ctx.", "\nCtx.") for s in strategies], fontsize=20)
 
 ax.set_xlabel("")
 ax.set_ylabel("")
