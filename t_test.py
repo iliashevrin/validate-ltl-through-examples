@@ -1,9 +1,18 @@
 import argparse
+import itertools
 import re
 
 import numpy as np
 from scipy.stats import ttest_rel
 from scipy.stats import wilcoxon
+
+
+DEFAULT_RESULTS = [
+    "Random=results_ALL_RL_RANDOM_all_contexts.txt",
+    "Shortest First=results_ALL_RL_BY_LENGTH_all_contexts.txt",
+    "LTLTrust=results_ALL_RL_LTLTRUST_all_contexts.txt",
+    "SA LTLTrust=results_ALL_RL_LTLTRUST_PLUS_all_contexts.txt",
+]
 
 
 def traces_to_detection(results_file):
@@ -19,37 +28,67 @@ def traces_to_detection(results_file):
     return np.array([float(x) for x in re.findall(r"'([\d.]+)'", match.group(1))])
 
 
-def t_test(A, B):
+def holm(pvalues):
+    """Holm-Bonferroni adjusted p-values, in the original order."""
+    order = np.argsort(pvalues)
+    adjusted = np.empty(len(pvalues))
+    running = 0.0
 
-    diff = A - B
+    for rank, index in enumerate(order):
+        running = max(running, (len(pvalues) - rank) * pvalues[index])
+        adjusted[index] = min(1.0, running)
 
-    print("Sizes:", len(A), len(B))
-
-    print("Mean diff:", np.mean(diff))
-    print("Median diff:", np.median(diff))
-    print("Std diff:", np.std(diff, ddof=1))
-
-    # Paired t-test
-    result = ttest_rel(A, B)
-
-    print("t-statistic:", result.statistic)
-    print("p-value:", result.pvalue)
-
-    res = wilcoxon(A, B, alternative="less")
-    print("Wilcoxon p-value:", res.pvalue)
+    return adjusted
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Paired comparison of the traces needed for mismatch detection by two orderings."
+        description="Pairwise paired comparison of the traces needed for mismatch detection by several orderings."
     )
-    parser.add_argument("results_a", help="e.g. results_ALL_RL_LTLTRUST_all_contexts.txt")
-    parser.add_argument("results_b", help="e.g. results_ALL_RL_RANDOM_all_contexts.txt")
+    parser.add_argument(
+        "results",
+        nargs="*",
+        default=DEFAULT_RESULTS,
+        metavar="[NAME=]RESULTS_FILE",
+        help="evaluate.py results files to compare pairwise, default: the four orderings on ALL_RL",
+    )
 
     args = parser.parse_args()
 
-    print(f"Comparing {args.results_a} with {args.results_b}")
-    t_test(traces_to_detection(args.results_a), traces_to_detection(args.results_b))
+    orderings = {}
+    for item in args.results:
+        name, _, path = item.rpartition("=")
+        orderings[name or path] = traces_to_detection(path)
+
+    comparisons = []
+
+    for (name_a, a), (name_b, b) in itertools.combinations(orderings.items(), 2):
+        if len(a) != len(b):
+            raise ValueError(f"{name_a} and {name_b} list different numbers of detected pairs")
+
+        diff = a - b
+        comparisons.append({
+            "pair": f"{name_a} vs {name_b}",
+            "n": len(diff),
+            "mean_diff": diff.mean(),
+            "dz": diff.mean() / diff.std(ddof=1),
+            "t": ttest_rel(a, b),
+            "w": wilcoxon(a, b),
+            "nonzero": int(np.count_nonzero(diff)),
+        })
+
+    t_adjusted = holm(np.array([c["t"].pvalue for c in comparisons]))
+    w_adjusted = holm(np.array([c["w"].pvalue for c in comparisons]))
+
+    print(f"{'Comparison (A vs B)':<32}{'n':>5}{'mean A-B':>10}{'d_z':>7}{'t':>8}"
+          f"{'p (t, Holm)':>14}{'p (Wilcoxon, Holm)':>21}{'non-zero':>10}")
+
+    for c, p_t, p_w in zip(comparisons, t_adjusted, w_adjusted):
+        print(f"{c['pair']:<32}{c['n']:>5}{c['mean_diff']:>10.2f}{c['dz']:>7.2f}{c['t'].statistic:>8.2f}"
+              f"{p_t:>14.2e}{p_w:>21.2e}{c['nonzero']:>10}")
+
+    print("\nTwo-sided tests; d_z is the mean paired difference over its standard deviation;")
+    print("the Wilcoxon signed-rank test discards the pairs with equal numbers of traces (zero differences).")
 
 
 if __name__ == "__main__":
