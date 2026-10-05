@@ -315,6 +315,10 @@ def get_formula_features(formula_str: str):
 def all_contexts(mut, acceptance, length):
     return True
 
+# Only traces that are accepting or rejecting with respect to the candidate
+def conclusive_contexts(mut, acceptance, length):
+    return acceptance is not None
+
 def top25_context(mut, acceptance, length):
     return top_contexts(25, mut, acceptance, length)
 
