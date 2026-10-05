@@ -146,15 +146,21 @@ def ordering_random(formula, traces, strategy):
     random.shuffle(traces)
     return traces
 
+# Optional suffix of the model files (see train_ordering.py --tag), set from argv[4]
+MODEL_TAG = ""
+
 def ltltrust(formula, traces, strategy):
-    return trace_ranking(formula, traces, strategy, "smoothed")
+    return trace_ranking(formula, traces, strategy, "smoothed" + MODEL_TAG)
 
 def ltltrust_plus(formula, traces, strategy):
-    return trace_ranking(formula, traces, strategy, "smoothed_plus")
+    return trace_ranking(formula, traces, strategy, "smoothed_plus" + MODEL_TAG)
 
 
 
 def main():
+
+    global MODEL_TAG
+    MODEL_TAG = sys.argv[4] if len(sys.argv) > 4 else ""
 
     ordering_names = sys.argv[1].split(",")
     orderings = []
@@ -262,7 +268,7 @@ def main():
 
     for data in orderings:
 
-        log_file = f"log_{dataset}_{data.name}_{strategy}.txt"
+        log_file = f"log_{dataset}_{data.name}_{strategy}{MODEL_TAG}.txt"
         with open(log_file, "w", encoding="utf-8") as out:
             out.write(data.full_log)
 
@@ -272,7 +278,7 @@ def main():
         confidence = []    
         undet_inf = len(data.seen_ndt) / total
 
-        output_file = f"results_{dataset}_{data.name}_{strategy}.txt"
+        output_file = f"results_{dataset}_{data.name}_{strategy}{MODEL_TAG}.txt"
 
         with open(output_file, "w", encoding="utf-8") as out:
             print(f'Accepting traces for GT: {(data.acc_values["True"] / data.repeats):.3f}', file=out)

@@ -99,7 +99,11 @@ def reciprocal_utility(labels, alpha=1.0):
 def build_training_data(
     formulas,
     strategy,
-    utility
+    utility,
+    alpha_prior=1.0,
+    beta_prior=1.0,
+    len_ref=3,
+    lit_ref=5,
 ):
     rows = []
 
@@ -145,7 +149,9 @@ def build_training_data(
 
                 usefulness = smoothed_ratio(
                     helpful_count,
-                    total_count
+                    total_count,
+                    alpha_prior,
+                    beta_prior,
                 )
 
             elif utility == "smoothed_plus":
@@ -161,6 +167,10 @@ def build_training_data(
                     avg_literals,
                     helpful_count,
                     total_count,
+                    alpha_prior=alpha_prior,
+                    beta_prior=beta_prior,
+                    len_ref=len_ref,
+                    lit_ref=lit_ref,
                 )
 
             elif utility == "reciprocal":
@@ -195,11 +205,20 @@ def train_model(
     utility,
     test_size=0.2,
     random_state=42,
+    alpha_prior=1.0,
+    beta_prior=1.0,
+    len_ref=3,
+    lit_ref=5,
+    tag="",
 ):
     df = build_training_data(
         formulas,
         strategy,
         utility,
+        alpha_prior,
+        beta_prior,
+        len_ref,
+        lit_ref,
     )
 
     # ----------------------------------------------
@@ -299,13 +318,13 @@ def train_model(
     })
 
     test_formulas_df.to_csv(
-        f"heldout_test_formulas_{strategy}_{utility}.csv",
+        f"heldout_test_formulas_{strategy}_{utility}{tag}.csv",
         index=False,
     )
 
     print(
         f"Saved {len(test_formulas_df)} held-out formulas "
-        f"to heldout_test_formulas_{strategy}_{utility}.csv"
+        f"to heldout_test_formulas_{strategy}_{utility}{tag}.csv"
     )
 
     return model, feature_columns, df
@@ -554,6 +573,17 @@ def main():
 
     parser.add_argument("utility", default="smoothed_ratio")
 
+    parser.add_argument("--alpha-prior", type=float, default=1.0,
+                        help="Beta-prior pseudo-count of distinguishing traces (1 = Laplace smoothing)")
+    parser.add_argument("--beta-prior", type=float, default=1.0,
+                        help="Beta-prior pseudo-count of non-distinguishing traces (1 = Laplace smoothing)")
+    parser.add_argument("--len-ref", type=float, default=3,
+                        help="SA usefulness: trace length that adds 1 to the complexity penalty (inf disables the term)")
+    parser.add_argument("--lit-ref", type=float, default=5,
+                        help="SA usefulness: literal count that adds 1 to the complexity penalty (inf disables the term)")
+    parser.add_argument("--tag", default="",
+                        help="Suffix of the saved model files, e.g. _a2_b1, to keep variants apart")
+
     args = parser.parse_args()
 
 
@@ -568,10 +598,15 @@ def main():
         formulas=train_formulas,
         strategy=args.strategy,
         utility=args.utility,
+        alpha_prior=args.alpha_prior,
+        beta_prior=args.beta_prior,
+        len_ref=args.len_ref,
+        lit_ref=args.lit_ref,
+        tag=args.tag,
     )
 
-    joblib.dump(model, f"mutation_ranker_{args.strategy}_{args.utility}.pkl")
-    joblib.dump(feature_columns, f"feature_columns_{args.strategy}_{args.utility}.pkl")
+    joblib.dump(model, f"mutation_ranker_{args.strategy}_{args.utility}{args.tag}.pkl")
+    joblib.dump(feature_columns, f"feature_columns_{args.strategy}_{args.utility}{args.tag}.pkl")
 
 
 if __name__ == "__main__":
