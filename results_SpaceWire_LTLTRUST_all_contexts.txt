@@ -1,6 +1,6 @@
 Accepting traces for GT: 14.000
-Rejecting traces for GT: 14.000
-Inconclusive traces for GT: 37.000
+Rejecting traces for GT: 15.000
+Inconclusive traces for GT: 38.000
 
 Accuracy: 0.167
 Detected Ratio: 1.000
@@ -8,8 +8,8 @@ Detected Ratio: 1.000
 Undetected <=0 Ratio: 1.000 (Undetected Ratio: 0.000 + Detected >0 Ratio: 1.000)
 Confidence score for n=0: 0.167
 
-Undetected <=1 Ratio: 0.267 (Undetected Ratio: 0.000 + Detected >1 Ratio: 0.267)
-Confidence score for n=1: 0.429
+Undetected <=1 Ratio: 0.333 (Undetected Ratio: 0.000 + Detected >1 Ratio: 0.333)
+Confidence score for n=1: 0.375
 
 Undetected <=2 Ratio: 0.200 (Undetected Ratio: 0.000 + Detected >2 Ratio: 0.200)
 Confidence score for n=2: 0.500
@@ -53,26 +53,25 @@ Confidence score for n=14: 0.857
 Undetected <=15 Ratio: 0.033 (Undetected Ratio: 0.000 + Detected >15 Ratio: 0.033)
 Confidence score for n=15: 0.857
 
-Traces to Detection: Avg: 2.167, Median: 1.00, Std: 4.03, P75: 1.75, P90: 3.00, Max: 23.00, Min: 1.00
+Traces to Detection: Avg: 2.233, Median: 1.00, Std: 4.01, P75: 2.00, P90: 3.00, Max: 23.00, Min: 1.00
 
-Trace Lengths: Avg: 2.213, Median: 2.00, Std: 1.03, P75: 3.00, P90: 4.00, Max: 4.00, Min: 1.00
+Trace Lengths: Avg: 2.202, Median: 2.07, Std: 1.02, P75: 3.00, P90: 3.10, Max: 4.00, Min: 1.00
 
-Trace Literals: Avg: 5.748, Median: 3.50, Std: 7.81, P75: 5.00, P90: 9.10, Max: 45.00, Min: 2.00
+Trace Literals: Avg: 6.148, Median: 4.00, Std: 7.94, P75: 6.00, P90: 9.20, Max: 45.00, Min: 2.00
 
 Mutation Contexts by Usefulness
 Mutation.REMOVE_G_1_False_3:1
-Mutation.ADD_X_3_True_3:1
-Mutation.ADD_F_1_True_2:1
+Mutation.SWAP_AND_WITH_IMPLIES_1_False_3:1
 Mutation.SWAP_G_WITH_X_1_False_4:1
 Mutation.ADD_X_3_None_4:1
-Mutation.REMOVE_RIGHT_SUBFORMULA_4_True_1:1
-Mutation.SWAP_IMPLIES_WITH_EQUIV_2_True_1:1
+Mutation.SWAP_G_WITH_X_1_False_3:1
 Mutation.REMOVE_LEFT_SUBFORMULA_3_True_1:1
-Mutation.ADD_NEGATION_3_True_2:1
+Mutation.ADD_X_4_True_2:1
+Mutation.SWAP_IMPLIES_WITH_EQUIV_2_True_1:2
+Mutation.SWAP_AND_WITH_EQUIV_3_True_1:3
 Mutation.ADD_X_1_False_4:3
 Mutation.ADD_NEGATION_1_True_1:3
-Mutation.SWAP_AND_WITH_EQUIV_3_True_1:4
-Mutation.ADD_X_4_True_1:4
+Mutation.ADD_X_4_True_1:5
 Mutation.ADD_X_1_False_3:7
 
-Traces to Detection List: ['4.00', '1.00', '3.00', '1.00', '1.00', '1.00', '2.00', '1.00', '1.00', '1.00', '1.00', '1.00', '23.00', '1.00', '1.00', '3.00', '1.00', '1.00', '1.00', '1.00', '3.00', '2.00', '1.00', '1.00', '1.00', '3.00', '1.00', '1.00', '1.00', '1.00']
+Traces to Detection List: ['4.00', '1.00', '3.00', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '2.00', '1.00', '23.00', '1.00', '1.00', '3.00', '1.00', '1.00', '1.00', '1.00', '3.00', '2.00', '1.00', '1.00', '2.00', '3.00', '1.00', '1.00', '2.00', '1.00']

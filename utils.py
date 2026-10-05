@@ -309,6 +309,7 @@ def get_formula_features(formula_str: str):
         max_depths["Or"],
         max_depths["Implies"],
         max_depths["Equiv"],
+        len(collect_aps(f)),
     ]
 
 

@@ -1,8 +1,8 @@
 Candidate = G(NChar_received -> (NChar_received U NChar_read))
 GT = G((NChar_received) -> ((NChar_TXFIFO) U (NChar_read)))
 trace#0, cand_acc=False, gt_acc=False, 1; !NChar_read & NChar_received; cycle{!NChar_read & NChar_received}
-trace#1, cand_acc=None, gt_acc=None, NChar_read & NChar_received; cycle{1}
-trace#2, cand_acc=True, gt_acc=True, cycle{NChar_read | !NChar_received}
+trace#1, cand_acc=True, gt_acc=True, cycle{(!NChar_read & !NChar_received) | (NChar_read & NChar_received)}
+trace#2, cand_acc=None, gt_acc=None, NChar_read & NChar_received; cycle{1}
 trace#3, cand_acc=False, gt_acc=None, !NChar_read & NChar_received; !NChar_read & !NChar_received; cycle{1}
 
 Candidate = G((!sent_data & !sent_control_symbol) -> null_passed)
@@ -13,7 +13,7 @@ Candidate = G((output_port_reset & transmition_stopped) -> ((!data_transition U 
 GT = ((output_port_reset) -> G (!(data_transition) & !(Strobe_signal_transition))) & G( (transmition_stopped) -> (X (reset_strobe_signal) & X X(reset_data_signal)))
 trace#0, cand_acc=False, gt_acc=False, output_port_reset & reset_strobe_signal & transmition_stopped; cycle{!Strobe_signal_transition & !reset_data_signal}
 trace#1, cand_acc=False, gt_acc=False, 1; output_port_reset & reset_strobe_signal & transmition_stopped; cycle{!Strobe_signal_transition & !reset_data_signal}
-trace#2, cand_acc=True, gt_acc=None, cycle{(!output_port_reset & transmition_stopped) | (output_port_reset & !transmition_stopped)}
+trace#2, cand_acc=False, gt_acc=None, 1; data_transition & output_port_reset & !reset_strobe_signal & transmition_stopped; cycle{1}
 
 Candidate = G((receiver_enabled & Null_detected & !gotNull_assert) -> X(gotNull_assert))
 GT = G((receiver_enabled) -> (! (gotNull_assert) U (Null_detected)))
@@ -29,12 +29,11 @@ trace#0, cand_acc=False, gt_acc=None, 1; ESC_received; (EEP_received & !ESC_erro
 
 Candidate = (!CT_received U (CT_received & G(CT_received -> send_NChar | !send_NChar))) & (!send_NChar U CT_received)
 GT = G(!(send_NChar) U (FCT_received))
-trace#0, cand_acc=True, gt_acc=True, cycle{CT_received}
-trace#1, cand_acc=True, gt_acc=None, CT_received | !send_NChar; CT_received; cycle{1}
+trace#0, cand_acc=False, gt_acc=None, !CT_received & send_NChar; CT_received; cycle{1}
 
 Candidate = G((!first_Null_received) -> (!Parity_Error_enable & !ESC_Error_enable & !gotFCT_enable & !gotNChar_enable & !gotBC_enable))
 GT = G((first_Null_received) -> X((Parity_Error_enable) & (ESC_Error_enable) & (gotFCT_enable) & (gotNChar_enable) & (gotBC_enable)))
-trace#0, cand_acc=False, gt_acc=None, 1; (ESC_Error_enable & !first_Null_received) | (Parity_Error_enable & !first_Null_received) | (!first_Null_received & gotBC_enable) | (!first_Null_received & gotFCT_enable) | (!first_Null_received & gotNChar_enable); cycle{1}
+trace#0, cand_acc=True, gt_acc=None, cycle{(!ESC_Error_enable & !Parity_Error_enable & !first_Null_received & !gotBC_enable & !gotFCT_enable & !gotNChar_enable) | (ESC_Error_enable & first_Null_received) | (Parity_Error_enable & first_Null_received) | (first_Null_received & gotBC_enable) | (first_Null_received & gotFCT_enable) | (first_Null_received & gotNChar_enable)}
 
 Candidate = G(Disconnect_Error_enable -> (first_data_transition | first_strobe_line_transition))
 GT = G(((first_data_transition) | (first_strobe_line_transition )) -> X (Disconnect_Error_enable) )
@@ -42,11 +41,12 @@ trace#0, cand_acc=False, gt_acc=None, 1; Disconnect_Error_enable & !first_data_t
 
 Candidate = G(Port_Reset_asserted -> (TX_FIFO_cleared & RX_FIFO_cleared & ErrorReset_state))
 GT = G((Port_Reset_asserted) -> ((TX_FIFO_cleared) & (RX_FIFO_cleared) & X (ErrorReset_state)))
-trace#0, cand_acc=True, gt_acc=None, !Port_Reset_asserted | (ErrorReset_state & RX_FIFO_cleared & TX_FIFO_cleared); cycle{!Port_Reset_asserted | (ErrorReset_state & RX_FIFO_cleared & TX_FIFO_cleared)}
+trace#0, cand_acc=False, gt_acc=None, 1; (!ErrorReset_state & Port_Reset_asserted) | (Port_Reset_asserted & !RX_FIFO_cleared) | (Port_Reset_asserted & !TX_FIFO_cleared); cycle{1}
 
 Candidate = G((link_machine_Run_state & broadcast_code_requested) -> (broadcast_code_requested U (current_character_finished & X broadcast_code_sent)))
 GT = G(((link_machine_Run_state) & (broadcast_code_requested)) -> ((current_character_finished) -> X (broadcast_code_sent)))
-trace#0, cand_acc=False, gt_acc=None, 1; broadcast_code_requested & !current_character_finished & link_machine_Run_state; !broadcast_code_requested & !current_character_finished; cycle{1}
+trace#0, cand_acc=None, gt_acc=None, (broadcast_code_requested & !broadcast_code_sent & link_machine_Run_state) | (broadcast_code_requested & !current_character_finished & link_machine_Run_state); cycle{(broadcast_code_requested & !broadcast_code_sent) | (broadcast_code_requested & !current_character_finished)}
+trace#1, cand_acc=False, gt_acc=None, 1; broadcast_code_requested & !current_character_finished & link_machine_Run_state; !broadcast_code_requested & !current_character_finished; cycle{1}
 
 Candidate = G(CT_requested -> (current_character_sent -> F(CT_sent)))
 GT = G((FCT_requested) -> (! (FCT_sent) U (current_character_sent)))
@@ -56,23 +56,23 @@ Candidate = G((LinkDisabled_asserted & Ready_state) -> X(Ready_state))
 GT = G (((LinkDisabled_asserted) & (Ready_state)) -> X (G(Ready_state)))
 trace#0, cand_acc=True, gt_acc=True, 1; cycle{Ready_state}
 trace#1, cand_acc=False, gt_acc=False, 1; LinkDisabled_asserted & Ready_state; !Ready_state; cycle{1}
-trace#2, cand_acc=False, gt_acc=False, LinkDisabled_asserted & Ready_state; LinkDisabled_asserted & !Ready_state; cycle{LinkDisabled_asserted}
-trace#3, cand_acc=True, gt_acc=True, 1; LinkDisabled_asserted & Ready_state; cycle{LinkDisabled_asserted & Ready_state}
-trace#4, cand_acc=False, gt_acc=False, LinkDisabled_asserted & Ready_state; !Ready_state; cycle{1}
+trace#2, cand_acc=False, gt_acc=False, LinkDisabled_asserted & Ready_state; !Ready_state; cycle{1}
+trace#3, cand_acc=False, gt_acc=False, LinkDisabled_asserted & Ready_state; LinkDisabled_asserted & !Ready_state; cycle{LinkDisabled_asserted}
+trace#4, cand_acc=True, gt_acc=True, LinkDisabled_asserted & Ready_state; LinkDisabled_asserted & Ready_state; cycle{LinkDisabled_asserted & Ready_state}
 trace#5, cand_acc=True, gt_acc=True, cycle{!Ready_state}
-trace#6, cand_acc=True, gt_acc=True, !LinkDisabled_asserted | !Ready_state; cycle{!LinkDisabled_asserted | !Ready_state}
-trace#7, cand_acc=True, gt_acc=True, LinkDisabled_asserted & Ready_state; LinkDisabled_asserted & Ready_state; cycle{LinkDisabled_asserted & Ready_state}
-trace#8, cand_acc=True, gt_acc=True, cycle{!LinkDisabled_asserted}
-trace#9, cand_acc=True, gt_acc=True, cycle{(LinkDisabled_asserted & !Ready_state) | (!LinkDisabled_asserted & Ready_state)}
-trace#10, cand_acc=False, gt_acc=False, LinkDisabled_asserted & Ready_state; cycle{!Ready_state}
-trace#11, cand_acc=True, gt_acc=True, cycle{!LinkDisabled_asserted & !Ready_state}
-trace#12, cand_acc=True, gt_acc=True, cycle{LinkDisabled_asserted & !Ready_state}
-trace#13, cand_acc=True, gt_acc=True, cycle{LinkDisabled_asserted & Ready_state}
-trace#14, cand_acc=True, gt_acc=True, cycle{!LinkDisabled_asserted | !Ready_state}
-trace#15, cand_acc=None, gt_acc=None, LinkDisabled_asserted & Ready_state; !LinkDisabled_asserted; cycle{1}
+trace#6, cand_acc=True, gt_acc=True, 1; LinkDisabled_asserted & Ready_state; cycle{LinkDisabled_asserted & Ready_state}
+trace#7, cand_acc=True, gt_acc=True, !LinkDisabled_asserted | !Ready_state; cycle{!LinkDisabled_asserted | !Ready_state}
+trace#8, cand_acc=True, gt_acc=True, cycle{(LinkDisabled_asserted & !Ready_state) | (!LinkDisabled_asserted & Ready_state)}
+trace#9, cand_acc=True, gt_acc=True, cycle{LinkDisabled_asserted & !Ready_state}
+trace#10, cand_acc=True, gt_acc=True, cycle{!LinkDisabled_asserted & !Ready_state}
+trace#11, cand_acc=True, gt_acc=True, cycle{!LinkDisabled_asserted}
+trace#12, cand_acc=None, gt_acc=None, Ready_state; LinkDisabled_asserted & !Ready_state; cycle{1}
+trace#13, cand_acc=False, gt_acc=False, LinkDisabled_asserted & Ready_state; cycle{!Ready_state}
+trace#14, cand_acc=True, gt_acc=True, cycle{LinkDisabled_asserted & Ready_state}
+trace#15, cand_acc=True, gt_acc=True, cycle{!LinkDisabled_asserted | !Ready_state}
 trace#16, cand_acc=True, gt_acc=True, LinkDisabled_asserted & Ready_state; cycle{LinkDisabled_asserted & Ready_state}
-trace#17, cand_acc=False, gt_acc=False, cycle{!Ready_state; LinkDisabled_asserted & Ready_state}
-trace#18, cand_acc=None, gt_acc=None, Ready_state; LinkDisabled_asserted & !Ready_state; cycle{1}
+trace#17, cand_acc=None, gt_acc=None, LinkDisabled_asserted & Ready_state; !LinkDisabled_asserted; cycle{1}
+trace#18, cand_acc=False, gt_acc=False, cycle{!Ready_state; LinkDisabled_asserted & Ready_state}
 trace#19, cand_acc=None, gt_acc=None, !LinkDisabled_asserted | !Ready_state; cycle{1}
 trace#20, cand_acc=None, gt_acc=None, cycle{1}
 trace#21, cand_acc=None, gt_acc=None, !LinkDisabled_asserted | !Ready_state; !Ready_state; cycle{1}
@@ -106,7 +106,7 @@ trace#0, cand_acc=True, gt_acc=None, cycle{!NChar_sent | !Run_state_started | la
 
 Candidate = G((receive_FIFO_full -> !send_FCT) & (!receive_FIFO_full & eight_NChar_room -> F(send_FCT)))
 GT = G((receive_FIFO_full) -> ! F(send_FCT)) & G((eight_NChar_room ) -> X(send_FCT))
-trace#0, cand_acc=True, gt_acc=None, cycle{(!eight_NChar_room & !send_FCT) | (!receive_FIFO_full & send_FCT)}
+trace#0, cand_acc=True, gt_acc=None, cycle{(!eight_NChar_room & !receive_FIFO_full) | (!receive_FIFO_full & send_FCT)}
 
 Candidate = G(all_error_recovery_actions_completed -> F(normal_state))
 GT = G((all_error_recovery_actions_completed) -> X(normal_state))
@@ -121,7 +121,7 @@ trace#1, cand_acc=True, gt_acc=False, cycle{!current_packet_sent & !error_transm
 
 Candidate = G((free_output_port) -> (packet_transfer U output_port_free))
 GT = G((output_port_free) -> ((packet_transfer) & X (free_output_port)))
-trace#0, cand_acc=False, gt_acc=None, 1; free_output_port & !output_port_free & !packet_transfer; cycle{1}
+trace#0, cand_acc=False, gt_acc=None, 1; free_output_port & !output_port_free & packet_transfer; cycle{!output_port_free & packet_transfer}
 
 Candidate = G((!multicast_output_ports_ready) -> (input_port_wait & (!NChar_sent U multicast_output_ports_ready)))
 GT = G(! (NChar_accepted) -> ((input_port_wait) & (! (NChar_sent) U (multicast_output_ports_ready))))
@@ -129,7 +129,8 @@ trace#0, cand_acc=False, gt_acc=None, 1; (NChar_sent & !multicast_output_ports_r
 
 Candidate = G(BROADCAST_CODE_received -> (Character_sent U broadcast_code_sent))
 GT = G((BROADCAST_CODE_received) -> ((Character_sent) -> X (broadcast_code_sent)))
-trace#0, cand_acc=False, gt_acc=None, 1; BROADCAST_CODE_received & !Character_sent & !broadcast_code_sent; cycle{1}
+trace#0, cand_acc=False, gt_acc=False, 1; BROADCAST_CODE_received & Character_sent & !broadcast_code_sent; cycle{Character_sent & !broadcast_code_sent}
+trace#1, cand_acc=False, gt_acc=None, 1; BROADCAST_CODE_received & !Character_sent & !broadcast_code_sent; cycle{1}
 
 Candidate = G(RECEIVE_ERROR_received -> F(ErrorReset_state))
 GT = G((RECEIVE_ERROR_received) -> X (ErrorReset_state))
@@ -147,7 +148,8 @@ trace#0, cand_acc=True, gt_acc=None, cycle{got_null_passed | (first_null_receive
 
 Candidate = G((receive_i & !receive_j U send_i) -> (send_i -> !send_j U send_i))
 GT = G( (receive_i -> X(F(receive_j))) -> (send_i & X(send_j)) )
-trace#0, cand_acc=True, gt_acc=None, receive_i & !receive_j & !send_i; cycle{!receive_j & !send_i}
+trace#0, cand_acc=True, gt_acc=True, receive_i & !receive_j & !send_i & send_j; cycle{receive_i & !receive_j & !send_i & send_j}
+trace#1, cand_acc=True, gt_acc=None, receive_i & send_i; cycle{!send_i & !send_j}
 
 Candidate = G((corr_interr_code_received & send_interr_ack & !interr_code_prop) -> (F(new_interr_code_disc) | G(new_interr_code_prop)))
 GT = G(((corr_interr_code_received) -> X( !( !(send_interr_ack) U(interr_code_prop)))) -> (G(new_interr_code_disc) & G(F(new_interr_code_prop))))

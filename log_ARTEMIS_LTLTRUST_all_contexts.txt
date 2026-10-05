@@ -49,7 +49,7 @@ trace#0, cand_acc=True, gt_acc=None, 1; cycle{SelfTestMode}
 
 Candidate = G(StartUpMode -> (checkCommsSensors & checkCommsValves))
 GT = G(StartUpMode -> X(checkCommsSensors & checkCommsValves))
-trace#0, cand_acc=True, gt_acc=None, !StartUpMode | (checkCommsSensors & checkCommsValves); cycle{!StartUpMode | (checkCommsSensors & checkCommsValves)}
+trace#0, cand_acc=False, gt_acc=None, 1; (StartUpMode & !checkCommsSensors) | (StartUpMode & !checkCommsValves); cycle{1}
 
 Candidate = G((SelfTestMode & selfTestFail) -> G(!ventilating))
 GT = !selfTestFail U (selfTestFail & G(SelfTestMode -> G(!ventilating)))
@@ -58,7 +58,7 @@ trace#1, cand_acc=True, gt_acc=False, cycle{!selfTestFail}
 
 Candidate = G(((PCVMode | PSVMode) & expiratoryPauseButton) -> F(expiratoryPhaseEnd & (expiratoryPauseButton -> (inValveClose & outValveClose) U !expiratoryPauseButton)))
 GT = !expiratoryPauseButton & expiratoryPhaseEnd U (expiratoryPauseButton & expiratoryPhaseEnd & G((PCVMode | PSVMode) & expiratoryPauseButton -> X(expiratoryPause & inValveClose & outValveClose)))
-trace#0, cand_acc=True, gt_acc=None, !expiratoryPauseButton | (!PCVMode & !PSVMode); cycle{!expiratoryPauseButton | (!PCVMode & !PSVMode)}
+trace#0, cand_acc=True, gt_acc=None, cycle{(!PCVMode & !PSVMode & expiratoryPauseButton) | (PCVMode & !expiratoryPauseButton) | (PSVMode & !expiratoryPauseButton) | (!expiratoryPauseButton & expiratoryPhaseEnd)}
 
 Candidate = G(StartUpMode -> F(checkCommsGUI))
 GT = G(StartUpMode -> (checkCommsGUI))
@@ -85,7 +85,7 @@ trace#0, cand_acc=True, gt_acc=None, cycle{(!StandbyMode & !StartUpMode & !inVal
 
 Candidate = G((PCVMode | PSVMode) & inspiratoryPauseButton -> F inspiratoryPause)
 GT = !(inspiratoryPauseButton) U ((inspiratoryPauseButton) & G((( PCVMode | PSVMode )) -> X((inspiratoryPause | (! inspiratoryPauseButton)))))
-trace#0, cand_acc=True, gt_acc=None, inspiratoryPause | !inspiratoryPauseButton | (!PCVMode & !PSVMode); cycle{inspiratoryPause | !inspiratoryPauseButton | (!PCVMode & !PSVMode)}
+trace#0, cand_acc=True, gt_acc=None, cycle{inspiratoryPause | !inspiratoryPauseButton}
 
 Candidate = G(StartUpMode -> F(defaultParamsLoaded))
 GT = G(StartUpMode -> (defaultParamsLoaded))
@@ -122,7 +122,7 @@ trace#2, cand_acc=True, gt_acc=None, cycle{!RM | expiratoryPhaseStart}
 
 Candidate = G((PCVMode | PSVMode) & expiratoryPauseButton -> F expiratoryPause)
 GT = !(expiratoryPauseButton) U ((expiratoryPauseButton) & G((( PCVMode | PSVMode )) -> X((expiratoryPause | (! expiratoryPauseButton)))))
-trace#0, cand_acc=True, gt_acc=None, expiratoryPause | !expiratoryPauseButton | (!PCVMode & !PSVMode); cycle{expiratoryPause | !expiratoryPauseButton | (!PCVMode & !PSVMode)}
+trace#0, cand_acc=True, gt_acc=None, cycle{expiratoryPause | !expiratoryPauseButton}
 
 Candidate = G(PSVModeSelected -> F(PSVMode))
 GT = !(PSVModeSelected) U ((PSVModeSelected) & G(StandbyMode -> F(PSVMode)))
@@ -134,7 +134,7 @@ trace#0, cand_acc=True, gt_acc=None, cycle{RM | !RMButton | !inspiratoryPhaseEnd
 
 Candidate = G((PSVMode & stopVentilation) -> F(!PSVMode & !StandbyMode))
 GT = !(stopVentilation) U ((stopVentilation) & G(PSVMode -> F(StandbyMode)))
-trace#0, cand_acc=True, gt_acc=None, !PSVMode | !stopVentilation; cycle{!PSVMode | !stopVentilation}
+trace#0, cand_acc=True, gt_acc=None, cycle{!stopVentilation | (!PSVMode & !StandbyMode)}
 
 Candidate = G((inspiratoryPhaseEnd & !PCVMode & RM & RMButton) -> X(RM))
 GT = !(inspiratoryPhaseEnd) U ((inspiratoryPhaseEnd) & G((PCVMode & RMButton) -> X(RM)))
@@ -146,11 +146,11 @@ trace#0, cand_acc=False, gt_acc=None, 1; !PCVMode & PCVModeSelected; cycle{!PCVM
 
 Candidate = G(RM -> (outValveClose & inValveOpen))
 GT = G((RM) -> X((outValveClose & inValveOpen)))
-trace#0, cand_acc=True, gt_acc=None, !RM | (inValveOpen & outValveClose); cycle{!RM | (inValveOpen & outValveClose)}
+trace#0, cand_acc=False, gt_acc=None, 1; (RM & !inValveOpen) | (RM & !outValveClose); cycle{1}
 
 Candidate = G(((PCVMode | PSVMode) & inspiratoryPauseButton) -> F(inspiratoryPhaseEnd & (inspiratoryPauseButton -> (inValveClose & outValveClose) U !inspiratoryPauseButton)))
 GT = !inspiratoryPauseButton & inspiratoryPhaseEnd U (inspiratoryPauseButton & inspiratoryPhaseEnd & G((PCVMode | PSVMode) & inspiratoryPauseButton -> G(inspiratoryPause & inValveClose & outValveClose)))
-trace#0, cand_acc=True, gt_acc=None, !inspiratoryPauseButton | (!PCVMode & !PSVMode); cycle{!inspiratoryPauseButton | (!PCVMode & !PSVMode)}
+trace#0, cand_acc=True, gt_acc=None, cycle{(!PCVMode & !PSVMode & inspiratoryPauseButton) | (PCVMode & !inspiratoryPauseButton) | (PSVMode & !inspiratoryPauseButton) | (!inspiratoryPauseButton & inspiratoryPhaseEnd)}
 
 Candidate = G(SelfTestMode -> F(selfTestFail | selfTestPass))
 GT = G(SelfTestMode -> X((selfTestPass | selfTestFail)))
@@ -165,7 +165,9 @@ Candidate = G(SelfTestMode -> F(testFl2Pass | testFl2Fail | testFl2Skip))
 GT = G(SelfTestMode -> (((testFl2Pass | testFl2Fail) | testFl2Skip)))
 trace#0, cand_acc=False, gt_acc=False, 1; SelfTestMode & !testFl2Fail & !testFl2Pass & !testFl2Skip; cycle{!testFl2Fail & !testFl2Pass & !testFl2Skip}
 trace#1, cand_acc=True, gt_acc=True, cycle{!SelfTestMode | testFl2Fail | testFl2Pass | testFl2Skip}
-trace#2, cand_acc=True, gt_acc=None, 1; cycle{testFl2Fail | testFl2Pass | testFl2Skip}
+trace#2, cand_acc=True, gt_acc=True, !SelfTestMode | testFl2Fail | testFl2Pass | testFl2Skip; cycle{!SelfTestMode | testFl2Fail | testFl2Pass | testFl2Skip}
+trace#3, cand_acc=None, gt_acc=None, (SelfTestMode & testFl2Fail) | (SelfTestMode & testFl2Pass) | (SelfTestMode & testFl2Skip); cycle{1}
+trace#4, cand_acc=True, gt_acc=None, 1; cycle{testFl2Fail | testFl2Pass | testFl2Skip}
 
 Candidate = G(initStart -> F(checkCommsGUI & checkCommsSensors & checkCommsValves))
 GT = G(StartUpMode -> ((((initStart & checkCommsSensors) & checkCommsValves) & checkCommsGUI)))
@@ -192,20 +194,20 @@ trace#2, cand_acc=True, gt_acc=None, cycle{displayTV | !measureTV}
 Candidate = G(enableLeakCompensation -> F(leakCompensationActive)) & !leakCompensationActive
 GT = G(enableLeakCompensation -> F(leakCompensationActive))
 trace#0, cand_acc=True, gt_acc=True, !leakCompensationActive; cycle{leakCompensationActive; !leakCompensationActive}
-trace#1, cand_acc=False, gt_acc=False, !leakCompensationActive; enableLeakCompensation & !leakCompensationActive; cycle{!leakCompensationActive}
-trace#2, cand_acc=True, gt_acc=True, enableLeakCompensation & !leakCompensationActive; cycle{enableLeakCompensation & leakCompensationActive}
-trace#3, cand_acc=True, gt_acc=True, !leakCompensationActive; cycle{leakCompensationActive}
-trace#4, cand_acc=False, gt_acc=False, enableLeakCompensation & !leakCompensationActive; cycle{!leakCompensationActive}
-trace#5, cand_acc=True, gt_acc=True, !enableLeakCompensation & !leakCompensationActive; cycle{!enableLeakCompensation | leakCompensationActive}
-trace#6, cand_acc=True, gt_acc=True, !enableLeakCompensation & !leakCompensationActive; cycle{!enableLeakCompensation}
+trace#1, cand_acc=True, gt_acc=True, enableLeakCompensation & !leakCompensationActive; cycle{enableLeakCompensation & leakCompensationActive}
+trace#2, cand_acc=False, gt_acc=False, !leakCompensationActive; enableLeakCompensation & !leakCompensationActive; cycle{!leakCompensationActive}
+trace#3, cand_acc=False, gt_acc=False, enableLeakCompensation & !leakCompensationActive; cycle{!leakCompensationActive}
+trace#4, cand_acc=True, gt_acc=True, !leakCompensationActive; cycle{leakCompensationActive}
+trace#5, cand_acc=True, gt_acc=True, !enableLeakCompensation & !leakCompensationActive; cycle{!enableLeakCompensation}
+trace#6, cand_acc=True, gt_acc=True, !enableLeakCompensation & !leakCompensationActive; cycle{!enableLeakCompensation | leakCompensationActive}
 trace#7, cand_acc=False, gt_acc=False, leakCompensationActive; enableLeakCompensation & !leakCompensationActive; cycle{!leakCompensationActive}
-trace#8, cand_acc=True, gt_acc=True, !leakCompensationActive; leakCompensationActive; cycle{leakCompensationActive}
+trace#8, cand_acc=None, gt_acc=None, !enableLeakCompensation & !leakCompensationActive; cycle{1}
 trace#9, cand_acc=False, gt_acc=None, leakCompensationActive; cycle{1}
 
 Candidate = G((StartUpMode | SelfTestMode) -> !patientConnected)
 GT = G(StartUpMode | SelfTestMode -> G(! patientConnected))
 trace#0, cand_acc=False, gt_acc=False, 1; (SelfTestMode & patientConnected) | (StartUpMode & patientConnected); cycle{1}
-trace#1, cand_acc=True, gt_acc=None, !patientConnected | (!SelfTestMode & !StartUpMode); cycle{!patientConnected | (!SelfTestMode & !StartUpMode)}
+trace#1, cand_acc=True, gt_acc=None, cycle{!patientConnected | (!SelfTestMode & !StartUpMode)}
 
 Candidate = G(enterAlarmThresholds)
 GT = ((enterAlarmThresholds))
@@ -213,18 +215,21 @@ trace#0, cand_acc=False, gt_acc=None, 1; !enterAlarmThresholds; cycle{1}
 
 Candidate = G((PCVMode & breathingCycleDone) -> F(breathingCycleStart)) & G((PCVMode & patientBreathingRequest) -> F(breathingCycleStart))
 GT = !breathingCycleDone | patientBreathingRequest U (breathingCycleDone | patientBreathingRequest & G(PCVMode -> (breathingCycleStart)))
-trace#0, cand_acc=True, gt_acc=True, cycle{!PCVMode | breathingCycleStart | (!breathingCycleDone & !patientBreathingRequest)}
-trace#1, cand_acc=True, gt_acc=True, cycle{breathingCycleStart | (PCVMode & !breathingCycleDone & !patientBreathingRequest)}
-trace#2, cand_acc=True, gt_acc=True, cycle{!PCVMode | breathingCycleStart}
-trace#3, cand_acc=True, gt_acc=True, cycle{!PCVMode | (!breathingCycleDone & !patientBreathingRequest) | (breathingCycleStart & !patientBreathingRequest)}
-trace#4, cand_acc=True, gt_acc=True, cycle{!PCVMode | (!breathingCycleDone & breathingCycleStart) | (!breathingCycleDone & !patientBreathingRequest)}
-trace#5, cand_acc=False, gt_acc=True, 1; (PCVMode & breathingCycleDone & !breathingCycleStart) | (PCVMode & !breathingCycleStart & patientBreathingRequest); cycle{!breathingCycleStart}
+trace#0, cand_acc=True, gt_acc=True, cycle{breathingCycleStart | (PCVMode & !breathingCycleDone & !patientBreathingRequest)}
+trace#1, cand_acc=True, gt_acc=True, cycle{!PCVMode | breathingCycleStart}
+trace#2, cand_acc=True, gt_acc=True, cycle{!PCVMode | breathingCycleStart | (!breathingCycleDone & !patientBreathingRequest)}
+trace#3, cand_acc=True, gt_acc=True, 1; cycle{breathingCycleStart}
+trace#4, cand_acc=True, gt_acc=True, cycle{!PCVMode | (!breathingCycleDone & !patientBreathingRequest) | (breathingCycleStart & !patientBreathingRequest)}
+trace#5, cand_acc=True, gt_acc=True, cycle{!PCVMode | (!breathingCycleDone & breathingCycleStart) | (!breathingCycleDone & !patientBreathingRequest)}
+trace#6, cand_acc=False, gt_acc=True, 1; (PCVMode & breathingCycleDone & !breathingCycleStart) | (PCVMode & !breathingCycleStart & patientBreathingRequest); cycle{!breathingCycleStart}
 
 Candidate = G(SelfTestMode -> F(testPSExpPass | testPSExpFail | testPSExpSkip))
 GT = G(SelfTestMode -> (((testPSExpPass | testPSExpFail) | testPSExpSkip)))
 trace#0, cand_acc=False, gt_acc=False, 1; SelfTestMode & !testPSExpFail & !testPSExpPass & !testPSExpSkip; cycle{!testPSExpFail & !testPSExpPass & !testPSExpSkip}
 trace#1, cand_acc=True, gt_acc=True, cycle{!SelfTestMode | testPSExpFail | testPSExpPass | testPSExpSkip}
-trace#2, cand_acc=True, gt_acc=None, 1; cycle{testPSExpFail | testPSExpPass | testPSExpSkip}
+trace#2, cand_acc=True, gt_acc=True, !SelfTestMode | testPSExpFail | testPSExpPass | testPSExpSkip; cycle{!SelfTestMode | testPSExpFail | testPSExpPass | testPSExpSkip}
+trace#3, cand_acc=None, gt_acc=None, (SelfTestMode & testPSExpFail) | (SelfTestMode & testPSExpPass) | (SelfTestMode & testPSExpSkip); cycle{1}
+trace#4, cand_acc=True, gt_acc=None, 1; cycle{testPSExpFail | testPSExpPass | testPSExpSkip}
 
 Candidate = G(apnea -> F(apneaAlarm))
 GT = !(apnea) U ((apnea) & F(apneaAlarm))
@@ -255,8 +260,7 @@ trace#0, cand_acc=False, gt_acc=None, 1; alarmSettingsChanged & !logAlarmSetting
 Candidate = G(StandbyMode -> !ventilating)
 GT = G(StandbyMode -> G((!ventilating)))
 trace#0, cand_acc=False, gt_acc=False, 1; StandbyMode & ventilating; cycle{1}
-trace#1, cand_acc=None, gt_acc=None, !StandbyMode & ventilating; cycle{1}
-trace#2, cand_acc=True, gt_acc=None, cycle{(StandbyMode & !ventilating) | (!StandbyMode & ventilating)}
+trace#1, cand_acc=True, gt_acc=None, cycle{(StandbyMode & !ventilating) | (!StandbyMode & ventilating)}
 
 Candidate = G(StandbyMode -> ventilationParamsAdjustable)
 GT = G(StandbyMode -> F((ventilationParamsAdjustable)))
@@ -289,9 +293,7 @@ trace#0, cand_acc=False, gt_acc=None, 1; gasSupplyFailure & !patientSafe; cycle{
 
 Candidate = G(enableLeakCompensation -> F(leakCompensationActive)) & G(!enableLeakCompensation -> F(!leakCompensationActive))
 GT = (G(enableLeakCompensation <-> leakCompensationActive))
-trace#0, cand_acc=True, gt_acc=True, cycle{!enableLeakCompensation & !leakCompensationActive}
-trace#1, cand_acc=True, gt_acc=True, cycle{(!enableLeakCompensation & !leakCompensationActive) | (enableLeakCompensation & leakCompensationActive)}
-trace#2, cand_acc=True, gt_acc=None, !enableLeakCompensation | leakCompensationActive; cycle{leakCompensationActive; !enableLeakCompensation & !leakCompensationActive}
+trace#0, cand_acc=True, gt_acc=None, !enableLeakCompensation | leakCompensationActive; cycle{leakCompensationActive; !enableLeakCompensation & !leakCompensationActive}
 
 Candidate = G(powerSupplyChanged -> F(logPowerSupply))
 GT = !(powerSupplyChanged) U ((powerSupplyChanged) & (logPowerSupply))
@@ -309,7 +311,9 @@ Candidate = G(SelfTestMode -> F(testPowerSwitchPass | testPowerSwitchFail | test
 GT = G(SelfTestMode -> (((testPowerSwitchPass | testPowerSwitchFail) | testPowerSwitchSkip)))
 trace#0, cand_acc=False, gt_acc=False, 1; SelfTestMode & !testPowerSwitchFail & !testPowerSwitchPass & !testPowerSwitchSkip; cycle{!testPowerSwitchFail & !testPowerSwitchPass & !testPowerSwitchSkip}
 trace#1, cand_acc=True, gt_acc=True, cycle{!SelfTestMode | testPowerSwitchFail | testPowerSwitchPass | testPowerSwitchSkip}
-trace#2, cand_acc=True, gt_acc=None, 1; cycle{testPowerSwitchFail | testPowerSwitchPass | testPowerSwitchSkip}
+trace#2, cand_acc=True, gt_acc=True, !SelfTestMode | testPowerSwitchFail | testPowerSwitchPass | testPowerSwitchSkip; cycle{!SelfTestMode | testPowerSwitchFail | testPowerSwitchPass | testPowerSwitchSkip}
+trace#3, cand_acc=None, gt_acc=None, (SelfTestMode & testPowerSwitchFail) | (SelfTestMode & testPowerSwitchPass) | (SelfTestMode & testPowerSwitchSkip); cycle{1}
+trace#4, cand_acc=True, gt_acc=None, 1; cycle{testPowerSwitchFail | testPowerSwitchPass | testPowerSwitchSkip}
 
 Candidate = G(PCVMode & RMButton -> F RM)
 GT = !(RMButton) U ((RMButton) & G(PCVMode -> (RM)))
@@ -323,8 +327,7 @@ Candidate = G((breathingCircuitConnected & !patientConnected & airSupplyConnecte
 GT = !(powerButton) U ((powerButton) & G((breathingCircuitConnected & ! ( patientConnected ) & airSupplyConnected & powerConnected ) -> X(StartUpMode)))
 trace#0, cand_acc=False, gt_acc=False, 1; airSupplyConnected & breathingCircuitConnected & !patientConnected & powerButton & powerConnected; !StartUpMode; cycle{1}
 trace#1, cand_acc=False, gt_acc=False, airSupplyConnected & breathingCircuitConnected & !patientConnected & powerButton & powerConnected; !StartUpMode; cycle{1}
-trace#2, cand_acc=False, gt_acc=False, airSupplyConnected & breathingCircuitConnected & !patientConnected & powerButton & powerConnected; !StartUpMode & airSupplyConnected & breathingCircuitConnected & !patientConnected & powerButton & powerConnected; cycle{airSupplyConnected & breathingCircuitConnected & !patientConnected & powerButton & powerConnected}
-trace#3, cand_acc=True, gt_acc=None, 1; cycle{StartUpMode}
+trace#2, cand_acc=True, gt_acc=None, 1; cycle{StartUpMode}
 
 Candidate = G(logPreUseCheck -> F(preUseCheckDone))
 GT = !(preUseCheckDone) U ((preUseCheckDone) & F(logPreUseCheck))
@@ -355,18 +358,15 @@ trace#0, cand_acc=False, gt_acc=None, 1; !loadLastParams & resumeVentilation; cy
 
 Candidate = G((PCVMode & !inspiratoryPhaseStart) -> ((!breathingCycleDone & !patientBreathingRequest) U (breathingCycleDone | patientBreathingRequest) -> X(inspiratoryPhaseStart)))
 GT = !breathingCycleDone | patientBreathingRequest U (breathingCycleDone | patientBreathingRequest & G(PCVMode -> F(inspiratoryPhaseStart)))
-trace#0, cand_acc=True, gt_acc=True, cycle{!PCVMode}
-trace#1, cand_acc=True, gt_acc=True, cycle{(PCVMode & inspiratoryPhaseStart) | (!PCVMode & !inspiratoryPhaseStart)}
-trace#2, cand_acc=False, gt_acc=True, 1; (PCVMode & breathingCycleDone & !inspiratoryPhaseStart) | (PCVMode & !inspiratoryPhaseStart & patientBreathingRequest); !inspiratoryPhaseStart; cycle{1}
+trace#0, cand_acc=False, gt_acc=True, (PCVMode & breathingCycleDone & !inspiratoryPhaseStart) | (PCVMode & !inspiratoryPhaseStart & patientBreathingRequest); PCVMode & !inspiratoryPhaseStart; cycle{PCVMode}
 
 Candidate = G(StandbyMode -> (!ventilating & inValveClose & outValveOpen))
 GT = G(StandbyMode -> G(((!ventilating & inValveClose) & outValveOpen)))
-trace#0, cand_acc=False, gt_acc=False, 1; (StandbyMode & !inValveClose) | (StandbyMode & !outValveOpen) | (StandbyMode & ventilating); cycle{1}
-trace#1, cand_acc=True, gt_acc=None, cycle{!StandbyMode | (inValveClose & outValveOpen & !ventilating)}
+trace#0, cand_acc=True, gt_acc=None, cycle{(!StandbyMode & !inValveClose) | (!StandbyMode & !outValveOpen) | (!StandbyMode & ventilating) | (StandbyMode & inValveClose & outValveOpen & !ventilating)}
 
 Candidate = G(StartUpMode -> (F(defaultParamsLoaded) & F(checkCommsSensors) & F(checkCommsValves) & F(checkCommsGUI) & F(initDone)))
 GT = G(StartUpMode -> X((((checkCommsSensors) & checkCommsValves) & checkCommsGUI) & defaultParamsLoaded & (initStart & (initDone | ((initFail & OutOfServiceWarning) & failSafeMode)))))
-trace#0, cand_acc=True, gt_acc=None, cycle{!StartUpMode | (checkCommsGUI & checkCommsSensors & checkCommsValves & defaultParamsLoaded & initDone)}
+trace#0, cand_acc=True, gt_acc=None, cycle{checkCommsGUI & checkCommsSensors & checkCommsValves & defaultParamsLoaded & initDone}
 
 Candidate = G((PCVMode & !expiratoryPhaseEnd & !patientBreathingRequest & expiratoryPauseButton) -> F(inValveClose & outValveClose))
 GT = !(expiratoryPauseButton) U ((expiratoryPauseButton) & G(PCVMode & expiratoryPhaseEnd & !patientBreathingRequest -> F(((expiratoryPhaseEnd & inValveClose) & outValveClose))))
@@ -374,11 +374,12 @@ trace#0, cand_acc=True, gt_acc=None, cycle{!PCVMode | !expiratoryPauseButton | e
 
 Candidate = G(RMButton -> F(!RM))
 GT = !(! RMButton) U ((! RMButton) & F(((! RM) & expiratoryPhaseStart)))
-trace#0, cand_acc=True, gt_acc=None, cycle{!RM | !RMButton}
+trace#0, cand_acc=False, gt_acc=None, 1; RM & RMButton; cycle{RM}
 
 Candidate = G(expiratoryPhase -> (inValveClose & outValveOpen))
 GT = G((expiratoryPhase) -> G((inValveClose & outValveOpen)))
-trace#0, cand_acc=True, gt_acc=None, !expiratoryPhase | (inValveClose & outValveOpen); cycle{!expiratoryPhase | (inValveClose & outValveOpen)}
+trace#0, cand_acc=False, gt_acc=False, 1; (expiratoryPhase & !inValveClose) | (expiratoryPhase & !outValveOpen); cycle{1}
+trace#1, cand_acc=True, gt_acc=None, cycle{(expiratoryPhase & inValveClose & outValveOpen) | (!expiratoryPhase & !inValveClose) | (!expiratoryPhase & !outValveOpen)}
 
 Candidate = G(powerButton -> X(StartUpMode))
 GT = !(off & powerButton) U ((off & powerButton) & F((StartUpMode)))
@@ -390,7 +391,7 @@ trace#0, cand_acc=True, gt_acc=None, 1; cycle{PSVMode}
 
 Candidate = G((PCVMode & stopVentilation) -> F(!PCVMode & !StandbyMode))
 GT = !(stopVentilation) U ((stopVentilation) & G(PCVMode -> F(StandbyMode)))
-trace#0, cand_acc=True, gt_acc=None, !PCVMode | !stopVentilation; cycle{!PCVMode | !stopVentilation}
+trace#0, cand_acc=True, gt_acc=None, cycle{!stopVentilation | (!PCVMode & !StandbyMode)}
 
 Candidate = G(PSVMode & breathingCycleStart -> inspiratoryPhaseStart)
 GT = !(breathingCycleStart) U ((breathingCycleStart) & G(PSVMode -> (inspiratoryPhaseStart)))
@@ -411,7 +412,7 @@ trace#0, cand_acc=True, gt_acc=None, 1; cycle{expiratoryPhaseStart}
 
 Candidate = G((PSVMode & expiratoryPhase & !patientBreathingRequest & expClock_within_interval_min_exp_time_psv_to_apnea_lag & expiratoryPauseButton) -> F(inValveClose & outValveClose))
 GT = !(expiratoryPauseButton) U ((expiratoryPauseButton) & G((PSVMode & expClock_within_interval_min_exp_time_psv_to_apnea_lag & !patientBreathingRequest & expiratoryPhase) -> F(((expiratoryPhaseEnd & inValveClose) & outValveClose))))
-trace#0, cand_acc=True, gt_acc=None, cycle{!PSVMode | !expClock_within_interval_min_exp_time_psv_to_apnea_lag | !expiratoryPauseButton | !expiratoryPhase | (inValveClose & outValveClose)}
+trace#0, cand_acc=True, gt_acc=None, cycle{(inValveClose & outValveClose) | (!PSVMode & !expClock_within_interval_min_exp_time_psv_to_apnea_lag & !expiratoryPauseButton & !expiratoryPhase & patientBreathingRequest)}
 
 Candidate = G((PCVMode & dropPAW_greaterThan_ITS_PCV & patientBreathingRequest) -> F(!PCVMode | patientBreathingRequest))
 GT = !(dropPAW_greaterThan_ITS_PCV) U ((dropPAW_greaterThan_ITS_PCV) & G((PCVMode) -> F(patientBreathingRequest)))
@@ -420,7 +421,7 @@ trace#0, cand_acc=True, gt_acc=None, cycle{1}
 Candidate = G((PSVMode & inspiratoryPhase) -> (inspiratoryPhase U ((P_insp_greaterThanOrEqual_MaxP_insp | inspClock_greaterThanOrEqual_inspiratoryTime) & X(!inspiratoryPhase))))
 GT = G(PSVMode -> (inspiratoryPhase U (( P_insp_greaterThanOrEqual_MaxP_insp | inspClock_greaterThanOrEqual_inspiratoryTime ))))
 trace#0, cand_acc=False, gt_acc=False, 1; PSVMode & !P_insp_greaterThanOrEqual_MaxP_insp & !inspClock_greaterThanOrEqual_inspiratoryTime & inspiratoryPhase; !P_insp_greaterThanOrEqual_MaxP_insp & !inspClock_greaterThanOrEqual_inspiratoryTime & !inspiratoryPhase; cycle{1}
-trace#1, cand_acc=True, gt_acc=None, !PSVMode | !inspiratoryPhase; cycle{!PSVMode | !inspiratoryPhase}
+trace#1, cand_acc=True, gt_acc=None, cycle{!P_insp_greaterThanOrEqual_MaxP_insp & !inspClock_greaterThanOrEqual_inspiratoryTime & !inspiratoryPhase}
 
 Candidate = G((inspiratoryPhase & PCVMode & !apnea) -> (outValveClose & P_insp_equalTo_P_inspPCV)) & G((inspiratoryPhase & PSVMode & !apnea) -> (outValveClose & P_insp_equalTo_P_inspPSV)) & G((inspiratoryPhase & PCVMode & apnea) -> (outValveClose & P_insp_equalTo_P_inspAP))
 GT = G((inspiratoryPhase) -> G((((outValveClose & ((PCVMode & (! apnea)) -> (P_insp_equalTo_P_inspPCV))) & (PSVMode -> (P_insp_equalTo_P_inspPSV))) & ((PCVMode & apnea) -> (P_insp_equalTo_P_inspAP)))))
@@ -452,7 +453,8 @@ trace#0, cand_acc=False, gt_acc=None, 1; !breathingCycleStart & dropPAW_greaterT
 
 Candidate = G(PCVMode -> (breathingCycleTime_equalTo_1_divideBy_RR_PCV & ExpiratoryTime_equalTo_breathingCycleTime_divideBy_1_plus_ItoE_PCV))
 GT = G(PCVMode -> G(((breathingCycleTime_equalTo_1_divideBy_RR_PCV) & (ExpiratoryTime_equalTo_breathingCycleTime_divideBy_1_plus_ItoE_PCV))))
-trace#0, cand_acc=True, gt_acc=None, !PCVMode | (ExpiratoryTime_equalTo_breathingCycleTime_divideBy_1_plus_ItoE_PCV & breathingCycleTime_equalTo_1_divideBy_RR_PCV); cycle{!PCVMode | (ExpiratoryTime_equalTo_breathingCycleTime_divideBy_1_plus_ItoE_PCV & breathingCycleTime_equalTo_1_divideBy_RR_PCV)}
+trace#0, cand_acc=False, gt_acc=False, 1; (!ExpiratoryTime_equalTo_breathingCycleTime_divideBy_1_plus_ItoE_PCV & PCVMode) | (PCVMode & !breathingCycleTime_equalTo_1_divideBy_RR_PCV); cycle{1}
+trace#1, cand_acc=True, gt_acc=None, cycle{(ExpiratoryTime_equalTo_breathingCycleTime_divideBy_1_plus_ItoE_PCV & PCVMode & breathingCycleTime_equalTo_1_divideBy_RR_PCV) | (!ExpiratoryTime_equalTo_breathingCycleTime_divideBy_1_plus_ItoE_PCV & !PCVMode) | (!PCVMode & !breathingCycleTime_equalTo_1_divideBy_RR_PCV)}
 
 Candidate = G((PSVMode & breathingCycleStart) -> dropPAW_greaterThan_ITS_PSV)
 GT = !(dropPAW_greaterThan_ITS_PSV) U ((dropPAW_greaterThan_ITS_PSV) & G(PSVMode -> F(breathingCycleStart)))
@@ -474,8 +476,8 @@ trace#2, cand_acc=True, gt_acc=None, cycle{!PCVMode | inspiratoryTime_equalTo_60
 
 Candidate = G((PSVMode & expiratoryPhase) -> (minExpiratoryTime_equalTo_inspClock_divideBy_2 & minExpiratoryTime_greaterThanOrEqual_0_4 & minExpiratoryTime_lessThanOrEqual_2))
 GT = G(PSVMode -> ((((minExpiratoryTime_greaterThanOrEqual_0_4) & (minExpiratoryTime_lessThanOrEqual_2)) & (expiratoryPhase -> (minExpiratoryTime_equalTo_inspClock_divideBy_2)))))
-trace#0, cand_acc=True, gt_acc=True, cycle{(minExpiratoryTime_equalTo_inspClock_divideBy_2 & minExpiratoryTime_greaterThanOrEqual_0_4 & minExpiratoryTime_lessThanOrEqual_2) | (!PSVMode & !expiratoryPhase)}
-trace#1, cand_acc=True, gt_acc=True, cycle{!PSVMode | (minExpiratoryTime_equalTo_inspClock_divideBy_2 & minExpiratoryTime_greaterThanOrEqual_0_4 & minExpiratoryTime_lessThanOrEqual_2)}
+trace#0, cand_acc=True, gt_acc=True, cycle{!PSVMode | (minExpiratoryTime_equalTo_inspClock_divideBy_2 & minExpiratoryTime_greaterThanOrEqual_0_4 & minExpiratoryTime_lessThanOrEqual_2)}
+trace#1, cand_acc=True, gt_acc=True, cycle{(minExpiratoryTime_equalTo_inspClock_divideBy_2 & minExpiratoryTime_greaterThanOrEqual_0_4 & minExpiratoryTime_lessThanOrEqual_2) | (!PSVMode & !expiratoryPhase)}
 trace#2, cand_acc=True, gt_acc=None, cycle{!expiratoryPhase | (minExpiratoryTime_equalTo_inspClock_divideBy_2 & minExpiratoryTime_greaterThanOrEqual_0_4 & minExpiratoryTime_lessThanOrEqual_2)}
 
 Candidate = G((StartUpMode & (ADCConnFailure | ADCError) & ADCRetries_greaterThanOrEqual_5) -> F(failSafeMode))
@@ -493,7 +495,7 @@ trace#0, cand_acc=True, gt_acc=None, cycle{!PSVMode | !dropPAW_greaterThan_ITS_P
 Candidate = G((P_insp_greaterThan_MaxP_insp & !expiratoryPhaseStart) -> X(expiratoryPhaseStart))
 GT = !(P_insp_greaterThan_MaxP_insp) U ((P_insp_greaterThan_MaxP_insp) & X((inspiratoryPhaseEnd & expiratoryPhaseStart)))
 trace#0, cand_acc=False, gt_acc=False, 1; P_insp_greaterThan_MaxP_insp & !expiratoryPhaseStart; !expiratoryPhaseStart; cycle{1}
-trace#1, cand_acc=False, gt_acc=False, P_insp_greaterThan_MaxP_insp & !expiratoryPhaseStart; P_insp_greaterThan_MaxP_insp & !expiratoryPhaseStart; cycle{P_insp_greaterThan_MaxP_insp}
-trace#2, cand_acc=False, gt_acc=False, P_insp_greaterThan_MaxP_insp & !expiratoryPhaseStart; !expiratoryPhaseStart; cycle{1}
-trace#3, cand_acc=True, gt_acc=None, 1; cycle{expiratoryPhaseStart}
+trace#1, cand_acc=False, gt_acc=False, P_insp_greaterThan_MaxP_insp & !expiratoryPhaseStart; !expiratoryPhaseStart; cycle{1}
+trace#2, cand_acc=False, gt_acc=False, P_insp_greaterThan_MaxP_insp & !expiratoryPhaseStart; P_insp_greaterThan_MaxP_insp & !expiratoryPhaseStart; cycle{P_insp_greaterThan_MaxP_insp}
+trace#3, cand_acc=True, gt_acc=None, cycle{(P_insp_greaterThan_MaxP_insp & expiratoryPhaseStart) | (!P_insp_greaterThan_MaxP_insp & !expiratoryPhaseStart)}
 
