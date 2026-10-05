@@ -59,7 +59,7 @@ for name, ndt, dt_rand, dt_reg, avg_rand, avg_reg in zip(strategies, ndt_inf, dt
 x = np.arange(len(strategies))
 width = 0.38
 
-fig, ax = plt.subplots(figsize=(10, 6.5))  # keep compact height
+fig, ax = plt.subplots(figsize=(10, 5))  # keep compact height
 
 base_color = "0.80"
 top_color = "0.55"
@@ -148,14 +148,24 @@ avg_handle = Line2D(
     label="Top label = NDT + DT; parentheses = avg. traces"
 )
 
-ax.legend(handles=[base_patch, random_patch, regr_patch], fontsize=18)
+# One row above the axes, so the bars need no headroom for the legend
+ax.legend(
+    handles=[base_patch, random_patch, regr_patch],
+    fontsize=18,
+    ncol=3,
+    loc="lower center",
+    bbox_to_anchor=(0.5, 1.0),
+    frameon=False,
+    handlelength=1.5,
+    columnspacing=1.2,
+)
 
 # =========================
 # Limits
 # =========================
 
-# Leave room above the bar labels for the legend
-ax.set_ylim(0, np.max(ndt_inf + np.maximum(dt_random, dt_regr)) * 1.75)
+# Leave room above the bars for their labels
+ax.set_ylim(0, np.max(ndt_inf + np.maximum(dt_random, dt_regr)) * 1.4)
 
 plt.tight_layout()
 
