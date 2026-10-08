@@ -227,9 +227,12 @@ def main():
 
                 for _ in range(0, data.repeats):
 
-                    traces = data.order(cand, traces, strategy)
+                    # Every ordering starts from the traces as generated, so
+                    # orderings that keep ties in input order (shortest
+                    # first) do not depend on the orderings run before them
+                    ordered = data.order(cand, list(traces), strategy)
 
-                    seen, length, lit, mc, values, log = evaluate(cand, gt, traces)
+                    seen, length, lit, mc, values, log = evaluate(cand, gt, ordered)
 
                     # mp_map[key].append(seen)
 
