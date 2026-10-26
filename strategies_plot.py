@@ -57,7 +57,9 @@ for name, ndt, dt_rand, dt_reg, avg_rand, avg_reg in zip(strategies, ndt_inf, dt
 # =========================
 
 x = np.arange(len(strategies))
-width = 0.38
+# Sized for a one-column paper, where the figure spans most of the text width:
+# wide bars and fonts that stay legible at about half the figure's size
+width = 0.44
 
 fig, ax = plt.subplots(figsize=(10, 4.2))  # keep compact height
 
@@ -101,7 +103,7 @@ for i in range(len(strategies)):
         f"{total_random:.3f}\n({avg_random[i]:.2f})",
         ha="center",
         va="bottom",
-        fontsize=16,
+        fontsize=14,
     )
 
     ax.text(
@@ -110,7 +112,7 @@ for i in range(len(strategies)):
         f"{total_regr:.3f}\n({avg_regr[i]:.2f})",
         ha="center",
         va="bottom",
-        fontsize=15,
+        fontsize=14,
     )
 
 # =========================
@@ -119,7 +121,10 @@ for i in range(len(strategies)):
 
 ax.set_xticks(x)
 # Horizontal labels over two lines, e.g. "Top 25" above "Ctx."
-ax.set_xticklabels([s.replace(" Ctx.", "\nCtx.") for s in strategies], fontsize=20)
+ax.set_xticklabels([s.replace(" Ctx.", "\nCtx.") for s in strategies], fontsize=17)
+ax.tick_params(axis="y", labelsize=13)
+# Little empty space beside the outer bars
+ax.margins(x=0.02)
 
 ax.set_xlabel("")
 ax.set_ylabel("")
@@ -152,7 +157,7 @@ avg_handle = Line2D(
 # One row above the axes, so the bars need no headroom for the legend
 ax.legend(
     handles=[base_patch, random_patch, regr_patch],
-    fontsize=18,
+    fontsize=16,
     ncol=3,
     loc="lower center",
     bbox_to_anchor=(0.5, 1.0),
