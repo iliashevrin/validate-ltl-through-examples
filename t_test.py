@@ -12,6 +12,7 @@ DEFAULT_RESULTS = [
     "Shortest First=results_ALL_RL_BY_LENGTH_all_contexts.txt",
     "LTLTrust=results_ALL_RL_LTLTRUST_all_contexts.txt",
     "SA LTLTrust=results_ALL_RL_LTLTRUST_PLUS_all_contexts.txt",
+    "Static=results_ALL_RL_STATIC_all_contexts.txt",
 ]
 
 
