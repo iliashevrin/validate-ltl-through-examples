@@ -9,6 +9,7 @@ from train_ordering import trace_ranking, static_trace_ranking
 
 import csv
 import functools
+import math
 import random
 import statistics
 import joblib
@@ -110,6 +111,42 @@ def stats(data):
 
 
 
+def miss_probability(num_traces, num_detecting, n):
+    """The probability that a uniformly random order of the traces has no detecting one among its first n."""
+    return math.comb(num_traces - num_detecting, n) / math.comb(num_traces, n) if n <= num_traces else 0.0
+
+
+def random_order_stats(counts):
+    """
+    stats() of the position of the first detecting trace, exactly, over a pair
+    drawn from counts, (traces, detecting traces) per detectable pair, and a
+    uniformly random order of its traces.
+    """
+    if len(counts) <= 1:
+        return "N/A"
+
+    last = max(num_traces - num_detecting + 1 for num_traces, num_detecting in counts)
+    # P(position > x) for x = 0, 1, ..., last
+    survival = [statistics.mean(miss_probability(t, d, x) for t, d in counts) for x in range(last + 1)]
+
+    avg_val = sum(survival)
+    second_moment = sum((2 * x + 1) * survival[x] for x in range(last + 1))
+    std_val = math.sqrt(second_moment - avg_val ** 2)
+
+    def percentile(p):
+        return next(x for x in range(1, last + 1) if 1 - survival[x] >= p - 1e-12)
+
+    return (
+        f"Avg: {avg_val:.3f}, "
+        f"Median: {percentile(0.5):.2f}, "
+        f"Std: {std_val:.2f}, "
+        f"P75: {percentile(0.75):.2f}, "
+        f"P90: {percentile(0.9):.2f}, "
+        f"Max: {last:.2f}, "
+        f"Min: 1.00"
+    )
+
+
 def confidence(undetected_under_n, total, dataset):
 
     mismatch = total / DATASIZE[dataset]
@@ -129,6 +166,10 @@ class OrderingData:
 
         self.seen_dt = []
         self.seen_ndt = []
+        # (traces, detecting traces) per detectable pair, for the orderings with
+        # repeats: their detection statistics are exact, not estimated from the
+        # repeats, which remain for the trace lengths and literal counts only
+        self.exact_counts = []
         self.lengths = []
         self.lits = []
         self.total = 0
@@ -176,6 +217,8 @@ def main():
 
     global MODEL_TAG
     MODEL_TAG = sys.argv[4] if len(sys.argv) > 4 else ""
+
+    random.seed(0)
 
     ordering_names = sys.argv[1].split(",")
     orderings = []
@@ -279,7 +322,14 @@ def main():
 
 
                 if len(curr_seen_dt) > 0:
-                    data.seen_dt.append(statistics.mean(curr_seen_dt))
+                    if data.repeats > 1:
+                        gt_aut = spot.translate(gt)
+                        num_detecting = sum(check_acceptance(gt_aut, t) != acc for t, acc, _ in traces)
+                        data.exact_counts.append((len(traces), num_detecting))
+                        # The expected position of the first detecting trace
+                        data.seen_dt.append((len(traces) + 1) / (num_detecting + 1))
+                    else:
+                        data.seen_dt.append(statistics.mean(curr_seen_dt))
 
                 data.lengths.append(statistics.mean(curr_length))
                 data.lits.append(statistics.mean(curr_lit))
@@ -311,7 +361,10 @@ def main():
             print(f'Detected Ratio: {(1-undet_inf):.3f}', file=out)
 
             for i in range(0, 16):
-                det_more_than_i.append(len([n for n in data.seen_dt if n > i]) / total)
+                if data.repeats > 1:
+                    det_more_than_i.append(sum(miss_probability(t, d, i) for t, d in data.exact_counts) / total)
+                else:
+                    det_more_than_i.append(len([n for n in data.seen_dt if n > i]) / total)
                 undet_under_i.append(undet_inf + det_more_than_i[i])
                 confidence.append(
                     accuracy / (accuracy + ((1 - accuracy) * undet_under_i[i]))
@@ -328,7 +381,8 @@ def main():
                     file=out,
                 )
 
-            print(f'\nTraces to Detection: {stats(data.seen_dt)}', file=out)
+            detection_stats = random_order_stats(data.exact_counts) if data.repeats > 1 else stats(data.seen_dt)
+            print(f'\nTraces to Detection: {detection_stats}', file=out)
             # print(f'Inspected Traces When No Detection: {stats(data.seen_ndt)}', file=out)
 
             print(f'\nTrace Lengths: {stats(data.lengths)}', file=out)

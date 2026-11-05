@@ -7,12 +7,14 @@ import matplotlib.pyplot as plt
 
 
 # (results file, line style, line width), styled as described in the paper's caption:
-# dashed: random, dotted: shortest-first, solid: LTLTrust, bold: SA LTLTrust
+# dashed: random, dotted: shortest-first, solid: LTLTrust, bold: SA LTLTrust,
+# dash-dotted: static
 ORDERINGS = [
     ("results_ALL_RL_RANDOM_all_contexts.txt", (0, (8, 4)), 1.5),
     ("results_ALL_RL_BY_LENGTH_all_contexts.txt", (0, (2, 1.5)), 1.5),
     ("results_ALL_RL_LTLTRUST_all_contexts.txt", "solid", 1.5),
     ("results_ALL_RL_LTLTRUST_PLUS_all_contexts.txt", "solid", 4),
+    ("results_ALL_RL_STATIC_all_contexts.txt", (0, (5, 2, 1, 2)), 1.5),
 ]
 
 

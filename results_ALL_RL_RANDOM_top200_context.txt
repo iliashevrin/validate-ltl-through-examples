@@ -1,6 +1,6 @@
-Accepting traces for GT: 303.767
-Rejecting traces for GT: 286.867
-Inconclusive traces for GT: 780.833
+Accepting traces for GT: 308.667
+Rejecting traces for GT: 290.167
+Inconclusive traces for GT: 790.433
 
 Accuracy: 0.377
 Detected Ratio: 0.951
@@ -8,238 +8,237 @@ Detected Ratio: 0.951
 Undetected <=0 Ratio: 1.000 (Undetected Ratio: 0.049 + Detected >0 Ratio: 0.951)
 Confidence score for n=0: 0.377
 
-Undetected <=1 Ratio: 0.995 (Undetected Ratio: 0.049 + Detected >1 Ratio: 0.946)
-Confidence score for n=1: 0.378
+Undetected <=1 Ratio: 0.667 (Undetected Ratio: 0.049 + Detected >1 Ratio: 0.618)
+Confidence score for n=1: 0.475
 
-Undetected <=2 Ratio: 0.763 (Undetected Ratio: 0.049 + Detected >2 Ratio: 0.715)
-Confidence score for n=2: 0.442
+Undetected <=2 Ratio: 0.477 (Undetected Ratio: 0.049 + Detected >2 Ratio: 0.428)
+Confidence score for n=2: 0.559
 
-Undetected <=3 Ratio: 0.470 (Undetected Ratio: 0.049 + Detected >3 Ratio: 0.422)
-Confidence score for n=3: 0.562
+Undetected <=3 Ratio: 0.360 (Undetected Ratio: 0.049 + Detected >3 Ratio: 0.311)
+Confidence score for n=3: 0.627
 
-Undetected <=4 Ratio: 0.332 (Undetected Ratio: 0.049 + Detected >4 Ratio: 0.283)
-Confidence score for n=4: 0.646
+Undetected <=4 Ratio: 0.282 (Undetected Ratio: 0.049 + Detected >4 Ratio: 0.234)
+Confidence score for n=4: 0.681
 
-Undetected <=5 Ratio: 0.239 (Undetected Ratio: 0.049 + Detected >5 Ratio: 0.190)
-Confidence score for n=5: 0.716
+Undetected <=5 Ratio: 0.229 (Undetected Ratio: 0.049 + Detected >5 Ratio: 0.180)
+Confidence score for n=5: 0.725
 
-Undetected <=6 Ratio: 0.177 (Undetected Ratio: 0.049 + Detected >6 Ratio: 0.129)
-Confidence score for n=6: 0.773
+Undetected <=6 Ratio: 0.191 (Undetected Ratio: 0.049 + Detected >6 Ratio: 0.142)
+Confidence score for n=6: 0.760
 
-Undetected <=7 Ratio: 0.136 (Undetected Ratio: 0.049 + Detected >7 Ratio: 0.087)
-Confidence score for n=7: 0.816
+Undetected <=7 Ratio: 0.163 (Undetected Ratio: 0.049 + Detected >7 Ratio: 0.114)
+Confidence score for n=7: 0.788
 
-Undetected <=8 Ratio: 0.108 (Undetected Ratio: 0.049 + Detected >8 Ratio: 0.059)
-Confidence score for n=8: 0.848
+Undetected <=8 Ratio: 0.142 (Undetected Ratio: 0.049 + Detected >8 Ratio: 0.093)
+Confidence score for n=8: 0.810
 
-Undetected <=9 Ratio: 0.098 (Undetected Ratio: 0.049 + Detected >9 Ratio: 0.049)
-Confidence score for n=9: 0.861
+Undetected <=9 Ratio: 0.126 (Undetected Ratio: 0.049 + Detected >9 Ratio: 0.077)
+Confidence score for n=9: 0.828
 
-Undetected <=10 Ratio: 0.087 (Undetected Ratio: 0.049 + Detected >10 Ratio: 0.039)
-Confidence score for n=10: 0.874
+Undetected <=10 Ratio: 0.113 (Undetected Ratio: 0.049 + Detected >10 Ratio: 0.064)
+Confidence score for n=10: 0.842
 
-Undetected <=11 Ratio: 0.077 (Undetected Ratio: 0.049 + Detected >11 Ratio: 0.028)
-Confidence score for n=11: 0.887
+Undetected <=11 Ratio: 0.103 (Undetected Ratio: 0.049 + Detected >11 Ratio: 0.054)
+Confidence score for n=11: 0.855
 
-Undetected <=12 Ratio: 0.069 (Undetected Ratio: 0.049 + Detected >12 Ratio: 0.021)
-Confidence score for n=12: 0.897
+Undetected <=12 Ratio: 0.094 (Undetected Ratio: 0.049 + Detected >12 Ratio: 0.045)
+Confidence score for n=12: 0.865
 
-Undetected <=13 Ratio: 0.059 (Undetected Ratio: 0.049 + Detected >13 Ratio: 0.010)
-Confidence score for n=13: 0.911
+Undetected <=13 Ratio: 0.087 (Undetected Ratio: 0.049 + Detected >13 Ratio: 0.038)
+Confidence score for n=13: 0.874
 
-Undetected <=14 Ratio: 0.059 (Undetected Ratio: 0.049 + Detected >14 Ratio: 0.010)
-Confidence score for n=14: 0.911
+Undetected <=14 Ratio: 0.081 (Undetected Ratio: 0.049 + Detected >14 Ratio: 0.032)
+Confidence score for n=14: 0.881
 
-Undetected <=15 Ratio: 0.057 (Undetected Ratio: 0.049 + Detected >15 Ratio: 0.008)
-Confidence score for n=15: 0.914
+Undetected <=15 Ratio: 0.076 (Undetected Ratio: 0.049 + Detected >15 Ratio: 0.028)
+Confidence score for n=15: 0.888
 
-Traces to Detection: Avg: 3.679, Median: 2.77, Std: 2.66, P75: 4.51, P90: 6.51, Max: 20.37, Min: 1.00
+Traces to Detection: Avg: 3.727, Median: 2.00, Std: 4.20, P75: 4.00, P90: 8.00, Max: 69.00, Min: 1.00
 
-Trace Lengths: Avg: 1.956, Median: 1.92, Std: 0.23, P75: 2.07, P90: 2.26, Max: 2.87, Min: 1.18
+Trace Lengths: Avg: 1.955, Median: 1.92, Std: 0.24, P75: 2.06, P90: 2.27, Max: 2.78, Min: 1.25
 
-Trace Literals: Avg: 4.185, Median: 2.75, Std: 11.41, P75: 3.90, P90: 5.77, Max: 211.91, Min: 0.70
+Trace Literals: Avg: 4.234, Median: 2.72, Std: 12.10, P75: 3.93, P90: 5.75, Max: 225.21, Min: 0.61
 
 Mutation Contexts by Usefulness
-Mutation.ADD_G_4_True_1:1
-Mutation.REMOVE_RIGHT_SUBFORMULA_1_None_2:1
-Mutation.REMOVE_LEFT_SUBFORMULA_1_None_2:1
-Mutation.SWAP_AND_WITH_IMPLIES_3_True_2:1
-Mutation.REMOVE_LEFT_SUBFORMULA_4_True_2:2
-Mutation.SWAP_AND_WITH_OR_1_False_2:2
-Mutation.SWAP_AND_WITH_EQUIV_3_None_2:2
-Mutation.ADD_X_2_False_2:3
-Mutation.REMOVE_RIGHT_SUBFORMULA_2_False_2:3
-Mutation.SWAP_APS_0_None_3:3
-Mutation.REMOVE_RIGHT_SUBFORMULA_1_False_2:3
-Mutation.SWAP_AND_WITH_OR_2_False_2:3
-Mutation.SWAP_AND_WITH_EQUIV_3_True_2:3
+Mutation.ADD_F_4_None_2:1
+Mutation.SWAP_AND_WITH_OR_1_False_2:1
+Mutation.SWAP_AND_WITH_OR_2_False_1:2
+Mutation.REMOVE_RIGHT_SUBFORMULA_2_False_2:2
+Mutation.SWAP_OR_WITH_EQUIV_3_None_2:2
+Mutation.SWAP_AND_WITH_OR_2_False_2:2
+Mutation.REMOVE_RIGHT_SUBFORMULA_1_False_2:2
+Mutation.SWAP_G_WITH_F_3_False_2:3
+Mutation.SWAP_AND_WITH_IMPLIES_3_True_2:3
+Mutation.ADD_X_2_False_2:4
+Mutation.ADD_G_4_True_1:4
+Mutation.REMOVE_RIGHT_SUBFORMULA_1_None_2:4
+Mutation.ADD_X_5_True_3:4
 Mutation.ADD_G_2_False_1:4
+Mutation.SWAP_OR_WITH_AND_3_False_2:4
 Mutation.SWAP_F_WITH_G_2_None_2:5
-Mutation.REMOVE_RIGHT_SUBFORMULA_4_None_2:5
-Mutation.SWAP_OR_WITH_IMPLIES_1_True_2:5
-Mutation.REMOVE_LEFT_SUBFORMULA_2_False_1:5
-Mutation.SWAP_AND_WITH_OR_3_True_2:5
-Mutation.SWAP_AND_WITH_OR_2_False_1:6
-Mutation.SWAP_OR_WITH_EQUIV_3_None_2:6
-Mutation.SWAP_AND_WITH_IMPLIES_1_False_2:6
-Mutation.SWAP_IMPLIES_WITH_OR_3_None_2:6
-Mutation.ADD_F_4_None_2:6
-Mutation.SWAP_OR_WITH_IMPLIES_1_True_3:6
+Mutation.REMOVE_LEFT_SUBFORMULA_2_False_1:6
 Mutation.REMOVE_X_3_None_2:6
-Mutation.ADD_F_4_False_3:7
-Mutation.ADD_X_5_True_3:7
-Mutation.SWAP_OR_WITH_EQUIV_2_None_2:7
-Mutation.SWAP_G_WITH_F_3_False_2:7
-Mutation.SWAP_AND_WITH_IMPLIES_2_False_2:8
-Mutation.SWAP_F_WITH_G_1_None_2:8
-Mutation.ADD_G_2_False_2:8
-Mutation.ADD_X_5_None_3:9
-Mutation.SWAP_F_WITH_G_4_None_2:9
-Mutation.SWAP_OR_WITH_AND_3_False_2:9
+Mutation.REMOVE_NEGATION_3_None_2:7
+Mutation.SWAP_AND_WITH_IMPLIES_2_False_2:7
+Mutation.SWAP_IMPLIES_WITH_OR_3_None_2:7
+Mutation.ADD_G_2_False_2:7
+Mutation.SWAP_AND_WITH_EQUIV_3_True_2:8
+Mutation.REMOVE_LEFT_SUBFORMULA_1_None_1:8
+Mutation.SWAP_AND_WITH_EQUIV_3_None_2:8
+Mutation.SWAP_OR_WITH_IMPLIES_1_True_2:8
+Mutation.SWAP_AND_WITH_IMPLIES_3_None_2:8
+Mutation.SWAP_APS_0_None_3:9
+Mutation.ADD_F_4_False_3:9
+Mutation.SWAP_OR_WITH_IMPLIES_2_None_2:9
+Mutation.ADD_G_2_True_3:9
+Mutation.SWAP_OR_WITH_IMPLIES_1_True_3:9
 Mutation.SWAP_G_WITH_X_2_None_3:10
-Mutation.SWAP_AND_WITH_EQUIV_2_False_2:11
-Mutation.REMOVE_RIGHT_SUBFORMULA_4_True_2:11
-Mutation.SWAP_AND_WITH_EQUIV_3_False_2:11
-Mutation.SWAP_AND_WITH_IMPLIES_3_None_2:11
-Mutation.ADD_G_2_True_3:11
-Mutation.SWAP_AND_WITH_OR_3_False_2:11
-Mutation.ADD_NEGATION_5_True_2:12
-Mutation.SWAP_OR_WITH_IMPLIES_2_None_2:12
-Mutation.ADD_NEGATION_3_None_1:12
-Mutation.REMOVE_NEGATION_3_None_2:12
-Mutation.REMOVE_LEFT_SUBFORMULA_1_None_1:12
-Mutation.SWAP_AND_WITH_EQUIV_4_False_2:12
-Mutation.REMOVE_LEFT_SUBFORMULA_1_False_2:13
-Mutation.SWAP_AND_WITH_OR_3_None_2:13
-Mutation.REMOVE_LEFT_SUBFORMULA_3_None_2:13
-Mutation.SWAP_OR_WITH_EQUIV_1_True_2:14
-Mutation.REMOVE_NEGATION_4_None_2:15
-Mutation.ADD_NEGATION_1_False_4:15
-Mutation.REMOVE_NEGATION_3_False_1:15
+Mutation.SWAP_AND_WITH_OR_3_None_2:10
+Mutation.ADD_NEGATION_3_None_1:10
+Mutation.REMOVE_RIGHT_SUBFORMULA_4_True_2:10
+Mutation.SWAP_F_WITH_G_1_None_2:10
+Mutation.SWAP_AND_WITH_OR_3_False_2:10
+Mutation.SWAP_AND_WITH_OR_3_True_2:10
+Mutation.REMOVE_RIGHT_SUBFORMULA_4_None_2:11
+Mutation.SWAP_AND_WITH_IMPLIES_1_False_2:11
+Mutation.SWAP_F_WITH_G_4_None_2:11
+Mutation.REMOVE_LEFT_SUBFORMULA_1_False_2:11
+Mutation.SWAP_AND_WITH_IMPLIES_3_False_2:11
+Mutation.REMOVE_LEFT_SUBFORMULA_2_None_1:12
+Mutation.ADD_X_5_None_3:12
+Mutation.REMOVE_LEFT_SUBFORMULA_4_True_2:12
+Mutation.REMOVE_NEGATION_3_False_1:12
+Mutation.REMOVE_NEGATION_4_None_2:13
+Mutation.ADD_NEGATION_4_True_3:13
+Mutation.ADD_X_3_True_2:13
+Mutation.SWAP_AND_WITH_EQUIV_3_False_2:13
+Mutation.SWAP_AND_WITH_EQUIV_2_False_2:14
+Mutation.ADD_NEGATION_5_True_2:14
+Mutation.REMOVE_LEFT_SUBFORMULA_2_False_2:14
+Mutation.SWAP_AND_WITH_EQUIV_4_False_2:14
+Mutation.SWAP_IMPLIES_WITH_EQUIV_1_True_2:15
+Mutation.SWAP_OR_WITH_EQUIV_2_None_2:15
 Mutation.SWAP_IMPLIES_WITH_AND_1_True_2:16
-Mutation.ADD_NEGATION_1_True_3:16
+Mutation.SWAP_OR_WITH_EQUIV_1_True_2:16
+Mutation.ADD_NEGATION_2_False_2:16
+Mutation.REMOVE_LEFT_SUBFORMULA_3_None_2:16
 Mutation.ADD_NEGATION_2_True_2:16
-Mutation.ADD_X_3_True_2:16
+Mutation.ADD_G_5_True_2:16
 Mutation.SWAP_AND_WITH_EQUIV_1_False_2:17
-Mutation.REMOVE_LEFT_SUBFORMULA_2_None_1:17
-Mutation.ADD_X_2_False_3:17
-Mutation.SWAP_G_WITH_F_3_None_1:17
-Mutation.ADD_NEGATION_2_False_2:18
-Mutation.ADD_NEGATION_4_True_3:18
-Mutation.SWAP_AND_WITH_IMPLIES_3_False_2:18
+Mutation.ADD_NEGATION_1_False_4:17
+Mutation.ADD_F_2_True_1:17
+Mutation.ADD_X_4_True_2:18
+Mutation.SWAP_IMPLIES_WITH_OR_1_True_2:18
 Mutation.REMOVE_LEFT_SUBFORMULA_3_False_2:18
-Mutation.SWAP_F_WITH_G_3_True_2:18
-Mutation.SWAP_IMPLIES_WITH_EQUIV_1_True_2:19
-Mutation.REMOVE_LEFT_SUBFORMULA_1_True_2:19
-Mutation.SWAP_IMPLIES_WITH_OR_1_True_2:20
-Mutation.SWAP_G_WITH_F_2_None_2:21
-Mutation.ADD_G_1_True_2:21
-Mutation.REMOVE_LEFT_SUBFORMULA_2_False_2:21
+Mutation.REMOVE_RIGHT_SUBFORMULA_3_None_1:19
+Mutation.ADD_NEGATION_1_True_3:19
 Mutation.ADD_F_4_True_1:21
-Mutation.ADD_X_4_True_2:22
 Mutation.SWAP_IMPLIES_WITH_OR_2_True_2:22
+Mutation.SWAP_G_WITH_F_2_None_2:22
 Mutation.ADD_X_3_False_2:22
-Mutation.ADD_G_1_False_2:22
-Mutation.ADD_F_2_True_1:22
-Mutation.ADD_G_5_True_2:22
+Mutation.REMOVE_RIGHT_SUBFORMULA_1_True_2:23
 Mutation.ADD_X_2_None_2:23
-Mutation.REMOVE_RIGHT_SUBFORMULA_4_False_2:23
-Mutation.REMOVE_RIGHT_SUBFORMULA_4_True_1:24
+Mutation.SWAP_G_WITH_F_3_None_1:23
+Mutation.ADD_F_4_False_2:24
+Mutation.ADD_G_1_True_2:24
+Mutation.ADD_G_1_False_2:24
+Mutation.ADD_X_2_False_3:24
+Mutation.SWAP_F_WITH_G_3_True_2:24
+Mutation.SWAP_IMPLIES_WITH_EQUIV_2_True_2:24
+Mutation.ADD_X_2_None_3:25
 Mutation.ADD_X_4_True_3:25
-Mutation.SWAP_IMPLIES_WITH_EQUIV_2_True_2:25
-Mutation.REMOVE_RIGHT_SUBFORMULA_3_None_1:26
-Mutation.SWAP_EQUIV_WITH_OR_2_None_2:26
-Mutation.ADD_F_4_False_2:27
-Mutation.REMOVE_LEFT_SUBFORMULA_4_True_1:27
-Mutation.REMOVE_RIGHT_SUBFORMULA_3_None_2:29
-Mutation.REMOVE_RIGHT_SUBFORMULA_1_True_2:30
-Mutation.ADD_NEGATION_3_False_2:31
+Mutation.SWAP_IMPLIES_WITH_AND_2_True_1:25
+Mutation.REMOVE_LEFT_SUBFORMULA_1_True_2:26
+Mutation.ADD_G_2_True_2:26
+Mutation.REMOVE_RIGHT_SUBFORMULA_3_False_2:27
+Mutation.REMOVE_RIGHT_SUBFORMULA_4_True_1:27
+Mutation.REMOVE_LEFT_SUBFORMULA_4_False_2:28
+Mutation.SWAP_IMPLIES_WITH_AND_2_True_2:29
+Mutation.SWAP_EQUIV_WITH_OR_2_None_2:29
+Mutation.REMOVE_RIGHT_SUBFORMULA_4_False_2:30
 Mutation.ADD_NEGATION_4_None_1:31
-Mutation.ADD_G_2_True_2:31
+Mutation.REMOVE_LEFT_SUBFORMULA_4_True_1:31
+Mutation.ADD_G_3_False_3:32
 Mutation.ADD_NEGATION_3_False_1:33
-Mutation.ADD_NEGATION_5_None_2:33
-Mutation.ADD_X_2_None_3:34
-Mutation.REMOVE_RIGHT_SUBFORMULA_3_False_2:34
-Mutation.ADD_G_3_False_3:35
-Mutation.SWAP_IMPLIES_WITH_EQUIV_2_None_2:35
-Mutation.ADD_NEGATION_2_False_3:35
+Mutation.ADD_NEGATION_2_False_3:33
+Mutation.ADD_NEGATION_3_False_2:34
+Mutation.ADD_G_1_True_1:34
+Mutation.SWAP_OR_WITH_IMPLIES_3_None_2:34
+Mutation.REMOVE_RIGHT_SUBFORMULA_3_None_2:36
+Mutation.REMOVE_RIGHT_SUBFORMULA_3_True_2:37
+Mutation.SWAP_IMPLIES_WITH_EQUIV_2_None_2:37
+Mutation.ADD_NEGATION_5_None_2:37
+Mutation.ADD_G_4_True_3:38
 Mutation.ADD_G_3_True_3:38
-Mutation.SWAP_G_WITH_F_1_False_2:39
-Mutation.REMOVE_RIGHT_SUBFORMULA_2_None_1:39
-Mutation.REMOVE_RIGHT_SUBFORMULA_3_True_2:39
-Mutation.ADD_X_4_False_3:39
-Mutation.SWAP_OR_WITH_IMPLIES_3_None_2:39
-Mutation.REMOVE_LEFT_SUBFORMULA_4_False_2:40
-Mutation.ADD_NEGATION_4_False_2:40
-Mutation.ADD_X_5_None_2:41
-Mutation.SWAP_IMPLIES_WITH_AND_2_True_2:41
-Mutation.ADD_G_1_True_1:41
-Mutation.ADD_G_4_True_3:42
-Mutation.ADD_X_1_True_4:42
-Mutation.SWAP_IMPLIES_WITH_AND_2_True_1:44
-Mutation.SWAP_G_WITH_X_1_False_2:49
-Mutation.ADD_NEGATION_3_True_2:49
-Mutation.SWAP_APS_0_None_1:52
-Mutation.REMOVE_RIGHT_SUBFORMULA_3_True_1:55
-Mutation.ADD_NEGATION_1_False_1:57
-Mutation.SWAP_G_WITH_X_1_None_3:58
-Mutation.SWAP_APS_0_False_2:58
-Mutation.ADD_X_4_False_2:59
-Mutation.REMOVE_RIGHT_SUBFORMULA_2_True_2:60
-Mutation.ADD_X_4_None_2:62
-Mutation.ADD_F_3_True_2:62
-Mutation.ADD_X_3_True_3:62
-Mutation.ADD_G_4_False_3:63
-Mutation.REMOVE_LEFT_SUBFORMULA_2_None_2:63
-Mutation.SWAP_AND_WITH_EQUIV_3_True_1:64
-Mutation.ADD_NEGATION_4_True_2:65
-Mutation.REMOVE_RIGHT_SUBFORMULA_2_True_1:65
-Mutation.ADD_F_4_True_2:67
-Mutation.ADD_X_2_True_3:67
-Mutation.REMOVE_RIGHT_SUBFORMULA_2_None_2:71
-Mutation.ADD_NEGATION_4_None_2:73
-Mutation.SWAP_AND_WITH_IMPLIES_3_True_1:74
-Mutation.REMOVE_LEFT_SUBFORMULA_3_True_2:75
-Mutation.ADD_NEGATION_3_None_3:78
-Mutation.ADD_X_1_True_3:83
-Mutation.ADD_X_1_None_3:85
-Mutation.ADD_X_3_True_1:86
-Mutation.REMOVE_LEFT_SUBFORMULA_2_True_2:90
-Mutation.ADD_G_4_False_2:91
-Mutation.SWAP_AND_WITH_OR_3_True_1:97
-Mutation.ADD_NEGATION_3_True_1:98
-Mutation.SWAP_APS_0_True_1:100
-Mutation.SWAP_APS_0_True_2:102
-Mutation.ADD_X_4_None_3:103
-Mutation.REMOVE_LEFT_SUBFORMULA_3_True_1:109
-Mutation.SWAP_APS_0_None_2:110
-Mutation.SWAP_F_WITH_X_3_None_3:113
-Mutation.SWAP_G_WITH_X_1_False_3:119
-Mutation.SWAP_F_WITH_G_3_None_2:125
-Mutation.ADD_X_1_None_2:138
-Mutation.ADD_F_1_False_1:143
-Mutation.SWAP_IMPLIES_WITH_OR_2_None_2:143
-Mutation.ADD_NEGATION_1_False_3:150
-Mutation.ADD_G_4_True_2:151
-Mutation.SWAP_G_WITH_F_1_False_1:152
-Mutation.ADD_G_3_False_2:157
-Mutation.ADD_X_3_False_3:158
+Mutation.ADD_NEGATION_4_False_2:38
+Mutation.SWAP_G_WITH_F_1_False_2:40
+Mutation.REMOVE_RIGHT_SUBFORMULA_2_None_1:40
+Mutation.ADD_X_5_None_2:43
+Mutation.ADD_X_4_False_3:43
+Mutation.SWAP_APS_0_False_2:43
+Mutation.REMOVE_RIGHT_SUBFORMULA_2_True_2:46
+Mutation.SWAP_G_WITH_X_1_None_3:47
+Mutation.ADD_X_1_True_4:47
+Mutation.ADD_F_4_True_2:48
+Mutation.SWAP_G_WITH_X_1_False_2:51
+Mutation.ADD_X_2_True_3:51
+Mutation.ADD_X_4_False_2:52
+Mutation.ADD_NEGATION_3_True_2:55
+Mutation.REMOVE_LEFT_SUBFORMULA_2_None_2:59
+Mutation.ADD_X_3_True_3:60
+Mutation.ADD_NEGATION_1_False_1:62
+Mutation.REMOVE_RIGHT_SUBFORMULA_3_True_1:62
+Mutation.ADD_NEGATION_4_True_2:64
+Mutation.ADD_NEGATION_4_None_2:64
+Mutation.SWAP_AND_WITH_IMPLIES_3_True_1:67
+Mutation.SWAP_APS_0_None_1:68
+Mutation.ADD_X_4_None_2:68
+Mutation.ADD_G_4_False_3:69
+Mutation.SWAP_AND_WITH_EQUIV_3_True_1:71
+Mutation.ADD_F_3_True_2:72
+Mutation.REMOVE_RIGHT_SUBFORMULA_2_True_1:74
+Mutation.ADD_NEGATION_3_True_1:76
+Mutation.SWAP_AND_WITH_OR_3_True_1:80
+Mutation.REMOVE_RIGHT_SUBFORMULA_2_None_2:87
+Mutation.ADD_NEGATION_3_None_3:87
+Mutation.REMOVE_LEFT_SUBFORMULA_3_True_2:88
+Mutation.ADD_X_1_None_3:91
+Mutation.SWAP_APS_0_True_2:93
+Mutation.ADD_X_1_True_3:99
+Mutation.SWAP_APS_0_None_2:105
+Mutation.REMOVE_LEFT_SUBFORMULA_2_True_2:109
+Mutation.ADD_X_3_True_1:110
+Mutation.ADD_X_4_None_3:111
+Mutation.SWAP_APS_0_True_1:116
+Mutation.REMOVE_LEFT_SUBFORMULA_3_True_1:116
+Mutation.ADD_X_1_None_2:120
+Mutation.SWAP_IMPLIES_WITH_OR_2_None_2:121
+Mutation.ADD_G_4_False_2:124
+Mutation.ADD_NEGATION_1_False_3:124
+Mutation.SWAP_F_WITH_G_3_None_2:132
+Mutation.SWAP_G_WITH_X_1_False_3:134
+Mutation.SWAP_F_WITH_X_3_None_3:134
+Mutation.ADD_X_4_True_1:151
+Mutation.SWAP_G_WITH_F_1_False_1:153
+Mutation.ADD_F_1_False_1:155
+Mutation.ADD_X_3_False_3:155
+Mutation.ADD_NEGATION_1_True_2:157
+Mutation.ADD_G_4_True_2:158
+Mutation.ADD_NEGATION_3_None_2:159
 Mutation.ADD_X_1_False_4:160
-Mutation.ADD_X_4_True_1:161
-Mutation.REMOVE_LEFT_SUBFORMULA_2_True_1:165
-Mutation.ADD_NEGATION_1_True_2:166
-Mutation.ADD_F_2_False_2:169
-Mutation.ADD_NEGATION_3_None_2:178
-Mutation.SWAP_IMPLIES_WITH_EQUIV_2_True_1:189
-Mutation.ADD_F_1_False_2:208
-Mutation.ADD_F_3_False_2:219
-Mutation.ADD_X_3_None_3:239
-Mutation.SWAP_G_WITH_F_1_None_2:249
-Mutation.ADD_X_3_None_2:250
-Mutation.ADD_G_3_True_2:279
-Mutation.ADD_NEGATION_1_False_2:375
-Mutation.ADD_NEGATION_1_True_1:555
-Mutation.ADD_F_1_True_2:584
-Mutation.ADD_X_1_False_3:642
+Mutation.REMOVE_LEFT_SUBFORMULA_2_True_1:161
+Mutation.ADD_G_3_False_2:171
+Mutation.SWAP_IMPLIES_WITH_EQUIV_2_True_1:188
+Mutation.ADD_F_1_False_2:201
+Mutation.ADD_F_2_False_2:203
+Mutation.ADD_F_3_False_2:216
+Mutation.ADD_X_3_None_2:235
+Mutation.ADD_X_3_None_3:255
+Mutation.ADD_G_3_True_2:259
+Mutation.SWAP_G_WITH_F_1_None_2:271
+Mutation.ADD_NEGATION_1_False_2:368
+Mutation.ADD_NEGATION_1_True_1:545
+Mutation.ADD_X_1_False_3:602
+Mutation.ADD_F_1_True_2:612
 
-Traces to Detection List: ['1.80', '3.60', '1.30', '10.50', '20.37', '2.50', '2.27', '10.23', '2.87', '4.27', '2.17', '4.77', '2.70', '2.40', '2.37', '1.80', '1.50', '13.00', '2.57', '1.83', '2.67', '2.17', '4.33', '2.03', '1.83', '1.40', '6.17', '5.00', '5.83', '1.73', '1.80', '2.40', '4.43', '3.57', '2.03', '2.00', '5.00', '2.67', '6.20', '4.80', '6.03', '2.57', '1.67', '10.37', '5.17', '17.53', '7.03', '2.63', '5.07', '7.47', '12.17', '5.30', '2.20', '5.40', '1.77', '7.37', '1.43', '2.07', '1.00', '3.50', '1.53', '2.07', '3.20', '2.77', '4.70', '3.97', '3.07', '2.60', '1.93', '11.53', '5.63', '1.83', '2.33', '6.10', '2.33', '2.00', '4.07', '2.27', '9.83', '2.47', '1.50', '4.37', '2.83', '2.73', '3.23', '2.30', '3.00', '1.23', '14.10', '2.30', '3.70', '3.93', '3.17', '4.33', '2.23', '2.17', '3.20', '2.77', '3.57', '1.13', '4.60', '3.97', '1.47', '2.97', '1.23', '3.13', '5.03', '6.50', '2.53', '4.40', '5.57', '2.27', '3.00', '1.43', '4.83', '5.93', '1.83', '4.80', '3.97', '1.37', '5.50', '3.17', '3.90', '2.37', '2.63', '1.73', '3.17', '15.50', '1.17', '1.60', '3.37', '2.27', '1.20', '2.60', '4.67', '3.13', '4.37', '5.57', '7.60', '8.47', '2.90', '1.60', '2.43', '5.77', '2.20', '3.07', '11.57', '2.37', '6.13', '12.97', '2.57', '4.27', '1.43', '1.20', '2.30', '4.90', '3.17', '2.90', '8.87', '3.93', '5.73', '2.93', '2.83', '1.37', '2.20', '1.80', '6.33', '2.03', '1.03', '2.77', '1.27', '5.47', '1.63', '3.67', '4.43', '2.00', '2.50', '9.67', '1.93', '1.43', '9.93', '7.57', '8.13', '3.90', '4.93', '1.60', '2.13', '3.13', '6.00', '1.97', '1.23', '2.87', '7.37', '2.43', '3.23', '1.67', '3.03', '2.17', '1.70', '1.60', '2.80', '2.57', '1.17', '2.03', '2.30', '2.93', '1.60', '1.60', '2.47', '3.20', '2.77', '1.83', '4.33', '1.43', '7.27', '4.20', '2.27', '1.00', '1.70', '6.97', '2.57', '4.03', '2.27', '2.33', '1.40', '2.17', '6.57', '1.60', '2.07', '5.47', '1.93', '2.13', '4.00', '2.37', '1.30', '2.10', '1.97', '2.97', '3.00', '1.87', '3.30', '2.47', '3.77', '1.77', '2.20', '3.63', '3.17', '2.53', '3.80', '2.00', '7.30', '3.43', '2.03', '2.93', '4.43', '5.63', '4.83', '1.87', '1.83', '3.43', '6.37', '3.30', '7.03', '1.17', '2.67', '2.23', '5.50', '5.10', '6.07', '2.30', '2.40', '4.63', '2.83', '3.67', '2.23', '3.43', '1.47', '8.87', '4.70', '2.20', '7.60', '2.93', '10.97', '1.73', '1.87', '2.80', '5.13', '2.17', '2.03', '1.80', '3.23', '1.87', '1.60', '2.30', '2.50', '1.97', '3.43', '3.27', '9.80', '2.57', '3.10', '1.43', '2.70', '1.57', '4.53', '6.30', '3.37', '1.27', '11.43', '2.07', '1.47', '2.27', '1.37', '2.57', '2.30', '4.87', '6.40', '2.03', '1.83', '4.07', '1.83', '3.57', '2.93', '4.60', '2.17', '1.93', '1.80', '12.50', '3.27', '2.70', '3.40', '2.17', '2.00', '4.73', '1.63', '1.73', '2.50', '1.30', '6.00', '5.17', '1.83', '1.87', '6.67', '1.87', '4.73', '2.17', '3.93', '1.63', '6.17', '1.83', '5.33', '1.17', '2.67', '4.27', '2.63', '1.90', '2.37', '2.50', '3.07', '2.57', '7.63', '2.77', '2.87', '3.87', '6.17', '5.33', '3.33', '3.63', '4.27', '3.03']
+Traces to Detection List: ['1.80', '3.73', '1.43', '9.67', '18.50', '2.25', '2.60', '9.67', '2.75', '4.43', '2.50', '4.83', '2.33', '2.50', '2.65', '2.00', '1.60', '12.50', '2.71', '1.70', '2.50', '1.73', '4.40', '2.18', '1.85', '1.33', '5.67', '4.50', '4.14', '1.75', '1.85', '2.14', '5.20', '4.14', '2.00', '1.90', '5.25', '3.00', '6.67', '4.30', '5.50', '2.90', '1.53', '14.33', '6.67', '16.67', '9.25', '2.89', '5.50', '7.50', '15.00', '4.11', '2.08', '7.25', '1.57', '9.83', '1.33', '2.00', '1.00', '3.67', '2.00', '2.17', '3.14', '2.93', '4.17', '3.71', '3.00', '3.00', '1.71', '10.50', '5.60', '1.93', '1.80', '6.80', '2.67', '2.00', '3.62', '2.38', '10.00', '1.64', '1.42', '5.25', '3.00', '2.64', '3.50', '1.92', '3.00', '1.16', '14.50', '2.64', '4.14', '4.00', '3.00', '4.80', '2.50', '2.00', '3.13', '2.50', '3.29', '1.12', '4.11', '4.50', '1.48', '3.67', '1.29', '2.75', '4.11', '6.00', '2.42', '3.83', '6.25', '2.50', '2.93', '1.40', '3.86', '5.00', '1.80', '4.00', '3.33', '1.50', '5.80', '3.22', '3.62', '2.87', '2.20', '1.88', '3.00', '15.00', '1.22', '1.50', '2.75', '2.18', '1.32', '2.43', '4.18', '3.62', '4.22', '7.25', '7.60', '7.25', '2.67', '1.78', '2.43', '5.80', '2.33', '2.40', '14.00', '2.56', '4.50', '14.50', '2.67', '3.83', '1.29', '1.14', '2.25', '5.80', '3.50', '3.25', '10.00', '4.40', '6.50', '3.00', '2.50', '1.29', '2.10', '2.62', '5.80', '1.92', '1.14', '2.70', '1.20', '5.25', '1.67', '4.00', '4.00', '2.58', '2.60', '9.33', '2.00', '1.32', '9.67', '9.67', '9.67', '4.00', '4.83', '1.45', '2.36', '2.92', '6.33', '2.00', '1.48', '2.83', '7.00', '2.86', '3.00', '1.69', '3.07', '2.27', '1.66', '1.85', '2.92', '2.62', '1.42', '1.80', '2.29', '3.11', '1.33', '2.20', '2.30', '2.56', '3.86', '1.90', '3.86', '1.33', '6.50', '3.86', '2.11', '1.00', '2.00', '8.25', '3.30', '5.75', '2.00', '2.25', '1.35', '1.91', '7.25', '1.61', '2.18', '4.83', '1.81', '2.11', '6.00', '2.00', '1.30', '2.91', '2.64', '2.93', '2.94', '1.88', '2.20', '2.80', '2.86', '1.87', '2.10', '4.00', '3.07', '2.24', '3.30', '2.00', '5.80', '4.11', '2.67', '2.48', '4.10', '5.80', '5.20', '1.90', '2.07', '2.71', '5.80', '2.76', '5.50', '1.08', '2.57', '2.23', '5.60', '4.70', '5.60', '2.42', '2.42', '5.60', '2.91', '3.50', '2.67', '3.43', '1.67', '9.67', '3.92', '1.94', '8.00', '2.63', '9.67', '1.84', '1.64', '2.40', '4.38', '1.93', '2.63', '2.23', '3.79', '2.05', '1.88', '2.23', '2.67', '1.72', '3.89', '3.13', '11.67', '2.46', '2.50', '1.68', '2.41', '1.71', '4.17', '6.17', '3.33', '1.21', '11.67', '2.42', '1.47', '2.42', '1.41', '2.43', '2.42', '4.80', '7.00', '1.89', '1.68', '3.62', '2.42', '4.38', '3.50', '5.29', '2.07', '2.20', '1.71', '11.67', '3.13', '2.61', '4.00', '2.42', '1.94', '4.38', '1.71', '1.74', '2.42', '1.43', '6.50', '4.86', '2.12', '1.86', '8.20', '1.85', '4.00', '2.05', '3.77', '1.62', '6.17', '1.89', '4.07', '1.21', '2.40', '4.24', '2.58', '1.77', '2.64', '2.58', '3.00', '2.42', '7.80', '2.45', '3.50', '4.36', '5.80', '5.90', '4.08', '4.44', '3.70', '2.89']
