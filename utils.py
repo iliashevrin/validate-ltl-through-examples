@@ -321,6 +321,9 @@ def all_contexts(mut, acceptance, length):
 def conclusive_contexts(mut, acceptance, length):
     return acceptance is not None
 
+def top10_context(mut, acceptance, length):
+    return top_contexts(10, mut, acceptance, length)
+
 def top25_context(mut, acceptance, length):
     return top_contexts(25, mut, acceptance, length)
 

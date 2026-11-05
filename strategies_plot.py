@@ -12,6 +12,7 @@ from matplotlib.lines import Line2D
 # =========================
 
 STRATEGIES = {
+    "Top 10 Ctx.": "top10_context",
     "Top 25 Ctx.": "top25_context",
     "Top 50 Ctx.": "top50_context",
     "Top 100 Ctx.": "top100_context",

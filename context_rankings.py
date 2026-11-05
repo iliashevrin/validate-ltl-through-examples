@@ -20,15 +20,16 @@ import pandas as pd
 from train_ordering import build_training_data, split_by_formula
 
 
-def write_ranking(path, header, series):
+def write_ranking(path, header, series, pairs):
     # Ties in a fixed order, by context name
     ranked = series.reset_index()
     ranked.columns = ["context", "value"]
+    ranked["pairs"] = ranked["context"].map(pairs)
     ranked = ranked.sort_values(by=["value", "context"], ascending=[False, True])
 
     with open(path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
-        writer.writerow(["Mutation Context", header])
+        writer.writerow(["Mutation Context", header, "Training Pairs"])
         writer.writerows(ranked.itertuples(index=False, name=None))
 
     print(f"{path}: {len(ranked)} contexts, top: {ranked['context'].iloc[:5].tolist()}")
@@ -59,8 +60,9 @@ def main():
     print(f"{train['formula_id'].nunique()} training pairs, {len(valid_ids)} held out")
 
     by_context = train.groupby("mutation")
-    write_ranking(f"context_ranking_{args.strategy}_smoothed.csv", "Mean Usefulness", by_context["target"].mean())
-    write_ranking(f"freq_train_{args.strategy}.csv", "Detections", by_context["helpful_count"].sum())
+    pairs = by_context["formula_id"].nunique()
+    write_ranking(f"context_ranking_{args.strategy}_smoothed.csv", "Mean Usefulness", by_context["target"].mean(), pairs)
+    write_ranking(f"freq_train_{args.strategy}.csv", "Detections", by_context["helpful_count"].sum(), pairs)
 
     detections = by_context["helpful_count"].sum()
     print(f"{len(detections)} contexts on the training pairs, {(detections > 0).sum()} distinguished at least one pair")

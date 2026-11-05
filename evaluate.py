@@ -203,7 +203,7 @@ def context_scores(path):
     with open(path, newline="", encoding="utf-8") as f:
         reader = csv.reader(f)
         next(reader)
-        return {context: float(score) for context, score in reader}
+        return {row[0]: float(row[1]) for row in reader}
 
 def static_usefulness(formula, traces, strategy):
     return static_trace_ranking(traces, context_scores(f"context_ranking_{strategy}_smoothed.csv"))
