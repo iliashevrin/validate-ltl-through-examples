@@ -196,6 +196,20 @@ def build_training_data(
 
 
 # ==================================================
+# SPLIT BY FORMULA
+# ==================================================
+
+def split_by_formula(groups, test_size=0.2, random_state=42):
+    splitter = GroupShuffleSplit(
+        n_splits=1,
+        test_size=test_size,
+        random_state=random_state,
+    )
+
+    return next(splitter.split(groups, groups=groups))
+
+
+# ==================================================
 # TRAIN MODEL
 # ==================================================
 
@@ -243,19 +257,7 @@ def train_model(
 
     groups = df_model["formula_id"]
 
-    # ----------------------------------------------
-    # split BY FORMULA
-    # ----------------------------------------------
-
-    splitter = GroupShuffleSplit(
-        n_splits=1,
-        test_size=test_size,
-        random_state=random_state,
-    )
-
-    train_idx, valid_idx = next(
-        splitter.split(X, y, groups=groups)
-    )
+    train_idx, valid_idx = split_by_formula(groups, test_size, random_state)
 
     X_train = X.iloc[train_idx]
     y_train = y.iloc[train_idx]
@@ -540,6 +542,28 @@ def diversified_trace_ranking(
     return ranked_traces, base_scores
 
 
+
+
+def static_trace_ranking(traces, scores):
+    """
+    The traces by a fixed score per mutation context, with no formula features:
+    the regression's ranking otherwise, down to the order inside a context and
+    the ties. Contexts the scores do not know come last.
+    """
+    by_mutation = defaultdict(list)
+
+    for trace in traces:
+        by_mutation[trace[2]].append(trace)
+
+    ranked_traces = []
+
+    for mutation in sorted(
+        by_mutation,
+        key=lambda m: (-scores.get(m, float("-inf")), m),
+    ):
+        ranked_traces.extend(sorted(by_mutation[mutation]))
+
+    return ranked_traces
 
 
 def trace_ranking(formula, traces, strategy, utility):

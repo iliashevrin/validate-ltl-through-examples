@@ -5,9 +5,10 @@ spot.setup()
 import itertools
 from mutation_based import generate_traces
 from utils import check_acceptance, get_formula_features, collect_aps, trace_len, count_literals
-from train_ordering import trace_ranking
+from train_ordering import trace_ranking, static_trace_ranking
 
 import csv
+import functools
 import random
 import statistics
 import joblib
@@ -155,6 +156,20 @@ def ltltrust(formula, traces, strategy):
 def ltltrust_plus(formula, traces, strategy):
     return trace_ranking(formula, traces, strategy, "smoothed_plus" + MODEL_TAG)
 
+# Fixed rankings of the contexts learned on the training pairs (context_rankings.py)
+@functools.lru_cache(maxsize=None)
+def context_scores(path):
+    with open(path, newline="", encoding="utf-8") as f:
+        reader = csv.reader(f)
+        next(reader)
+        return {context: float(score) for context, score in reader}
+
+def static_usefulness(formula, traces, strategy):
+    return static_trace_ranking(traces, context_scores(f"context_ranking_{strategy}_smoothed.csv"))
+
+def static_detections(formula, traces, strategy):
+    return static_trace_ranking(traces, context_scores(f"freq_train_{strategy}.csv"))
+
 
 
 def main():
@@ -175,6 +190,10 @@ def main():
             orderings.append(OrderingData(name, ltltrust, 1))
         elif name == "LTLTRUST_PLUS":
             orderings.append(OrderingData(name, ltltrust_plus, 1))
+        elif name == "STATIC":
+            orderings.append(OrderingData(name, static_usefulness, 1))
+        elif name == "STATIC_DETECTIONS":
+            orderings.append(OrderingData(name, static_detections, 1))
         else:
             raise ValueError("Incorrect ordering function")
 

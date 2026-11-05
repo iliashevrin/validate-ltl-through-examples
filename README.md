@@ -18,6 +18,6 @@ Spot orders formula operands by creation order within a process, so traces gener
 
 1. `filter_synthetic_pairs.py`: drop synthetic pairs using APs outside the provided set (`data_collection/data_all_in_ap_set.csv`).
 2. `precompute_traces.py`: generate the traces of all training and real-world candidates (`trace_cache.json`).
-3. `collect_frequencies.py ALL_RL/pairs_claude.csv all_contexts`: rank mutation contexts by their detections on the real-world pairs (`freq_ALL_RL_all_contexts.csv`, used by the top-k strategies).
+3. `context_rankings.py data_collection/data_all_in_ap_set.csv`: rank mutation contexts on the training pairs alone, by their detections (`freq_train_all_contexts.csv`, used by the top-k strategies) and by their mean usefulness (`context_ranking_all_contexts_smoothed.csv`, used by the `STATIC` ordering). Needs `heldout_test_formulas_all_contexts_smoothed.csv` from training `all_contexts`, to check that the split is the same.
 4. `train_ordering.py data_collection/data_all_in_ap_set.csv <strategy> <smoothed|smoothed_plus>`: train the trace ordering models.
 5. `evaluate.py <orderings> <pairs csv> <strategy>`: evaluate, writing `results_*` and `log_*`.

@@ -161,7 +161,9 @@ def get_top_contexts_log(file_path):
 
 
 
-TOP_CONTEXTS = get_top_contexts("freq_ALL_RL_all_contexts.csv")
+# Ranked on the training pairs alone (context_rankings.py), read on first use
+TOP_CONTEXTS_FILE = "freq_train_all_contexts.csv"
+TOP_CONTEXTS = None
 
 
 
@@ -336,5 +338,10 @@ def top400_context(mut, acceptance, length):
 
 
 def top_contexts(k, mut, acceptance, length):
+    global TOP_CONTEXTS
+
+    if TOP_CONTEXTS is None:
+        TOP_CONTEXTS = get_top_contexts(TOP_CONTEXTS_FILE)
+
     return (str(mut[0]), mut[1], acceptance, length) in TOP_CONTEXTS[:k]
 
