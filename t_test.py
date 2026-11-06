@@ -11,8 +11,8 @@ DEFAULT_RESULTS = [
     "Random=results_ALL_RL_RANDOM_all_contexts.txt",
     "Shortest First=results_ALL_RL_BY_LENGTH_all_contexts.txt",
     "LTLTrust=results_ALL_RL_STATIC_all_contexts.txt",
-    "LTLTrust with regression=results_ALL_RL_LTLTRUST_all_contexts.txt",
-    "SA LTLTrust with regression=results_ALL_RL_LTLTRUST_PLUS_all_contexts.txt",
+    "SA LTLTrust=results_ALL_RL_STATIC_SA_all_contexts.txt",
+    "Reg LTLTrust=results_ALL_RL_LTLTRUST_all_contexts.txt",
 ]
 
 

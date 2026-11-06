@@ -208,6 +208,9 @@ def context_scores(path):
 def static_usefulness(formula, traces, strategy):
     return static_trace_ranking(traces, context_scores(f"context_ranking_{strategy}_smoothed.csv"))
 
+def static_sa_usefulness(formula, traces, strategy):
+    return static_trace_ranking(traces, context_scores(f"context_ranking_{strategy}_smoothed_plus.csv"))
+
 def static_detections(formula, traces, strategy):
     return static_trace_ranking(traces, context_scores(f"freq_train_{strategy}.csv"))
 
@@ -235,6 +238,8 @@ def main():
             orderings.append(OrderingData(name, ltltrust_plus, 1))
         elif name == "STATIC":
             orderings.append(OrderingData(name, static_usefulness, 1))
+        elif name == "STATIC_SA":
+            orderings.append(OrderingData(name, static_sa_usefulness, 1))
         elif name == "STATIC_DETECTIONS":
             orderings.append(OrderingData(name, static_detections, 1))
         else:

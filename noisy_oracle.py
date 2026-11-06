@@ -20,16 +20,16 @@ import csv
 import numpy as np
 from scipy.stats import wilcoxon
 
-from evaluate import by_length, ltltrust, ltltrust_plus, static_usefulness
+from evaluate import by_length, ltltrust, static_sa_usefulness, static_usefulness
 from mutation_based import generate_traces
 from utils import check_acceptance, translate
 
 
 FIXED_ORDERINGS = [
     ("Shortest First", by_length),
-    ("Static", static_usefulness),
-    ("LTLTrust (regression)", ltltrust),
-    ("SA LTLTrust (regression)", ltltrust_plus),
+    ("LTLTrust", static_usefulness),
+    ("SA LTLTrust", static_sa_usefulness),
+    ("Reg LTLTrust", ltltrust),
 ]
 ORDERINGS = ["Random"] + [name for name, _ in FIXED_ORDERINGS]
 
@@ -158,12 +158,12 @@ def main():
             for name, (c, w, g) in simulate(pairs, hit, e, args.trials).items():
                 print(f"{name:<26}{g:>24.3f}{c:>21.3f}{w:>19.3f}")
 
-        print("--- paired Wilcoxon on the per-pair P[correct mismatch], against Static")
-        static = result["Static"][:, 0]
+        print("--- paired Wilcoxon on the per-pair P[correct mismatch], against LTLTrust")
+        base = result["LTLTrust"][:, 0]
         for name in ORDERINGS:
-            if name != "Static":
+            if name != "LTLTrust":
                 other = result[name][:, 0]
-                print(f"{name:<26} mean diff {np.mean(other - static):+.3f}  p={wilcoxon(other, static).pvalue:.2e}")
+                print(f"{name:<26} mean diff {np.mean(other - base):+.3f}  p={wilcoxon(other, base).pvalue:.2e}")
 
 
 if __name__ == "__main__":

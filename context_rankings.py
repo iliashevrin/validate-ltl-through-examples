@@ -6,7 +6,9 @@ neither the real-world pairs nor the held-out synthetic pairs are involved.
 
   context_ranking_<strategy>_smoothed.csv: contexts by their mean usefulness,
       the regression's target without any formula features. This is what the
-      STATIC ordering of evaluate.py uses.
+      STATIC ordering of evaluate.py uses (LTLTrust in the paper).
+  context_ranking_<strategy>_smoothed_plus.csv: contexts by their mean
+      simplicity-adjusted usefulness, for the STATIC_SA ordering (SA LTLTrust).
   freq_train_<strategy>.csv: contexts by their distinguishing traces over all
       traces of all training pairs, regardless of order. The first k of these
       are the top-k trace generation strategies, and the STATIC_DETECTIONS
@@ -63,6 +65,12 @@ def main():
     pairs = by_context["formula_id"].nunique()
     write_ranking(f"context_ranking_{args.strategy}_smoothed.csv", "Mean Usefulness", by_context["target"].mean(), pairs)
     write_ranking(f"freq_train_{args.strategy}.csv", "Detections", by_context["helpful_count"].sum(), pairs)
+
+    # The same pairs, scored by their simplicity-adjusted usefulness
+    df_sa = build_training_data(formulas, args.strategy, "smoothed_plus")
+    assert df_sa[["formula_id", "mutation"]].equals(df[["formula_id", "mutation"]])
+    train_sa = df_sa.iloc[train_idx].groupby("mutation")
+    write_ranking(f"context_ranking_{args.strategy}_smoothed_plus.csv", "Mean SA Usefulness", train_sa["target"].mean(), pairs)
 
     detections = by_context["helpful_count"].sum()
     print(f"{len(detections)} contexts on the training pairs, {(detections > 0).sum()} distinguished at least one pair")
