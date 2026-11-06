@@ -1,0 +1,26 @@
+Mutation Context,Detections,Training Pairs
+Mutation.SWAP_G_WITH_F_1_False_3,1982,2668
+Mutation.ADD_NEGATION_1_False_2,1708,4011
+Mutation.ADD_X_3_True_3,1697,2223
+Mutation.ADD_X_4_True_3,1555,1682
+Mutation.ADD_NEGATION_2_True_2,1366,3408
+Mutation.ADD_NEGATION_1_True_1,1304,2694
+Mutation.ADD_X_3_False_3,1272,1928
+Mutation.ADD_F_1_False_3,1219,3013
+Mutation.SWAP_APS_0_True_2,1183,3147
+Mutation.REMOVE_RIGHT_SUBFORMULA_2_True_2,1150,2206
+Mutation.ADD_NEGATION_1_True_2,1099,2722
+Mutation.REMOVE_LEFT_SUBFORMULA_2_True_2,997,2005
+Mutation.ADD_X_1_False_2,955,2447
+Mutation.ADD_X_1_False_3,931,1993
+Mutation.SWAP_G_WITH_X_1_False_4,829,1087
+Mutation.ADD_NEGATION_3_True_2,828,2623
+Mutation.SWAP_APS_0_False_2,803,3153
+Mutation.ADD_X_1_True_3,760,1657
+Mutation.ADD_X_4_False_3,748,1553
+Mutation.ADD_NEGATION_3_False_2,747,2111
+Mutation.ADD_X_2_True_3,710,1072
+Mutation.SWAP_APS_0_False_3,667,1524
+Mutation.ADD_F_3_False_3,651,1370
+Mutation.ADD_X_2_False_3,619,850
+Mutation.ADD_NEGATION_2_False_2,584,2750

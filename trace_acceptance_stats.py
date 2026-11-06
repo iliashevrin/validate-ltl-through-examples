@@ -29,7 +29,7 @@ def print_table(title, generated, detecting):
             f"{label:<22}"
             f"{generated[value]:>9} ({generated[value] / total_generated:5.1%})"
             f"{detecting[value]:>9} ({detecting[value] / total_detecting:5.1%})"
-            f"{detecting[value] / generated[value]:>24.1%}"
+            f"{detecting[value] / generated[value] if generated[value] else 0:>24.1%}"
         )
 
     print(f"{'Total':<22}{total_generated:>18}{total_detecting:>18}{total_detecting / total_generated:>24.1%}\n")

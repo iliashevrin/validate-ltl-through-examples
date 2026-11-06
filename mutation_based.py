@@ -276,6 +276,32 @@ def rejecting_traces(mutant):
     return accepting_traces(f"!({mutant})")
 
 
+def arbitrary_traces(mutant, trans, formula_aut, negated_aut):
+    """An arbitrary accepting run of the mutant and of its negation."""
+    return accepting_traces(mutant) + rejecting_traces(mutant)
+
+
+def intersection_trace(aut1, aut2):
+    run = spot.product(aut1, aut2).accepting_run()
+    return [] if run is None else [str(spot.twa_word(run))]
+
+
+def distinguishing_traces(mutant, trans, formula_aut, negated_aut):
+    """
+    Accepting runs that tell the mutant from the formula, in either direction,
+    of the product of two automata rather than of one translated conjunction,
+    which can take hours on long formulas. An equivalent mutant has none. Every
+    word of such a run follows the same run, so the formula accepts or rejects a
+    trace as a whole, never inconclusively.
+    """
+    return (
+        intersection_trace(formula_aut, trans.run(f"!({mutant})"))
+        + intersection_trace(trans.run(mutant), negated_aut)
+    )
+
+
+TRACE_GENERATORS = {"distinguishing": distinguishing_traces, "arbitrary": arbitrary_traces}
+
 
 
 # Spot orders the operands of a formula by when they were first created in the
@@ -315,11 +341,12 @@ def generate_traces(formula, strategy):
     ]
 
 
-def generate_raw_traces(formula):
+def generate_raw_traces(formula, generator="distinguishing"):
     """
     All traces of all mutation contexts of a formula, as
     (trace, acceptance by the formula, mutation name, depth).
     """
+    traces_of_mutant = TRACE_GENERATORS[generator]
     mutants = mutate_ltl_formula(formula)
 
     traces = []
@@ -328,15 +355,11 @@ def generate_raw_traces(formula):
     d = spot.make_bdd_dict()
     trans = spot.translator(d)
     original_aut = trans.run(formula)
+    negated_aut = trans.run(f"!({formula})")
 
     for mutant, mutation_type in mutants:
 
-        # Generate candidate traces from mutant and negated mutant
-        candidates = []
-        candidates.extend(accepting_traces(mutant))
-        candidates.extend(rejecting_traces(mutant))
-
-        for trace in candidates:
+        for trace in traces_of_mutant(mutant, trans, original_aut, negated_aut):
 
             if trace is None or trace in used_traces:
                 continue

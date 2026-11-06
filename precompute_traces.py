@@ -13,7 +13,7 @@ import csv
 import json
 import time
 
-from mutation_based import generate_raw_traces, TRACE_CACHE
+from mutation_based import generate_raw_traces, TRACE_CACHE, TRACE_GENERATORS
 
 
 DEFAULT_PAIRS = [
@@ -26,6 +26,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("pairs", nargs="*", default=DEFAULT_PAIRS, help="Cand-GT pair CSVs")
     parser.add_argument("--output", default=TRACE_CACHE)
+    parser.add_argument("--generator", default="distinguishing", choices=sorted(TRACE_GENERATORS))
 
     args = parser.parse_args()
 
@@ -46,7 +47,7 @@ def main():
 
     for index, candidate in enumerate(candidates, start=1):
         try:
-            cache[candidate] = generate_raw_traces(candidate)
+            cache[candidate] = generate_raw_traces(candidate, args.generator)
         except Exception as e:
             print(f"[WARNING] Skipping candidate {candidate}: {e}", flush=True)
 

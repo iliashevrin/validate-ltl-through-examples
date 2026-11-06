@@ -35,22 +35,22 @@ def read_results(ordering, strategy):
 strategies = list(STRATEGIES)
 
 random_results = [read_results("RANDOM", s) for s in STRATEGIES.values()]
-regr_results = [read_results("LTLTRUST", s) for s in STRATEGIES.values()]
+ltltrust_results = [read_results("STATIC", s) for s in STRATEGIES.values()]
 
 # The undetected ratio does not depend on the ordering
-ndt_inf = np.array([r[0] for r in regr_results])
+ndt_inf = np.array([r[0] for r in ltltrust_results])
 
 dt_random = np.array([r[1] for r in random_results])
-dt_regr = np.array([r[1] for r in regr_results])
+dt_ltltrust = np.array([r[1] for r in ltltrust_results])
 
 avg_random = np.array([r[2] for r in random_results])
-avg_regr = np.array([r[2] for r in regr_results])
+avg_ltltrust = np.array([r[2] for r in ltltrust_results])
 
-for name, ndt, dt_rand, dt_reg, avg_rand, avg_reg in zip(strategies, ndt_inf, dt_random, dt_regr, avg_random, avg_regr):
+for name, ndt, dt_rand, dt_lt, avg_rand, avg_lt in zip(strategies, ndt_inf, dt_random, dt_ltltrust, avg_random, avg_ltltrust):
     print(
-        f"{name:14s} NDT_inf={ndt:.3f} | DT>5 random={dt_rand:.3f} LTLTrust={dt_reg:.3f} "
-        f"| NDT_5 random={ndt + dt_rand:.3f} LTLTrust={ndt + dt_reg:.3f} "
-        f"| avg traces random={avg_rand:.2f} LTLTrust={avg_reg:.2f}"
+        f"{name:14s} NDT_inf={ndt:.3f} | DT>5 random={dt_rand:.3f} LTLTrust={dt_lt:.3f} "
+        f"| NDT_5 random={ndt + dt_rand:.3f} LTLTrust={ndt + dt_lt:.3f} "
+        f"| avg traces random={avg_rand:.2f} LTLTrust={avg_lt:.2f}"
     )
 
 # =========================
@@ -68,7 +68,7 @@ base_color = "0.80"
 top_color = "0.55"
 
 hatch_random = "//"
-hatch_regr = "\\\\"
+hatch_ltltrust = "\\\\"
 
 # =========================
 # Bars
@@ -85,10 +85,10 @@ ax.bar(x - width / 2, dt_random, width,
 ax.bar(x + width / 2, ndt_inf, width,
        color=base_color, edgecolor="black", linewidth=0.8)
 
-ax.bar(x + width / 2, dt_regr, width,
+ax.bar(x + width / 2, dt_ltltrust, width,
        bottom=ndt_inf,
        color=top_color, edgecolor="black",
-       hatch=hatch_regr, linewidth=0.8)
+       hatch=hatch_ltltrust, linewidth=0.8)
 
 # =========================
 # Labels (sum + avg traces)
@@ -96,7 +96,7 @@ ax.bar(x + width / 2, dt_regr, width,
 
 for i in range(len(strategies)):
     total_random = ndt_inf[i] + dt_random[i]
-    total_regr = ndt_inf[i] + dt_regr[i]
+    total_ltltrust = ndt_inf[i] + dt_ltltrust[i]
 
     ax.text(
         x[i] - width / 2,
@@ -109,8 +109,8 @@ for i in range(len(strategies)):
 
     ax.text(
         x[i] + width / 2,
-        total_regr + 0.01,
-        f"{total_regr:.3f}\n({avg_regr[i]:.2f})",
+        total_ltltrust + 0.01,
+        f"{total_ltltrust:.3f}\n({avg_ltltrust[i]:.2f})",
         ha="center",
         va="bottom",
         fontsize=14,
@@ -141,9 +141,9 @@ random_patch = mpatches.Patch(
     edgecolor="black",
     label=r"$DT_{>5}$ (Random)",
 )
-regr_patch = mpatches.Patch(
+ltltrust_patch = mpatches.Patch(
     facecolor=top_color,
-    hatch=hatch_regr,
+    hatch=hatch_ltltrust,
     edgecolor="black",
     label=r"$DT_{>5}$ (LTLTrust Ordering)",
 )
@@ -157,7 +157,7 @@ avg_handle = Line2D(
 
 # One row above the axes, so the bars need no headroom for the legend
 ax.legend(
-    handles=[base_patch, random_patch, regr_patch],
+    handles=[base_patch, random_patch, ltltrust_patch],
     fontsize=16,
     ncol=3,
     loc="lower center",
@@ -172,7 +172,7 @@ ax.legend(
 # =========================
 
 # Leave room above the bars for their labels
-ax.set_ylim(0, np.max(ndt_inf + np.maximum(dt_random, dt_regr)) * 1.4)
+ax.set_ylim(0, np.max(ndt_inf + np.maximum(dt_random, dt_ltltrust)) * 1.4)
 
 plt.tight_layout()
 

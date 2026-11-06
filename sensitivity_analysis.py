@@ -13,10 +13,10 @@ import re
 
 # Total candidates per dataset, as in evaluate.py's DATASIZE
 DATASETS = {
-    "Dwyer": ("Dwyer/pairs_claude.csv", "results_Dwyer_LTLTRUST_all_contexts.txt", 99),
-    "SpaceWire": ("SpaceWire/pairs_claude.csv", "results_SpaceWire_LTLTRUST_all_contexts.txt", 36),
-    "Textbook": ("textbook/pairs_claude.csv", "results_textbook_LTLTRUST_all_contexts.txt", 367),
-    "ARTEMIS": ("ARTEMIS/pairs_claude.csv", "results_ARTEMIS_LTLTRUST_all_contexts.txt", 122),
+    "Dwyer": ("Dwyer/pairs_claude.csv", "results_Dwyer_STATIC_all_contexts.txt", 99),
+    "SpaceWire": ("SpaceWire/pairs_claude.csv", "results_SpaceWire_STATIC_all_contexts.txt", 36),
+    "Textbook": ("textbook/pairs_claude.csv", "results_textbook_STATIC_all_contexts.txt", 367),
+    "ARTEMIS": ("ARTEMIS/pairs_claude.csv", "results_ARTEMIS_STATIC_all_contexts.txt", 122),
 }
 
 
