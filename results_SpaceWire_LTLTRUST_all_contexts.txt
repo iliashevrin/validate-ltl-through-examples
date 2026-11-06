@@ -1,6 +1,6 @@
-Accepting traces for GT: 3.000
-Rejecting traces for GT: 24.000
-Inconclusive traces for GT: 26.000
+Accepting traces for GT: 1.000
+Rejecting traces for GT: 20.000
+Inconclusive traces for GT: 28.000
 
 Accuracy: 0.167
 Detected Ratio: 1.000
@@ -8,29 +8,29 @@ Detected Ratio: 1.000
 Undetected <=0 Ratio: 1.000 (Undetected Ratio: 0.000 + Detected >0 Ratio: 1.000)
 Confidence score for n=0: 0.167
 
-Undetected <=1 Ratio: 0.200 (Undetected Ratio: 0.000 + Detected >1 Ratio: 0.200)
-Confidence score for n=1: 0.500
+Undetected <=1 Ratio: 0.333 (Undetected Ratio: 0.000 + Detected >1 Ratio: 0.333)
+Confidence score for n=1: 0.375
 
-Undetected <=2 Ratio: 0.200 (Undetected Ratio: 0.000 + Detected >2 Ratio: 0.200)
-Confidence score for n=2: 0.500
+Undetected <=2 Ratio: 0.267 (Undetected Ratio: 0.000 + Detected >2 Ratio: 0.267)
+Confidence score for n=2: 0.429
 
-Undetected <=3 Ratio: 0.067 (Undetected Ratio: 0.000 + Detected >3 Ratio: 0.067)
-Confidence score for n=3: 0.750
+Undetected <=3 Ratio: 0.033 (Undetected Ratio: 0.000 + Detected >3 Ratio: 0.033)
+Confidence score for n=3: 0.857
 
-Undetected <=4 Ratio: 0.067 (Undetected Ratio: 0.000 + Detected >4 Ratio: 0.067)
-Confidence score for n=4: 0.750
+Undetected <=4 Ratio: 0.000 (Undetected Ratio: 0.000 + Detected >4 Ratio: 0.000)
+Confidence score for n=4: 1.000
 
-Undetected <=5 Ratio: 0.067 (Undetected Ratio: 0.000 + Detected >5 Ratio: 0.067)
-Confidence score for n=5: 0.750
+Undetected <=5 Ratio: 0.000 (Undetected Ratio: 0.000 + Detected >5 Ratio: 0.000)
+Confidence score for n=5: 1.000
 
-Undetected <=6 Ratio: 0.067 (Undetected Ratio: 0.000 + Detected >6 Ratio: 0.067)
-Confidence score for n=6: 0.750
+Undetected <=6 Ratio: 0.000 (Undetected Ratio: 0.000 + Detected >6 Ratio: 0.000)
+Confidence score for n=6: 1.000
 
-Undetected <=7 Ratio: 0.067 (Undetected Ratio: 0.000 + Detected >7 Ratio: 0.067)
-Confidence score for n=7: 0.750
+Undetected <=7 Ratio: 0.000 (Undetected Ratio: 0.000 + Detected >7 Ratio: 0.000)
+Confidence score for n=7: 1.000
 
-Undetected <=8 Ratio: 0.033 (Undetected Ratio: 0.000 + Detected >8 Ratio: 0.033)
-Confidence score for n=8: 0.857
+Undetected <=8 Ratio: 0.000 (Undetected Ratio: 0.000 + Detected >8 Ratio: 0.000)
+Confidence score for n=8: 1.000
 
 Undetected <=9 Ratio: 0.000 (Undetected Ratio: 0.000 + Detected >9 Ratio: 0.000)
 Confidence score for n=9: 1.000
@@ -53,31 +53,28 @@ Confidence score for n=14: 1.000
 Undetected <=15 Ratio: 0.000 (Undetected Ratio: 0.000 + Detected >15 Ratio: 0.000)
 Confidence score for n=15: 1.000
 
-Traces to Detection: Avg: 1.767, Median: 1.00, Std: 1.96, P75: 1.00, P90: 3.00, Max: 9.00, Min: 1.00
+Traces to Detection: Avg: 1.633, Median: 1.00, Std: 0.96, P75: 2.75, P90: 3.00, Max: 4.00, Min: 1.00
 
-Trace Lengths: Avg: 2.996, Median: 3.00, Std: 0.94, P75: 3.17, P90: 4.00, Max: 5.00, Min: 1.00
+Trace Lengths: Avg: 3.269, Median: 3.00, Std: 0.64, P75: 3.92, P90: 4.00, Max: 5.00, Min: 2.00
 
-Trace Literals: Avg: 16.269, Median: 7.00, Std: 41.70, P75: 9.47, P90: 20.80, Max: 234.00, Min: 2.00
+Trace Literals: Avg: 17.564, Median: 8.00, Std: 31.96, P75: 10.67, P90: 21.90, Max: 157.00, Min: 3.00
 
 Mutation Contexts by Usefulness
-Mutation.ADD_X_3_False_4:1
-Mutation.REMOVE_RIGHT_SUBFORMULA_3_True_2:1
-Mutation.ADD_X_7_True_4:1
 Mutation.ADD_X_4_False_4:1
-Mutation.ADD_X_3_True_3:1
-Mutation.ADD_X_5_False_4:1
-Mutation.ADD_X_3_True_4:1
-Mutation.REMOVE_G_2_False_3:1
-Mutation.ADD_NEGATION_2_True_2:1
-Mutation.ADD_NEGATION_3_True_2:1
-Mutation.ADD_X_4_False_2:1
-Mutation.ADD_X_4_True_3:2
-Mutation.SWAP_G_WITH_F_1_False_3:2
-Mutation.REMOVE_F_4_True_3:2
-Mutation.SWAP_G_WITH_X_1_False_5:2
-Mutation.ADD_NEGATION_1_True_1:2
-Mutation.SWAP_G_WITH_X_1_False_4:2
-Mutation.REMOVE_F_3_True_3:3
+Mutation.REMOVE_RIGHT_SUBFORMULA_6_True_3:1
+Mutation.ADD_X_7_False_4:1
+Mutation.ADD_X_7_True_3:1
+Mutation.ADD_F_3_True_5:1
+Mutation.REMOVE_X_4_False_3:1
+Mutation.REMOVE_NEGATION_6_True_3:1
+Mutation.SWAP_AND_WITH_OR_4_True_2:1
+Mutation.REMOVE_LEFT_SUBFORMULA_2_True_2:1
+Mutation.ADD_F_4_False_2:1
+Mutation.SWAP_AND_WITH_OR_3_True_2:1
+Mutation.SWAP_G_WITH_F_1_False_4:2
+Mutation.REMOVE_G_1_False_3:2
 Mutation.REMOVE_RIGHT_SUBFORMULA_2_True_2:4
+Mutation.SWAP_G_WITH_X_1_False_4:5
+Mutation.SWAP_G_WITH_F_1_False_3:6
 
-Traces to Detection List: ['3.00', '1.00', '8.00', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '9.00', '1.00', '1.00', '3.00', '1.00', '1.00', '1.00', '1.00', '3.00', '1.00', '1.00', '1.00', '1.00', '3.00', '1.00', '1.00', '1.00', '1.00']
+Traces to Detection List: ['3.00', '1.00', '2.00', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '3.00', '1.00', '1.00', '1.00', '1.00', '3.00', '1.00', '1.00', '1.00', '4.00', '3.00', '2.00', '1.00', '1.00', '1.00', '3.00', '3.00', '1.00', '1.00', '3.00']

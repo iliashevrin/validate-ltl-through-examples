@@ -145,7 +145,7 @@ def build_training_data(
             total_count = len(labels)
 
 
-            if utility == "smoothed":
+            if utility == "usefulness":
 
                 usefulness = smoothed_ratio(
                     helpful_count,
@@ -154,7 +154,7 @@ def build_training_data(
                     beta_prior,
                 )
 
-            elif utility == "smoothed_plus":
+            elif utility == "sa_usefulness":
 
                 trace_length = 0
                 avg_literals = 0
@@ -595,7 +595,7 @@ def main():
 
     parser.add_argument("strategy", default="all_contexts")
 
-    parser.add_argument("utility", default="smoothed_ratio")
+    parser.add_argument("utility", default="usefulness")
 
     parser.add_argument("--alpha-prior", type=float, default=1.0,
                         help="Beta-prior pseudo-count of distinguishing traces (1 = Laplace smoothing)")

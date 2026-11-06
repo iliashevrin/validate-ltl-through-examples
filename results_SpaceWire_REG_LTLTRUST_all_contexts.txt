@@ -1,0 +1,83 @@
+Accepting traces for GT: 3.000
+Rejecting traces for GT: 24.000
+Inconclusive traces for GT: 26.000
+
+Accuracy: 0.167
+Detected Ratio: 1.000
+
+Undetected <=0 Ratio: 1.000 (Undetected Ratio: 0.000 + Detected >0 Ratio: 1.000)
+Confidence score for n=0: 0.167
+
+Undetected <=1 Ratio: 0.200 (Undetected Ratio: 0.000 + Detected >1 Ratio: 0.200)
+Confidence score for n=1: 0.500
+
+Undetected <=2 Ratio: 0.200 (Undetected Ratio: 0.000 + Detected >2 Ratio: 0.200)
+Confidence score for n=2: 0.500
+
+Undetected <=3 Ratio: 0.067 (Undetected Ratio: 0.000 + Detected >3 Ratio: 0.067)
+Confidence score for n=3: 0.750
+
+Undetected <=4 Ratio: 0.067 (Undetected Ratio: 0.000 + Detected >4 Ratio: 0.067)
+Confidence score for n=4: 0.750
+
+Undetected <=5 Ratio: 0.067 (Undetected Ratio: 0.000 + Detected >5 Ratio: 0.067)
+Confidence score for n=5: 0.750
+
+Undetected <=6 Ratio: 0.067 (Undetected Ratio: 0.000 + Detected >6 Ratio: 0.067)
+Confidence score for n=6: 0.750
+
+Undetected <=7 Ratio: 0.067 (Undetected Ratio: 0.000 + Detected >7 Ratio: 0.067)
+Confidence score for n=7: 0.750
+
+Undetected <=8 Ratio: 0.033 (Undetected Ratio: 0.000 + Detected >8 Ratio: 0.033)
+Confidence score for n=8: 0.857
+
+Undetected <=9 Ratio: 0.000 (Undetected Ratio: 0.000 + Detected >9 Ratio: 0.000)
+Confidence score for n=9: 1.000
+
+Undetected <=10 Ratio: 0.000 (Undetected Ratio: 0.000 + Detected >10 Ratio: 0.000)
+Confidence score for n=10: 1.000
+
+Undetected <=11 Ratio: 0.000 (Undetected Ratio: 0.000 + Detected >11 Ratio: 0.000)
+Confidence score for n=11: 1.000
+
+Undetected <=12 Ratio: 0.000 (Undetected Ratio: 0.000 + Detected >12 Ratio: 0.000)
+Confidence score for n=12: 1.000
+
+Undetected <=13 Ratio: 0.000 (Undetected Ratio: 0.000 + Detected >13 Ratio: 0.000)
+Confidence score for n=13: 1.000
+
+Undetected <=14 Ratio: 0.000 (Undetected Ratio: 0.000 + Detected >14 Ratio: 0.000)
+Confidence score for n=14: 1.000
+
+Undetected <=15 Ratio: 0.000 (Undetected Ratio: 0.000 + Detected >15 Ratio: 0.000)
+Confidence score for n=15: 1.000
+
+Traces to Detection: Avg: 1.767, Median: 1.00, Std: 1.96, P75: 1.00, P90: 3.00, Max: 9.00, Min: 1.00
+
+Trace Lengths: Avg: 2.996, Median: 3.00, Std: 0.94, P75: 3.17, P90: 4.00, Max: 5.00, Min: 1.00
+
+Trace Literals: Avg: 16.269, Median: 7.00, Std: 41.70, P75: 9.47, P90: 20.80, Max: 234.00, Min: 2.00
+
+Mutation Contexts by Usefulness
+Mutation.ADD_X_3_False_4:1
+Mutation.REMOVE_RIGHT_SUBFORMULA_3_True_2:1
+Mutation.ADD_X_7_True_4:1
+Mutation.ADD_X_4_False_4:1
+Mutation.ADD_X_3_True_3:1
+Mutation.ADD_X_5_False_4:1
+Mutation.ADD_X_3_True_4:1
+Mutation.REMOVE_G_2_False_3:1
+Mutation.ADD_NEGATION_2_True_2:1
+Mutation.ADD_NEGATION_3_True_2:1
+Mutation.ADD_X_4_False_2:1
+Mutation.ADD_X_4_True_3:2
+Mutation.SWAP_G_WITH_F_1_False_3:2
+Mutation.REMOVE_F_4_True_3:2
+Mutation.SWAP_G_WITH_X_1_False_5:2
+Mutation.ADD_NEGATION_1_True_1:2
+Mutation.SWAP_G_WITH_X_1_False_4:2
+Mutation.REMOVE_F_3_True_3:3
+Mutation.REMOVE_RIGHT_SUBFORMULA_2_True_2:4
+
+Traces to Detection List: ['3.00', '1.00', '8.00', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '9.00', '1.00', '1.00', '3.00', '1.00', '1.00', '1.00', '1.00', '3.00', '1.00', '1.00', '1.00', '1.00', '3.00', '1.00', '1.00', '1.00', '1.00']

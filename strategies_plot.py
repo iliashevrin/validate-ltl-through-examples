@@ -35,7 +35,7 @@ def read_results(ordering, strategy):
 strategies = list(STRATEGIES)
 
 random_results = [read_results("RANDOM", s) for s in STRATEGIES.values()]
-ltltrust_results = [read_results("STATIC", s) for s in STRATEGIES.values()]
+ltltrust_results = [read_results("LTLTRUST", s) for s in STRATEGIES.values()]
 
 # The undetected ratio does not depend on the ordering
 ndt_inf = np.array([r[0] for r in ltltrust_results])

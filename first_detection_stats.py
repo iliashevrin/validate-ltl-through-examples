@@ -13,16 +13,16 @@ import argparse
 import csv
 from collections import Counter
 
-from evaluate import by_length, ltltrust, static_sa_usefulness, static_usefulness
+from evaluate import shortest_first, reg_ltltrust, sa_ltltrust, ltltrust
 from mutation_based import generate_traces
 from utils import check_acceptance, translate
 
 
 ORDERINGS = [
-    ("Shortest First", by_length),
-    ("LTLTrust", static_usefulness),
-    ("SA LTLTrust", static_sa_usefulness),
-    ("Reg LTLTrust", ltltrust),
+    ("Shortest First", shortest_first),
+    ("LTLTrust", ltltrust),
+    ("SA LTLTrust", sa_ltltrust),
+    ("Reg LTLTrust", reg_ltltrust),
 ]
 LABELS = [(True, "Accepting"), (False, "Rejecting"), (None, "Inconclusive")]
 

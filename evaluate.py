@@ -180,7 +180,7 @@ class OrderingData:
 
 
 
-def by_length(formula, traces, strategy):
+def shortest_first(formula, traces, strategy):
     traces.sort(key=lambda trace: trace_len(trace[0]))
     return traces
 
@@ -191,11 +191,11 @@ def ordering_random(formula, traces, strategy):
 # Optional suffix of the model files (see train_ordering.py --tag), set from argv[4]
 MODEL_TAG = ""
 
-def ltltrust(formula, traces, strategy):
-    return trace_ranking(formula, traces, strategy, "smoothed" + MODEL_TAG)
+def reg_ltltrust(formula, traces, strategy):
+    return trace_ranking(formula, traces, strategy, "usefulness" + MODEL_TAG)
 
-def ltltrust_plus(formula, traces, strategy):
-    return trace_ranking(formula, traces, strategy, "smoothed_plus" + MODEL_TAG)
+def sa_reg_ltltrust(formula, traces, strategy):
+    return trace_ranking(formula, traces, strategy, "sa_usefulness" + MODEL_TAG)
 
 # Fixed rankings of the contexts learned on the training pairs (context_rankings.py)
 @functools.lru_cache(maxsize=None)
@@ -205,11 +205,11 @@ def context_scores(path):
         next(reader)
         return {row[0]: float(row[1]) for row in reader}
 
-def static_usefulness(formula, traces, strategy):
-    return static_trace_ranking(traces, context_scores(f"context_ranking_{strategy}_smoothed.csv"))
+def ltltrust(formula, traces, strategy):
+    return static_trace_ranking(traces, context_scores(f"context_ranking_{strategy}_usefulness.csv"))
 
-def static_sa_usefulness(formula, traces, strategy):
-    return static_trace_ranking(traces, context_scores(f"context_ranking_{strategy}_smoothed_plus.csv"))
+def sa_ltltrust(formula, traces, strategy):
+    return static_trace_ranking(traces, context_scores(f"context_ranking_{strategy}_sa_usefulness.csv"))
 
 def static_detections(formula, traces, strategy):
     return static_trace_ranking(traces, context_scores(f"freq_train_{strategy}.csv"))
@@ -230,16 +230,16 @@ def main():
 
         if name == "RANDOM":
             orderings.append(OrderingData(name, ordering_random, 30))
-        elif name == "BY_LENGTH":
-            orderings.append(OrderingData(name, by_length, 1))
+        elif name == "SHORTEST_FIRST":
+            orderings.append(OrderingData(name, shortest_first, 1))
+        elif name == "REG_LTLTRUST":
+            orderings.append(OrderingData(name, reg_ltltrust, 1))
+        elif name == "SA_REG_LTLTRUST":
+            orderings.append(OrderingData(name, sa_reg_ltltrust, 1))
         elif name == "LTLTRUST":
             orderings.append(OrderingData(name, ltltrust, 1))
-        elif name == "LTLTRUST_PLUS":
-            orderings.append(OrderingData(name, ltltrust_plus, 1))
-        elif name == "STATIC":
-            orderings.append(OrderingData(name, static_usefulness, 1))
-        elif name == "STATIC_SA":
-            orderings.append(OrderingData(name, static_sa_usefulness, 1))
+        elif name == "SA_LTLTRUST":
+            orderings.append(OrderingData(name, sa_ltltrust, 1))
         elif name == "STATIC_DETECTIONS":
             orderings.append(OrderingData(name, static_detections, 1))
         else:

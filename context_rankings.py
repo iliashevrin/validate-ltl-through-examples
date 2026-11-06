@@ -4,11 +4,11 @@ Fixed global rankings of the mutation contexts, learned on the training pairs
 alone: the same rows and the same split by formula as train_ordering.py, so
 neither the real-world pairs nor the held-out synthetic pairs are involved.
 
-  context_ranking_<strategy>_smoothed.csv: contexts by their mean usefulness,
+  context_ranking_<strategy>_usefulness.csv: contexts by their mean usefulness,
       the regression's target without any formula features. This is what the
-      STATIC ordering of evaluate.py uses (LTLTrust in the paper).
-  context_ranking_<strategy>_smoothed_plus.csv: contexts by their mean
-      simplicity-adjusted usefulness, for the STATIC_SA ordering (SA LTLTrust).
+      LTLTRUST ordering of evaluate.py uses.
+  context_ranking_<strategy>_sa_usefulness.csv: contexts by their mean
+      simplicity-adjusted usefulness, for the SA_LTLTRUST ordering.
   freq_train_<strategy>.csv: contexts by their distinguishing traces over all
       traces of all training pairs, regardless of order. The first k of these
       are the top-k trace generation strategies, and the STATIC_DETECTIONS
@@ -41,7 +41,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("data_file", help="The training pairs csv")
     parser.add_argument("--strategy", default="all_contexts")
-    parser.add_argument("--heldout", default="heldout_test_formulas_all_contexts_smoothed.csv",
+    parser.add_argument("--heldout", default="heldout_test_formulas_all_contexts_usefulness.csv",
                         help="The held-out pairs saved by train_ordering.py, to check the split against")
     args = parser.parse_args()
 
@@ -50,7 +50,7 @@ def main():
         next(reader)
         formulas = [tuple(row) for row in reader]
 
-    df = build_training_data(formulas, args.strategy, "smoothed")
+    df = build_training_data(formulas, args.strategy, "usefulness")
     train_idx, valid_idx = split_by_formula(df["formula_id"])
 
     # The same held-out pairs as the regression's
@@ -63,14 +63,14 @@ def main():
 
     by_context = train.groupby("mutation")
     pairs = by_context["formula_id"].nunique()
-    write_ranking(f"context_ranking_{args.strategy}_smoothed.csv", "Mean Usefulness", by_context["target"].mean(), pairs)
+    write_ranking(f"context_ranking_{args.strategy}_usefulness.csv", "Mean Usefulness", by_context["target"].mean(), pairs)
     write_ranking(f"freq_train_{args.strategy}.csv", "Detections", by_context["helpful_count"].sum(), pairs)
 
     # The same pairs, scored by their simplicity-adjusted usefulness
-    df_sa = build_training_data(formulas, args.strategy, "smoothed_plus")
+    df_sa = build_training_data(formulas, args.strategy, "sa_usefulness")
     assert df_sa[["formula_id", "mutation"]].equals(df[["formula_id", "mutation"]])
     train_sa = df_sa.iloc[train_idx].groupby("mutation")
-    write_ranking(f"context_ranking_{args.strategy}_smoothed_plus.csv", "Mean SA Usefulness", train_sa["target"].mean(), pairs)
+    write_ranking(f"context_ranking_{args.strategy}_sa_usefulness.csv", "Mean SA Usefulness", train_sa["target"].mean(), pairs)
 
     detections = by_context["helpful_count"].sum()
     print(f"{len(detections)} contexts on the training pairs, {(detections > 0).sum()} distinguished at least one pair")
