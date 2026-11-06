@@ -27,7 +27,7 @@ def smoothed_ratio_plus(
     total,
     alpha_prior=1.0,
     beta_prior=1.0,
-    len_ref=3,
+    len_ref=6,
     lit_ref=5,
     gamma=1.0,
 ):
@@ -102,7 +102,7 @@ def build_training_data(
     utility,
     alpha_prior=1.0,
     beta_prior=1.0,
-    len_ref=3,
+    len_ref=6,
     lit_ref=5,
 ):
     rows = []
@@ -221,7 +221,7 @@ def train_model(
     random_state=42,
     alpha_prior=1.0,
     beta_prior=1.0,
-    len_ref=3,
+    len_ref=6,
     lit_ref=5,
     tag="",
 ):
@@ -601,7 +601,7 @@ def main():
                         help="Beta-prior pseudo-count of distinguishing traces (1 = Laplace smoothing)")
     parser.add_argument("--beta-prior", type=float, default=1.0,
                         help="Beta-prior pseudo-count of non-distinguishing traces (1 = Laplace smoothing)")
-    parser.add_argument("--len-ref", type=float, default=3,
+    parser.add_argument("--len-ref", type=float, default=6,
                         help="SA usefulness: trace length that adds 1 to the complexity penalty (inf disables the term)")
     parser.add_argument("--lit-ref", type=float, default=5,
                         help="SA usefulness: literal count that adds 1 to the complexity penalty (inf disables the term)")

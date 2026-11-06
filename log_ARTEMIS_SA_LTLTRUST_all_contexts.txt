@@ -55,10 +55,10 @@ trace#2, cand_acc=False, gt_acc=False, !StartUpMode | checkCommsGUI; StartUpMode
 trace#3, cand_acc=True, gt_acc=True, !StartUpMode & !checkCommsGUI; cycle{!StartUpMode & !checkCommsGUI}
 trace#4, cand_acc=True, gt_acc=True, !StartUpMode & checkCommsGUI; cycle{!StartUpMode}
 trace#5, cand_acc=True, gt_acc=True, !StartUpMode | checkCommsGUI; cycle{!StartUpMode | checkCommsGUI}
-trace#6, cand_acc=False, gt_acc=False, StartUpMode & !checkCommsGUI; cycle{!StartUpMode & !checkCommsGUI}
-trace#7, cand_acc=True, gt_acc=True, !StartUpMode & checkCommsGUI; cycle{!StartUpMode | checkCommsGUI}
-trace#8, cand_acc=False, gt_acc=False, StartUpMode & !checkCommsGUI; cycle{!checkCommsGUI}
-trace#9, cand_acc=False, gt_acc=False, 1; !StartUpMode | checkCommsGUI; StartUpMode & !checkCommsGUI; cycle{!checkCommsGUI}
+trace#6, cand_acc=False, gt_acc=False, 1; !StartUpMode | checkCommsGUI; StartUpMode & !checkCommsGUI; cycle{!checkCommsGUI}
+trace#7, cand_acc=False, gt_acc=False, StartUpMode & !checkCommsGUI; cycle{!StartUpMode & !checkCommsGUI}
+trace#8, cand_acc=True, gt_acc=True, !StartUpMode & checkCommsGUI; cycle{!StartUpMode | checkCommsGUI}
+trace#9, cand_acc=False, gt_acc=False, StartUpMode & !checkCommsGUI; cycle{!checkCommsGUI}
 trace#10, cand_acc=True, gt_acc=True, StartUpMode & checkCommsGUI; cycle{!StartUpMode & !checkCommsGUI}
 trace#11, cand_acc=True, gt_acc=True, StartUpMode & checkCommsGUI; cycle{!StartUpMode | checkCommsGUI}
 trace#12, cand_acc=False, gt_acc=False, StartUpMode & !checkCommsGUI; cycle{StartUpMode & !checkCommsGUI}
@@ -88,10 +88,10 @@ trace#2, cand_acc=False, gt_acc=False, !StartUpMode | defaultParamsLoaded; Start
 trace#3, cand_acc=True, gt_acc=True, !StartUpMode & !defaultParamsLoaded; cycle{!StartUpMode & !defaultParamsLoaded}
 trace#4, cand_acc=True, gt_acc=True, !StartUpMode & defaultParamsLoaded; cycle{!StartUpMode}
 trace#5, cand_acc=True, gt_acc=True, !StartUpMode | defaultParamsLoaded; cycle{!StartUpMode | defaultParamsLoaded}
-trace#6, cand_acc=False, gt_acc=False, StartUpMode & !defaultParamsLoaded; cycle{!StartUpMode & !defaultParamsLoaded}
-trace#7, cand_acc=True, gt_acc=True, !StartUpMode & defaultParamsLoaded; cycle{!StartUpMode | defaultParamsLoaded}
-trace#8, cand_acc=False, gt_acc=False, StartUpMode & !defaultParamsLoaded; cycle{!defaultParamsLoaded}
-trace#9, cand_acc=False, gt_acc=False, 1; !StartUpMode | defaultParamsLoaded; StartUpMode & !defaultParamsLoaded; cycle{!defaultParamsLoaded}
+trace#6, cand_acc=False, gt_acc=False, 1; !StartUpMode | defaultParamsLoaded; StartUpMode & !defaultParamsLoaded; cycle{!defaultParamsLoaded}
+trace#7, cand_acc=False, gt_acc=False, StartUpMode & !defaultParamsLoaded; cycle{!StartUpMode & !defaultParamsLoaded}
+trace#8, cand_acc=True, gt_acc=True, !StartUpMode & defaultParamsLoaded; cycle{!StartUpMode | defaultParamsLoaded}
+trace#9, cand_acc=False, gt_acc=False, StartUpMode & !defaultParamsLoaded; cycle{!defaultParamsLoaded}
 trace#10, cand_acc=True, gt_acc=True, StartUpMode & defaultParamsLoaded; cycle{!StartUpMode & !defaultParamsLoaded}
 trace#11, cand_acc=True, gt_acc=True, StartUpMode & defaultParamsLoaded; cycle{!StartUpMode | defaultParamsLoaded}
 trace#12, cand_acc=False, gt_acc=False, StartUpMode & !defaultParamsLoaded; cycle{StartUpMode & !defaultParamsLoaded}
@@ -165,17 +165,14 @@ trace#2, cand_acc=False, gt_acc=False, !SelfTestMode | testFl2Fail | testFl2Pass
 trace#3, cand_acc=True, gt_acc=True, !SelfTestMode & !testFl2Fail & !testFl2Pass & !testFl2Skip; cycle{!SelfTestMode & !testFl2Fail & !testFl2Pass & !testFl2Skip}
 trace#4, cand_acc=True, gt_acc=True, !SelfTestMode & testFl2Fail & !testFl2Pass & !testFl2Skip; cycle{!SelfTestMode & !testFl2Pass & !testFl2Skip}
 trace#5, cand_acc=True, gt_acc=True, !SelfTestMode | testFl2Fail | testFl2Pass | testFl2Skip; cycle{!SelfTestMode | testFl2Fail | testFl2Pass | testFl2Skip}
-trace#6, cand_acc=False, gt_acc=False, SelfTestMode & !testFl2Fail & !testFl2Pass & !testFl2Skip; cycle{!SelfTestMode & !testFl2Fail & !testFl2Pass & !testFl2Skip}
-trace#7, cand_acc=True, gt_acc=True, (!SelfTestMode & testFl2Fail) | (!SelfTestMode & testFl2Pass) | (!SelfTestMode & testFl2Skip); cycle{!SelfTestMode | testFl2Fail | testFl2Pass | testFl2Skip}
-trace#8, cand_acc=False, gt_acc=False, SelfTestMode & !testFl2Fail & !testFl2Pass & !testFl2Skip; cycle{!testFl2Fail & !testFl2Pass & !testFl2Skip}
-trace#9, cand_acc=False, gt_acc=False, 1; !SelfTestMode | testFl2Fail | testFl2Pass | testFl2Skip; SelfTestMode & !testFl2Fail & !testFl2Pass & !testFl2Skip; cycle{!testFl2Fail & !testFl2Pass & !testFl2Skip}
+trace#6, cand_acc=False, gt_acc=False, 1; !SelfTestMode | testFl2Fail | testFl2Pass | testFl2Skip; SelfTestMode & !testFl2Fail & !testFl2Pass & !testFl2Skip; cycle{!testFl2Fail & !testFl2Pass & !testFl2Skip}
+trace#7, cand_acc=False, gt_acc=False, SelfTestMode & !testFl2Fail & !testFl2Pass & !testFl2Skip; cycle{!SelfTestMode & !testFl2Fail & !testFl2Pass & !testFl2Skip}
+trace#8, cand_acc=True, gt_acc=True, (!SelfTestMode & testFl2Fail) | (!SelfTestMode & testFl2Pass) | (!SelfTestMode & testFl2Skip); cycle{!SelfTestMode | testFl2Fail | testFl2Pass | testFl2Skip}
+trace#9, cand_acc=False, gt_acc=False, SelfTestMode & !testFl2Fail & !testFl2Pass & !testFl2Skip; cycle{!testFl2Fail & !testFl2Pass & !testFl2Skip}
 trace#10, cand_acc=True, gt_acc=True, (SelfTestMode & testFl2Fail) | (SelfTestMode & testFl2Pass) | (SelfTestMode & testFl2Skip); cycle{!SelfTestMode & !testFl2Fail & !testFl2Pass & !testFl2Skip}
 trace#11, cand_acc=True, gt_acc=True, (SelfTestMode & testFl2Fail) | (SelfTestMode & testFl2Pass) | (SelfTestMode & testFl2Skip); cycle{!SelfTestMode | testFl2Fail | testFl2Pass | testFl2Skip}
 trace#12, cand_acc=False, gt_acc=False, SelfTestMode & !testFl2Fail & !testFl2Pass & !testFl2Skip; cycle{SelfTestMode & !testFl2Fail & !testFl2Pass & !testFl2Skip}
-trace#13, cand_acc=True, gt_acc=True, SelfTestMode & !testFl2Fail & !testFl2Pass & testFl2Skip; cycle{!testFl2Fail & !testFl2Pass & testFl2Skip}
-trace#14, cand_acc=True, gt_acc=True, SelfTestMode & !testFl2Fail & testFl2Pass & !testFl2Skip; cycle{!testFl2Fail & testFl2Pass & !testFl2Skip}
-trace#15, cand_acc=True, gt_acc=True, SelfTestMode & testFl2Fail & !testFl2Pass & !testFl2Skip; cycle{testFl2Fail & !testFl2Pass & !testFl2Skip}
-trace#16, cand_acc=True, gt_acc=False, SelfTestMode & !testFl2Fail & !testFl2Pass & !testFl2Skip; testFl2Fail | testFl2Pass | testFl2Skip; cycle{!SelfTestMode | testFl2Fail | testFl2Pass | testFl2Skip}
+trace#13, cand_acc=True, gt_acc=False, SelfTestMode & !testFl2Fail & !testFl2Pass & !testFl2Skip; testFl2Fail | testFl2Pass | testFl2Skip; cycle{!SelfTestMode | testFl2Fail | testFl2Pass | testFl2Skip}
 
 Candidate = G(initStart -> F(checkCommsGUI & checkCommsSensors & checkCommsValves))
 GT = G(StartUpMode -> ((((initStart & checkCommsSensors) & checkCommsValves) & checkCommsGUI)))
@@ -225,17 +222,14 @@ trace#2, cand_acc=False, gt_acc=False, !SelfTestMode | testPSExpFail | testPSExp
 trace#3, cand_acc=True, gt_acc=True, !SelfTestMode & !testPSExpFail & !testPSExpPass & !testPSExpSkip; cycle{!SelfTestMode & !testPSExpFail & !testPSExpPass & !testPSExpSkip}
 trace#4, cand_acc=True, gt_acc=True, !SelfTestMode & testPSExpFail & !testPSExpPass & !testPSExpSkip; cycle{!SelfTestMode & !testPSExpPass & !testPSExpSkip}
 trace#5, cand_acc=True, gt_acc=True, !SelfTestMode | testPSExpFail | testPSExpPass | testPSExpSkip; cycle{!SelfTestMode | testPSExpFail | testPSExpPass | testPSExpSkip}
-trace#6, cand_acc=False, gt_acc=False, SelfTestMode & !testPSExpFail & !testPSExpPass & !testPSExpSkip; cycle{!SelfTestMode & !testPSExpFail & !testPSExpPass & !testPSExpSkip}
-trace#7, cand_acc=True, gt_acc=True, (!SelfTestMode & testPSExpFail) | (!SelfTestMode & testPSExpPass) | (!SelfTestMode & testPSExpSkip); cycle{!SelfTestMode | testPSExpFail | testPSExpPass | testPSExpSkip}
-trace#8, cand_acc=False, gt_acc=False, SelfTestMode & !testPSExpFail & !testPSExpPass & !testPSExpSkip; cycle{!testPSExpFail & !testPSExpPass & !testPSExpSkip}
-trace#9, cand_acc=False, gt_acc=False, 1; !SelfTestMode | testPSExpFail | testPSExpPass | testPSExpSkip; SelfTestMode & !testPSExpFail & !testPSExpPass & !testPSExpSkip; cycle{!testPSExpFail & !testPSExpPass & !testPSExpSkip}
+trace#6, cand_acc=False, gt_acc=False, 1; !SelfTestMode | testPSExpFail | testPSExpPass | testPSExpSkip; SelfTestMode & !testPSExpFail & !testPSExpPass & !testPSExpSkip; cycle{!testPSExpFail & !testPSExpPass & !testPSExpSkip}
+trace#7, cand_acc=False, gt_acc=False, SelfTestMode & !testPSExpFail & !testPSExpPass & !testPSExpSkip; cycle{!SelfTestMode & !testPSExpFail & !testPSExpPass & !testPSExpSkip}
+trace#8, cand_acc=True, gt_acc=True, (!SelfTestMode & testPSExpFail) | (!SelfTestMode & testPSExpPass) | (!SelfTestMode & testPSExpSkip); cycle{!SelfTestMode | testPSExpFail | testPSExpPass | testPSExpSkip}
+trace#9, cand_acc=False, gt_acc=False, SelfTestMode & !testPSExpFail & !testPSExpPass & !testPSExpSkip; cycle{!testPSExpFail & !testPSExpPass & !testPSExpSkip}
 trace#10, cand_acc=True, gt_acc=True, (SelfTestMode & testPSExpFail) | (SelfTestMode & testPSExpPass) | (SelfTestMode & testPSExpSkip); cycle{!SelfTestMode & !testPSExpFail & !testPSExpPass & !testPSExpSkip}
 trace#11, cand_acc=True, gt_acc=True, (SelfTestMode & testPSExpFail) | (SelfTestMode & testPSExpPass) | (SelfTestMode & testPSExpSkip); cycle{!SelfTestMode | testPSExpFail | testPSExpPass | testPSExpSkip}
 trace#12, cand_acc=False, gt_acc=False, SelfTestMode & !testPSExpFail & !testPSExpPass & !testPSExpSkip; cycle{SelfTestMode & !testPSExpFail & !testPSExpPass & !testPSExpSkip}
-trace#13, cand_acc=True, gt_acc=True, SelfTestMode & !testPSExpFail & !testPSExpPass & testPSExpSkip; cycle{!testPSExpFail & !testPSExpPass & testPSExpSkip}
-trace#14, cand_acc=True, gt_acc=True, SelfTestMode & !testPSExpFail & testPSExpPass & !testPSExpSkip; cycle{!testPSExpFail & testPSExpPass & !testPSExpSkip}
-trace#15, cand_acc=True, gt_acc=True, SelfTestMode & testPSExpFail & !testPSExpPass & !testPSExpSkip; cycle{testPSExpFail & !testPSExpPass & !testPSExpSkip}
-trace#16, cand_acc=True, gt_acc=False, SelfTestMode & !testPSExpFail & !testPSExpPass & !testPSExpSkip; testPSExpFail | testPSExpPass | testPSExpSkip; cycle{!SelfTestMode | testPSExpFail | testPSExpPass | testPSExpSkip}
+trace#13, cand_acc=True, gt_acc=False, SelfTestMode & !testPSExpFail & !testPSExpPass & !testPSExpSkip; testPSExpFail | testPSExpPass | testPSExpSkip; cycle{!SelfTestMode | testPSExpFail | testPSExpPass | testPSExpSkip}
 
 Candidate = G(apnea -> F(apneaAlarm))
 GT = !(apnea) U ((apnea) & F(apneaAlarm))
@@ -299,28 +293,26 @@ Candidate = G(enableLeakCompensation -> F(leakCompensationActive)) & G(!enableLe
 GT = (G(enableLeakCompensation <-> leakCompensationActive))
 trace#0, cand_acc=True, gt_acc=True, cycle{(!enableLeakCompensation & !leakCompensationActive) | (enableLeakCompensation & leakCompensationActive)}
 trace#1, cand_acc=False, gt_acc=False, enableLeakCompensation & !leakCompensationActive; cycle{!leakCompensationActive}
-trace#2, cand_acc=False, gt_acc=False, !enableLeakCompensation & leakCompensationActive; cycle{leakCompensationActive}
-trace#3, cand_acc=False, gt_acc=False, (!enableLeakCompensation & !leakCompensationActive) | (enableLeakCompensation & leakCompensationActive); !enableLeakCompensation & leakCompensationActive; cycle{leakCompensationActive}
-trace#4, cand_acc=False, gt_acc=False, (!enableLeakCompensation & !leakCompensationActive) | (enableLeakCompensation & leakCompensationActive); enableLeakCompensation & !leakCompensationActive; cycle{!leakCompensationActive}
-trace#5, cand_acc=False, gt_acc=False, !enableLeakCompensation & leakCompensationActive; cycle{enableLeakCompensation & leakCompensationActive}
-trace#6, cand_acc=False, gt_acc=False, !enableLeakCompensation & leakCompensationActive; enableLeakCompensation & leakCompensationActive; cycle{leakCompensationActive}
-trace#7, cand_acc=False, gt_acc=False, enableLeakCompensation & !leakCompensationActive; !enableLeakCompensation & !leakCompensationActive; cycle{!leakCompensationActive}
+trace#2, cand_acc=False, gt_acc=False, (!enableLeakCompensation & !leakCompensationActive) | (enableLeakCompensation & leakCompensationActive); !enableLeakCompensation & leakCompensationActive; cycle{leakCompensationActive}
+trace#3, cand_acc=False, gt_acc=False, (!enableLeakCompensation & !leakCompensationActive) | (enableLeakCompensation & leakCompensationActive); enableLeakCompensation & !leakCompensationActive; cycle{!leakCompensationActive}
+trace#4, cand_acc=False, gt_acc=False, !enableLeakCompensation & leakCompensationActive; cycle{leakCompensationActive}
+trace#5, cand_acc=False, gt_acc=False, !enableLeakCompensation & leakCompensationActive; enableLeakCompensation & leakCompensationActive; cycle{leakCompensationActive}
+trace#6, cand_acc=False, gt_acc=False, enableLeakCompensation & !leakCompensationActive; !enableLeakCompensation & !leakCompensationActive; cycle{!leakCompensationActive}
+trace#7, cand_acc=False, gt_acc=False, !enableLeakCompensation & leakCompensationActive; cycle{enableLeakCompensation & leakCompensationActive}
 trace#8, cand_acc=False, gt_acc=False, enableLeakCompensation & !leakCompensationActive; cycle{!enableLeakCompensation & !leakCompensationActive}
-trace#9, cand_acc=True, gt_acc=True, !enableLeakCompensation & !leakCompensationActive; cycle{(!enableLeakCompensation & !leakCompensationActive) | (enableLeakCompensation & leakCompensationActive)}
-trace#10, cand_acc=True, gt_acc=True, !enableLeakCompensation & !leakCompensationActive; cycle{!enableLeakCompensation & !leakCompensationActive}
-trace#11, cand_acc=False, gt_acc=False, !enableLeakCompensation | leakCompensationActive; (!enableLeakCompensation & !leakCompensationActive) | (enableLeakCompensation & leakCompensationActive); !enableLeakCompensation & leakCompensationActive; cycle{leakCompensationActive}
-trace#12, cand_acc=False, gt_acc=False, enableLeakCompensation | !leakCompensationActive; (!enableLeakCompensation & !leakCompensationActive) | (enableLeakCompensation & leakCompensationActive); enableLeakCompensation & !leakCompensationActive; cycle{!leakCompensationActive}
-trace#13, cand_acc=False, gt_acc=False, !enableLeakCompensation & leakCompensationActive; cycle{!enableLeakCompensation & leakCompensationActive}
-trace#14, cand_acc=False, gt_acc=False, enableLeakCompensation & !leakCompensationActive; cycle{enableLeakCompensation & !leakCompensationActive}
-trace#15, cand_acc=False, gt_acc=False, !enableLeakCompensation & leakCompensationActive; enableLeakCompensation & leakCompensationActive; cycle{enableLeakCompensation & leakCompensationActive}
+trace#9, cand_acc=False, gt_acc=False, !enableLeakCompensation | leakCompensationActive; (!enableLeakCompensation & !leakCompensationActive) | (enableLeakCompensation & leakCompensationActive); !enableLeakCompensation & leakCompensationActive; cycle{leakCompensationActive}
+trace#10, cand_acc=False, gt_acc=False, enableLeakCompensation | !leakCompensationActive; (!enableLeakCompensation & !leakCompensationActive) | (enableLeakCompensation & leakCompensationActive); enableLeakCompensation & !leakCompensationActive; cycle{!leakCompensationActive}
+trace#11, cand_acc=True, gt_acc=True, !enableLeakCompensation & !leakCompensationActive; cycle{(!enableLeakCompensation & !leakCompensationActive) | (enableLeakCompensation & leakCompensationActive)}
+trace#12, cand_acc=True, gt_acc=True, !enableLeakCompensation & !leakCompensationActive; cycle{!enableLeakCompensation & !leakCompensationActive}
+trace#13, cand_acc=False, gt_acc=False, !enableLeakCompensation & leakCompensationActive; enableLeakCompensation & leakCompensationActive; cycle{enableLeakCompensation & leakCompensationActive}
+trace#14, cand_acc=False, gt_acc=False, !enableLeakCompensation & leakCompensationActive; cycle{!enableLeakCompensation & leakCompensationActive}
+trace#15, cand_acc=False, gt_acc=False, enableLeakCompensation & !leakCompensationActive; cycle{enableLeakCompensation & !leakCompensationActive}
 trace#16, cand_acc=True, gt_acc=True, (!enableLeakCompensation & !leakCompensationActive) | (enableLeakCompensation & leakCompensationActive); cycle{(!enableLeakCompensation & !leakCompensationActive) | (enableLeakCompensation & leakCompensationActive)}
-trace#17, cand_acc=True, gt_acc=True, !enableLeakCompensation & !leakCompensationActive; cycle{enableLeakCompensation & leakCompensationActive}
-trace#18, cand_acc=True, gt_acc=True, enableLeakCompensation & leakCompensationActive; cycle{!enableLeakCompensation & !leakCompensationActive}
-trace#19, cand_acc=True, gt_acc=True, enableLeakCompensation & leakCompensationActive; cycle{enableLeakCompensation & leakCompensationActive}
-trace#20, cand_acc=True, gt_acc=True, enableLeakCompensation & leakCompensationActive; cycle{(!enableLeakCompensation & !leakCompensationActive) | (enableLeakCompensation & leakCompensationActive)}
-trace#21, cand_acc=True, gt_acc=True, !enableLeakCompensation & !leakCompensationActive; enableLeakCompensation & leakCompensationActive; cycle{(!enableLeakCompensation & !leakCompensationActive) | (enableLeakCompensation & leakCompensationActive)}
-trace#22, cand_acc=False, gt_acc=False, enableLeakCompensation & !leakCompensationActive; !enableLeakCompensation & !leakCompensationActive; cycle{!enableLeakCompensation & !leakCompensationActive}
-trace#23, cand_acc=True, gt_acc=False, !enableLeakCompensation & leakCompensationActive; !enableLeakCompensation & !leakCompensationActive; cycle{!enableLeakCompensation & !leakCompensationActive}
+trace#17, cand_acc=True, gt_acc=True, !enableLeakCompensation & !leakCompensationActive; enableLeakCompensation & leakCompensationActive; cycle{(!enableLeakCompensation & !leakCompensationActive) | (enableLeakCompensation & leakCompensationActive)}
+trace#18, cand_acc=True, gt_acc=True, !enableLeakCompensation & !leakCompensationActive; cycle{enableLeakCompensation & leakCompensationActive}
+trace#19, cand_acc=True, gt_acc=True, enableLeakCompensation & leakCompensationActive; cycle{!enableLeakCompensation & !leakCompensationActive}
+trace#20, cand_acc=False, gt_acc=False, enableLeakCompensation & !leakCompensationActive; !enableLeakCompensation & !leakCompensationActive; cycle{!enableLeakCompensation & !leakCompensationActive}
+trace#21, cand_acc=True, gt_acc=False, !enableLeakCompensation & leakCompensationActive; !enableLeakCompensation & !leakCompensationActive; cycle{!enableLeakCompensation & !leakCompensationActive}
 
 Candidate = G(powerSupplyChanged -> F(logPowerSupply))
 GT = !(powerSupplyChanged) U ((powerSupplyChanged) & (logPowerSupply))
@@ -342,17 +334,14 @@ trace#2, cand_acc=False, gt_acc=False, !SelfTestMode | testPowerSwitchFail | tes
 trace#3, cand_acc=True, gt_acc=True, !SelfTestMode & !testPowerSwitchFail & !testPowerSwitchPass & !testPowerSwitchSkip; cycle{!SelfTestMode & !testPowerSwitchFail & !testPowerSwitchPass & !testPowerSwitchSkip}
 trace#4, cand_acc=True, gt_acc=True, !SelfTestMode & testPowerSwitchFail & !testPowerSwitchPass & !testPowerSwitchSkip; cycle{!SelfTestMode & !testPowerSwitchPass & !testPowerSwitchSkip}
 trace#5, cand_acc=True, gt_acc=True, !SelfTestMode | testPowerSwitchFail | testPowerSwitchPass | testPowerSwitchSkip; cycle{!SelfTestMode | testPowerSwitchFail | testPowerSwitchPass | testPowerSwitchSkip}
-trace#6, cand_acc=False, gt_acc=False, SelfTestMode & !testPowerSwitchFail & !testPowerSwitchPass & !testPowerSwitchSkip; cycle{!SelfTestMode & !testPowerSwitchFail & !testPowerSwitchPass & !testPowerSwitchSkip}
-trace#7, cand_acc=True, gt_acc=True, (!SelfTestMode & testPowerSwitchFail) | (!SelfTestMode & testPowerSwitchPass) | (!SelfTestMode & testPowerSwitchSkip); cycle{!SelfTestMode | testPowerSwitchFail | testPowerSwitchPass | testPowerSwitchSkip}
-trace#8, cand_acc=False, gt_acc=False, SelfTestMode & !testPowerSwitchFail & !testPowerSwitchPass & !testPowerSwitchSkip; cycle{!testPowerSwitchFail & !testPowerSwitchPass & !testPowerSwitchSkip}
-trace#9, cand_acc=False, gt_acc=False, 1; !SelfTestMode | testPowerSwitchFail | testPowerSwitchPass | testPowerSwitchSkip; SelfTestMode & !testPowerSwitchFail & !testPowerSwitchPass & !testPowerSwitchSkip; cycle{!testPowerSwitchFail & !testPowerSwitchPass & !testPowerSwitchSkip}
+trace#6, cand_acc=False, gt_acc=False, 1; !SelfTestMode | testPowerSwitchFail | testPowerSwitchPass | testPowerSwitchSkip; SelfTestMode & !testPowerSwitchFail & !testPowerSwitchPass & !testPowerSwitchSkip; cycle{!testPowerSwitchFail & !testPowerSwitchPass & !testPowerSwitchSkip}
+trace#7, cand_acc=False, gt_acc=False, SelfTestMode & !testPowerSwitchFail & !testPowerSwitchPass & !testPowerSwitchSkip; cycle{!SelfTestMode & !testPowerSwitchFail & !testPowerSwitchPass & !testPowerSwitchSkip}
+trace#8, cand_acc=True, gt_acc=True, (!SelfTestMode & testPowerSwitchFail) | (!SelfTestMode & testPowerSwitchPass) | (!SelfTestMode & testPowerSwitchSkip); cycle{!SelfTestMode | testPowerSwitchFail | testPowerSwitchPass | testPowerSwitchSkip}
+trace#9, cand_acc=False, gt_acc=False, SelfTestMode & !testPowerSwitchFail & !testPowerSwitchPass & !testPowerSwitchSkip; cycle{!testPowerSwitchFail & !testPowerSwitchPass & !testPowerSwitchSkip}
 trace#10, cand_acc=True, gt_acc=True, (SelfTestMode & testPowerSwitchFail) | (SelfTestMode & testPowerSwitchPass) | (SelfTestMode & testPowerSwitchSkip); cycle{!SelfTestMode & !testPowerSwitchFail & !testPowerSwitchPass & !testPowerSwitchSkip}
 trace#11, cand_acc=True, gt_acc=True, (SelfTestMode & testPowerSwitchFail) | (SelfTestMode & testPowerSwitchPass) | (SelfTestMode & testPowerSwitchSkip); cycle{!SelfTestMode | testPowerSwitchFail | testPowerSwitchPass | testPowerSwitchSkip}
 trace#12, cand_acc=False, gt_acc=False, SelfTestMode & !testPowerSwitchFail & !testPowerSwitchPass & !testPowerSwitchSkip; cycle{SelfTestMode & !testPowerSwitchFail & !testPowerSwitchPass & !testPowerSwitchSkip}
-trace#13, cand_acc=True, gt_acc=True, SelfTestMode & !testPowerSwitchFail & !testPowerSwitchPass & testPowerSwitchSkip; cycle{!testPowerSwitchFail & !testPowerSwitchPass & testPowerSwitchSkip}
-trace#14, cand_acc=True, gt_acc=True, SelfTestMode & !testPowerSwitchFail & testPowerSwitchPass & !testPowerSwitchSkip; cycle{!testPowerSwitchFail & testPowerSwitchPass & !testPowerSwitchSkip}
-trace#15, cand_acc=True, gt_acc=True, SelfTestMode & testPowerSwitchFail & !testPowerSwitchPass & !testPowerSwitchSkip; cycle{testPowerSwitchFail & !testPowerSwitchPass & !testPowerSwitchSkip}
-trace#16, cand_acc=True, gt_acc=False, SelfTestMode & !testPowerSwitchFail & !testPowerSwitchPass & !testPowerSwitchSkip; testPowerSwitchFail | testPowerSwitchPass | testPowerSwitchSkip; cycle{!SelfTestMode | testPowerSwitchFail | testPowerSwitchPass | testPowerSwitchSkip}
+trace#13, cand_acc=True, gt_acc=False, SelfTestMode & !testPowerSwitchFail & !testPowerSwitchPass & !testPowerSwitchSkip; testPowerSwitchFail | testPowerSwitchPass | testPowerSwitchSkip; cycle{!SelfTestMode | testPowerSwitchFail | testPowerSwitchPass | testPowerSwitchSkip}
 
 Candidate = G(PCVMode & RMButton -> F RM)
 GT = !(RMButton) U ((RMButton) & G(PCVMode -> (RM)))

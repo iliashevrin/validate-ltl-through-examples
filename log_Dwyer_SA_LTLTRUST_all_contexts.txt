@@ -19,18 +19,18 @@ trace#1, cand_acc=False, gt_acc=None, !atfloor & call & open; cycle{1}
 Candidate = G((OpenNetworkConnection & X(NetworkError)) -> X(F(ErrorMessage)))
 GT = G (OpenNetworkConnection -> G (NetworkError -> F ErrorMessage))
 trace#0, cand_acc=True, gt_acc=True, cycle{!OpenNetworkConnection}
-trace#1, cand_acc=True, gt_acc=True, !ErrorMessage & !OpenNetworkConnection; cycle{!ErrorMessage & !OpenNetworkConnection}
-trace#2, cand_acc=False, gt_acc=False, !OpenNetworkConnection; OpenNetworkConnection; !ErrorMessage & NetworkError; cycle{!ErrorMessage}
+trace#1, cand_acc=False, gt_acc=False, !OpenNetworkConnection; OpenNetworkConnection; !ErrorMessage & NetworkError; cycle{!ErrorMessage}
+trace#2, cand_acc=True, gt_acc=True, !ErrorMessage & !OpenNetworkConnection; cycle{!ErrorMessage & !OpenNetworkConnection}
 trace#3, cand_acc=True, gt_acc=True, !OpenNetworkConnection; cycle{!OpenNetworkConnection}
 trace#4, cand_acc=False, gt_acc=False, !NetworkError & OpenNetworkConnection; !ErrorMessage & NetworkError & !OpenNetworkConnection; cycle{(!ErrorMessage & !OpenNetworkConnection) | (!ErrorMessage & !NetworkError)}
-trace#5, cand_acc=True, gt_acc=True, !OpenNetworkConnection; !ErrorMessage & !NetworkError & !OpenNetworkConnection; cycle{!ErrorMessage & !OpenNetworkConnection}
-trace#6, cand_acc=False, gt_acc=False, ErrorMessage & OpenNetworkConnection; !ErrorMessage & NetworkError & !OpenNetworkConnection; cycle{!ErrorMessage & !OpenNetworkConnection}
-trace#7, cand_acc=True, gt_acc=True, !OpenNetworkConnection; cycle{!ErrorMessage & !OpenNetworkConnection}
-trace#8, cand_acc=False, gt_acc=False, OpenNetworkConnection; !ErrorMessage & NetworkError & !OpenNetworkConnection; cycle{!ErrorMessage & !OpenNetworkConnection}
-trace#9, cand_acc=True, gt_acc=True, !OpenNetworkConnection; ErrorMessage & !OpenNetworkConnection; cycle{!OpenNetworkConnection}
-trace#10, cand_acc=False, gt_acc=False, OpenNetworkConnection; !ErrorMessage & NetworkError & OpenNetworkConnection; !ErrorMessage & NetworkError; cycle{!ErrorMessage}
+trace#5, cand_acc=False, gt_acc=False, OpenNetworkConnection; !ErrorMessage & NetworkError & OpenNetworkConnection; !ErrorMessage & NetworkError; cycle{!ErrorMessage}
+trace#6, cand_acc=True, gt_acc=True, !OpenNetworkConnection; !ErrorMessage & !NetworkError & !OpenNetworkConnection; cycle{!ErrorMessage & !OpenNetworkConnection}
+trace#7, cand_acc=False, gt_acc=False, ErrorMessage & OpenNetworkConnection; !ErrorMessage & NetworkError & !OpenNetworkConnection; cycle{!ErrorMessage & !OpenNetworkConnection}
+trace#8, cand_acc=False, gt_acc=False, 1; !OpenNetworkConnection; OpenNetworkConnection; !ErrorMessage & NetworkError; cycle{!ErrorMessage}
+trace#9, cand_acc=False, gt_acc=False, OpenNetworkConnection; !ErrorMessage & NetworkError & !OpenNetworkConnection; cycle{!ErrorMessage & !OpenNetworkConnection}
+trace#10, cand_acc=True, gt_acc=True, !OpenNetworkConnection; ErrorMessage & !OpenNetworkConnection; cycle{!OpenNetworkConnection}
 trace#11, cand_acc=False, gt_acc=False, !ErrorMessage & OpenNetworkConnection; !ErrorMessage & NetworkError; cycle{!ErrorMessage}
-trace#12, cand_acc=False, gt_acc=False, 1; !OpenNetworkConnection; OpenNetworkConnection; !ErrorMessage & NetworkError; cycle{!ErrorMessage}
+trace#12, cand_acc=True, gt_acc=True, !OpenNetworkConnection; cycle{!ErrorMessage & !OpenNetworkConnection}
 trace#13, cand_acc=True, gt_acc=None, NetworkError & OpenNetworkConnection; !ErrorMessage & !NetworkError & !OpenNetworkConnection; cycle{!ErrorMessage & !OpenNetworkConnection}
 
 Candidate = G(PopServerConnected -> (MessagesTransfered U PlacedinMailboxes))
@@ -94,24 +94,24 @@ trace#3, cand_acc=False, gt_acc=False, !call_doResults_i | return_doResults_i; c
 trace#4, cand_acc=True, gt_acc=True, !call_doResults_i & call_doResults_j & !return_doResults_i; cycle{!call_doResults_i | return_doResults_i}
 trace#5, cand_acc=True, gt_acc=True, !call_doResults_i & call_doResults_j & return_doResults_i; cycle{!call_doResults_i | return_doResults_i}
 trace#6, cand_acc=True, gt_acc=True, !call_doResults_i | return_doResults_i; cycle{!call_doResults_i | return_doResults_i}
-trace#7, cand_acc=False, gt_acc=False, call_doResults_i & call_doResults_j & !return_doResults_i; cycle{!call_doResults_i | return_doResults_i}
-trace#8, cand_acc=False, gt_acc=False, call_doResults_i & call_doResults_j & !return_doResults_i; cycle{call_doResults_i}
-trace#9, cand_acc=True, gt_acc=True, !call_doResults_i & return_doResults_i; cycle{!call_doResults_i | return_doResults_i}
-trace#10, cand_acc=True, gt_acc=True, call_doResults_i & call_doResults_j & return_doResults_i; cycle{!call_doResults_i | return_doResults_i}
-trace#11, cand_acc=False, gt_acc=False, call_doResults_i & call_doResults_j & !return_doResults_i; cycle{call_doResults_i | !call_doResults_j}
-trace#12, cand_acc=False, gt_acc=False, !call_doResults_i | !call_doResults_j | return_doResults_i; !call_doResults_i | return_doResults_i; call_doResults_i & call_doResults_j & !return_doResults_i; cycle{1}
+trace#7, cand_acc=False, gt_acc=False, !call_doResults_i | !call_doResults_j | return_doResults_i; !call_doResults_i | return_doResults_i; call_doResults_i & call_doResults_j & !return_doResults_i; cycle{1}
+trace#8, cand_acc=False, gt_acc=False, call_doResults_i & call_doResults_j & !return_doResults_i; cycle{!call_doResults_i | return_doResults_i}
+trace#9, cand_acc=False, gt_acc=False, call_doResults_i & call_doResults_j & !return_doResults_i; cycle{call_doResults_i}
+trace#10, cand_acc=True, gt_acc=True, !call_doResults_i & return_doResults_i; cycle{!call_doResults_i | return_doResults_i}
+trace#11, cand_acc=True, gt_acc=True, call_doResults_i & call_doResults_j & return_doResults_i; cycle{!call_doResults_i | return_doResults_i}
+trace#12, cand_acc=False, gt_acc=False, call_doResults_i & call_doResults_j & !return_doResults_i; cycle{call_doResults_i | !call_doResults_j}
 trace#13, cand_acc=True, gt_acc=True, call_doResults_i & return_doResults_i; cycle{!call_doResults_i & !call_doResults_j & !return_doResults_i}
 trace#14, cand_acc=False, gt_acc=False, call_doResults_i & call_doResults_j & !return_doResults_i; cycle{!call_doResults_i | (call_doResults_j & !return_doResults_i)}
 trace#15, cand_acc=True, gt_acc=True, call_doResults_i & return_doResults_i; cycle{!call_doResults_i | return_doResults_i}
 trace#16, cand_acc=False, gt_acc=False, call_doResults_i & call_doResults_j & !return_doResults_i; cycle{call_doResults_i & !return_doResults_i}
-trace#17, cand_acc=False, gt_acc=False, call_doResults_i & call_doResults_j & !return_doResults_i; cycle{call_doResults_i | return_doResults_i}
-trace#18, cand_acc=False, gt_acc=False, call_doResults_i & call_doResults_j & !return_doResults_i; !call_doResults_i | return_doResults_i; cycle{!call_doResults_i | return_doResults_i}
-trace#19, cand_acc=False, gt_acc=False, call_doResults_i & !call_doResults_j & !return_doResults_i; !call_doResults_i & call_doResults_j & !return_doResults_i; cycle{!call_doResults_i | !call_doResults_j}
+trace#17, cand_acc=False, gt_acc=False, call_doResults_i & call_doResults_j & !return_doResults_i; !call_doResults_i | return_doResults_i; cycle{!call_doResults_i | return_doResults_i}
+trace#18, cand_acc=False, gt_acc=False, call_doResults_i & !call_doResults_j & !return_doResults_i; !call_doResults_i & call_doResults_j & !return_doResults_i; cycle{!call_doResults_i | !call_doResults_j}
+trace#19, cand_acc=False, gt_acc=False, call_doResults_i & call_doResults_j & !return_doResults_i; cycle{call_doResults_i | return_doResults_i}
 trace#20, cand_acc=False, gt_acc=False, call_doResults_i & call_doResults_j & !return_doResults_i; !call_doResults_i; cycle{!call_doResults_i | return_doResults_i}
 trace#21, cand_acc=False, gt_acc=False, call_doResults_i & call_doResults_j & !return_doResults_i; return_doResults_i; cycle{!call_doResults_i | return_doResults_i}
-trace#22, cand_acc=True, gt_acc=True, call_doResults_i & !call_doResults_j & !return_doResults_i; return_doResults_i; cycle{!call_doResults_i | return_doResults_i}
-trace#23, cand_acc=False, gt_acc=False, call_doResults_i & call_doResults_j & !return_doResults_i; !call_doResults_i & return_doResults_i; cycle{!call_doResults_i}
-trace#24, cand_acc=False, gt_acc=False, call_doResults_i & call_doResults_j & !return_doResults_i; !call_doResults_i & return_doResults_i; cycle{return_doResults_i}
+trace#22, cand_acc=False, gt_acc=False, call_doResults_i & call_doResults_j & !return_doResults_i; !call_doResults_i & return_doResults_i; cycle{!call_doResults_i}
+trace#23, cand_acc=False, gt_acc=False, call_doResults_i & call_doResults_j & !return_doResults_i; !call_doResults_i & return_doResults_i; cycle{return_doResults_i}
+trace#24, cand_acc=True, gt_acc=True, call_doResults_i & !call_doResults_j & !return_doResults_i; return_doResults_i; cycle{!call_doResults_i | return_doResults_i}
 trace#25, cand_acc=True, gt_acc=True, !call_doResults_i & call_doResults_j & !return_doResults_i; call_doResults_i & return_doResults_i; cycle{!call_doResults_i | return_doResults_i}
 trace#26, cand_acc=False, gt_acc=True, call_doResults_i & !call_doResults_j & !return_doResults_i; cycle{!call_doResults_j & !return_doResults_i}
 
@@ -274,7 +274,8 @@ trace#1, cand_acc=False, gt_acc=False, !p; cycle{!p}
 trace#2, cand_acc=True, gt_acc=True, !p; cycle{p}
 trace#3, cand_acc=False, gt_acc=False, p; !p; cycle{!p}
 trace#4, cand_acc=True, gt_acc=True, p; cycle{p}
-trace#5, cand_acc=True, gt_acc=False, cycle{!p; p}
+trace#5, cand_acc=False, gt_acc=False, 1; p; !p; cycle{!p}
+trace#6, cand_acc=True, gt_acc=False, cycle{!p; p}
 
 Candidate = p U !p
 GT = G  (p U !p)
@@ -322,8 +323,7 @@ trace#0, cand_acc=True, gt_acc=True, cycle{!Synch_to_medium}
 trace#1, cand_acc=True, gt_acc=True, !Synch_to_medium; cycle{!Synch_to_medium}
 trace#2, cand_acc=False, gt_acc=False, !Synch_to_medium; Synch_to_medium; Broadcast & Synch_to_medium; !Broadcast & Synch_to_medium; Broadcast; cycle{1}
 trace#3, cand_acc=False, gt_acc=False, Synch_to_medium; !Broadcast & Synch_to_medium; Broadcast & Synch_to_medium; !Broadcast & Synch_to_medium; cycle{!Broadcast & Synch_to_medium}
-trace#4, cand_acc=True, gt_acc=True, Broadcast & Synch_to_medium; Broadcast & !Synch_to_medium; !Broadcast & !Synch_to_medium; cycle{!Broadcast & !Synch_to_medium}
-trace#5, cand_acc=True, gt_acc=False, Synch_to_medium; !Broadcast & Synch_to_medium; !Broadcast & Synch_to_medium; cycle{!Broadcast & Synch_to_medium}
+trace#4, cand_acc=True, gt_acc=False, Synch_to_medium; !Broadcast & Synch_to_medium; !Broadcast & Synch_to_medium; cycle{!Broadcast & Synch_to_medium}
 
 Candidate = G(safe -> G(bounded_height))
 GT = G (safe -> bounded_height)
@@ -333,16 +333,15 @@ trace#2, cand_acc=False, gt_acc=False, !bounded_height & safe; cycle{1}
 trace#3, cand_acc=False, gt_acc=False, !bounded_height & safe; !safe; cycle{1}
 trace#4, cand_acc=False, gt_acc=False, !bounded_height & safe; cycle{bounded_height}
 trace#5, cand_acc=True, gt_acc=True, !bounded_height & !safe; cycle{!safe}
-trace#6, cand_acc=True, gt_acc=True, bounded_height & !safe; cycle{!safe}
-trace#7, cand_acc=True, gt_acc=True, !safe; cycle{!safe}
-trace#8, cand_acc=False, gt_acc=False, !bounded_height & safe; cycle{!safe}
-trace#9, cand_acc=False, gt_acc=False, !bounded_height & safe; bounded_height & !safe; cycle{!safe}
+trace#6, cand_acc=False, gt_acc=False, !bounded_height & safe; bounded_height & !safe; cycle{!safe}
+trace#7, cand_acc=True, gt_acc=True, bounded_height & !safe; cycle{!safe}
+trace#8, cand_acc=True, gt_acc=True, !safe; cycle{!safe}
+trace#9, cand_acc=False, gt_acc=False, !bounded_height & safe; cycle{!safe}
 trace#10, cand_acc=False, gt_acc=False, !bounded_height & safe; cycle{safe}
 trace#11, cand_acc=True, gt_acc=True, bounded_height & !safe; cycle{bounded_height & !safe}
 trace#12, cand_acc=False, gt_acc=False, !bounded_height & safe; cycle{!bounded_height}
 trace#13, cand_acc=False, gt_acc=False, !bounded_height & safe; bounded_height & safe; cycle{bounded_height}
-trace#14, cand_acc=False, gt_acc=False, !bounded_height & safe; cycle{!bounded_height | !safe}
-trace#15, cand_acc=False, gt_acc=True, bounded_height & safe; !bounded_height & !safe; cycle{bounded_height | !safe}
+trace#14, cand_acc=False, gt_acc=True, bounded_height & safe; !bounded_height & !safe; cycle{bounded_height | !safe}
 
 Candidate = G(merging -> !new_id)
 GT = G (merging -> !(new_id U safe))

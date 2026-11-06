@@ -7,7 +7,7 @@ count, the traces to detection and the confidence, as evaluate.py does, on the
 held-out pairs, where the constants are chosen, and on the real-world pairs.
 
 Infinite constants drop a term of the score: both infinite is plain usefulness,
-that is, the LTLTRUST ordering. The pair (3, 5) must reproduce results_*_SA_LTLTRUST_*.
+that is, the LTLTRUST ordering. The pair (6, 5), the default, must reproduce results_*_SA_LTLTRUST_*.
 """
 import argparse
 import csv
