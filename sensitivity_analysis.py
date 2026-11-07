@@ -43,17 +43,19 @@ def measure(pairs_file, results_file, candidates, n):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("-n", type=int, default=5, help="Number of examined traces")
+    parser.add_argument("--ordering", default="LTLTRUST", help="The ordering whose results to analyze, e.g. SA_LTLTRUST")
     parser.add_argument("--deltas", type=float, nargs="+", default=[0.05, 0.1, 0.15, 0.2],
                         help="Absolute accuracy misestimations to evaluate")
 
     args = parser.parse_args()
 
-    print(f"conf_{args.n} under an assumed accuracy Acc - delta .. Acc + delta (LTLTrust ordering)\n")
+    print(f"conf_{args.n} under an assumed accuracy Acc - delta .. Acc + delta ({args.ordering} ordering)\n")
 
     header = f"{'Dataset':<11}{'Acc':>7}{'NDT':>7}{'conf':>7}" + "".join(f"{f'+-{d:g}':>17}" for d in args.deltas)
     print(header)
 
     for name, (pairs_file, results_file, candidates) in DATASETS.items():
+        results_file = results_file.replace("_LTLTRUST_", f"_{args.ordering}_")
         acc, ndt, printed_conf = measure(pairs_file, results_file, candidates, args.n)
         conf = confidence(acc, ndt)
 
