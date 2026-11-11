@@ -6,6 +6,10 @@ SA usefulness over the training pairs and reports the trace length, the literal
 count, the traces to detection and the confidence, as evaluate.py does, on the
 held-out pairs, where the constants are chosen, and on the real-world pairs.
 
+With --validation, the constants are instead chosen on a validation split of the
+training pairs (a fifth of them, by formula), with the contexts ranked on the rest,
+so that the held-out pairs remain a pure test set.
+
 Infinite constants drop a term of the score: both infinite is plain usefulness,
 that is, the LTLTRUST ordering. The pair (6, 5), the default, must reproduce results_*_SA_LTLTRUST_*.
 """
@@ -19,6 +23,9 @@ import pandas as pd
 from evaluate import DATASIZE
 from mutation_based import generate_traces
 from train_ordering import build_training_data, smoothed_ratio_plus, split_by_formula, static_trace_ranking
+
+# The synthetic datasets' accuracy (Table 2), for the confidence on the validation split
+SYNTHETIC_ACCURACY = 0.433
 from utils import check_acceptance, count_literals, trace_len, translate
 
 
@@ -27,16 +34,15 @@ LIT_REFS = [2.5, 5, 10, math.inf]
 STRATEGY = "all_contexts"
 
 
+def pair_data(gt_formula, candidate):
+    traces = generate_traces(candidate, STRATEGY)
+    gt = translate(gt_formula)
+    return {"traces": traces, "detects": {(t, acc): check_acceptance(gt, t) != acc for t, acc, _ in traces}}
+
+
 def load_pairs(path, dataset):
-    pairs = []
     with open(path, newline="", encoding="utf-8") as f:
-        for row in csv.DictReader(f):
-            traces = generate_traces(row["Response"], STRATEGY)
-            gt = translate(row["Ground Truth"])
-            pairs.append({
-                "traces": traces,
-                "detects": {(t, acc): check_acceptance(gt, t) != acc for t, acc, _ in traces},
-            })
+        pairs = [pair_data(row["Ground Truth"], row["Response"]) for row in csv.DictReader(f)]
     return {"pairs": pairs, "accuracy": 1 - len(pairs) / DATASIZE[dataset]}
 
 
@@ -68,6 +74,7 @@ def measure(data, scores):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("data_file", nargs="?", default="data_collection/data_all_in_ap_set.csv")
+    parser.add_argument("--validation", action="store_true", help="Choose on a validation split of the training pairs")
     args = parser.parse_args()
 
     with open(args.data_file, newline="", encoding="utf-8") as f:
@@ -88,8 +95,16 @@ def main():
         for context, traces in by_context.items():
             context_stats[(formula_id, context)] = (trace_len(traces[0]), sum(map(count_literals, traces)) / len(traces))
 
-    datasets = [("Held-out", load_pairs("heldout_test_formulas_all_contexts_usefulness.csv", "heldout")),
-                ("Real-world", load_pairs("ALL_RL/pairs_claude.csv", "ALL_RL"))]
+    datasets = []
+    if args.validation:
+        inner_idx, val_idx = split_by_formula(train["formula_id"], random_state=7)
+        val_ids = sorted(set(train.iloc[val_idx]["formula_id"]))
+        train = train.iloc[inner_idx].copy()
+        print(f"validation split: {train['formula_id'].nunique()} pairs to rank on, {len(val_ids)} to choose on")
+        datasets.append(("Validation", {"pairs": [pair_data(formulas[i][0], formulas[i][1]) for i in val_ids],
+                                        "accuracy": SYNTHETIC_ACCURACY}))
+    datasets += [("Held-out", load_pairs("heldout_test_formulas_all_contexts_usefulness.csv", "heldout")),
+                 ("Real-world", load_pairs("ALL_RL/pairs_claude.csv", "ALL_RL"))]
 
     header = f"{'len,lit':<12}" + "".join(f"{'| ' + name:<8}{'len':>6}{'lit':>7}{'avg':>7}{'conf1':>7}{'conf5':>7}{'conf10':>7}  " for name, _ in datasets)
     print(header)
