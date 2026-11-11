@@ -1,4 +1,5 @@
 import argparse
+import os
 import re
 
 import matplotlib
@@ -28,13 +29,14 @@ def confidence_scores(results_file):
 def main():
     parser = argparse.ArgumentParser(description="Plot conf_n for n=0..15 per trace ordering.")
     parser.add_argument("--output", default="chart.svg")
+    parser.add_argument("--results-dir", default=".", help="Directory of the evaluate.py results files")
 
     args = parser.parse_args()
 
     fig, ax = plt.subplots(figsize=(6.0, 3.71))
 
     for results_file, style, width in ORDERINGS:
-        n, conf = confidence_scores(results_file)
+        n, conf = confidence_scores(os.path.join(args.results_dir, results_file))
         ax.plot(n, conf, color="0.6", linestyle=style, linewidth=width)
 
     ax.set_xlim(0, 15)

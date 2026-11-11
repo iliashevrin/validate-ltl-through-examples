@@ -30,12 +30,17 @@ except ImportError:
 import spot
 spot.setup()
 
-import config
 import json
 
-os.environ['OPENAI_API_KEY'] = config.OPENAI_API_KEY
-os.environ["GEMINI_API_KEY"] = config.GEMINI_API_KEY
-os.environ["ANTHROPIC_API_KEY"] = config.ANTHROPIC_API_KEY
+# The API keys come from the environment or from an untracked config.py
+try:
+    import config
+except ImportError:
+    config = None
+
+for _key in ("OPENAI_API_KEY", "GEMINI_API_KEY", "ANTHROPIC_API_KEY"):
+    if config is not None and hasattr(config, _key):
+        os.environ.setdefault(_key, getattr(config, _key))
 
 from utils import collect_aps
 
@@ -906,9 +911,6 @@ def main() -> None:
 
     args = parser.parse_args()
 
-    if not os.getenv("ANTHROPIC_API_KEY"):
-        raise RuntimeError("ANTHROPIC_API_KEY environment variable is not set.")
-
     dataset = []
     parse_errors = 0
 
@@ -946,9 +948,9 @@ def main() -> None:
                 key = (row["Requirement"], row["Ground Truth"], row["Atomic Proposition"])
                 cached[key] = row["Response"]
 
-    client = anthropic.Anthropic(
-        api_key=os.environ["ANTHROPIC_API_KEY"]
-    )
+    # Created on the first response missing from --responses, so that a rerun
+    # on the stored responses needs no API key
+    client = None
 
     rows = []
     seen = set()
@@ -965,6 +967,10 @@ def main() -> None:
         if key in cached:
             model_response = cached[key]
         else:
+            if client is None:
+                if not os.getenv("ANTHROPIC_API_KEY"):
+                    raise RuntimeError("ANTHROPIC_API_KEY environment variable is not set.")
+                client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
             model_response = ask_claude(client, requirement, atomic_proposition)
 
         status = classify_response(ground_truth, model_response, atomic_proposition)

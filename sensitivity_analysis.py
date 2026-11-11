@@ -9,6 +9,7 @@ accuracy Acc +- delta while keeping NDT_n fixed.
 """
 import argparse
 import csv
+import os
 import re
 
 # Total candidates per dataset, as in evaluate.py's DATASIZE
@@ -46,6 +47,7 @@ def main():
     parser.add_argument("--ordering", default="LTLTRUST", help="The ordering whose results to analyze, e.g. SA_LTLTRUST")
     parser.add_argument("--deltas", type=float, nargs="+", default=[0.05, 0.1, 0.15, 0.2],
                         help="Absolute accuracy misestimations to evaluate")
+    parser.add_argument("--results-dir", default=".", help="Directory of the evaluate.py results files")
 
     args = parser.parse_args()
 
@@ -55,7 +57,7 @@ def main():
     print(header)
 
     for name, (pairs_file, results_file, candidates) in DATASETS.items():
-        results_file = results_file.replace("_LTLTRUST_", f"_{args.ordering}_")
+        results_file = os.path.join(args.results_dir, results_file.replace("_LTLTRUST_", f"_{args.ordering}_"))
         acc, ndt, printed_conf = measure(pairs_file, results_file, candidates, args.n)
         conf = confidence(acc, ndt)
 

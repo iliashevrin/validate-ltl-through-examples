@@ -1,5 +1,6 @@
 import argparse
 import itertools
+import os
 import re
 
 import numpy as np
@@ -51,15 +52,16 @@ def main():
         nargs="*",
         default=DEFAULT_RESULTS,
         metavar="[NAME=]RESULTS_FILE",
-        help="evaluate.py results files to compare pairwise, default: the four orderings on ALL_RL",
+        help="evaluate.py results files to compare pairwise, default: the five orderings on ALL_RL",
     )
+    parser.add_argument("--results-dir", default=".", help="Directory of the results files")
 
     args = parser.parse_args()
 
     orderings = {}
     for item in args.results:
         name, _, path = item.rpartition("=")
-        orderings[name or path] = traces_to_detection(path)
+        orderings[name or path] = traces_to_detection(os.path.join(args.results_dir, path))
 
     comparisons = []
 

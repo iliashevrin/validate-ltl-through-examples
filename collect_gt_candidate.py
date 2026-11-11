@@ -14,10 +14,17 @@ from openai import OpenAI
 import spot
 spot.setup()
 
-import config
 import json
 
-os.environ['OPENAI_API_KEY'] = config.OPENAI_API_KEY
+# The API keys come from the environment or from an untracked config.py
+try:
+    import config
+except ImportError:
+    config = None
+
+for _key in ("OPENAI_API_KEY",):
+    if config is not None and hasattr(config, _key):
+        os.environ.setdefault(_key, getattr(config, _key))
 
 
 

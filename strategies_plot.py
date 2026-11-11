@@ -1,3 +1,5 @@
+import argparse
+import os
 import re
 
 import numpy as np
@@ -6,6 +8,11 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from matplotlib.lines import Line2D
+
+parser = argparse.ArgumentParser(description="Plot NDT_5 of the trace generation strategies.")
+parser.add_argument("--output", default="stacked_bar_plot.svg")
+parser.add_argument("--results-dir", default=".", help="Directory of the evaluate.py results files")
+args = parser.parse_args()
 
 # =========================
 # Data, read from the evaluate.py results on the combined real-world dataset
@@ -22,7 +29,7 @@ STRATEGIES = {
 
 
 def read_results(ordering, strategy):
-    with open(f"results_ALL_RL_{ordering}_{strategy}.txt", encoding="utf-8") as f:
+    with open(os.path.join(args.results_dir, f"results_ALL_RL_{ordering}_{strategy}.txt"), encoding="utf-8") as f:
         txt = f.read()
 
     undetected = float(re.search(r"Undetected Ratio: ([\d.]+)", txt).group(1))
@@ -180,4 +187,4 @@ plt.tight_layout()
 # Save SVG
 # =========================
 
-plt.savefig("stacked_bar_plot.svg", format="svg", bbox_inches="tight")
+plt.savefig(args.output, format="svg", bbox_inches="tight")
